@@ -2,3 +2,8 @@ Individual databases added for each of us. When we push changes to main will be 
 
 The following will install all dependecies found in the Pipfile:
 pipenv install
+OR
+pipenv install -r requirements.txt
+
+Run seeds - from pipenv shell:
+flask seed all
