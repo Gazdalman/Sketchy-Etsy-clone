@@ -4,7 +4,9 @@ from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
 
+
 def email_exists(form, field):
+
     # Checking if user exists
     email = field.data
     user = User.query.filter(User.email == email).first()
@@ -23,5 +25,6 @@ def username_exists(form, field):
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
+
     email = StringField('email', validators=[DataRequired(), email_exists]) #, Email()
     password = StringField('password', validators=[DataRequired()])

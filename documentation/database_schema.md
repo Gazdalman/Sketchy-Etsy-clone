@@ -46,6 +46,7 @@
 | column name      | data type | details               |
 |------------------|-----------|-----------------------|
 | id               | integer   | not null, primary key |
+| 
 
 ## `orders`
 
@@ -53,10 +54,8 @@
 |------------------|-----------|-----------------------|
 | id               | integer   | not null, primary key |
 | user_id          | integer   | not null, foreign key |
-| order_details    | integer   | not null, foreign key |
 
 * `user_id` references `users` table
-* `order_details` references `order_products` table
 
 ## `order_products`
 

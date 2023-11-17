@@ -4,6 +4,9 @@ import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
 
+import LoginFormModal from "../LoginFormModal";
+import OpenModalButton from "../OpenModalButton";
+
 function SignupFormModal() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
@@ -76,6 +79,12 @@ function SignupFormModal() {
 				</label>
 				<button type="submit">Sign Up</button>
 			</form>
+
+			<span>Have an account? <OpenModalButton
+        modalComponent={<LoginFormModal />}
+        itemText="Log In Here"
+      /></span>
+
 		</>
 	);
 }

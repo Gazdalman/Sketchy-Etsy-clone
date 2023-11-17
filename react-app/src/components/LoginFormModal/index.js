@@ -4,6 +4,9 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
+import OpenModalButton from "../OpenModalButton";
+import SignupFormModal from "../SignupFormModal";
+
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -50,6 +53,14 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+
+      <OpenModalButton
+        // name="banana"
+        modalClasses={["banana"]}
+        modalComponent={<SignupFormModal />}
+        itemText="... or Sign Up Here"
+      />
+
     </>
   );
 }
