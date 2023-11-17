@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
+
 import LoginFormModal from "../LoginFormModal";
 import OpenModalButton from "../OpenModalButton";
 
@@ -78,10 +79,12 @@ function SignupFormModal() {
 				</label>
 				<button type="submit">Sign Up</button>
 			</form>
+
 			<span>Have an account? <OpenModalButton
         modalComponent={<LoginFormModal />}
         itemText="Log In Here"
       /></span>
+
 		</>
 	);
 }
