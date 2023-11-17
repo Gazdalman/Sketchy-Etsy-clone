@@ -1,0 +1,4 @@
+Individual databases added for each of us. When we push changes to main will be when we also consolidate our databases manually to prevent merge conflicts.
+
+The following will install all dependecies found in the Pipfile:
+pipenv install
