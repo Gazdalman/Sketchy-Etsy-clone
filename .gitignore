@@ -1,0 +1,12 @@
+
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/
+
+node_modules
+.venv
+.env
+*.db
+migrations
+instance
