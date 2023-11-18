@@ -28,5 +28,5 @@ class Cart(db.Model):
             'user': self.user_id,
             'product': self.product_id,
             'cart_user': self.cart_user,
-            'cart_product_list': self.cart_product_list
+            'cart_product_list': self.cart_product_list # * may move the list comprehension here instead
         }
