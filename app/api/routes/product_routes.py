@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from flask_login import login_required
 from app.models import Product, Review
 
@@ -10,6 +10,7 @@ def get_all():
   products = Product.query.all()
   p_list = [product.to_dict() for product in products]
   return p_list
+  # return render_template("test_products.html", p_list=p_list)
 
 @product_routes.route('/<int:id>')
 def specific_product(id):
