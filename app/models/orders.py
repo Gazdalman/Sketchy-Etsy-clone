@@ -36,6 +36,8 @@ class Order(db.Model):
   def to_dict(self):
     return {
       "user_id": self.user_id,
-      "products":[ product.name for product in self.products],
-      "total": f'${self.price}'
+      "products":dict([( product.id, {"name": product.name}) for product in self.products]),
+      "total": f'${self.price}',
+      "placed": datetime.utcnow,
+      "fulfilled": datetime.utcnow
     }
