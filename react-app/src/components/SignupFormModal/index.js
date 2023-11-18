@@ -81,8 +81,9 @@ function SignupFormModal() {
 			</form>
 
 			<span>Have an account? <OpenModalButton
+				modalClasses={["this"]}
         modalComponent={<LoginFormModal />}
-        itemText="Log In Here"
+        buttonText="Log In Here"
       /></span>
 
 		</>
