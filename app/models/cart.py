@@ -8,9 +8,9 @@ class Cart(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
 
     cart_user = db.relationship(
         "User",
@@ -23,8 +23,14 @@ class Cart(db.Model):
         back_populates="cart"
     )
 
-    def to_dict(self): # ?
+    def to_dict(self): # ? i think set up correctly
         return {
             'user': self.user_id,
+<<<<<<< HEAD
             'cart': self.cart_product_list
+=======
+            'product': self.product_id,
+            'cart_user': self.cart_user,
+            'cart_product_list': self.cart_product_list
+>>>>>>> f6920ac (cart FE & BE some connects made)
         }
