@@ -23,6 +23,11 @@ class Product(db.Model):
   #   back_populates="products"
   # )
 
+  reviews = db.relationship(
+    "Review",
+    back_populate="product"
+  )
+
   orders = db.relationship(
     "Order",
     secondary="order_products",
