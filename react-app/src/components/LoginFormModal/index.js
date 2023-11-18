@@ -9,18 +9,18 @@ import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
+  const [creds, setCreds] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(login(creds, password));
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
     }
   };
 
@@ -34,11 +34,11 @@ function LoginFormModal() {
           ))}
         </ul>
         <label>
-          Email
+          Username/Email
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={creds}
+            onChange={(e) => setCreds(e.target.value)}
             required
           />
         </label>
@@ -60,7 +60,6 @@ function LoginFormModal() {
         modalComponent={<SignupFormModal />}
         itemText="... or Sign Up Here"
       />
-
     </>
   );
 }
