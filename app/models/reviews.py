@@ -12,6 +12,7 @@ class Review(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     review = db.Column(db.String, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
     seller_commented = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
