@@ -37,6 +37,12 @@ class Product(db.Model):
     back_populates="products"
   )
 
+  cart = db.relationship(
+    "Cart",
+    secondary="cart_products",
+    back_populates="cart_product_list"
+  )
+
   @property
   def categories(self):
     return self.categories

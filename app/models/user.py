@@ -33,6 +33,11 @@ class User(db.Model, UserMixin):
         back_populates="seller"
     )
 
+    cart = db.relationship(
+        "Cart",
+        back_populates="user_cart"
+    )
+
     @property
     def password(self):
         return self.hashed_password
@@ -47,6 +52,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'firstName': self.firstName,
+            'lastName': self.lastName,
             'username': self.username,
             'email': self.email
         }
