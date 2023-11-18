@@ -2,7 +2,6 @@ from app.models import db, Cart, Product, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_carts():
-    # ! does not actually seed ??? - needs fixing
     nina_cart = Cart(user_id=1)
     ann_cart = Cart(user_id=2)
     rod_cart = Cart(user_id=3)

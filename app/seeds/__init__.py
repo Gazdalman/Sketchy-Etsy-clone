@@ -6,6 +6,8 @@ from .products import seed_products, undo_products
 from .wishlist import seed_wishlist, undo_wishlist
 from .orders import seed_orders, undo_orders
 
+from .carts import seed_carts, undo_carts
+
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -32,6 +34,7 @@ def seed():
     seed_orders()
     seed_wishlist()
     seed_reviews()
+    seed_carts()
 
     # Add other seed functions here
 
@@ -40,6 +43,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     # ? - decide order after test
+    undo_carts()
     undo_reviews()
     undo_wishlist()
     undo_orders()
