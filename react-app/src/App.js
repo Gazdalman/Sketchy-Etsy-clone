@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
 import CheckOut from "./components/CheckOut";
+import Wishlist from "./components/Wishlist"
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/wishlist">
+            <Wishlist />
           </Route>
         </Switch>
       )}
