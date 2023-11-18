@@ -4,6 +4,8 @@ from .users import seed_users, undo_users
 from .reviews import seed_reviews, undo_reviews
 from .products import seed_products, undo_products
 
+from .carts import seed_carts, undo_carts
+
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -17,12 +19,14 @@ def seed():
     if environment == 'production':
         # Before seeding in production, you want to run the seed undo command, which will  truncate all tables prefixed with the schema name (see comment in users.py undo_users function). Make sure to add all your other model's undo functions below
         # ? - decide order after test
+        undo_carts()
         undo_reviews()
         undo_products()
         undo_users()
     seed_users()
     seed_products()
     seed_reviews()
+    seed_carts()
 
     # Add other seed functions here
 
@@ -31,6 +35,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     # ? - decide order after test
+    undo_carts()
     undo_reviews()
     undo_products()
     undo_users()
