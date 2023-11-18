@@ -5,8 +5,8 @@
 | column name | data type | details                   |
 |-------------|-----------|---------------------------|
 | id          | integer   | not null, primary key     |
-| username    | string    | not null,                 |
-| email       | string    | not null, indexed, unique |
+| username    | string    | not null, unique                |
+| email       | string    | not null, unique          |
 | first_name  | string    | not null                  |
 | last_name   | string    |                           |
 | created_at  | datetime  | not null                  |
@@ -46,7 +46,7 @@
 | column name      | data type | details               |
 |------------------|-----------|-----------------------|
 | id               | integer   | not null, primary key |
-| 
+|
 
 ## `orders`
 

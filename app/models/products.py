@@ -12,6 +12,7 @@ class Product(db.Model):
   seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
   description = db.Column(db.String(2000), nullable=False)
+  units_available = db.Column(db.INTEGER, nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
   updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -20,11 +21,11 @@ class Product(db.Model):
     back_populates="products"
   )
 
-  # wishlist = db.relationship(
-  #   "Wishlist",
-  #   secondary="wishlist_details",
-  #   back_populates="products"
-  # )
+  wishlist = db.relationship(
+    "Wishlist",
+    secondary="wishlist_details",
+    back_populates="products"
+  )
 
   reviews = db.relationship(
     "Review",
