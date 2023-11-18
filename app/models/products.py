@@ -15,7 +15,10 @@ class Product(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
   updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-
+  seller = db.relationship(
+    "User",
+    back_populates="products"
+  )
 
   # wishlist = db.relationship(
   #   "Wishlist",
@@ -25,7 +28,7 @@ class Product(db.Model):
 
   reviews = db.relationship(
     "Review",
-    back_populate="product"
+    back_populates="product"
   )
 
   orders = db.relationship(
@@ -53,5 +56,7 @@ class Product(db.Model):
       'price': self.price,
       'description': self.description,
       'created_at': self.created_at,
-      'updated_at': self.updated_at
+      'updated_at': self.updated_at,
+      "seller": self.seller.to_dict()['username'],
+      "reviews": [review.to_dict() for review in self.reviews]
     }
