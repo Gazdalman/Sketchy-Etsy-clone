@@ -4,6 +4,12 @@ from app.models import Product, Review
 
 product_routes = Blueprint("products", __name__)
 
+@product_routes.route('/<int:id>')
+def specific_product():
+    """Query to see specific product"""
+    product = Product.query.get(id)
+    return product.to_dict()
+
 @product_routes.route("/")
 def get_all():
   products = Product.query.all()
@@ -13,3 +19,4 @@ def get_all():
 @product_routes.route("/new")
 def create_prod():
   pass
+
