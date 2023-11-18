@@ -14,6 +14,7 @@ class Order(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.INTEGER, primary_key=True)
+  
   user_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   
   products = db.relationship(
