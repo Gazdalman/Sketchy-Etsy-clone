@@ -9,10 +9,8 @@ bp = Blueprint("wishlist", __name__)
 @bp.route("/")
 @login_required
 def all_wishlist():
-    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
 
-    # print('all-wishlist======>', wishlist)
-    # print('to_dict=======>',wishlist[0].to_dict())
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
 
     return wishlist.to_dict()
 
@@ -41,15 +39,11 @@ def new_wishlist():
 def delete_wishlist():
     req_product = request.get_json()
     product = Product.query.get(req_product["product"])
-    print('REQUEST TO DELETE =>', req_product)
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
 
     wishlist.products.remove(product)
 
-    print('WISH ====>', wishlist)
-
     db.session.commit()
-
 
     return wishlist.to_dict()
