@@ -62,10 +62,13 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        data = form.data
         user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password']
+            firstName=data['firstName'],
+            lastName=data['lastName'],
+            username=data['username'],
+            email=data['email'],
+            password=data['password']
         )
         db.session.add(user)
         db.session.commit()
@@ -80,4 +83,3 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': ['Unauthorized']}, 401
-
