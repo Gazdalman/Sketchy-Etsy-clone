@@ -17,12 +17,12 @@ def seed():
     if environment == 'production':
         # Before seeding in production, you want to run the seed undo command, which will  truncate all tables prefixed with the schema name (see comment in users.py undo_users function). Make sure to add all your other model's undo functions below
         # ? - decide order after test
-        undo_products()
         undo_reviews()
+        undo_products()
         undo_users()
     seed_users()
-    seed_reviews()
     seed_products()
+    seed_reviews()
 
     # Add other seed functions here
 
@@ -31,7 +31,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     # ? - decide order after test
-    undo_products()
     undo_reviews()
+    undo_products()
     undo_users()
     # Add other undo functions here
