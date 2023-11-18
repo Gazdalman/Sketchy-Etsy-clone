@@ -9,9 +9,9 @@ def seed_reviews():
     seed_review4 = Review(user_id=2, product_id=3, review="It works")
     seed_review5 = Review(user_id=4, product_id=4, review="Barely works")
 
-    all_revs = [seed_review1, seed_review2, seed_review3, seed_review4, seed_review5]
-    add_revs = [db.session.add(rev) for rev in all_revs]
-    db.session.commit()
+#     all_revs = [seed_review1, seed_review2, seed_review3, seed_review4, seed_review5]
+#     add_revs = [db.session.add(rev) for rev in all_revs]
+#     db.session.commit()
 
 def undo_reviews():
     if environment == "production":
@@ -19,4 +19,4 @@ def undo_reviews():
     else:
         db.session.execute(text("DELETE FROM reviews"))
 
-    db.session.commit()
+#     db.session.commit()
