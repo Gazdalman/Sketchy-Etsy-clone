@@ -6,6 +6,7 @@ class Wishlist (db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    #wishlist.product.append(product_id)
 
     products = db.relationship("Product", secondary="wishlist_details")
     #secondary states what the join table is
@@ -23,4 +24,5 @@ class WishlistDetail(db.Model):
 #query user/:id.wishlist.product >
 
 #seeds
-#wishlist user = // 
+#wishlist user = //
+# wishlist.append(product)
