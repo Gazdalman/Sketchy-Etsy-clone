@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.product_routes import product_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -16,7 +17,7 @@ app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 
 # Register Bluprints
-app.register_blueprint(wishlist.bp,  url_prefix="/wishlist")
+app.register_blueprint(wishlist.bp,  url_prefix="/api/wishlist")
 
 # Setup login manager
 login = LoginManager(app)
@@ -34,6 +35,8 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(product_routes, url_prefix='/api/products')
+
 db.init_app(app)
 Migrate(app, db)
 

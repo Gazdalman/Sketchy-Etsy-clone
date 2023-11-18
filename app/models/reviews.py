@@ -15,3 +15,21 @@ class Review(db.Model):
     seller_commented = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
+
+    product = db.relationship(
+    "Product",
+    back_populates="reviews"
+    )
+
+    def to_dict(self):
+        dictionary = {
+            "id": self.id,
+            "product_id": self.product_id,
+            "user_id": self.user_id,
+            "review": self.review,
+            "seller_commented": self.seller_commented,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
+
+        return dictionary

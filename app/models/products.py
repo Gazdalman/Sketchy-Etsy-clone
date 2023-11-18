@@ -26,6 +26,11 @@ class Product(db.Model):
   #   back_populates="products"
   # )
 
+  reviews = db.relationship(
+    "Review",
+    back_populates="product"
+  )
+
   orders = db.relationship(
     "Order",
     secondary="order_products",
@@ -51,5 +56,7 @@ class Product(db.Model):
       'price': self.price,
       'description': self.description,
       'created_at': self.created_at,
-      'updated_at': self.updated_at
+      'updated_at': self.updated_at,
+      "seller": self.seller.to_dict()['username'],
+      "reviews": [review.to_dict() for review in self.reviews]
     }

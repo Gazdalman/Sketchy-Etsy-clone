@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request
-from models import Wishlist, WishlistDetail
+from app.models import Wishlist, WishlistDetail
 from flask_login import current_user
 
 bp = Blueprint("wishlist", __name__)
@@ -8,7 +8,7 @@ bp = Blueprint("wishlist", __name__)
 def wishlist():
 
     #update / append
-    #wishlist = Wishlist.query.filter(user_id == current_user.get_id()).all()
+    # wishlist = Wishlist.query.filter(user_id == current_user.get_id()).all()
 
     #add and get separate routes
     #wishlist.products.append(product_id)

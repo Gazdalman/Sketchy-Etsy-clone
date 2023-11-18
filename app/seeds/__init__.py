@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 
 from .reviews import seed_reviews, undo_reviews
 from .products import seed_products, undo_products
+from .wishlist import seed_wishlist, undo_wishlist
 
 from app.models.db import db, environment, SCHEMA
 
@@ -19,12 +20,13 @@ def seed():
         # ? - decide order after test
         undo_reviews()
         undo_products()
-        undo_reviews()
         undo_users()
+        undo_wishlist()
+
     seed_users()
-    seed_reviews()
     seed_products()
     seed_reviews()
+    seed_wishlist()
 
     # Add other seed functions here
 
@@ -35,6 +37,6 @@ def undo():
     # ? - decide order after test
     undo_reviews()
     undo_products()
-    undo_reviews()
     undo_users()
+    undo_wishlist()
     # Add other undo functions here
