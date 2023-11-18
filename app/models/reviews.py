@@ -16,7 +16,7 @@ class Review(db.Model):
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
 
-    product = db.relationship(
-    "Product",
-    back_populates="reviews"
-  )
+    products = db.relationship(
+        "Product",
+        back_populates="reviews"
+    )

@@ -1,7 +1,7 @@
 from .db import db
 from .user import User
 from .reviews import Review
-from .joins import OrderProduct
+from .joins import OrderProduct, CartProduct
 from .products import Product
 from .orders import Order
 from .cart import Cart

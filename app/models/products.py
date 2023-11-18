@@ -25,7 +25,7 @@ class Product(db.Model):
 
   reviews = db.relationship(
     "Review",
-    back_populate="product"
+    back_populates="products"
   )
 
   orders = db.relationship(
@@ -38,6 +38,11 @@ class Product(db.Model):
     "Cart",
     secondary="cart_products",
     back_populates="cart_product_list"
+  )
+
+  seller = db.relationship(
+    "User",
+    back_populates="products"
   )
 
   @property
