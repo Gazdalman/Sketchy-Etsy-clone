@@ -1,5 +1,5 @@
-# from app.models import db, Review, environment, SCHEMA
-# from sqlalchemy.sql import text
+from app.models import db, Review, environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_reviews():
@@ -13,10 +13,10 @@ def seed_reviews():
 #     add_revs = [db.session.add(rev) for rev in all_revs]
 #     db.session.commit()
 
-# def undo_reviews():
-#     if environment == "production":
-#         db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
-#     else:
-#         db.session.execute(text("DELETE FROM users"))
+def undo_reviews():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.reviews RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM reviews"))
 
 #     db.session.commit()

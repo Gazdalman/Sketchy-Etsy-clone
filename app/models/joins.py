@@ -11,7 +11,4 @@ class OrderProduct(db.Model):
   order_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("orders.id")))
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
 
-<<<<<<< HEAD
-=======
   quantity = db.Column(db.INTEGER)
->>>>>>> main
