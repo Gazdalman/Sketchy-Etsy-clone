@@ -15,3 +15,8 @@ class Review(db.Model):
     seller_commented = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
+
+    product = db.relationship(
+    "Product",
+    back_populates="reviews"
+  )

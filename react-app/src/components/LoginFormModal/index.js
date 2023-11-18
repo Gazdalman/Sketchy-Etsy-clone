@@ -58,7 +58,7 @@ function LoginFormModal() {
         // name="banana"
         modalClasses={["banana"]}
         modalComponent={<SignupFormModal />}
-        itemText="... or Sign Up Here"
+        buttonText="... or Sign Up Here"
       />
     </>
   );
