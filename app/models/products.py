@@ -59,6 +59,7 @@ class Product(db.Model):
       'seller_id': self.seller_id,
       'price': self.price,
       'description': self.description,
+      'units_available': self.units_available,
       'created_at': self.created_at,
       'updated_at': self.updated_at,
       "seller": self.seller.to_dict()['username'],
