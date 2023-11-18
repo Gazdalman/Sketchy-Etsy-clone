@@ -12,9 +12,9 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    firstName = db.Column(db.String, nullable=False)
+    firstName = db.Column(db.String(50), nullable=False)
 
-    lastName = db.Column(db.String)
+    lastName = db.Column(db.String(50))
 
     # ? admin = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -27,6 +27,11 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.Date, nullable=False, default=date.today())
 
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    products = db.relationship(
+        "Product",
+        back_populates="seller"
+    )
 
     @property
     def password(self):

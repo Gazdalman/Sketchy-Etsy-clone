@@ -7,5 +7,8 @@ class OrderProduct(db.Model):
   if environment == "production":
     __table_args__ = {'schema': SCHEMA}
 
+  id = db.Column(db.INTEGER, primary_key=True)
   order_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("orders.id")))
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
+
+  quantity = db.Column(db.INTEGER)
