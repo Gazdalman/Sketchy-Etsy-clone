@@ -10,7 +10,7 @@ class Cart(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
+    # product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
 
     cart_user = db.relationship(
         "User",
@@ -26,7 +26,7 @@ class Cart(db.Model):
     def to_dict(self): # ? i think set up correctly
         return {
             'user': self.user_id,
-            'product': self.product_id,
-            'cart_user': self.cart_user,
-            'cart_product_list': self.cart_product_list # * may move the list comprehension here instead
+            # 'product': self.product_id, # <- i don't think this is needed
+            # 'cart_user': self.cart_user, # <- i don't think this is needed
+            'products': self.cart_product_list # * may move the list comprehension here instead
         }

@@ -53,8 +53,8 @@ class Product(db.Model):
   def categories(self, *args):
     self.categories = list(*args)
 
-  def __repr__(self):
-    return f'<Order {self.id}>'
+  # def __repr__(self):
+  #   return f'<Order {self.id}>'
 
   def to_dict(self):
     return {
