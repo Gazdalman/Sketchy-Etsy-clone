@@ -4,8 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
+<<<<<<< HEAD
 import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist"
+=======
+>>>>>>> f6920ac (cart FE & BE some connects made)
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 

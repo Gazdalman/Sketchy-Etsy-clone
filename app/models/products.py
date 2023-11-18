@@ -49,6 +49,11 @@ class Product(db.Model):
     back_populates="products"
   )
 
+  seller = db.relationship(
+    "User",
+    back_populates="products"
+  )
+
   @property
   def categories(self):
     return self.categories
