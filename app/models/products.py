@@ -20,11 +20,11 @@ class Product(db.Model):
     back_populates="products"
   )
 
-  wishlist = db.relationship(
-    "Wishlist",
-    secondary="wishlist_details",
-    back_populates="products"
-  )
+  # wishlist = db.relationship(
+  #   "Wishlist",
+  #   secondary="wishlist_details",
+  #   back_populates="products"
+  # )
 
   orders = db.relationship(
     "Order",
