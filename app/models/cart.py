@@ -25,6 +25,6 @@ class Cart(db.Model):
 
     def to_dict(self): # ?
         return {
-            'user': self.user_id
+            'user': self.user_id,
             'cart': self.cart_product_list
         }
