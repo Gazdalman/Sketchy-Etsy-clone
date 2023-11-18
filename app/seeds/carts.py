@@ -2,26 +2,11 @@ from app.models import db, Cart, Product, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_carts():
-    nina_cart = Cart(user_id=1)
-    ann_cart = Cart(user_id=2)
-    rod_cart = Cart(user_id=3)
-    toney_cart = Cart(user_id=4)
-
-    products = Product.query.all()
-    print(products)
-
-    nina_cart.cart_product_list.extend([products[0], products[2], products[3]])
-    ann_cart.cart_product_list.extend([products[1], products[2], products[3]])
-    rod_cart.cart_product_list.extend([products[4], products[2], products[3]])
-    toney_cart.cart_product_list.extend([products[1], products[0], products[2]])
-
-
-    carts = [nina_cart, ann_cart, rod_cart, toney_cart]
-    _ = [db.session.add(cart) for cart in carts]
-    print(nina_cart)
-    print(carts)
-
-    db.session.commit()
+    nina_cart1 = Cart(user_id=1, product_id=1)
+    nina_cart2 = Cart(user_id=1, product_id=2)
+    nina_cart3 = Cart(user_id=1, product_id=3)
+    nina_carts = [nina_cart1, nina_cart2, nina_cart3]
+    add_nina_carts = [db.session.add(cart) for cart in nina_carts]
 
 def undo_carts():
     if environment == "production":
