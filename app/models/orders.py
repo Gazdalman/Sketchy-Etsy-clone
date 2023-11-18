@@ -14,11 +14,28 @@ class Order(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.INTEGER, primary_key=True)
-  
+
   user_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-  
+
+
   products = db.relationship(
     "Product",
     secondary="order_products",
     back_populates="orders"
   )
+
+  @property
+  def price(self):
+    products = self.products
+    price = 0
+    for product in products:
+      price += product.price
+
+    return price
+
+  def to_dict(self):
+    return {
+      "user_id": self.user_id,
+      "products":[ product.name for product in self.products],
+      "total": f'${self.price}'
+    }
