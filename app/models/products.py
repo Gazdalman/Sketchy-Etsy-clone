@@ -15,8 +15,14 @@ class Product(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
   updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-  # seller = db.relationship(
-  #   "User",
+  seller = db.relationship(
+    "User",
+    back_populates="products"
+  )
+
+  # wishlist = db.relationship(
+  #   "Wishlist",
+  #   secondary="wishlist_details",
   #   back_populates="products"
   # )
 
