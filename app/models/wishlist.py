@@ -1,15 +1,32 @@
-from .db import db
+from .db import db, environment,SCHEMA, add_prefix_for_prod
 
 
 class Wishlist (db.Model):
     __tablename__ = "wishlists"
 
+
+    if environment == "production":
+     __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     #wishlist.product.append(product_id)
 
-    products = db.relationship("Product", secondary="wishlist_details")
+    products = db.relationship(
+       "Product",
+       secondary="wishlist_details",
+       back_populates="wishlist"
+    )
+
     #secondary states what the join table is
+
+    def to_dict(self):
+       return {
+          "id": self.id,
+          "user_id": self.user_id,
+          "products": self.products 
+       }
+
 
 class WishlistDetail(db.Model):
     __tablename__ = "wishlist_details"
@@ -19,10 +36,3 @@ class WishlistDetail(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
 
     # wishlist =  db.relationship("Wishlist", back_populate="products" )
-
-
-#query user/:id.wishlist.product >
-
-#seeds
-#wishlist user = //
-# wishlist.append(product)

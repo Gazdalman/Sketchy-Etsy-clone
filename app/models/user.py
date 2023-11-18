@@ -35,7 +35,7 @@ class User(db.Model, UserMixin):
 
     cart = db.relationship(
         "Cart",
-        back_populates="user_cart"
+        back_populates="cart_user"
     )
 
     @property

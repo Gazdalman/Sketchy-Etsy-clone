@@ -13,11 +13,8 @@ from .config import Config
 
 from .api.routes import wishlist
 
+
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
-
-
-# Register Bluprints
-app.register_blueprint(wishlist.bp,  url_prefix="/api/wishlist")
 
 # Setup login manager
 login = LoginManager(app)
@@ -36,6 +33,8 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(product_routes, url_prefix='/api/products')
+# Wishlist test
+app.register_blueprint(wishlist.bp,  url_prefix="/api/wishlist")
 
 db.init_app(app)
 Migrate(app, db)
