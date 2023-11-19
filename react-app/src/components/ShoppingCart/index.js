@@ -24,7 +24,6 @@ export default function Cart() {
 
   useEffect(() => {
     setLoadedCart(Object.values(cart));
-    console.log(loadedCart);
   }, [isLoaded]);
 
   // ! Return to be expanded later
