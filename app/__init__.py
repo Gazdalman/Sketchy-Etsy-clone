@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from .models import db, User
-<<<<<<< HEAD
 from .api.routes.user_routes import user_routes
 from .api.routes.auth_routes import auth_routes
 from .api.routes.product_routes import product_routes
@@ -44,6 +43,8 @@ app.register_blueprint(shoppingcart_routes, url_prefix='/api/cart')
 app.register_blueprint(order_routes, url_prefix='/api/orders')
 # Wishlist test
 app.register_blueprint(wishlist.bp,  url_prefix="/api/wishlist")
+app.register_blueprint(order_routes, url_prefix='/api/orders')
+app.register_blueprint(shoppingcart_routes, url_prefix='/api/cart')
 
 db.init_app(app)
 Migrate(app, db)
