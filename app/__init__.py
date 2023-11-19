@@ -48,6 +48,9 @@ app.register_blueprint(order_routes, url_prefix='/api/orders')
 =======
 app.register_blueprint(shoppingcart_routes, url_prefix='/api/cart')
 >>>>>>> f6920ac (cart FE & BE some connects made)
+# Wishlist test
+app.register_blueprint(wishlist.bp,  url_prefix="/api/wishlist")
+app.register_blueprint(order_routes, url_prefix='/api/orders')
 
 db.init_app(app)
 Migrate(app, db)
