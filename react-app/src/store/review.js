@@ -1,15 +1,14 @@
-const CREATE_REVIEW = "review/CREATE_REVIEW"
+const CREATE_REVIEW = "review/CREATE_REVIEW";
 const ALL_REVIEWS = "reviews/allReviews";
 const DELETE_REVIEW = "reviews/deleteReview";
-const initialState = {}
-
+const initialState = {};
 
 const createReview = (payload) => {
-    return {
-        type: CREATE_REVIEW,
-        payload
-    }
-}
+  return {
+    type: CREATE_REVIEW,
+    payload,
+  };
+};
 
 const allReviews = (payload) => {
   return {
@@ -25,37 +24,36 @@ const deleteReview = (payload, reviewId) => {
 };
 
 export const allTheReviews = (spotId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}/reviews/`);
+  const response = await fetch(`/api/spots/${spotId}/reviews/`);
   const reviews = await response.json();
   console.log("🚀 ~ file: reviews.js:22 ~ allTheReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
   return reviews;
 };
 export const makeReview = (productId, payload, userId) => async (dispatch) => {
-    const response = await fetch(`/api/products/${productId}/review`,  {
+  const response = await fetch(`/api/products/${productId}/review`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      ...payload
+      ...payload,
     }),
   });
-    if (response.ok) {
+  if (response.ok) {
     const review = await response.json();
-    review.user_id = userId
-    dispatch(createReview(review))
+    review.user_id = userId;
+    dispatch(createReview(review));
     return review;
   } else {
     const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
-}
-
-}
+  }
+};
 export const deleteAReview = (reviewId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+  const response = await fetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(),
