@@ -1,21 +1,49 @@
 from flask import Blueprint, render_template, redirect, request
-from app.models import Wishlist, WishlistDetail
-from flask_login import current_user
+from app.models import db, Wishlist, Product
+from flask_login import current_user, login_required
 
 bp = Blueprint("wishlist", __name__)
 
+
+#all wishlist
 @bp.route("/")
-def wishlist():
+@login_required
+def all_wishlist():
 
-    #update / append
-    # wishlist = Wishlist.query.filter(user_id == current_user.get_id()).all()
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
-    #add and get separate routes
-    #wishlist.products.append(product_id)
+    return wishlist.to_dict()
 
 
-    #get request data
-    #request.data['product']
-    #return wishlist.products(be)  (fe)confirm message
+# #add wishlist
+@bp.route("/add-wish", methods=["POST"])
+@login_required
+def new_wishlist():
 
-    return render_template("test_wishlist.html")
+    #get product from the request
+    req_product = request.get_json()
+    product = Product.query.get(req_product["product"])
+
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
+
+    #add product to wishlist table
+    wishlist.products.append(product)
+    db.session.commit()
+
+    return wishlist.to_dict()
+
+
+#remove wishlist
+@bp.route("/delete-wish", methods=["DELETE"])
+@login_required
+def delete_wishlist():
+    req_product = request.get_json()
+    product = Product.query.get(req_product["product"])
+
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
+
+    wishlist.products.remove(product)
+
+    db.session.commit()
+
+    return wishlist.to_dict()

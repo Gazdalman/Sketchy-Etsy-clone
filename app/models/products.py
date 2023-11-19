@@ -12,6 +12,7 @@ class Product(db.Model):
   seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
   description = db.Column(db.String(2000), nullable=False)
+  units_available = db.Column(db.INTEGER, nullable=False)
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
   updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -20,11 +21,11 @@ class Product(db.Model):
     back_populates="products"
   )
 
-  # wishlist = db.relationship(
-  #   "Wishlist",
-  #   secondary="wishlist_details",
-  #   back_populates="products"
-  # )
+  wishlist = db.relationship(
+    "Wishlist",
+    secondary="wishlist_details",
+    back_populates="products"
+  )
 
   reviews = db.relationship(
     "Review",
@@ -43,6 +44,11 @@ class Product(db.Model):
     back_populates="cart_product_list"
   )
 
+  seller = db.relationship(
+    "User",
+    back_populates="products"
+  )
+
   @property
   def categories(self):
     return self.categories
@@ -51,9 +57,6 @@ class Product(db.Model):
   def categories(self, *args):
     self.categories = list(*args)
 
-  def __repr__(self):
-    return f'<Order {self.id}>'
-
   def to_dict(self):
     return {
       'id': self.id,
@@ -61,6 +64,7 @@ class Product(db.Model):
       'seller_id': self.seller_id,
       'price': self.price,
       'description': self.description,
+      'units_available': self.units_available,
       'created_at': self.created_at,
       'updated_at': self.updated_at,
       "seller": self.seller.to_dict()['username'],
