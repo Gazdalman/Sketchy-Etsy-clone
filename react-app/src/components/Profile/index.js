@@ -14,8 +14,6 @@ import { useParams } from "react-router-dom";
 export default function Profile() {
   const user = useSelector((state) => state.session.user);
   const { userId } = useParams();
-  //   console.log(user);
-  //   console.log(userId);
 
   if (Number(user.id) === Number(userId)) {
     return (

@@ -1,6 +1,6 @@
 /* BoilerPlate */
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 
@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -31,15 +32,19 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/wishlist">
-            <Wishlist />
-          </Route>
-          <Route path="/profile/:userId">
-            <Profile />
-          </Route>
+          {user && (
+            <>
+              <Route path="/cart">
+                <Cart />
+              </Route>
+              <Route path="/wishlist">
+                <Wishlist />
+              </Route>
+              <Route path="/profile/:userId">
+                <Profile />
+              </Route>
+            </>
+          )}
         </Switch>
       )}
     </>
