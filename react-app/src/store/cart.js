@@ -5,8 +5,8 @@ const getAllCartItems = (userCart) => ({
   payload: userCart,
 });
 
-export const getCart = (userId) => async (dispatch) => {
-  const res = await fetch("/api/cart/" + Number(userId));
+export const getCart = () => async (dispatch) => {
+  const res = await fetch("/api/cart/");
   if (res.ok) {
     const cartData = await res.json();
     if (cartData.errors) {
@@ -20,9 +20,7 @@ export const getCart = (userId) => async (dispatch) => {
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case GET_CART:
-      const new_state = {
-        cart: [...action.payload.products],
-      };
+      const new_state = action.payload;
       return new_state;
     default:
       return state;

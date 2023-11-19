@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
 import cart from "./cart";
-import wishlist from './wishlist';
+import wishlist from "./wishlist";
 
 const rootReducer = combineReducers({
   session,

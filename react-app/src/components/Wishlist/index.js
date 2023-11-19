@@ -25,13 +25,12 @@ export default function Wishlist() {
 
 
 
-    if (!user) {
-        history.push("/login")
-    }
-
-    return (
-        <>
-            <h1>Wishlist</h1>
+  if (!user) {
+      history.push("/login")
+  }
+  return  (
+    <>
+          <h1>Wishlist</h1>
             { allProducts && allProducts.length > 0 && (
                 <>
                     {allProducts.map((product) =>
@@ -42,7 +41,7 @@ export default function Wishlist() {
                     )}
                 </>
             )}
-        </>
-    )
+    </>
+  );
 
 }

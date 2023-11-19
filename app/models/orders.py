@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from .joins import OrderProduct
+from .products import Product
 from datetime import datetime
 
 # order_products = db.Table(
@@ -25,20 +26,32 @@ class Order(db.Model):
     back_populates="orders"
   )
 
+  def get_records(self):
+    order_items = OrderProduct.query.filter(OrderProduct.order_id == self.id).all()
+    products = []
+    for item in order_items:
+      product = Product.query.get(item.product_id)
+      products.append(product)
+
+    return products
+
   @property
   def price(self):
-    products = self.products
+    products = self.get_records()
     price = 0
     for product in products:
       price += product.price
 
     return price
 
+
   def to_dict(self):
     return {
       "user_id": self.user_id,
-      "products":dict([( product.id, {"name": product.name}) for product in self.products]),
+      "products": [{'id': product.id,'name': product.name, 'price': product.price} for product in self.get_records()],
       "total": f'${self.price}',
       "placed": datetime.utcnow(),
       "fulfilled": datetime.utcnow()
     }
+  def product_ids(self):
+    return [product.id for product in self.get_records()]
