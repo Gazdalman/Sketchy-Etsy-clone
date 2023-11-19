@@ -11,11 +11,13 @@ import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
 // import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
+import { getAllProducts } from "./store/product";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
+    dispatch(getAllProducts())
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
