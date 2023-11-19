@@ -1,28 +1,28 @@
 const ALL_WISH = "wishlist/ALL_WISH";
 const initialState = {}
 
-const allWish = () => ({
+const allWish = (wishlist) => ({
+
     type: ALL_WISH,
-    payload
+    payload: wishlist
+
 })
 
 
-export const getWish = (userId)  => async (dispatch) => {
-    const response = await fetch("/api/wishlist" , {
+export const getWish = ()  => async (dispatch) => {
+    const response = await fetch(`/api/wishlist/` , {
         headers: {
             "Content-Type": "application/json",
         },
-        
     });
 
     if (response.ok) {
         const data = await response.json();
-        if (data.errors) {
-            return
-        }
+        dispatch(allWish(data));
+
+        console.log('fettch wishl', data)
     }
 
-    dispatch(allWish(data));
 };
 
 
