@@ -20,7 +20,7 @@ export const getWish = ()  => async (dispatch) => {
         const data = await response.json();
         dispatch(allWish(data));
 
-        console.log('fettch wish', data)
+        console.log('fetch wish', data)
     }
 
 };
