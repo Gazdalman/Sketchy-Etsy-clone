@@ -11,6 +11,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
 // import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/wishlist">
             <Wishlist />
+          </Route>
+          <Route path="/profile/:userId">
+            <Profile />
           </Route>
         </Switch>
       )}

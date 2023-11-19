@@ -4,12 +4,11 @@ from app.models import Cart, User
 
 shoppingcart_routes = Blueprint('cart', __name__, url_prefix="/cart")
 
-@shoppingcart_routes.route("/<int:id>")
-def shoppingCart(id):
+@shoppingcart_routes.route("/")
+def shoppingCart():
     """Query for user's shopping cart"""
-    user = User.query.get(current_user.get_id())
-    cart = Cart.query.filter(Cart.user_id == current_user.get_id()).all()
-    cart_dict = cart[0].to_dict()
-    cart_dict["products"] = [product.to_dict() for product in cart_dict["products"]]
-    # print(cart_dict)
-    return cart_dict
+    userId = current_user.get_id()
+    cart = Cart.query.filter(Cart.user_id == userId).first()
+    cartDict = cart.to_dict()
+    print("Cart ==> ", cartDict["cart"])
+    return cartDict["cart"]
