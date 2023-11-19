@@ -1,10 +1,16 @@
 const GET_CART = "cart/GET_CART";
-// const REMOVE_ITEM = "cart/REMOVE_ITEM";
+const ADD_TO_CART = "cart/ADD_TO_CART";
 
 const getAllCartItems = (userCart) => ({
   type: GET_CART,
   payload: userCart,
 });
+
+const addItemToCart = (updatedCart) => ({
+  type: ADD_TO_CART,
+  payload: updatedCart,
+});
+
 
 export const getCart = () => async (dispatch) => {
   const res = await fetch("/api/cart/");
@@ -50,10 +56,26 @@ export const updateQuantity = (itemId, change) => async (dispatch) => {
   }
 };
 
-export default function reducer(state = {}, action) {
+export const addToCart = (itemId) => async (dispatch) => {
+  // ! need to create the backend route for adding an item to cart
+  console.log(itemId)
+  const res = await fetch("");
+  if (res.ok) {
+    const cartData = await res.json();
+    if (cartData.errors) {
+      console.log(cartData.errors);
+      return;
+    }
+    dispatch(addItemToCart(cartData));
+  }
+}
+
+export default function reducer(state = { cart: [] }, action) {
+  // * CRUD -> create on signup & delete on checkout
+  let new_state = {};
   switch (action.type) {
     case GET_CART:
-      const new_state = { ...action.payload.cart };
+      new_state = { ...action.payload.cart };
       return new_state;
     default:
       return state;
