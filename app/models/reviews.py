@@ -16,7 +16,6 @@ class Review(db.Model):
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
 
-<<<<<<< HEAD
     product = db.relationship(
     "Product",
     back_populates="reviews"
@@ -34,9 +33,3 @@ class Review(db.Model):
         }
 
         return dictionary
-=======
-    products = db.relationship(
-        "Product",
-        back_populates="reviews"
-    )
->>>>>>> f6920ac (cart FE & BE some connects made)

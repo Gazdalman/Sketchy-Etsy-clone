@@ -10,20 +10,19 @@ class Cart(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    # product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
-
     cart_user = db.relationship(
         "User",
         back_populates="cart"
     )
 
+    # * holds all product & cart info, including item quantity
     cart_product_list = db.relationship(
         "Product",
         secondary="cart_products",
         back_populates="cart"
     )
 
-    def to_dict(self): # ? i think set up correctly
+    def to_dict(self):
         return {
             'user': self.user_id,
             'cart': self.cart_product_list
