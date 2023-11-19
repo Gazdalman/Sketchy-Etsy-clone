@@ -72,7 +72,7 @@ def sign_up():
         )
         db.session.add(new_user)
         db.session.commit()
-        
+
         user_cart = Cart(
             user_id = new_user.id
         )
