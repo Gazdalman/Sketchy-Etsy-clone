@@ -8,29 +8,22 @@ export default function Wishlist(){
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    const wishlist = useSelector((state) => state.wishlist.products);
+    const wishlist = useSelector((state) => state.wishlist);
+    const [isLoaded, setIsLoaded] = useState(false);
 
 
     console.log('wish state ===>', wishlist)
 
     console.log('user state', user)
 
-    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() =>  {
+
             if (user){
-                setIsLoaded(true)
-            }else {
-                history.push("/login")
+                dispatch(getWish()).then(() => setIsLoaded(true))
             }
 
     }, [dispatch]);
-
-
-    useEffect(() => {
-        dispatch(getWish())
-    }, [isLoaded])
-
 
 
    return (

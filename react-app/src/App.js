@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
+import Wishlist from "./components/Wishlist";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route path="/wishlist">
+            <Wishlist />
           </Route>
         </Switch>
       )}
