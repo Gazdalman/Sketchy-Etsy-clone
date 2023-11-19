@@ -38,6 +38,6 @@ class Order(db.Model):
       "user_id": self.user_id,
       "products":dict([( product.id, {"name": product.name}) for product in self.products]),
       "total": f'${self.price}',
-      "placed": datetime.utcnow,
-      "fulfilled": datetime.utcnow
+      "placed": datetime.utcnow(),
+      "fulfilled": datetime.utcnow()
     }

@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
-from app.models import Product, Order, Cart, db
+from app.models import Product, Order, Cart, db, OrderProduct
 
 order_routes = Blueprint("orders", __name__)
 
@@ -15,15 +15,23 @@ def get_orders():
 def place_order():
   user_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).first()
 
-  if not len(user_cart.products):
+  if not len(user_cart.cart_product_list):
     return {"errors": "Cannot place orders with empty cart"}
 
   order = Order(
     user_id=current_user.get_id()
   )
 
-  order.products.extend(user_cart.products)
+  for product in user_cart.cart_product_list:
+    item_ordered = OrderProduct.query.filter(
+      OrderProduct.order_id == order.id, OrderProduct.product_id == product.id
+    ).first()
+    if item_ordered:
+      item_ordered.quantity += 1
+    else:
+      order.products.append(product)
   db.session.add(order)
   db.session.commit()
+  print("This is the order", order.to_dict())
 
   return order.to_dict()
