@@ -11,5 +11,5 @@ def shoppingCart(id):
     cart = Cart.query.filter(Cart.user_id == current_user.get_id()).all()
     cart_dict = cart[0].to_dict()
     cart_dict["products"] = [product.to_dict() for product in cart_dict["products"]]
-    print(cart_dict)
+    # print(cart_dict)
     return cart_dict

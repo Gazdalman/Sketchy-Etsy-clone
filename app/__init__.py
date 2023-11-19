@@ -10,12 +10,7 @@ from flask_login import LoginManager
 from .models import db, User
 
 """ Route Imports """
-from .api.routes.user_routes import user_routes
-from .api.routes.auth_routes import auth_routes
-from .api.routes.product_routes import product_routes
-from .api.routes.order_routes import order_routes
-from .api.routes.shoppingcart_routes import shoppingcart_routes
-from .api.routes.wishlist import wishlist
+from .api.routes import auth_routes, user_routes, product_routes, order_routes, wishlist, shoppingcart_routes
 
 """ Seed Imports """
 from .seeds import seed_commands
