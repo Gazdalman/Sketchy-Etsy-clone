@@ -12,6 +12,8 @@ import Cart from "./components/ShoppingCart";
 // import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
 import { getAllProducts } from "./store/product";
+import ProductPage from "./components/ProductPage";
+import ProductShow from "./components/ProductDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +28,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <ProductPage />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>
@@ -34,6 +39,9 @@ function App() {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route path="/products/:productId">
+            <ProductShow />
           </Route>
           <Route path="/wishlist">
             <Wishlist />
