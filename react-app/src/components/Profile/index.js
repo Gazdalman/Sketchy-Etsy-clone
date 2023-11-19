@@ -25,6 +25,7 @@ export default function Profile() {
         <button>New Product</button>
         {/* might move the following 2 buttons to an account setting menu */}
         <button>Edit Profile</button>
+        {/* Following buttons needs to render modal to confirm deletion */}
         <button>Delete Account</button>
 
         <div>
