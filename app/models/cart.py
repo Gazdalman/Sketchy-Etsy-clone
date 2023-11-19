@@ -26,7 +26,5 @@ class Cart(db.Model):
     def to_dict(self): # ? i think set up correctly
         return {
             'user': self.user_id,
-            # 'product': self.product_id, # <- i don't think this is needed
-            # 'cart_user': self.cart_user, # <- i don't think this is needed
-            'products': self.cart_product_list # * may move the list comprehension here instead
+            'cart': self.cart_product_list
         }

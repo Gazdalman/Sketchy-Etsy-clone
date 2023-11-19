@@ -24,4 +24,4 @@ class CartProduct(db.Model):
   cart_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("carts.id")))
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
 
-  quantity = db.Column(db.INTEGER)
+  quantity = db.Column(db.INTEGER, nullable=False, default=1)

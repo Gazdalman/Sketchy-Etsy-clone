@@ -33,8 +33,3 @@ class Review(db.Model):
         }
 
         return dictionary
-
-    product = db.relationship(
-        "Product",
-        back_populates="reviews"
-    )

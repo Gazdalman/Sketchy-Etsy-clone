@@ -1,14 +1,13 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
+from app.models.db import db, environment, SCHEMA
 
+""" Import Seed Files """
+from .users import seed_users, undo_users
 from .reviews import seed_reviews, undo_reviews
 from .products import seed_products, undo_products
 from .wishlist import seed_wishlist, undo_wishlist
 from .orders import seed_orders, undo_orders
-
 from .carts import seed_carts, undo_carts
-
-from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -43,9 +42,9 @@ def seed():
 def undo():
     # ? - decide order after test
     undo_carts()
-    undo_reviews()
     undo_wishlist()
     undo_orders()
     undo_products()
+    undo_reviews()
     undo_users()
     # Add other undo functions here
