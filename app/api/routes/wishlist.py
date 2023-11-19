@@ -10,7 +10,7 @@ bp = Blueprint("wishlist", __name__)
 @login_required
 def all_wishlist():
 
-    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
     return wishlist.to_dict()
 
@@ -24,7 +24,7 @@ def new_wishlist():
     req_product = request.get_json()
     product = Product.query.get(req_product["product"])
 
-    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
     #add product to wishlist table
     wishlist.products.append(product)
@@ -40,7 +40,7 @@ def delete_wishlist():
     req_product = request.get_json()
     product = Product.query.get(req_product["product"])
 
-    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).all()[0]
+    wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
     wishlist.products.remove(product)
 
