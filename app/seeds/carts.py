@@ -12,7 +12,7 @@ def seed_carts():
     print(products)
 
     nina_cart.cart_product_list.extend([products[0], products[2], products[3]])
-    ann_cart.cart_product_list.extend([products[1], products[2], products[3]])
+    ann_cart.cart_product_list.extend([products[1], products[2], products[2]])
     rod_cart.cart_product_list.extend([products[4], products[2], products[3]])
     toney_cart.cart_product_list.extend([products[1], products[0], products[2]])
 

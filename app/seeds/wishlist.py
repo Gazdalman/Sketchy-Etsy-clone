@@ -22,8 +22,8 @@ def seed_wishlist():
 
 def undo_wishlist():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.wishlists RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM products"))
+        db.session.execute(text("DELETE FROM wishlists"))
 
     db.session.commit()

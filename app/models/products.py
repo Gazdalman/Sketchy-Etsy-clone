@@ -29,7 +29,11 @@ class Product(db.Model):
 
   reviews = db.relationship(
     "Review",
+<<<<<<< HEAD
     back_populates="products"
+=======
+    back_populates="product"
+>>>>>>> main
   )
 
   orders = db.relationship(

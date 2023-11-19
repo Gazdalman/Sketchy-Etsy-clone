@@ -17,17 +17,24 @@ def validation_errors_to_error_messages(validation_errors):
 
 @product_routes.route("/")
 def get_all():
+  """
+  Returns a list of all products on the site
+  """
   products = Product.query.all()
   p_list = [product.to_dict() for product in products]
   return p_list
   # return render_template("test_products.html", p_list=p_list)
 
+@product_routes.route("/user/<int:id>")
+def user_products(id):
+  products = Product.query.filter(id == Product.seller_id).all()
+
+  return dict((product.id, product.to_dict()) for product in products)
+
 @product_routes.route('/<int:id>')
 def specific_product(id):
     """Query to see specific product"""
     product = Product.query.get(id)
-    reviews = product.reviews
-    seller = product.seller
     p_dict = product.to_dict()
 
     # p_dict["reviews"] = [review.to_dict() for review in reviews]
