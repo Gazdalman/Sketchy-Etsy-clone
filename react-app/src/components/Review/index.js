@@ -11,7 +11,7 @@ function Reviews() {
   const reviews = useSelector((state) => state.review);
   console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", reviews[0]);
   // console.log("🚀 ~ file: index.js:8 ~ Reviews ~ user:", user);
-  const [activeRating, setActiveRating] = useState(3.6);
+  const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
   console.log(
     "🚀 ~ file: index.js:16 ~ Reviews ~ reviewsLength:",
@@ -30,29 +30,35 @@ function Reviews() {
     });
     sum = reviews.reduce((acc, review) => review.rating + acc, 0);
   }
-  const avg = sum / reviewsLength;
+  let avg;
+  if (sum > 0) {
+    avg = sum / reviewsLength;
+  }
+  // setActiveRating(avg);
   // if (reviewsLength >= 1) {
-  //   setActiveRating(avg);
+  // } else {
+  //   setActiveRating(0);
   // }
 
   console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
 
-  useEffect(
-    (e) => {
-      console.log("DID I ENTER THE USE EFFECT");
-      dispatch(allYourReviews(userId));
-      e.preventDefault();
-    },
-    [dispatch, userId]
-  );
+  useEffect(() => {
+    console.log("DID I ENTER THE USE EFFECT");
+    dispatch(allYourReviews(userId));
+    // e.preventDefault();
+  }, [dispatch, userId]);
   return (
     <>
       <p>JUST HERE AT THE REVIEWS</p>
       <p>
         {reviewsLength == 1 ? (
-          <h1>{reviewsLength} Reviews</h1>
+          <h1>
+            {reviewsLength} Reviews {avg.toFixed(2)}
+          </h1>
         ) : (
-          <h1>{reviewsLength} Reviews</h1>
+          <h1>
+            {reviewsLength} Reviews {avg.toFixed(2)}
+          </h1>
         )}
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <label>
@@ -62,35 +68,35 @@ function Reviews() {
             >
               <i
                 className={
-                  activeRating >= 1 || activeRating > 0.5
+                  avg >= 1 || avg > 0.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 2 || activeRating > 1.5
+                  avg >= 2 || avg >= 1.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 3 || activeRating > 2.5
+                  avg >= 3 || avg >= 2.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 4 || activeRating > 3.5
+                  avg >= 4 || avg >= 3.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 5 || activeRating > 4.5
+                  avg >= 5 || avg >= 4.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
