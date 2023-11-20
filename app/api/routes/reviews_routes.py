@@ -6,11 +6,11 @@ from app.forms import ReviewForm
 review_routes = Blueprint("reviews", __name__, url_prefix='/reviews')
 
 @review_routes.route("/<int:id>")
-@login_required
-def get_all():
+# @login_required
+def get_all(id):
   """
   Returns a list of all reviews
   """
   reviews = Review.query.all()
-  review_list = {'reviews': [reviews.to_dict() for review in reviews]}
+  review_list = {'reviews': [review.to_dict() for review in reviews]}
   return review_list
