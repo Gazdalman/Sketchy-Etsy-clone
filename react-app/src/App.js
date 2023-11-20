@@ -47,7 +47,7 @@ function App() {
           <Route exact path="/products/:productId">
             <ProductShow />
           </Route>
-          <Route path="/new_product">
+          <Route xact path="/new_product">
             <ProductFormPage type={"create"} />
           </Route>
           <Route exact path="/cart">
