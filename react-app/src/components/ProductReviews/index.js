@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allYourReviews } from "../../store/review";
+import { allTheReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-function Reviews() {
+function Reviews({ productId }) {
+  console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", productId);
   const dispatch = useDispatch();
-  const { userId } = useParams();
+  //   const { productId } = useParams();
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.review);
   const [activeRating, setActiveRating] = useState(0);
@@ -28,68 +29,64 @@ function Reviews() {
   // console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
 
   useEffect(() => {
-    dispatch(allYourReviews(userId));
-  }, [dispatch, userId]);
+    dispatch(allTheReviews(productId));
+  }, [dispatch, productId]);
   return (
     <>
       <p>
         {reviewsLength == 1 ? (
           <h1>
-            {reviewsLength} Reviews {avg?.toFixed(2)}
+            {reviewsLength} Reviews {avg.toFixed(2)}
           </h1>
         ) : (
           <h1>
-            {reviewsLength} Reviews {avg?.toFixed(2)}
+            {reviewsLength} Reviews {avg.toFixed(2)}
           </h1>
         )}
-        {!reviewsLength ? (
-          <h2>You have no reviewed anything</h2>
-        ) : (
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <label>
-              <div
-                class="rating"
-                style={{ display: "flex", flexDirection: "row" }}
-              >
-                <i
-                  className={
-                    avg >= 1 || avg > 0.5
-                      ? "fa-solid fa-star"
-                      : "fa-regular fa-star"
-                  }
-                ></i>
-                <i
-                  className={
-                    avg >= 2 || avg >= 1.5
-                      ? "fa-solid fa-star"
-                      : "fa-regular fa-star"
-                  }
-                ></i>
-                <i
-                  className={
-                    avg >= 3 || avg >= 2.5
-                      ? "fa-solid fa-star"
-                      : "fa-regular fa-star"
-                  }
-                ></i>
-                <i
-                  className={
-                    avg >= 4 || avg >= 3.5
-                      ? "fa-solid fa-star"
-                      : "fa-regular fa-star"
-                  }
-                ></i>
-                <i
-                  className={
-                    avg >= 5 || avg >= 4.5
-                      ? "fa-solid fa-star"
-                      : "fa-regular fa-star"
-                  }
-                ></i>
-              </div>
-            </label>
-          </div>
-        )}
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <label>
+            <div
+              class="rating"
+              style={{ display: "flex", flexDirection: "row" }}
+            >
+              <i
+                className={
+                  avg >= 1 || avg > 0.5
+                    ? "fa-solid fa-star"
+                    : "fa-regular fa-star"
+                }
+              ></i>
+              <i
+                className={
+                  avg >= 2 || avg >= 1.5
+                    ? "fa-solid fa-star"
+                    : "fa-regular fa-star"
+                }
+              ></i>
+              <i
+                className={
+                  avg >= 3 || avg >= 2.5
+                    ? "fa-solid fa-star"
+                    : "fa-regular fa-star"
+                }
+              ></i>
+              <i
+                className={
+                  avg >= 4 || avg >= 3.5
+                    ? "fa-solid fa-star"
+                    : "fa-regular fa-star"
+                }
+              ></i>
+              <i
+                className={
+                  avg >= 5 || avg >= 4.5
+                    ? "fa-solid fa-star"
+                    : "fa-regular fa-star"
+                }
+              ></i>
+            </div>
+          </label>
+        </div>
       </p>
       <div>
         {reviewsLength >= 1 ? (

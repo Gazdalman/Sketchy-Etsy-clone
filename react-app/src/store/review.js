@@ -23,6 +23,15 @@ const deleteReview = (payload, reviewId) => {
   };
 };
 
+export const allTheReviews = (userId) => async (dispatch) => {
+  console.log("DO I ENTER THE REvIEW THUNK");
+  const response = await fetch("/api/reviews");
+  const reviews = await response.json();
+  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
+  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
+  dispatch(allReviews(reviews));
+  return reviews;
+};
 export const allYourReviews = (userId) => async (dispatch) => {
   console.log("DO I ENTER THE REvIEW THUNK");
   const response = await fetch(`/api/reviews/${userId}`);
