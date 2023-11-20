@@ -13,11 +13,11 @@ def email_exists(form, field):
 
 
 class EditAccountForm(FlaskForm):
-    firstName = StringField("First Name")
+    firstName = StringField("First Name", validators=[DataRequired(), Length(min=2, message="First name must be a minimum of 2 charactors long")])
 
-    lastName = StringField("Last Name")
+    lastName = StringField("Last Name", validators=[Length(min=2, message="First name must be a minimum of 2 charactors long")])
 
-    email = StringField('email', validators=[email_exists])
+    email = StringField('email', validators=[DataRequired(), email_exists])
     #, Email()
 
     # old_password = StringField('current password', validators=[DataRequired()])

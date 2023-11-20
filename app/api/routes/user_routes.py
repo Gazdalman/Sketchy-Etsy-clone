@@ -41,7 +41,6 @@ def editAccount(id):
     user = User.query.get(id)
     form = EditAccountForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form)
 
     if form.validate_on_submit():
         data = form.data

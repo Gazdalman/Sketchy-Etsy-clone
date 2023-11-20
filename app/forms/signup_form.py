@@ -24,7 +24,7 @@ def username_exists(form, field):
 class SignUpForm(FlaskForm):
     firstName = StringField("First Name", [DataRequired("First name is required."), Length(min=2, message="First name must be 2 characters or longer.")])
 
-    lastName = StringField("Last Name")
+    lastName = StringField("Last Name", validators=[Length(min=2, message="First name must be a minimum of 2 charactors long")])
     # on frontend => if input not none/null len must be > 2
 
     username = StringField(

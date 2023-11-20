@@ -20,8 +20,9 @@ export default function EditAccountPage() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user.id, firstName, lastName, email);
-    dispatch(editUser(user.id, firstName, lastName, email));
+    dispatch(editUser(user.id, firstName, lastName, email)).then(() =>
+      history.push(`/profile/${user.id}`)
+    );
   };
 
   return (

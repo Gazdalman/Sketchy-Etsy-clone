@@ -112,7 +112,6 @@ export const deleteUser = () => async (dispatch) => {
 
 export const editUser =
   (userId, firstName, lastName, email) => async (dispatch) => {
-    console.log(userId, firstName, lastName, email);
     const res = await fetch(`/api/users/${userId}`, {
       method: "POST",
       headers: {
@@ -124,13 +123,12 @@ export const editUser =
         email,
       }),
     });
-    console.log(res);
     const userData = await res.json();
     if (userData.errors) {
       console.log(userData.errors);
       return userData.errors;
     }
-    console.log(userData);
+    // console.log(userData);
     dispatch(setUser(userData));
   };
 
