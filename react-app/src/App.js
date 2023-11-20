@@ -15,13 +15,14 @@ import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductDetail";
 import Profile from "./components/Profile";
+import EditAccountPage from "./components/EditAccountPage";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(getAllProducts())
+    dispatch(getAllProducts());
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -39,17 +40,20 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
           <Route path="/products/:productId">
             <ProductShow />
+          </Route>
+          <Route path="/cart">
+            <Cart />
           </Route>
           <Route path="/wishlist">
             <Wishlist />
           </Route>
           <Route path="/profile/:userId">
             <Profile />
+          </Route>
+          <Route>
+            <EditAccountPage />
           </Route>
         </Switch>
       )}

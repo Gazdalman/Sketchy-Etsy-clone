@@ -16,6 +16,9 @@ export default function Cart() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    if (!user) {
+      return history.push("/login");
+    }
     if (user.id) {
       dispatch(getCart()).then(() => {
         setIsLoaded(true);
@@ -62,6 +65,7 @@ export default function Cart() {
           </div>
         ))}
       <button onClick={() => history.push("/")}>Continue Shopping</button>
+      <button disabled={true}>Checkout</button>
     </div>
   );
 }

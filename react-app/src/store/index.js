@@ -1,20 +1,22 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
+import users from "./users";
 import cart from "./cart";
-import wishlist from './wishlist';
+import wishlist from "./wishlist";
 import productsReducer from "./product";
 import singleProductReducer from "./singleProduct";
 import orderReducer from "./order";
 
 const rootReducer = combineReducers({
   session,
+  users,
   cart,
   wishlist,
   products: productsReducer,
   requestedProduct: singleProductReducer,
-  orders: orderReducer
-})
+  orders: orderReducer,
+});
 
 let enhancer;
 

@@ -19,15 +19,14 @@ export default function Wishlist() {
   console.log("all product", allProducts);
 
   useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
     if (user) {
       dispatch(getWish());
       // .then(() => setIsLoaded(true))
     }
   }, [dispatch]);
-
-  if (!user) {
-    history.push("/login");
-  }
 
   return (
     <>
