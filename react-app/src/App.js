@@ -13,6 +13,7 @@ import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductDetail";
+import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
 
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route exact path="/products/:productId">
             <ProductShow />
+          </Route>
+          <Route path="/new_product">
+            <ProductFormPage type={"create"}/>
           </Route>
           <Route exact path="/cart">
             <Cart />
