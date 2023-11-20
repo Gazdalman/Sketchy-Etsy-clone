@@ -69,21 +69,22 @@ const review = (state = initialState, action) => {
         "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
         action
       );
-      const returnData = {};
-      action.payload.Reviews.forEach((review) => {
-        returnData[review.id] = review;
-      });
-      return returnData;
+      // const returnData = {};
+      // action.payload.Reviews.forEach((review) => {
+      //   returnData[review.id] = review;
+      // });
+      // return returnData;
+      return action.payload.reviews;
     }
-    case CREATE_REVIEW:
-      newState = { ...state };
-      newState[action.payload.id] = action.payload;
-      return newState;
-    case DELETE_REVIEW:
-      let deleteState;
-      deleteState = { ...state };
-      delete deleteState[action.payload];
-      return deleteState;
+    // case CREATE_REVIEW:
+    //   newState = { ...state };
+    //   newState[action.payload.id] = action.payload;
+    //   return newState;
+    // case DELETE_REVIEW:
+    //   let deleteState;
+    //   deleteState = { ...state };
+    //   delete deleteState[action.payload];
+    //   return deleteState;
     default:
       return state;
   }

@@ -11,6 +11,6 @@ def get_all(id):
   """
   Returns a list of all reviews
   """
-  reviews = Review.query.all()
+  reviews = Review.query.filter(user_id == id).all()
   review_list = {'reviews': [review.to_dict() for review in reviews]}
   return review_list

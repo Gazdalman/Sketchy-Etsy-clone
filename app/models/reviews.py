@@ -28,6 +28,7 @@ class Review(db.Model):
             "product_id": self.product_id,
             "user_id": self.user_id,
             "review": self.review,
+            "rating": self.rating,
             "seller_commented": self.seller_commented,
             "created_at": self.created_at,
             "updated_at": self.updated_at
