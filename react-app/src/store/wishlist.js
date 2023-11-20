@@ -19,12 +19,12 @@ export const getWish = (userId)  => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
+        dispatch(allWish(data));
         if (data.errors) {
             return
         }
     }
 
-    dispatch(allWish(data));
 };
 
 
