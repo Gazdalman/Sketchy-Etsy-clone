@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { allTheReviews } from "../../store/reviews";
+import { useDispatch, useSelector } from "react-redux";
+import { allYourReviews } from "../../store/review";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-function Reviews({ Reviews }) {
+function Reviews() {
   const dispatch = useDispatch();
-  //   const [stars, setStars] = useState(0);
+  const { userId } = useParams();
+  const user = useSelector((state) => state.session.user);
+  //   console.log("🚀 ~ file: index.js:9 ~ Reviews ~ userId:", userId);
+  //   const Reviews = useSelector((state) => state);
+  //   console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", Reviews);
+  console.log("🚀 ~ file: index.js:8 ~ Reviews ~ user:", user);
   const [activeRating, setActiveRating] = useState(0);
 
-  //   function checkLength() {
-  if (Reviews.length < 1) setActiveRating = 0;
-  if ((Reviews.length = 1)) setActiveRating = Reviews[0].rating;
-  if (Reviews.length > 1) {
-    const reviewsLength = Reviews.length;
-    const reviewsSum = Reviews.reduce((sum, review) => sum + review.rating, 0);
-    setActiveRating = reviewsSum / reviewsLength;
-  }
+  //   if (Reviews.length < 1) setActiveRating = 0;
+  //   if ((Reviews.length = 1)) setActiveRating = Reviews[0].rating;
+  //   if (Reviews.length > 1) {
+  //     const reviewsLength = Reviews.length;
+  //     const reviewsSum = Reviews.reduce((sum, review) => sum + review.rating, 0);
+  //     setActiveRating = reviewsSum / reviewsLength;
   //   }
 
-  useEffect(() => {
-    dispatch(allTheReviews(spotId));
-  }, [dispatch, spotId]);
+  //   useEffect(() => {
+  //     dispatch(allYourReviews());
+  //   }, [dispatch]);
   return (
     <>
-      <p>
+      <p>JUST HERE AT THE REVIEWS</p>
+      {/* <p>
         {reviewsLength == 1 ? (
           <h1>{reviewsLength} Reviews</h1>
         ) : (
@@ -125,7 +130,7 @@ function Reviews({ Reviews }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

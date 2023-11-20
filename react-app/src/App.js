@@ -16,6 +16,7 @@ import ProductShow from "./components/ProductDetail";
 import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
+import Reviews from "./components/Review";
 
 /* Import state */
 import { getAllProducts } from "./store/product";
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:userId">
             <Profile />
+          </Route>
+          <Route path="/:userId/reviews/">
+            <Reviews />
           </Route>
           <Route exact path="/editAccount">
             <EditAccountPage />

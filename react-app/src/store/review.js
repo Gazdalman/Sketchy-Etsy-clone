@@ -1,6 +1,6 @@
 const CREATE_REVIEW = "review/CREATE_REVIEW";
-const ALL_REVIEWS = "reviews/allReviews";
-const DELETE_REVIEW = "reviews/deleteReview";
+const ALL_REVIEWS = "reviews/ALL_REVIEWS";
+const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 const initialState = {};
 
 const createReview = (payload) => {
@@ -23,22 +23,17 @@ const deleteReview = (payload, reviewId) => {
   };
 };
 
-export const allTheReviews = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}/reviews/`);
+export const allYourReviews = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${userId}`);
   const reviews = await response.json();
-  console.log("🚀 ~ file: reviews.js:22 ~ allTheReviews ~ reviews:", reviews);
+  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
-  return reviews;
+  // return reviews;
 };
 export const makeReview = (productId, payload, userId) => async (dispatch) => {
   const response = await fetch(`/api/products/${productId}/review`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...payload,
-    }),
+    body: { ...payload },
   });
   if (response.ok) {
     const review = await response.json();
@@ -52,11 +47,10 @@ export const makeReview = (productId, payload, userId) => async (dispatch) => {
     }
   }
 };
-export const deleteAReview = (reviewId) => async (dispatch) => {
+export const deleteAReview = (payload, reviewId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(),
+    body: { ...payload },
   });
   if (response.ok) {
     const data = await response.json();
@@ -71,8 +65,11 @@ const review = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ALL_REVIEWS: {
+      console.log(
+        "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
+        action
+      );
       const returnData = {};
-      // newState = { ...action.payload };
       action.payload.Reviews.forEach((review) => {
         returnData[review.id] = review;
       });
@@ -84,10 +81,6 @@ const review = (state = initialState, action) => {
       return newState;
     case DELETE_REVIEW:
       let deleteState;
-      console.log(
-        "🚀 ~ file: reviews.js:79 ~ reviewReducer ~ action.payload:",
-        action.payload
-      );
       deleteState = { ...state };
       delete deleteState[action.payload];
       return deleteState;

@@ -1,0 +1,15 @@
+from flask import Blueprint, request
+from flask_login import login_required, current_user
+from app.models import Product, Review, db
+from app.forms import ProductForm
+
+review_routes = Blueprint("/reviews", __name__)
+
+@review_routes.route("/<int:id>")
+def get_all():
+  """
+  Returns a list of all reviews
+  """
+  reviews = Review.query.all()
+  review_list = [reviews.to_dict() for review in reviews]
+  return review_list
