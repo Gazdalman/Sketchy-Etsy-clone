@@ -1,9 +1,11 @@
 const ALL_WISH = "wishlist/ALL_WISH";
-const initialState = {}
+const initialState = {};
 
-const allWish = () => ({
+const allWish = (wishlist) => ({
+
     type: ALL_WISH,
-    payload
+    payload: wishlist
+
 })
 
 
@@ -12,7 +14,7 @@ export const getWish = (userId)  => async (dispatch) => {
         headers: {
             "Content-Type": "application/json",
         },
-        
+
     });
 
     if (response.ok) {
@@ -27,11 +29,11 @@ export const getWish = (userId)  => async (dispatch) => {
 
 
 
-export default function wishlist( state = initialState, action) {
-    switch(action.type) {
-        case ALL_WISH:
-            return action.payload
-        default:
-            return state;
-    }
+export default function wishlist(state = initialState, action) {
+  switch (action.type) {
+    case ALL_WISH:
+      return action.payload;
+    default:
+      return state;
+  }
 }

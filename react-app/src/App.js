@@ -14,6 +14,7 @@ import Wishlist from "./components/Wishlist";
 import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductDetail";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/wishlist">
             <Wishlist />
+          </Route>
+          <Route path="/profile/:userId">
+            <Profile />
           </Route>
         </Switch>
       )}

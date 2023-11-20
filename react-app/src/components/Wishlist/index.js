@@ -1,31 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getWish } from "../../store/wishlist";
 
 
-export default function Wishlist(){
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.session.user)
-
-    console.log('user state', user)
-
+export default function Wishlist() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user);
+    const wishlist = useSelector((state) => state.wishlist);
+    const allProducts = wishlist.products ? Object.values(wishlist.products) : null
     const [isLoaded, setIsLoaded] = useState(false);
 
-    useEffect(() => {
-        //dispatch wishlist
-        if (user.id){
-            dispatch(user.id).then(() => setIsLoaded(true))
-        }
+    console.log('wish', wishlist)
+    console.log('all product', allProducts)
 
-    }, [dispatch])
+    useEffect(() =>  {
 
-    // useEffect(() => {
-    //     //populate wishlist
-    // })
+            if (user){
+                dispatch(getWish()).then(() => setIsLoaded(true))
+            }
+
+    }, [dispatch]);
 
 
-    return(
-        <>
-        <h1>Wishlist</h1>
-        </>
-    )
+
+  if (!user) {
+      history.push("/login")
+  }
+  return  (
+    <>
+          <h1>Wishlist</h1>
+            { allProducts && allProducts.length > 0 && (
+                <>
+                    {allProducts.map((product) =>
+                        <div className="all-products">
+                            <div>{product.name}</div>
+                            <div>{product.price}</div>
+                        </div>
+                    )}
+                </>
+            )}
+    </>
+  );
+
 }
