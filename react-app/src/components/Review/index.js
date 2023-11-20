@@ -8,18 +8,34 @@ function Reviews() {
   const { userId } = useParams();
   const user = useSelector((state) => state.session.user);
   //   console.log("🚀 ~ file: index.js:9 ~ Reviews ~ userId:", userId);
-  const Reviews = useSelector((state) => state);
-  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", Reviews);
-  console.log("🚀 ~ file: index.js:8 ~ Reviews ~ user:", user);
-  const [activeRating, setActiveRating] = useState(0);
+  const reviews = useSelector((state) => state.review);
+  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", reviews[0]);
+  // console.log("🚀 ~ file: index.js:8 ~ Reviews ~ user:", user);
+  const [activeRating, setActiveRating] = useState(3.6);
+  const reviewsLength = reviews?.length;
+  console.log(
+    "🚀 ~ file: index.js:16 ~ Reviews ~ reviewsLength:",
+    reviewsLength
+  );
+  // // console.log(reviews[0].rating);
+  let sum = 0;
+  if (reviewsLength >= 1) {
+    //   for (let ele in reviews) {
+    //     sum += parseInt(ele.rating);
+    //   }
+    // }
 
-  //   if (Reviews.length < 1) setActiveRating = 0;
-  //   if ((Reviews.length = 1)) setActiveRating = Reviews[0].rating;
-  //   if (Reviews.length > 1) {
-  //     const reviewsLength = Reviews.length;
-  //     const reviewsSum = Reviews.reduce((sum, review) => sum + review.rating, 0);
-  //     setActiveRating = reviewsSum / reviewsLength;
-  //   }
+    reviews?.forEach((ele) => {
+      sum = sum + ele.rating;
+    });
+    sum = reviews.reduce((acc, review) => review.rating + acc, 0);
+  }
+  const avg = sum / reviewsLength;
+  // if (reviewsLength >= 1) {
+  //   setActiveRating(avg);
+  // }
+
+  console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
 
   useEffect(() => {
     console.log("DID I ENTER THE USE EFFECT");
@@ -28,7 +44,7 @@ function Reviews() {
   return (
     <>
       <p>JUST HERE AT THE REVIEWS</p>
-      {/* <p>
+      <p>
         {reviewsLength == 1 ? (
           <h1>{reviewsLength} Reviews</h1>
         ) : (
@@ -42,35 +58,35 @@ function Reviews() {
             >
               <i
                 className={
-                  activeRating >= 1 || activeRating > 1
+                  activeRating >= 1 || activeRating > 0.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 2 || activeRating > 2
+                  activeRating >= 2 || activeRating > 1.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 3 || activeRating > 3
+                  activeRating >= 3 || activeRating > 2.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 4 || activeRating > 3
+                  activeRating >= 4 || activeRating > 3.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
               ></i>
               <i
                 className={
-                  activeRating >= 5 || activeRating > 4
+                  activeRating >= 5 || activeRating > 4.5
                     ? "fa-solid fa-star"
                     : "fa-regular fa-star"
                 }
@@ -80,7 +96,7 @@ function Reviews() {
         </div>
       </p>
       <div>
-        {Reviews?.map(({ user_id, review, rating, created_at }) => (
+        {reviews?.map(({ user_id, review, rating, created_at }) => (
           <div>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
               <label>
@@ -131,7 +147,7 @@ function Reviews() {
             </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </>
   );
 }

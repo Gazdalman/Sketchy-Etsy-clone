@@ -76,7 +76,7 @@ const review = (state = initialState, action) => {
       //   returnData[review.id] = review;
       // });
       // return returnData;
-      return { reviews: action.payload };
+      return action.payload.reviews;
     }
     // case CREATE_REVIEW:
     //   newState = { ...state };
