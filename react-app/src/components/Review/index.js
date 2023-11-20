@@ -37,10 +37,14 @@ function Reviews() {
 
   console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
 
-  useEffect(() => {
-    console.log("DID I ENTER THE USE EFFECT");
-    dispatch(allYourReviews(userId));
-  }, [dispatch]);
+  useEffect(
+    (e) => {
+      console.log("DID I ENTER THE USE EFFECT");
+      dispatch(allYourReviews(userId));
+      e.preventDefault();
+    },
+    [dispatch, userId]
+  );
   return (
     <>
       <p>JUST HERE AT THE REVIEWS</p>
@@ -96,57 +100,61 @@ function Reviews() {
         </div>
       </p>
       <div>
-        {reviews?.map(({ user_id, review, rating, created_at }) => (
-          <div>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <label>
-                <div
-                  class="rating"
-                  style={{ display: "flex", flexDirection: "row" }}
-                >
-                  <i
-                    className={
-                      rating >= 1 || rating > 1
-                        ? "fa-solid fa-star"
-                        : "fa-regular fa-star"
-                    }
-                  ></i>
-                  <i
-                    className={
-                      rating >= 2 || rating > 2
-                        ? "fa-solid fa-star"
-                        : "fa-regular fa-star"
-                    }
-                  ></i>
-                  <i
-                    className={
-                      rating >= 3 || rating > 3
-                        ? "fa-solid fa-star"
-                        : "fa-regular fa-star"
-                    }
-                  ></i>
-                  <i
-                    className={
-                      rating >= 4 || rating > 3
-                        ? "fa-solid fa-star"
-                        : "fa-regular fa-star"
-                    }
-                  ></i>
-                  <i
-                    className={
-                      rating >= 5 || rating > 4
-                        ? "fa-solid fa-star"
-                        : "fa-regular fa-star"
-                    }
-                  ></i>
-                </div>
-              </label>
-            </div>
+        {reviewsLength >= 1 ? (
+          reviews?.map(({ user_id, review, rating, created_at }) => (
             <div>
-              <p>{review}</p>
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <label>
+                  <div
+                    class="rating"
+                    style={{ display: "flex", flexDirection: "row" }}
+                  >
+                    <i
+                      className={
+                        rating >= 1 || rating > 1
+                          ? "fa-solid fa-star"
+                          : "fa-regular fa-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        rating >= 2 || rating > 2
+                          ? "fa-solid fa-star"
+                          : "fa-regular fa-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        rating >= 3 || rating > 3
+                          ? "fa-solid fa-star"
+                          : "fa-regular fa-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        rating >= 4 || rating > 3
+                          ? "fa-solid fa-star"
+                          : "fa-regular fa-star"
+                      }
+                    ></i>
+                    <i
+                      className={
+                        rating >= 5 || rating > 4
+                          ? "fa-solid fa-star"
+                          : "fa-regular fa-star"
+                      }
+                    ></i>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <p>{review}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <h1>REVIEWS DON'T EXIST</h1>
+        )}
       </div>
     </>
   );
