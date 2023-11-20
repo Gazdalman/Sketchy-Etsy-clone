@@ -15,7 +15,7 @@ def all_wishlist():
     return wishlist.to_dict()
 
 
-# #add wishlist
+#add wishlist
 @wishlist_routes.route("/add-wish", methods=["POST"])
 @login_required
 def new_wishlist():
@@ -38,6 +38,7 @@ def new_wishlist():
 @login_required
 def delete_wishlist():
     req_product = request.get_json()
+
     product = Product.query.get(req_product["product"])
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
@@ -46,4 +47,5 @@ def delete_wishlist():
 
     db.session.commit()
 
-    return wishlist.to_dict()
+    # return wishlist.to_dict()
+    return "successfully deleted"

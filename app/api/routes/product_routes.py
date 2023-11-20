@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Product, Review, db
+from app.models import Product, Review, db, User
 from app.forms import ProductForm
-
+from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 product_routes = Blueprint("products", __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -48,12 +48,20 @@ def create_prod():
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     data = form.data
+    prev_img = data['preview']
+    prev_img.filename = get_unique_filename(prev_img.filename)
+    upload = upload_file_to_s3(prev_img)
+
+    if 'url' not in upload:
+      return upload
+
     product = Product(
       name=data['name'],
       price=data['price'],
       description=data['description'],
       units_available=data['units_available'],
-      seller_id=current_user.get_id()
+      seller_id=current_user.get_id(),
+      preview=upload["url"]
     )
 
     db.session.add(product)
@@ -65,10 +73,15 @@ def create_prod():
 @product_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_product(id):
+  user = User.query.get(current_user.get_id())
   product = Product.query.get(id)
 
   if product:
-    db.session.delete(product)
+    user.products.remove(product)
+    product.seller_id = 0
+    product.images = []
+    product.description = 'N/A'
+    product.units_available = 0
     db.session.commit()
     return {"message": f"Successfully deleted Product {product.id} - {product.name}"}
 

@@ -18,13 +18,13 @@ export const getOneProduct = (productId) => async dispatch => {
     return product;
   }
 
-  return { broken: 'nope'}
+  return { broken: 'nope' }
 };
 
 const singleProductReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_ONE:
-    return {...action.product}
+      return { ...action.product }
 
     default:
       return state

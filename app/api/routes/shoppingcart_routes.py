@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import db, Cart, User, CartProduct
+from app.models import db, Cart, User, CartProduct, Product
 
 shoppingcart_routes = Blueprint('cart', __name__, url_prefix="/cart")
 
@@ -31,9 +31,10 @@ def delItem(id):
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
     cartDict = cart.to_dict()
-    product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
+    product = Product.query.get(id)
     if product:
-        cart["cart_product_list"].remove(product)
+        print(cart.cart_product_list)
+        cart.cart_product_list.remove(product)
         db.session.commit()
         return { "message": "delete successful" }
     else:
@@ -50,11 +51,13 @@ def updateQunatity(id):
     product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
     if quant == "inc":
         product["quantity"] = product["quantity"] + 1
-        db.session.commit()
+        print(product["quantity"])
+        # db.session.commit()
         return { "message": "success" }
     elif quant == "dec":
         product["quantity"] = product["quantity"] - 1
-        db.session.commit()
+        print(product["quantity"])
+        # db.session.commit()
         return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }

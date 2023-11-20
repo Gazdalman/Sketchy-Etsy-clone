@@ -15,6 +15,7 @@ import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductDetail";
 import Profile from "./components/Profile";
+import ProductFormPage from "./components/ProductForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/products/:productId">
             <ProductShow />
+          </Route>
+          <Route path="/new_product">
+            <ProductFormPage type={"create"}/>
           </Route>
           <Route path="/wishlist">
             <Wishlist />
