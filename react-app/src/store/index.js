@@ -5,13 +5,15 @@ import cart from "./cart";
 import wishlist from './wishlist';
 import productsReducer from "./product";
 import singleProductReducer from "./singleProduct";
+import orderReducer from "./order";
 
 const rootReducer = combineReducers({
   session,
   cart,
   wishlist,
   products: productsReducer,
-  requestedProduct: singleProductReducer
+  requestedProduct: singleProductReducer,
+  orders: orderReducer
 })
 
 let enhancer;
