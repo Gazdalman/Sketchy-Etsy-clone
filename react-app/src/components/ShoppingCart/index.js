@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getCart, updateQuantity } from "../../store/cart";
 
+
 export default function Cart() {
   const history = useHistory();
   const dispatch = useDispatch();
