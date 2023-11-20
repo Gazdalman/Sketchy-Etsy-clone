@@ -34,7 +34,8 @@ def delItem(id):
     product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
     if product:
         cart["cart_product_list"].remove(product)
-        db.session.commit()
+        print(cart["cart_product_list"])
+        # db.session.commit()
         return { "message": "delete successful" }
     else:
         return { "error": "Product doesn't exist in your cart..." }
@@ -50,11 +51,13 @@ def updateQunatity(id):
     product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
     if quant == "inc":
         product["quantity"] = product["quantity"] + 1
-        db.session.commit()
+        print(product["quantity"])
+        # db.session.commit()
         return { "message": "success" }
     elif quant == "dec":
         product["quantity"] = product["quantity"] - 1
-        db.session.commit()
+        print(product["quantity"])
+        # db.session.commit()
         return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }

@@ -1,6 +1,6 @@
 from flask import Blueprint
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import db, User
 
 user_routes = Blueprint('users', __name__, url_prefix="/users")
 
@@ -24,4 +24,11 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-
+@user_routes.route('/', methods=["DELETE"])
+def delAccount():
+    user = User.queary.filter(User.id == current_user.get_id())
+    User.remove(user)
+    users = User.queary.all()
+    print(users)
+    # db.session.commit()
+    return { "message": "delete successful" }
