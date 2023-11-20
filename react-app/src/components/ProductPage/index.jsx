@@ -25,7 +25,7 @@ const ProductPage = () => {
 
 
   const addToWish = (e, product) => {
-      // e.preventDefault();
+      e.preventDefault();
 
       const productId = product?.id;
       dispatch(addWish(productId));
@@ -47,7 +47,7 @@ const ProductPage = () => {
             </a>
               <div  style={{margin: 20}} >
                 <button
-                 id="product-btn"
+                 className="add-wish-btn"
                  onClick={(e) => addToWish(e, product)}
                 >Add to Wishlist</button>
               </div>
