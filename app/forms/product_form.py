@@ -9,5 +9,5 @@ class ProductForm(FlaskForm):
   price = FloatField("Price $", validators=[DataRequired()])
   description = TextAreaField("Description", validators=[DataRequired(), Length(10, 2000)])
   units_available = IntegerField("# Available", validators=[DataRequired()])
-  product_id = IntegerField()
+  # product_id = IntegerField()
   # image_1 = FileField("Image file", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
