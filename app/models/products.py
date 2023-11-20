@@ -9,7 +9,7 @@ class Product(db.Model):
 
   id = db.Column(db.INTEGER, primary_key=True)
   name = db.Column(db.String(50), nullable=False)
-  seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+  seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='SET NULL'))
   price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
   description = db.Column(db.String(2000), nullable=False)
   units_available = db.Column(db.INTEGER, nullable=False)
@@ -67,6 +67,6 @@ class Product(db.Model):
       'units_available': self.units_available,
       'created_at': self.created_at,
       'updated_at': self.updated_at,
-      "seller": self.seller.to_dict()['username'],
+      "seller": self.seller.to_dict()['username'] if self.seller else 'deleted',
       "reviews": [review.to_dict() for review in self.reviews]
     }
