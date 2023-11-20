@@ -19,7 +19,7 @@ class EditAccountForm(FlaskForm):
 
     email = StringField('email', validators=[DataRequired(), email_exists])
     #, Email()
-
+    # ! may add ability to change user's password
     # old_password = StringField('current password', validators=[DataRequired()])
 
     # new_password = StringField('new password')
