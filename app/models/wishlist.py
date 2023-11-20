@@ -18,6 +18,11 @@ class Wishlist (db.Model):
        back_populates="wishlist"
     )
 
+    user = db.relationship(
+      "User",
+      back_populates="wishlist"
+   )
+
     #secondary states what the join table is
 
     def to_dict(self):

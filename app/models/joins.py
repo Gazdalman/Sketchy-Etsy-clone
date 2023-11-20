@@ -25,3 +25,10 @@ class CartProduct(db.Model):
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
 
   quantity = db.Column(db.INTEGER, nullable=False, default=1)
+
+  def to_dict(self):
+    return {
+      "cartId": self.cart_id,
+      "productId": self.product_id,
+      "quatity": self.quantity
+    }

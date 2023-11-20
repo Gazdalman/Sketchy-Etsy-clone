@@ -41,34 +41,22 @@ def specific_product(id):
     # p_dict["seller"] = seller.to_dict()['username']
     return p_dict
 
-@product_routes.route("/form", methods=["POST","PUT"])
+@product_routes.route("/form", methods=["POST"])
 @login_required
 def create_prod():
   form = ProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     data = form.data
-    if request.method == "POST":
-      product = Product(
-        name=data['name'],
-        price=data['price'],
-        description=data['description'],
-        units_available=data['units_available'],
-        seller_id=current_user.get_id()
-      )
+    product = Product(
+      name=data['name'],
+      price=data['price'],
+      description=data['description'],
+      units_available=data['units_available'],
+      seller_id=current_user.get_id()
+    )
 
-      db.session.add(product)
-    else:
-      product = Product.query.get(data['product_id'])
-      if product and int(current_user.get_id()) == int(product.seller_id):
-        product.name=data['name']
-        product.price=data['price']
-        product.description=data['description']
-        product.units_available=data['units_available']
-      elif current_user.get_id() != product.seller_id:
-        return {"errors": f"You do not own this product. User {int(current_user.get_id())} but {int(product.seller_id)}"}
-      else:
-        return "Product not found"
+    db.session.add(product)
 
     db.session.commit()
     return product.to_dict()
@@ -85,3 +73,24 @@ def delete_product(id):
     return {"message": f"Successfully deleted Product {product.id} - {product.name}"}
 
   return "No product with that id found"
+
+@product_routes.route("/<int:id>/edit", methods=["PUT"])
+@login_required
+def edit_product(id):
+  product = Product.query.get(id)
+  form = ProductForm
+  if form.validate_on_submit():
+    data=form.data
+    product = Product.query.get(id)
+    if product and int(current_user.get_id()) == int(product.seller_id):
+      product.name=data['name']
+      product.price=data['price']
+      product.description=data['description']
+      product.units_available=data['units_available']
+    elif current_user.get_id() != product.seller_id:
+      return {"errors": "You do not own this product."}
+    else:
+      return {"errors": "Product not own."}
+
+    db.session.commit()
+    return product.to_dict()
