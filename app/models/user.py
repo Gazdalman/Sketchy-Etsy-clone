@@ -44,6 +44,10 @@ class User(db.Model, UserMixin):
         back_populates="user",
         cascade='all, delete-orphan'
     )
+    reviews = db.relationship(
+        "Review",
+        back_populates="user"
+    )
 
     @property
     def password(self):
