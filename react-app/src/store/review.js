@@ -24,11 +24,13 @@ const deleteReview = (payload, reviewId) => {
 };
 
 export const allYourReviews = (userId) => async (dispatch) => {
+  console.log("DO I ENTER THE REvIEW THUNK");
   const response = await fetch(`/api/reviews/${userId}`);
   const reviews = await response.json();
+  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
   console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
-  // return reviews;
+  return reviews;
 };
 export const makeReview = (productId, payload, userId) => async (dispatch) => {
   const response = await fetch(`/api/products/${productId}/review`, {
@@ -69,21 +71,22 @@ const review = (state = initialState, action) => {
         "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
         action
       );
-      const returnData = {};
-      action.payload.Reviews.forEach((review) => {
-        returnData[review.id] = review;
-      });
-      return returnData;
+      // const returnData = {};
+      // action.payload.Reviews.forEach((review) => {
+      //   returnData[review.id] = review;
+      // });
+      // return returnData;
+      return { reviews: action.payload };
     }
-    case CREATE_REVIEW:
-      newState = { ...state };
-      newState[action.payload.id] = action.payload;
-      return newState;
-    case DELETE_REVIEW:
-      let deleteState;
-      deleteState = { ...state };
-      delete deleteState[action.payload];
-      return deleteState;
+    // case CREATE_REVIEW:
+    //   newState = { ...state };
+    //   newState[action.payload.id] = action.payload;
+    //   return newState;
+    // case DELETE_REVIEW:
+    //   let deleteState;
+    //   deleteState = { ...state };
+    //   delete deleteState[action.payload];
+    //   return deleteState;
     default:
       return state;
   }

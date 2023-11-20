@@ -8,8 +8,8 @@ function Reviews() {
   const { userId } = useParams();
   const user = useSelector((state) => state.session.user);
   //   console.log("🚀 ~ file: index.js:9 ~ Reviews ~ userId:", userId);
-  //   const Reviews = useSelector((state) => state);
-  //   console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", Reviews);
+  const Reviews = useSelector((state) => state);
+  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ Reviews:", Reviews);
   console.log("🚀 ~ file: index.js:8 ~ Reviews ~ user:", user);
   const [activeRating, setActiveRating] = useState(0);
 
@@ -21,9 +21,10 @@ function Reviews() {
   //     setActiveRating = reviewsSum / reviewsLength;
   //   }
 
-  //   useEffect(() => {
-  //     dispatch(allYourReviews());
-  //   }, [dispatch]);
+  useEffect(() => {
+    console.log("DID I ENTER THE USE EFFECT");
+    dispatch(allYourReviews(userId));
+  }, [dispatch]);
   return (
     <>
       <p>JUST HERE AT THE REVIEWS</p>

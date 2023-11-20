@@ -18,8 +18,13 @@ class Review(db.Model):
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
 
     product = db.relationship(
-    "Product",
-    back_populates="reviews"
+        "Product",
+        back_populates="reviews"
+    )
+
+    user = db.relationship(
+        "User",
+        back_populates="reviews"
     )
 
     def to_dict(self):

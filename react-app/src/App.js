@@ -22,7 +22,7 @@ function App() {
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(getAllProducts())
+    dispatch(getAllProducts());
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -52,7 +52,7 @@ function App() {
           <Route path="/profile/:userId">
             <Profile />
           </Route>
-          <Route path="/:userId/reviews/">
+          <Route path="/reviews/:userId">
             <Reviews />
           </Route>
         </Switch>

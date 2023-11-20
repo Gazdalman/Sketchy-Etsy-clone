@@ -26,7 +26,7 @@ const deleteProduct = (productId) => {
 }
 
 export const getAllProducts = () => async dispatch => {
-  const res = await fetch('/api/products');
+  const res = await fetch('/api/products/');
 
   if (res.ok) {
     const products = await res.json();

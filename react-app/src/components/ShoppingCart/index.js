@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getCart, updateQuantity } from "../../store/cart";
-
+import OpenModalButton from "../OpenModalButton";
+import DeleteItem from "../DeleteModal/deleteModalCart";
 
 export default function Cart() {
   const history = useHistory();
@@ -28,7 +29,7 @@ export default function Cart() {
 
   const removeItem = (itemId) => {
     // ! WHY ARE YOU FUCKING LOOPING?!?!?!?!
-    dispatch(removeItem(itemId));
+    // * open delete modal
   };
 
   const decQuant = (item) => {
@@ -36,7 +37,7 @@ export default function Cart() {
     const change = "dec";
     if (Number(item.quantity) === 1) {
       // ! WHY ARE YOU FUCKING LOOPING?!?!?!?!
-      removeItem(item.id);
+      // * open delete modal
     } else {
       dispatch(updateQuantity(item.id, change));
     }
@@ -70,13 +71,13 @@ export default function Cart() {
               </button>
             </p>
             {/* remove removes item from cart entirely */}
-            <button
-              value={item.id}
-              onClick={(e) => removeItem(e.target.value)}
-              disabled={true}
-            >
-              Remove
-            </button>
+            <>
+              <OpenModalButton
+                modalClasses={["delete-button-container"]}
+                buttonText="Remove from Cart"
+                modalComponent={<DeleteItem product={item} />}
+              />
+            </>
           </div>
         ))}
       <button onClick={() => history.push("/")}>Continue Shopping</button>

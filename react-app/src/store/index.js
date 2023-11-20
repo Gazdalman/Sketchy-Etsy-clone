@@ -6,6 +6,7 @@ import wishlist from "./wishlist";
 import review from "./review";
 import productsReducer from "./product";
 import singleProductReducer from "./singleProduct";
+import orderReducer from "./order";
 
 const rootReducer = combineReducers({
   session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   review,
   products: productsReducer,
   requestedProduct: singleProductReducer,
+  orders: orderReducer,
 });
 
 let enhancer;
