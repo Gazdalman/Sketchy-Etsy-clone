@@ -35,19 +35,20 @@ export const getWish = ()  => async (dispatch) => {
 
 //delete wish
 export const removeWish = (productId) => async (dispatch) => {
-    const response = await fetch("/api/wishlist/delete-wish", {
+    const response = await fetch(`/api/wishlist/delete-wish/${productId}`, {
         method: "DELETE",
 
-        body: {
-            product: productId
-        }
     });
 
     if (response.ok) {
         const message = await response.json();
-        dispatch(deleteWish(message))
+        if (message.error) {
+            console.log(message.error);
+            return
+        };
 
-        console.log('to delete', message)
+        dispatch(deleteWish(productId));
+        return message;
     };
 }
 
@@ -58,6 +59,7 @@ export default function wishlist(state = initialState, action) {
       return action.payload;
     case DELETE_WISH:
       const newState = {...state}
+      console.log('delete state in reducer', newState)
       delete newState[action.payload]
       return newState
     default:

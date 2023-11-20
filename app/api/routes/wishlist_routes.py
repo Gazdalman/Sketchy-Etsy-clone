@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request
-from app.models import db, Wishlist, Product
+from app.models import db, Wishlist, Product, WishlistDetail
 from flask_login import current_user, login_required
 
 wishlist_routes = Blueprint("wishlist", __name__)
@@ -34,18 +34,19 @@ def new_wishlist():
 
 
 #remove wishlist
-@wishlist_routes.route("/delete-wish", methods=["DELETE"])
+@wishlist_routes.route("/delete-wish/<int:id>", methods=["DELETE"])
 @login_required
-def delete_wishlist():
-    req_product = request.get_json()
-
-    product = Product.query.get(req_product["product"])
+def delete_wishlist(id):
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
+    product = Product.query.get(id)
 
-    wishlist.products.remove(product)
+    if product:
+        wishlist.products.remove(product)
+        db.session.commit()
 
-    db.session.commit()
+        return { "message": "Successfully deleted" }
+    else:
+        return { "error": "Product is not found"}
 
     # return wishlist.to_dict()
-    return "successfully deleted"
