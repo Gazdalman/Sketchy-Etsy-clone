@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { removeWish } from "../../store/wishlist";
+import { getWish, removeWish } from "../../store/wishlist";
 
 import "./deleteModal.css"
 
@@ -11,13 +11,14 @@ function DeleteWish({ product }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    console.log('product to delete ====>', product)
 
     const deleteWish =  async (e) => {
         e.preventDefault();
 
         await dispatch(removeWish(product.id)).then(closeModal);
+        await dispatch(getWish()).then(()=> history.push("/wishlist"))
 
-        history.push("/wishlist");
     };
 
     return (
