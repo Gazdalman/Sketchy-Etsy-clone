@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import DeleteAccount from "../DeleteModal/deleteModalUser";
 
 /*
 - ? optional adds to model as well:
@@ -26,7 +28,11 @@ export default function Profile() {
         {/* might move the following 2 buttons to an account setting menu */}
         <button>Edit Profile</button>
         {/* Following buttons needs to render modal to confirm deletion */}
-        <button>Delete Account</button>
+        <OpenModalButton
+          modalClasses={["delete-button-container"]}
+          buttonText="Delete your Account"
+          modalComponent={<DeleteAccount />}
+        />
 
         <div>
           Tabs will render here - will be rendered from another .js file and

@@ -97,6 +97,19 @@ export const signUp =
     }
   };
 
+export const deleteUser = () => async (dispatch) => {
+  const res = await fetch("/api/users/", {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    const data = await res.json();
+    if (data.error) {
+      return data.error;
+    }
+    dispatch(removeUser());
+  }
+};
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

@@ -1,34 +1,36 @@
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { removeWish } from "../../store/wishlist";
+import { deleteUser } from "../../store/session";
 
-import "./deleteModal.css"
+import "./deleteModal.css";
 
 //PLEASE CHANGE names/variables
 
-function DeleteWish({ product }) {
-    const { closeModal } = useModal();
-    const history = useHistory();
-    const dispatch = useDispatch();
+function DeleteAccount() {
+  const { closeModal } = useModal();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
+  const deleteAccount = async (e) => {
+    e.preventDefault();
 
-    const deleteWish =  async (e) => {
-        e.preventDefault();
+    history.push("/");
+    await dispatch(deleteUser()).then(closeModal);
+  };
 
-        await dispatch(removeWish(product.id)).then(closeModal);
-
-        history.push("/wishlist");
-    };
-
-    return (
-        <div className="delete-button-container">
-            <h2>Confirm Delete</h2>
-            <p>Are you sure you want to remove this product from your wishlist?</p>
-            <button id="delete-btn" onClick={deleteWish}>Yes (Delete product)</button>
-            <button id="keep-btn" onClick={closeModal}>No (Keep product)</button>
-        </div>
-    );
+  return (
+    <div className="delete-button-container">
+      <h2>Confirm Delete</h2>
+      <p>Are you sure you want to delete your account?</p>
+      <button id="delete-btn" onClick={deleteAccount}>
+        Yes (Delete account)
+      </button>
+      <button id="keep-btn" onClick={closeModal}>
+        No (Keep account)
+      </button>
+    </div>
+  );
 }
 
-export default DeleteWish;
+export default DeleteAccount;

@@ -9,7 +9,7 @@ class Product(db.Model):
 
   id = db.Column(db.INTEGER, primary_key=True)
   name = db.Column(db.String(50), nullable=False)
-  seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+  seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")))
   price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
   description = db.Column(db.String(2000), nullable=False)
   units_available = db.Column(db.INTEGER, nullable=False)
@@ -42,11 +42,6 @@ class Product(db.Model):
     "Cart",
     secondary="cart_products",
     back_populates="cart_product_list"
-  )
-
-  seller = db.relationship(
-    "User",
-    back_populates="products"
   )
 
   @property
