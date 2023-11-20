@@ -14,8 +14,6 @@ import { useParams } from "react-router-dom";
 export default function Profile() {
   const user = useSelector((state) => state.session.user);
   const { userId } = useParams();
-  //   console.log(user);
-  //   console.log(userId);
 
   if (Number(user.id) === Number(userId)) {
     return (
@@ -27,6 +25,7 @@ export default function Profile() {
         <button>New Product</button>
         {/* might move the following 2 buttons to an account setting menu */}
         <button>Edit Profile</button>
+        {/* Following buttons needs to render modal to confirm deletion */}
         <button>Delete Account</button>
 
         <div>

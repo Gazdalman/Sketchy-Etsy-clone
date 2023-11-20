@@ -2,11 +2,11 @@ from flask import Blueprint, render_template, redirect, request
 from app.models import db, Wishlist, Product
 from flask_login import current_user, login_required
 
-bp = Blueprint("wishlist", __name__)
+wishlist_routes = Blueprint("wishlist", __name__)
 
 
 #all wishlist
-@bp.route("/")
+@wishlist_routes.route("/")
 @login_required
 def all_wishlist():
 
@@ -15,8 +15,8 @@ def all_wishlist():
     return wishlist.to_dict()
 
 
-# #add wishlist
-@bp.route("/add-wish", methods=["POST"])
+#add wishlist
+@wishlist_routes.route("/add-wish", methods=["POST"])
 @login_required
 def new_wishlist():
 
@@ -34,10 +34,11 @@ def new_wishlist():
 
 
 #remove wishlist
-@bp.route("/delete-wish", methods=["DELETE"])
+@wishlist_routes.route("/delete-wish", methods=["DELETE"])
 @login_required
 def delete_wishlist():
     req_product = request.get_json()
+
     product = Product.query.get(req_product["product"])
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
@@ -46,4 +47,5 @@ def delete_wishlist():
 
     db.session.commit()
 
-    return wishlist.to_dict()
+    # return wishlist.to_dict()
+    return "successfully deleted"
