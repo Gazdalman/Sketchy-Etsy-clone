@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/product";
@@ -58,4 +58,4 @@ const ProductPage = () => {
   )
 }
 
-export default ProductPage
+export default ProductPage;
