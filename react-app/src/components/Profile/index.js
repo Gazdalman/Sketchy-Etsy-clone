@@ -5,14 +5,26 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteAccount from "../DeleteModal/deleteModalUser";
 import { getUser } from "../../store/users";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import UserOrders from "./userOrders";
+import UserProducts from "./userProducts";
+import UserReviews from "./userReviews";
 
 export default function Profile() {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+
+  // * these selectors will be moved to their respective components
+  // const products = useSelector((state) => state.products);
+  // const reviews = useSelector((state) => state.reviews);
+  // const orders = useSelector((state) => state.orders);
+
   const targetUser = useSelector((state) => state.users);
   const { userId } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [loadProducts, setLoadProducts] = useState(true);
+  const [loadReviews, setLoadReviews] = useState(false);
+  const [loadOrders, setLoadOrders] = useState(false);
 
   useEffect(() => {
     dispatch(getUser(userId)).then(() => setIsLoaded(true));
@@ -38,14 +50,43 @@ export default function Profile() {
             modalComponent={<DeleteAccount />}
           />
 
-          <div>
-            Tabs will render here - will be rendered from another .js file and
-            only when respective tab clicked
-            {/*
-              - tab -> pop with orders (5 at a time)
-                  + button for view all orders
-              - tab -> reviews authored by user
-              */}
+          <div style={{ display: "flex", gap: "15px" }}>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(true);
+                  setLoadReviews(false);
+                  setLoadOrders(false);
+                }}
+              >
+                Your Products
+              </h3>
+              {loadProducts && <UserProducts user={user} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(true);
+                  setLoadOrders(false);
+                }}
+              >
+                Your Reviews
+              </h3>
+              {loadReviews && <UserReviews user={user} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(false);
+                  setLoadOrders(true);
+                }}
+              >
+                Your Orders
+              </h3>
+              {loadOrders && <UserOrders user={user} />}
+            </div>
           </div>
         </div>
       );
@@ -56,7 +97,32 @@ export default function Profile() {
       {isLoaded && (
         <>
           <h1>Welcome to {targetUser.username}'s Profile</h1>
-          <div>Products being sold by user will render here</div>
+          <div style={{ display: "flex", gap: "15px" }}>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(true);
+                  setLoadReviews(false);
+                  setLoadOrders(false);
+                }}
+              >
+                Products
+              </h3>
+              {loadProducts && <UserProducts user={targetUser} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(true);
+                  setLoadOrders(false);
+                }}
+              >
+                Reviews
+              </h3>
+              {loadReviews && <UserReviews user={targetUser} />}
+            </div>
+          </div>
         </>
       )}
     </div>

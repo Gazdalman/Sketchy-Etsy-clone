@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function UserOrders({ user }) {
+export default function UserProducts({ user }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
