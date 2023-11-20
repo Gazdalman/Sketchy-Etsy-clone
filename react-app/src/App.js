@@ -16,6 +16,7 @@ import ProductShow from "./components/ProductDetail";
 import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
+import ProductFormPage from "./components/ProductForm";
 
 /* Import state */
 import { getAllProducts } from "./store/product";
