@@ -26,24 +26,27 @@ export default function Cart() {
     }
   }, [dispatch]);
 
-  const decQuant = async (item) => {
+  const decQuant = (item) => {
     const change = "dec";
     const itemId = item.id;
+    const itemId = item.id;
     if (Number(item.quantity) === 1) {
-      await dispatch(removeItem(itemId));
+      dispatch(removeItem(itemId));
     } else {
-      await dispatch(updateQuantity(itemId, change));
+      dispatch(updateQuantity(itemId, change));
     }
   };
   const incQuant = async (itemId) => {
     const change = "inc";
-    await dispatch(updateQuantity(itemId, change));
+    const itemId = item.id;
+    dispatch(updateQuantity(itemId, change));
   };
 
   return (
     <div>
       <h1>Shopping Cart</h1>
       {isLoaded &&
+        Object.values(cart).map((item) => (
         Object.values(cart).map((item) => (
           <div key={item.id}>
             <h3>{item.name}</h3>

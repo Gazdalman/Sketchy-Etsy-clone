@@ -41,38 +41,6 @@ export const removeItem = (itemId) => async (dispatch) => {
 };
 
 export const updateQuantity = (itemId, change) => async (dispatch) => {
-  console.log(itemId);
-  const res = await fetch(`/api/cart/${change}/${itemId}`, {
-    method: "PUT",
-  });
-  if (res.ok) {
-    const cartData = await res.json();
-    if (cartData.error) {
-      console.log(cartData.error);
-      return;
-    }
-    // console.log(cartData);
-    dispatch(getCart());
-  }
-};
-
-export const removeItem = (itemId) => async (dispatch) => {
-  const res = await fetch(`/api/cart/product/${itemId}`, {
-    method: "DELETE",
-  });
-  if (res.ok) {
-    const cartData = await res.json();
-    if (cartData.error) {
-      console.log(cartData.error);
-      return;
-    }
-    // console.log(cartData);
-    dispatch(getCart());
-  }
-};
-
-export const updateQuantity = (itemId, change) => async (dispatch) => {
-  console.log(itemId);
   const res = await fetch(`/api/cart/${change}/${itemId}`, {
     method: "PUT",
   });
