@@ -3,45 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { allTheReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-function Reviews({ productId }) {
-  console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", productId);
+function Reviews() {
+  //   console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", product);
   const dispatch = useDispatch();
-  //   const { productId } = useParams();
+  const { productId } = useParams();
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.review);
+  console.log("🚀 ~ file: index.js:12 ~ Reviews ~ reviews:", reviews);
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
   let sum = 0;
   if (reviewsLength >= 1) {
-    //   for (let ele in reviews) {
-    //     sum += parseInt(ele.rating);
-    //   }
-    // }
-    reviews?.forEach((ele) => {
-      sum = sum + ele.rating;
-    });
+    // reviews?.forEach((ele) => {
+    //   sum = sum + ele.rating;
+    // });
     sum = reviews.reduce((acc, review) => review.rating + acc, 0);
   }
   let avg;
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
-  // console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
+  console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
 
   useEffect(() => {
     dispatch(allTheReviews(productId));
   }, [dispatch, productId]);
   return (
     <>
-      <p>
+      <h1>REVIEWS APPEAR</h1>
+      <div>
         {reviewsLength == 1 ? (
-          <h1>
-            {reviewsLength} Reviews {avg.toFixed(2)}
-          </h1>
+          <span>
+            {reviewsLength} Reviews {avg?.toFixed(2)}
+          </span>
         ) : (
-          <h1>
-            {reviewsLength} Reviews {avg.toFixed(2)}
-          </h1>
+          <span>
+            {reviewsLength} Reviews {avg?.toFixed(2)}
+          </span>
         )}
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <label>
@@ -87,7 +85,7 @@ function Reviews({ productId }) {
             </div>
           </label>
         </div>
-      </p>
+      </div>
       <div>
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (

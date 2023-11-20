@@ -5,8 +5,8 @@ from app.forms import ReviewForm
 
 review_routes = Blueprint("reviews", __name__, url_prefix='/reviews')
 
-@review_routes.route("/")
-def get_all_user_reviews(productId):
+@review_routes.route("/<int:productId>")
+def get_all_product_reviews(productId):
   """
   Returns a list of all product reviews
   """

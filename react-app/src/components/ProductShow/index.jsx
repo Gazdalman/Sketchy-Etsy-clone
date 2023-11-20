@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
-// import Reviews from "../ProductReviews";
+import Reviews from "../ProductReviews";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
-      {/* <Reviews productId={product.id} /> */}
+      <Reviews product={product} />
     </div>
   ) : null;
 };

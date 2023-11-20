@@ -23,9 +23,9 @@ const deleteReview = (payload, reviewId) => {
   };
 };
 
-export const allTheReviews = (userId) => async (dispatch) => {
+export const allTheReviews = (productId) => async (dispatch) => {
   console.log("DO I ENTER THE REvIEW THUNK");
-  const response = await fetch("/api/reviews");
+  const response = await fetch(`/api/reviews/${productId}`);
   const reviews = await response.json();
   console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
   console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
