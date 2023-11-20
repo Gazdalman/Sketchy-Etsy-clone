@@ -1,6 +1,7 @@
 const initialState = {};
 const ALL_WISH = "wishlist/ALL_WISH";
 const DELETE_WISH = "wishlist/DELETE_WISH";
+// const ADD_WISH = "wishlist/ADD_WISH";
 
 const allWish = (wishlist) => ({
 
@@ -15,6 +16,12 @@ const deleteWish = (productId) => ({
     payload: productId
 
 });
+
+// const addToWish = (productId) => ({
+
+//     type: ADD_WISH,
+//     payload: productId
+// });
 
 //get all wish
 export const getWish = ()  => async (dispatch) => {
@@ -31,7 +38,6 @@ export const getWish = ()  => async (dispatch) => {
 
 
 };
-
 
 //delete wish
 export const removeWish = (productId) => async (dispatch) => {
@@ -50,18 +56,39 @@ export const removeWish = (productId) => async (dispatch) => {
         dispatch(deleteWish(productId));
         return message;
     };
-}
+};
+
+
+//add to wishlist
+export const addWish = (productId) => async (dispatch) => {
+    const response = await fetch(`/api/wishlist/add-wish/${productId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (response.ok) {
+        const message = response.json();
+        
+        dispatch(getWish());
+        return message
+    };
+
+};
 
 
 export default function wishlist(state = initialState, action) {
   switch (action.type) {
     case ALL_WISH:
-      return action.payload;
+        return action.payload;
+
     case DELETE_WISH:
-      const newState = {...state}
-      console.log('delete state in reducer', newState)
-      delete newState[action.payload]
-      return newState
+        const newState = {...state}
+        delete newState[action.payload]
+        return newState;
+
+
     default:
       return state;
   }

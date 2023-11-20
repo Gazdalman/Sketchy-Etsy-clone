@@ -15,7 +15,7 @@ function DeleteWish({ product }) {
 
     const deleteWish =  async (e) => {
         e.preventDefault();
-
+      
         await dispatch(removeWish(product.id)).then(closeModal);
         await dispatch(getWish()).then(()=> history.push("/wishlist"))
 

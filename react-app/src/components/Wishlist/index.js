@@ -12,7 +12,7 @@ export default function Wishlist() {
     const user = useSelector((state) => state.session.user);
     const wishlist = useSelector((state) => state.wishlist);
     const allProducts = wishlist.products ? Object.values(wishlist.products) : null
-    // const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     console.log('product id', wishlist.products)
     console.log('all product', allProducts)
@@ -21,7 +21,7 @@ export default function Wishlist() {
 
             if (user){
                 dispatch(getWish())
-                // .then(() => setIsLoaded(true))
+                .then(() => setIsLoaded(true))
             }
 
     }, [dispatch]);
@@ -32,7 +32,7 @@ export default function Wishlist() {
   };
 
 
-  return  (
+  return isLoaded && (
     <>
         <h1>Wishlist</h1>
         { allProducts && allProducts.length > 0 && (

@@ -15,6 +15,8 @@ const ProductShow = () => {
 
   let imgNum = 0
 
+ 
+
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
@@ -55,6 +57,7 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
+      <button>Add to Wishlist</button>
     </div>
   ) : null
 }

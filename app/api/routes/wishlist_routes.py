@@ -16,13 +16,13 @@ def all_wishlist():
 
 
 #add wishlist
-@wishlist_routes.route("/add-wish", methods=["POST"])
+@wishlist_routes.route("/add-wish/<int:id>", methods=["POST"])
 @login_required
-def new_wishlist():
+def new_wishlist(id):
 
     #get product from the request
-    req_product = request.get_json()
-    product = Product.query.get(req_product["product"])
+  
+    product = Product.query.get(id)
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
@@ -30,7 +30,8 @@ def new_wishlist():
     wishlist.products.append(product)
     db.session.commit()
 
-    return wishlist.to_dict()
+    # return wishlist.to_dict()
+    return { "message": "Product successfully added"}
 
 
 #remove wishlist
@@ -45,7 +46,7 @@ def delete_wishlist(id):
         wishlist.products.remove(product)
         db.session.commit()
 
-        return { "message": "Successfully deleted" }
+        return { "message": "Prodcut successfully deleted" }
     else:
         return { "error": "Product is not found"}
 
