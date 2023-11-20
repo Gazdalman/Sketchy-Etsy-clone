@@ -9,3 +9,4 @@ from .products import Product
 from .orders import Order
 from .cart import Cart
 from .wishlist import Wishlist, WishlistDetail
+from .product_images import ProductImage
