@@ -12,6 +12,7 @@ import Cart from "./components/ShoppingCart";
 // import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
 import Profile from "./components/Profile";
+import Reviews from "./components/Review";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/profile/:userId">
             <Profile />
+          </Route>
+          <Route path="/:userId/reviews/">
+            <Reviews />
           </Route>
         </Switch>
       )}
