@@ -10,13 +10,12 @@ class Cart(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
-    # product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
-
     cart_user = db.relationship(
         "User",
         back_populates="cart"
     )
 
+    # * holds all product & cart info, including item quantity
     cart_product_list = db.relationship(
         "Product",
         secondary="cart_products",
