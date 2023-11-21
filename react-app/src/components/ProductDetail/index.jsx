@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getOneProduct } from "../../store/singleProduct"
+import { addWish } from "../../store/wishlist"
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,15 @@ const ProductShow = () => {
   const product = useSelector(state => state.requestedProduct);
 
   let imgNum = 0
+
+
+  const addToWish = (e, product) => {
+    e.preventDefault();
+
+    const productId = product?.id;
+    dispatch(addWish(productId));
+
+};
 
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
@@ -55,6 +65,10 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
+      <button
+         className="add-wish-btn"
+         onClick={(e) => addToWish(e, product)}
+      >Add to Wishlist</button>
     </div>
   ) : null
 }
