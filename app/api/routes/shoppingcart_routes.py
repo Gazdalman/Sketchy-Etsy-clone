@@ -37,18 +37,26 @@ def delItem(id):
 
 
 @shoppingcart_routes.route("/<string:change>/<int:itemId>", methods=["PUT"])
-def updateQunatity(change, itemId):
+def updateQuantity(change, itemId):
     """ update item quantity """
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
+    item = Product.query.get(itemId)
+    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
     if change == "inc":
         product.quantity = product.quantity + 1
+        new_link = CartProduct(
+            cart_id=cart.id,
+            product_id=itemId
+        )
+        db.session.add(new_link)
         db.session.commit()
-        return { "message": "success", "new quantity": product.quantity }
+        return { "message": "success" }
     elif change == "dec":
         product.quantity = product.quantity - 1
+        link = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
+        db.session.delete(link)
         db.session.commit()
-        return { "message": "success", "new quantity": product.quantity }
+        return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }
