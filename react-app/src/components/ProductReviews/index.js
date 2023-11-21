@@ -129,7 +129,20 @@ function Reviews() {
 
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "50%",
+              }}
+            >
+              <div>
+                <p>{review}</p>
+                <span>
+                  <p>{created_at}</p>
+                </span>
+              </div>
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <label>
                   <div
@@ -173,12 +186,6 @@ function Reviews() {
                     ></i>
                   </div>
                 </label>
-              </div>
-              <div>
-                <p>{review}</p>
-                <span>
-                  <p>{created_at}</p>
-                </span>
               </div>
             </div>
           ))

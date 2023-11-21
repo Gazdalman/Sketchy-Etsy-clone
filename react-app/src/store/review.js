@@ -61,18 +61,12 @@ export const createAReview = (productId, payload) => async (dispatch) => {
   //   }
   // }
 };
-export const deleteAReview = (payload, reviewId) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${reviewId}`, {
+export const deleteAReview = (reviewId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${reviewId}/delete`, {
     method: "DELETE",
-    body: { ...payload },
   });
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(deleteReview(data, reviewId));
-  } else {
-    const errors = await response.json();
-    return errors;
-  }
+  dispatch(deleteReview(reviewId));
+  return response;
 };
 const review = (state = initialState, action) => {
   let newState;
@@ -87,37 +81,14 @@ const review = (state = initialState, action) => {
       newState = { ...state };
       newState[action.payload.id] = action.payload;
       return newState;
-    // case DELETE_REVIEW:
-    //   let deleteState;
-    //   deleteState = { ...state };
-    //   delete deleteState[action.payload];
-    //   return deleteState;
+    case DELETE_REVIEW:
+      let deleteState;
+      deleteState = { ...state };
+      delete deleteState[action.reviewId];
+      return deleteState;
     default:
       return state;
   }
 };
-// const review = (state = initialState, action) => {
-//   let newState;
-//   switch (action.type) {
-//     case ALL_REVIEWS: {
-//       console.log(
-//         "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
-//         action
-//       );
-//       return action.payload.reviews;
-//     }
-//     case CREATE_REVIEW:
-//       newState = { ...state };
-//       newState[action.payload.id] = action.payload;
-//       return newState;
-//     // case DELETE_REVIEW:
-//     //   let deleteState;
-//     //   deleteState = { ...state };
-//     //   delete deleteState[action.payload];
-//     //   return deleteState;
-//     default:
-//       return state;
-//   }
-// };
 
 export default review;
