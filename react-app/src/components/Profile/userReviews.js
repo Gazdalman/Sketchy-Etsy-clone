@@ -9,5 +9,5 @@ export default function UserReviews({ user }) {
     // ! dispatch for user's products
     console.log(user);
   }, [dispatch]);
-  return <h1>test</h1>;
+  return <h4>Coming Soon...</h4>;
 }

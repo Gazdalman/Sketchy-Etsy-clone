@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProducts } from "../../store/userProducts";
+import OpenModalButton from "../OpenModalButton";
+import DeleteProduct from "../DeleteModal/deleteModalProduct";
 
 export default function UserProducts({ user }) {
   const dispatch = useDispatch();
@@ -21,6 +23,12 @@ export default function UserProducts({ user }) {
             <div key={item.id}>
               <h4>{item.name}</h4>
               <p>{item.price}</p>
+              <button disabled>Edit</button>
+              <OpenModalButton
+                modalClasses={["delete-button-container"]}
+                buttonText="Delete Product"
+                modalComponent={<DeleteProduct />}
+              />
             </div>
           ))}
         </div>
