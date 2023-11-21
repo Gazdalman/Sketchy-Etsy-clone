@@ -8,7 +8,7 @@ const populateUserProducts = (products) => {
 }
 
 export const getUserProducts = (userId) => async dispatch => {
-  const res = await fetch(`/api/user/${userId}`)
+  const res = await fetch(`/api/products/user/${userId}`)
 
   if (res.ok) {
     const products = await res.json()

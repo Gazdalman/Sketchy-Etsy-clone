@@ -27,7 +27,7 @@ def get_all():
 
 @product_routes.route("/user/<int:id>")
 def user_products(id):
-  products = Product.query.filter(id == Product.seller_id).all()
+  products = Product.query.filter((id) == Product.seller_id).all()
 
   return dict((product.id, product.to_dict()) for product in products)
 
