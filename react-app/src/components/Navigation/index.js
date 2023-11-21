@@ -6,19 +6,12 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <ul>
       <li>
         <NavLink exact to="/">
           Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/new_product">
-          Create Spot
         </NavLink>
       </li>
 

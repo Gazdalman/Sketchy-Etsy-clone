@@ -34,7 +34,7 @@ export default function Profile() {
           </h1>
 
           <NavLink to="/new_product">
-            <button>New Product</button>
+            <button>List New Product</button>
           </NavLink>
           <NavLink to="/editAccount">
             <button>Edit Profile</button>

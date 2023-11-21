@@ -29,7 +29,6 @@ export default function Cart() {
   const decQuant = async (item) => {
     const change = "dec";
     const itemId = item.id;
-    const itemId = item.id;
     if (Number(item.quantity) === 1) {
       await dispatch(removeItem(itemId));
     } else {
@@ -45,7 +44,6 @@ export default function Cart() {
     <div>
       <h1>Shopping Cart</h1>
       {isLoaded &&
-        Object.values(cart).map((item) => (
         Object.values(cart).map((item) => (
           <div key={item.id}>
             <h3>{item.name}</h3>
