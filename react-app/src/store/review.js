@@ -25,7 +25,7 @@ const deleteReview = (payload, reviewId) => {
 };
 const editReview = (reviewId, payload) => {
   return {
-    type: DELETE_REVIEW,
+    type: EDIT_REVIEW,
     payload,
   };
 };
@@ -70,12 +70,20 @@ export const deleteAReview = (reviewId) => async (dispatch) => {
   return response;
 };
 export const editAReview = (reviewId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${reviewId}/delete`, {
+  console.log("🚀 ~ file: review.js:73 ~ editAReview ~ payload:", payload);
+  console.log("DO I ENTER THE THUNK???");
+  const response = await fetch(`/api/reviews/${reviewId}/edit`, {
     method: "PUT",
-    body: payload,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
-  dispatch(editReview(payload));
-  return response;
+  console.log("🚀 ~ file: review.js:76 ~ editAReview ~ response:", response);
+  console.log("DO I GET PAST THE FETCH??");
+  const review = await response.json();
+  console.log("🚀 ~ file: review.js:81 ~ editAReview ~ review:", review);
+  dispatch(editReview(review));
+  console.log("AM I RETURNING ANYTHING??");
+  return review;
 };
 const review = (state = initialState, action) => {
   let newState;
@@ -92,7 +100,8 @@ const review = (state = initialState, action) => {
       return newState;
     case EDIT_REVIEW:
       newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      console.log("🚀 ~ file: review.js:101 ~ review ~ newState:", newState);
+      newState[action.id] = action.payload;
       return newState;
     case DELETE_REVIEW:
       let deleteState;

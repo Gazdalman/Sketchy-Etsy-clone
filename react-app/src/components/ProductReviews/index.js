@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
+import EditReview from "../EditReviewModal/editModalReview";
 
 function Reviews() {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ function Reviews() {
           alignItems: "center",
         }}
       >
-        {reviewsLength == 1 ? (
+        {reviewsLength < 1 ? (
           <span>
             <h1>
               {reviewsLength} Reviews {avg?.toFixed(2)} Stars
@@ -196,7 +197,18 @@ function Reviews() {
                 <OpenModalButton
                   modalClasses={["delete-button-container"]}
                   buttonText="Delete Review"
-                  modalComponent={<DeleteReview reviewId={id} />}
+                  modalComponent={
+                    <DeleteReview reviewId={id} productId={productId} />
+                  }
+                />
+              ) : null}
+              {user?.id == user_id ? (
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Edit Review"
+                  modalComponent={
+                    <EditReview reviewId={id} productId={productId} />
+                  }
                 />
               ) : null}
             </>

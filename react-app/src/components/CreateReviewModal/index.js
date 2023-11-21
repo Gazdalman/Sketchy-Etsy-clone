@@ -22,7 +22,7 @@ function ReviewFormModal({ productId }) {
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
   const [errors, setErrors] = useState({});
-  const disabled = reviewText.length < 10;
+  const disabled = reviewText.length < 4;
   const reviews = useSelector((state) => state.review);
 
   function checkCredentials() {
