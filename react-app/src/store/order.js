@@ -21,18 +21,6 @@ export const placeOrder = () => async (dispatch) => {
   }
 }
 
-export const placeOrder = ()  => async dispatch => {
-  const res = await fetch('/api/orders/place', {
-    method: 'POST'
-  })
-
-  if (res.ok) {
-    const order = await res.json()
-    await dispatch(getAllOrders())
-    return order
-  }
-}
-
 export const getAllOrders = () => async (dispatch) => {
   const res = await fetch(`/api/orders`);
 
