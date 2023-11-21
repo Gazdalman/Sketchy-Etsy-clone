@@ -22,7 +22,7 @@ import { getAllProducts } from "./store/product";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  // const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(getAllProducts());
@@ -47,7 +47,7 @@ function App() {
             <ProductShow />
           </Route>
           <Route path="/new_product">
-            <ProductFormPage type={"create"}/>
+            <ProductFormPage type={"create"} />
           </Route>
           <Route exact path="/cart">
             <Cart />

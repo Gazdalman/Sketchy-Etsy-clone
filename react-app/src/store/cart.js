@@ -35,6 +35,7 @@ export const removeItem = (itemId) => async (dispatch) => {
 };
 
 export const updateQuantity = (itemId, change) => async (dispatch) => {
+  console.log(itemId);
   const res = await fetch(`/api/cart/${change}/${itemId}`, {
     method: "PUT",
   });

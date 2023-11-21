@@ -41,7 +41,7 @@ def updateQunatity(change, itemId):
     """ update item quantity """
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    product = CartProduct.query.filter(CartProduct.product_id == itemId and CartProduct.cart_id == cart.id).first()
+    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
     if change == "inc":
         product.quantity = product.quantity + 1
         db.session.commit()

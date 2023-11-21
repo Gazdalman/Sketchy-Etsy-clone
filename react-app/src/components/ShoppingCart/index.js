@@ -26,19 +26,18 @@ export default function Cart() {
     }
   }, [dispatch]);
 
-  const decQuant = (item) => {
+  const decQuant = async (item) => {
     const change = "dec";
     const itemId = item.id;
     if (Number(item.quantity) === 1) {
-      dispatch(removeItem(itemId));
+      await dispatch(removeItem(itemId));
     } else {
-      dispatch(updateQuantity(itemId, change));
+      await dispatch(updateQuantity(itemId, change));
     }
   };
-  const incQuant = (item) => {
+  const incQuant = async (itemId) => {
     const change = "inc";
-    const itemId = item.id;
-    dispatch(updateQuantity(itemId, change));
+    await dispatch(updateQuantity(itemId, change));
   };
 
   return (
@@ -51,9 +50,9 @@ export default function Cart() {
             <p>{item.price}</p>
             <p>{item.description}</p>
             <p>
-              {item.quantity}
+              {item["quantity"]}
               <button onClick={() => decQuant(item)}> - </button>
-              <button onClick={() => incQuant(item)}> + </button>
+              <button onClick={() => incQuant(item.id)}> + </button>
             </p>
             <>
               <OpenModalButton

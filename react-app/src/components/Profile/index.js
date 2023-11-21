@@ -33,12 +33,12 @@ export default function Profile() {
             Hello, {user.firstName} {user.lastName}
           </h1>
 
-          <button>New Product</button>
-          {/* might move the following 2 buttons to an account setting menu */}
+          <NavLink to="/new_product">
+            <button>New Product</button>
+          </NavLink>
           <NavLink to="/editAccount">
             <button>Edit Profile</button>
           </NavLink>
-          {/* Following buttons needs to render modal to confirm deletion */}
           <OpenModalButton
             modalClasses={["delete-button-container"]}
             buttonText="Delete your Account"

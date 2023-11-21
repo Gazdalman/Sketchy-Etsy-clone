@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { editUser } from "../../store/session";
 import "./EditAccountPage.css";
 
@@ -13,7 +13,7 @@ export default function EditAccountPage() {
   const [email, setEmail] = useState(user.email);
   //   const [old_password, setOldPassword] = useState("");
   //   const [new_password, setNewPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
 
   if (!user) {
     return history.push("/login");
@@ -30,9 +30,9 @@ export default function EditAccountPage() {
       <h1>Edit Account</h1>
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
+          {/* errors.map((error, idx) => (
             <li key={idx}>{error}</li>
-          ))}
+          )) */}
         </ul>
         <label>
           First Name
