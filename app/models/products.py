@@ -56,7 +56,7 @@ class Product(db.Model):
       'id': self.id,
       'name': self.name,
       'seller_id': self.seller_id,
-      'categories': self.categories.split(', '),
+      'categories': self.categories.split(', ') if self.categories else 'NULL',
       'price': self.price,
       'description': self.description,
       'units_available': self.units_available,
