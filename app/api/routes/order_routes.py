@@ -75,5 +75,7 @@ def place_order():
 
   # Convert the order to a dictionary
   order_dict = order.to_dict()
-
+  for item in cart_items:
+    db.session.delete(item)
+    db.session.commit()
   return order_dict

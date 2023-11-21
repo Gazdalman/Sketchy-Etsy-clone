@@ -40,7 +40,7 @@ class Order(db.Model):
     products = self.get_records()
     price = 0
     for product in products:
-      price += product['price']
+      price += product['price'] * product['quantity']
 
     return price
 
