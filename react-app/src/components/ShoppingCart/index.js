@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { getCart, removeItem, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteItem from "../DeleteModal/deleteModalCart";
@@ -64,8 +64,12 @@ export default function Cart() {
             </>
           </div>
         ))}
-      <button onClick={() => history.push("/")}>Continue Shopping</button>
-      <button disabled={true}>Checkout</button>
+      <NavLink to="/">
+        <button>Continue Shopping</button>
+      </NavLink>
+      <NavLink to="/checkout">
+        <button>Checkout</button>
+      </NavLink>
     </div>
   );
 }

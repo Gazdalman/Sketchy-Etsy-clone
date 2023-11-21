@@ -14,11 +14,6 @@ export default function Profile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
-  // * these selectors will be moved to their respective components
-  // const products = useSelector((state) => state.products);
-  // const reviews = useSelector((state) => state.reviews);
-  // const orders = useSelector((state) => state.orders);
-
   const targetUser = useSelector((state) => state.users);
   const { userId } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);

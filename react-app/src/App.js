@@ -9,13 +9,15 @@ import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
-// import CheckOut from "./components/CheckOut";
+import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
-import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductDetail";
 import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
+
+/* Import state */
+import { getAllProducts } from "./store/product";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,27 +36,31 @@ function App() {
           <Route exact path="/">
             <ProductPage />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/products/:productId">
+          <Route exact path="/products/:productId">
             <ProductShow />
           </Route>
-          <Route path="/cart">
+          <Route exact path="/cart">
             <Cart />
           </Route>
-          <Route path="/wishlist">
+          <Route exact path="/wishlist">
             <Wishlist />
           </Route>
-          <Route path="/profile/:userId">
+          <Route exact path="/profile/:userId">
             <Profile />
           </Route>
-          <Route>
+          <Route exact path="/editAccount">
             <EditAccountPage />
           </Route>
+          <Route exact path="/checkout">
+            <CheckOut />
+          </Route>
+          <Route>"404: Route doesn't exist"</Route>
         </Switch>
       )}
     </>
