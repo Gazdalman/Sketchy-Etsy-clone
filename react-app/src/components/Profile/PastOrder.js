@@ -19,7 +19,7 @@ export default function () {
 
     return isLoaded &&(
         <>
-            <h1>Past Order</h1>
+            <h1>History Order</h1>
             {Object.values(allOrders).map((order) => (
                 <div key={order.id}>
                     {order.products.map((item) => (
@@ -28,6 +28,7 @@ export default function () {
                             <p>{item.price}</p>
                             <button>Write Review</button>
                             <button>Return Item</button>
+                            <button>Buy Again</button>
                         </div>
                     ))}
                 </div>

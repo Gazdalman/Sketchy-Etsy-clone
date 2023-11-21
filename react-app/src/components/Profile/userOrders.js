@@ -35,6 +35,7 @@ export default function UserOrders({ user }) {
                   <p>{item.price}</p>
                   <button disabled>Write Review</button>
                   <button onClick={(e) => handleClick(e)}>Return Item</button>
+                  <button>Buy Again</button>
                 </div>
               ))}
             </div>
