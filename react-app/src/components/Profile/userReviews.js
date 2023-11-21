@@ -9,5 +9,9 @@ export default function UserReviews({ user }) {
     // ! dispatch for user's products
     console.log(user);
   }, [dispatch]);
+
+  // ! if current_user == user.id display 2 tabs (your reviews, reviews on your products) else == reviews on user products
+
+  // * for current_user authored reviews => button "Comment on Review"
   return <h4>Coming Soon...</h4>;
 }
