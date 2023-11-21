@@ -22,7 +22,7 @@ export const placeOrder = () => async (dispatch) => {
 }
 
 export const getAllOrders = () => async (dispatch) => {
-  const res = await fetch(`/api/orders`);
+  const res = await fetch(`/api/orders/`);
 
   if (res.ok) {
     const orders = await res.json();

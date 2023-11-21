@@ -21,8 +21,8 @@ export default function Wishlist() {
       history.push("/login");
     }
     if (user) {
-      dispatch(getWish());
-      // .then(() => setIsLoaded(true))
+      dispatch(getWish())
+      .then(() => setIsLoaded(true))
     }
   }, [dispatch]);
 
