@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-
+# ! Will not be implemented
 class CheckoutForm(FlaskForm):
     # * card information inputs -> options in front end for demo card info
     name_on_card = StringField("Card Owner", [DataRequired()])

@@ -9,18 +9,21 @@ import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import Cart from "./components/ShoppingCart";
-// import CheckOut from "./components/CheckOut";
+import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
-import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
-import ProductShow from "./components/ProductShow";
+import ProductShow from "./components/ProductDetail";
 import Profile from "./components/Profile";
 import ProductFormPage from "./components/ProductForm";
 import Reviews from "./components/Review";
+import EditAccountPage from "./components/EditAccountPage";
+
+/* Import state */
+import { getAllProducts } from "./store/product";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  // const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(getAllProducts());
@@ -35,30 +38,34 @@ function App() {
           <Route exact path="/">
             <ProductPage />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/products/:productId">
+          <Route exact path="/products/:productId">
             <ProductShow />
           </Route>
-          <Route path="/new_product">
-            <ProductFormPage type={"create"}/>
+          <Route xact path="/new_product">
+            <ProductFormPage type={"create"} />
           </Route>
-          <Route path="/wishlist">
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          <Route exact path="/wishlist">
             <Wishlist />
           </Route>
-          <Route path="/profile/:userId">
+          <Route exact path="/profile/:userId">
             <Profile />
           </Route>
-          <Route path="/reviews/:userId">
-            <Reviews />
+          <Route exact path="/editAccount">
+            <EditAccountPage />
           </Route>
+          <Route exact path="/checkout">
+            <CheckOut />
+          </Route>
+          <Route>"404: Route doesn't exist"</Route>
         </Switch>
       )}
     </>

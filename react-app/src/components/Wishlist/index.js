@@ -13,21 +13,18 @@ export default function Wishlist() {
     const allProducts = wishlist.products ? Object.values(wishlist.products) : null
     const [isLoaded, setIsLoaded] = useState(false);
 
-    console.log('product id', wishlist.products)
-    console.log('all product', allProducts)
+  console.log("product id", wishlist.products);
+  console.log("all product", allProducts);
 
-    useEffect(() =>  {
-
-            if (user){
-                dispatch(getWish())
-                .then(() => setIsLoaded(true))
-            }
-
-    }, [dispatch]);
-
-  if (!user) {
-    history.push("/login");
-  }
+  useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
+    if (user) {
+      dispatch(getWish());
+      // .then(() => setIsLoaded(true))
+    }
+  }, [dispatch]);
 
 
 
