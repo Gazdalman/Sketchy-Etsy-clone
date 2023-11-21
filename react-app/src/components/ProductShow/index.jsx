@@ -1,34 +1,26 @@
-
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { getOneProduct } from "../../store/singleProduct"
-import { addWish } from "../../store/wishlist"
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getOneProduct } from "../../store/singleProduct";
+import Reviews from "../ProductReviews";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
-  const history = useHistory()
-  const [previewImage, setPreviewImage] = useState({ url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png" });
+  const history = useHistory();
+  const [previewImage, setPreviewImage] = useState({
+    url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png",
+  });
   const [revAvg, setRevAvg] = useState(0);
-  const [numReviews, setNumReviews] = useState(0)
-  const product = useSelector(state => state.requestedProduct);
+  const [numReviews, setNumReviews] = useState(0);
+  const product = useSelector((state) => state.requestedProduct);
 
-  let imgNum = 0
-
-
-  const addToWish = (e, product) => {
-    e.preventDefault();
-
-    const productId = product?.id;
-    dispatch(addWish(productId));
-
-};
+  let imgNum = 0;
 
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
-      history.replace("/not-found")
+      history.replace("/not-found");
     }
   }, [dispatch]);
 
@@ -39,7 +31,6 @@ const ProductShow = () => {
 
   // }, [product]);
 
-
   // if (!isLoaded && rerendered && !product) {
   //   history.replace("/not-found")
   // }
@@ -47,7 +38,10 @@ const ProductShow = () => {
   return Object.keys(product).length > 0 && +product.id === +productId ? (
     <div id="product-show">
       <h1 id="product-name">{product.name}</h1>
-      <h3>S{product.price} | Product #:{product.id} | {product.units_available} available</h3>
+      <h3>
+        S{product.price} | Product #:{product.id} | {product.units_available}{" "}
+        available
+      </h3>
       <div id="product-images-container">
         {/* <img id="preview-image" src={previewImage.url} alt={`Product ${product.id}`} />
         <span id="none-prev">
@@ -57,7 +51,6 @@ const ProductShow = () => {
             ) : null
           ))}
         </span> */}
-
       </div>
       <h4 id="product-owner">Sold by {product.seller}</h4>
       <div id="product-details-lower">
@@ -65,12 +58,9 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
-      <button
-         className="add-wish-btn"
-         onClick={(e) => addToWish(e, product)}
-      >Add to Wishlist</button>
+      <Reviews product={product} />
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-export default ProductShow
+export default ProductShow;

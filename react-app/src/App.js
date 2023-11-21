@@ -13,16 +13,17 @@ import Cart from "./components/ShoppingCart";
 import Wishlist from "./components/Wishlist";
 import { getAllProducts } from "./store/product";
 import ProductPage from "./components/ProductPage";
-import ProductShow from "./components/ProductDetail";
+import ProductShow from "./components/ProductShow";
 import Profile from "./components/Profile";
 import ProductFormPage from "./components/ProductForm";
+import Reviews from "./components/Review";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(getAllProducts())
+    dispatch(getAllProducts());
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path="/profile/:userId">
             <Profile />
+          </Route>
+          <Route path="/reviews/:userId">
+            <Reviews />
           </Route>
         </Switch>
       )}

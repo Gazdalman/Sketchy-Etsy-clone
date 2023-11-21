@@ -3,4 +3,5 @@ from .user_routes import user_routes
 from .product_routes import product_routes
 from .order_routes import order_routes
 from .shoppingcart_routes import shoppingcart_routes
+from .reviews_routes import review_routes
 from .wishlist_routes import wishlist_routes
