@@ -33,8 +33,8 @@ export const allTheReviews = (productId) => async (dispatch) => {
   return reviews;
 };
 export const allYourReviews = (userId) => async (dispatch) => {
-  console.log("DO I ENTER THE REvIEW THUNK");
-  const response = await fetch(`/api/reviews/${userId}`);
+  console.log("🚀 ~ file: review.js:36 ~ allYourReviews ~ userId:", userId);
+  const response = await fetch(`/api/reviews/${userId}/reviews`);
   const reviews = await response.json();
   console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
   console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
