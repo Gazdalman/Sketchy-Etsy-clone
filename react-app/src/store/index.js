@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   products: productsReducer,
   requestedProduct: singleProductReducer,
   orders: orderReducer,
-  userProducts
+  userProducts,
 });
 
 let enhancer;
