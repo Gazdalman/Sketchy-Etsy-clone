@@ -39,22 +39,24 @@ export const allYourReviews = (userId) => async (dispatch) => {
   dispatch(allReviews(reviews));
   // return reviews;
 };
-export const makeReview = (productId, payload, userId) => async (dispatch) => {
-  const response = await fetch(`/api/products/${productId}/review`, {
+export const createAReview = (productId, payload) => async (dispatch) => {
+  console.log("INSIDE THE CREATION REVIEW THUNK");
+  const response = await fetch(`/api/reviews/${productId}/new`, {
     method: "POST",
     body: { ...payload },
   });
-  if (response.ok) {
-    const review = await response.json();
-    review.user_id = userId;
-    dispatch(createReview(review));
-    return review;
-  } else {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  }
+  console.log("🚀 ~ file: review.js:48 ~ createAReview ~ response:", response)
+  // if (response.ok) {
+  const review = await response.json();
+  console.log("SHOULD BE DISPATCHING FROM THE CREATION REVIEW THUNK");
+  dispatch(createReview(review));
+  return review;
+  // } else {
+  //   const data = await response.json();
+  //   if (data.errors) {
+  //     return data.errors;
+  //   }
+  // }
 };
 export const deleteAReview = (payload, reviewId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${reviewId}`, {
@@ -78,17 +80,12 @@ const review = (state = initialState, action) => {
         "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
         action
       );
-      // const returnData = {};
-      // action.payload.Reviews.forEach((review) => {
-      //   returnData[review.id] = review;
-      // });
-      // return returnData;
       return action.payload.reviews;
     }
-    // case CREATE_REVIEW:
-    //   newState = { ...state };
-    //   newState[action.payload.id] = action.payload;
-    //   return newState;
+    case CREATE_REVIEW:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
     // case DELETE_REVIEW:
     //   let deleteState;
     //   deleteState = { ...state };

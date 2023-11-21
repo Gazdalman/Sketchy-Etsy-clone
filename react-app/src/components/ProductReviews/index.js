@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { allTheReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import OpenModalButton from "../OpenModalButton";
+import ReviewFormModal from "../CreateReviewModal";
 
 function Reviews() {
   //   console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", product);
   const dispatch = useDispatch();
+  const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
+  console.log("🚀 ~ file: index.js:14 ~ Reviews ~ productId:", productId);
   const user = useSelector((state) => state.session.user);
+  //   const users = useSelector((state) => state.user);
+  //   console.log("🚀 ~ file: index.js:13 ~ Reviews ~ users:", users);
+  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ user:", user);
   const reviews = useSelector((state) => state.review);
   console.log("🚀 ~ file: index.js:12 ~ Reviews ~ reviews:", reviews);
   const [activeRating, setActiveRating] = useState(0);
@@ -23,25 +31,46 @@ function Reviews() {
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
-  console.log("🚀 ~ file: index.js:15 ~ Reviews ~ activeRating:", avg);
-
+  let commented = false;
+  const exists = (element) => element.user_id == user.id;
+  if (user && reviewsLength >= 1) {
+    commented = reviews?.some(exists);
+  }
+  console.log("🚀 ~ file: index.js:29 ~ Reviews ~ commented:", commented);
+  const owns = (ele) => ele.user_id == user.id;
+  //   const openMenu = () => {
+  //     if (showMenu) return;
+  //     setShowMenu(true);
+  //   };
+  const closeMenu = () => setShowMenu(false);
   useEffect(() => {
     dispatch(allTheReviews(productId));
   }, [dispatch, productId]);
   return (
     <>
       <h1>REVIEWS APPEAR</h1>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "nowrap",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
         {reviewsLength == 1 ? (
           <span>
-            {reviewsLength} Reviews {avg?.toFixed(2)}
+            <h1>
+              {reviewsLength} Reviews {avg?.toFixed(2)} Stars
+            </h1>
           </span>
         ) : (
           <span>
-            {reviewsLength} Reviews {avg?.toFixed(2)}
+            <h1>{reviewsLength} Reviews</h1>
           </span>
         )}
         <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <h1>{avg?.toFixed(2)}</h1>
           <label>
             <div
               class="rating"
@@ -87,6 +116,18 @@ function Reviews() {
         </div>
       </div>
       <div>
+        {!commented ? (
+          <OpenModalButton
+            buttonText="Add Review"
+            className="dropdownLi"
+            onButtonClick={closeMenu}
+            modalComponent={<ReviewFormModal productId={productId} />}
+          />
+        ) : (
+          //   <h1>Needs Button</h1>
+          <h2>you already commented</h2>
+        )}
+
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (
             <div>
@@ -136,6 +177,9 @@ function Reviews() {
               </div>
               <div>
                 <p>{review}</p>
+                <span>
+                  <p>{created_at}</p>
+                </span>
               </div>
             </div>
           ))

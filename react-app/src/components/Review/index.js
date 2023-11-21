@@ -32,20 +32,27 @@ function Reviews() {
   }, [dispatch, userId]);
   return (
     <>
-      <p>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "nowrap",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
         {reviewsLength == 1 ? (
           <h1>
             {reviewsLength} Reviews {avg?.toFixed(2)}
           </h1>
         ) : (
-          <h1>
-            {reviewsLength} Reviews {avg?.toFixed(2)}
-          </h1>
+          <h1>{reviewsLength} Reviews</h1>
         )}
         {!reviewsLength ? (
           <h2>You have no reviewed anything</h2>
         ) : (
           <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <h1>{avg?.toFixed(2)}</h1>
             <label>
               <div
                 class="rating"
@@ -90,7 +97,7 @@ function Reviews() {
             </label>
           </div>
         )}
-      </p>
+      </div>
       <div>
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (
