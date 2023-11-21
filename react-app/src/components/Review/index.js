@@ -14,6 +14,10 @@ function Reviews() {
   console.log("🚀 ~ file: index.js:14 ~ Reviews ~ reviews:", reviews);
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
+  console.log(
+    "🚀 ~ file: index.js:17 ~ Reviews ~ reviewsLength:",
+    reviewsLength
+  );
   function orderReviews(list) {
     let newwie = [];
     for (let i = list.length - 1; i >= 0; i--) {

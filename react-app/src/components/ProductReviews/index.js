@@ -5,6 +5,7 @@ import { allTheReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import DeleteReview from "../DeleteModal/deleteModalReview";
 
 function Reviews() {
   const dispatch = useDispatch();
@@ -128,66 +129,77 @@ function Reviews() {
         null}
 
         {reviewsLength >= 1 ? (
-          reviews?.map(({ user_id, review, rating, created_at }) => (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "50%",
-              }}
-            >
-              <div>
-                <p>{review}</p>
-                <span>
-                  <p>{created_at}</p>
-                </span>
+          reviews?.map(({ id, user_id, review, rating, created_at }) => (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "50%",
+                }}
+              >
+                <div>
+                  <p>{review}</p>
+                  <span>
+                    <p>{created_at}</p>
+                  </span>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-around" }}
+                >
+                  <label>
+                    <div
+                      class="rating"
+                      style={{ display: "flex", flexDirection: "row" }}
+                    >
+                      <i
+                        className={
+                          rating >= 1 || rating > 1
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 2 || rating > 2
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 3 || rating > 3
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 4 || rating > 3
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 5 || rating > 4
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                    </div>
+                  </label>
+                </div>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <label>
-                  <div
-                    class="rating"
-                    style={{ display: "flex", flexDirection: "row" }}
-                  >
-                    <i
-                      className={
-                        rating >= 1 || rating > 1
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 2 || rating > 2
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 3 || rating > 3
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 4 || rating > 3
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 5 || rating > 4
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                  </div>
-                </label>
-              </div>
-            </div>
+              {user?.id == user_id ? (
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Delete Review"
+                  modalComponent={<DeleteReview reviewId={id} />}
+                />
+              ) : null}
+            </>
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>

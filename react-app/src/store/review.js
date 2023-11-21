@@ -1,6 +1,7 @@
 const CREATE_REVIEW = "review/CREATE_REVIEW";
 const ALL_REVIEWS = "reviews/ALL_REVIEWS";
 const DELETE_REVIEW = "reviews/DELETE_REVIEW";
+const EDIT_REVIEW = "reviews/EDIT_REVIEW";
 const initialState = {};
 
 const createReview = (payload) => {
@@ -20,6 +21,12 @@ const deleteReview = (payload, reviewId) => {
   return {
     type: DELETE_REVIEW,
     payload: reviewId,
+  };
+};
+const editReview = (reviewId, payload) => {
+  return {
+    type: DELETE_REVIEW,
+    payload,
   };
 };
 
@@ -54,18 +61,20 @@ export const createAReview = (productId, payload) => async (dispatch) => {
   console.log("SHOULD BE DISPATCHING FROM THE CREATION REVIEW THUNK");
   dispatch(createReview(review));
   return review;
-  // } else {
-  //   const data = await response.json();
-  //   if (data.errors) {
-  //     return data.errors;
-  //   }
-  // }
 };
 export const deleteAReview = (reviewId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${reviewId}/delete`, {
     method: "DELETE",
   });
   dispatch(deleteReview(reviewId));
+  return response;
+};
+export const editAReview = (reviewId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${reviewId}/delete`, {
+    method: "PUT",
+    body: payload,
+  });
+  dispatch(editReview(payload));
   return response;
 };
 const review = (state = initialState, action) => {
@@ -78,6 +87,10 @@ const review = (state = initialState, action) => {
       });
       return newState;
     case CREATE_REVIEW:
+      newState = { ...state };
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case EDIT_REVIEW:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
       return newState;
