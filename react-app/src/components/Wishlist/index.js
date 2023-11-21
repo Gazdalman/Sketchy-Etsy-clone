@@ -31,6 +31,7 @@ export default function Wishlist() {
       history.push("/login")
   };
 
+  
 
   return isLoaded && (
     <>
@@ -46,6 +47,7 @@ export default function Wishlist() {
                         buttonText="Delete Product"
                         modalComponent={<DeleteWish product={ product } />}
                         />
+                        <button>Add to cart</button>
                     </div>
                 )}
             </>
