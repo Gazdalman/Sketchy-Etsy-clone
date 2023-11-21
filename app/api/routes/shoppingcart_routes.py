@@ -48,16 +48,19 @@ def updateQunatity(id):
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
     cartDict = cart.to_dict()
-    product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
+    item = Product.query.get(id)
+    product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).order_by(CartProduct.quantity.desc()).first()
     if quant == "inc":
         product["quantity"] = product["quantity"] + 1
         print(product["quantity"])
-        # db.session.commit()
+        cart.products.append(item)
+        db.session.commit()
         return { "message": "success" }
     elif quant == "dec":
         product["quantity"] = product["quantity"] - 1
         print(product["quantity"])
-        # db.session.commit()
+        cart.products.remove(item)
+        db.session.commit()
         return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }
