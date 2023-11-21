@@ -1,6 +1,6 @@
 from flask import Blueprint, session, jsonify, request
-from flask_login import login_required
-from app.models import Product, Review, db
+from flask_login import login_required, current_user
+from app.models import Product, Review, db, User
 from app.forms import ReviewForm
 
 review_routes = Blueprint("reviews", __name__, url_prefix='/reviews')
@@ -39,18 +39,29 @@ def get_all_user_reviews(id):
 def make_new_review(productId):
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  form['rating'] = form.data["rating"]
-  form['review'] = form.data["review"]
-  seven = list(form)
-  print("🐍 File: routes/reviews_routes.py | Line: 33 | make_new_review ~ seven",seven)
+
   if form.validate_on_submit():
+
     new_review=Review(
-      product_id=form.date["product_id"],
+      product_id=form.data["product_id"],
       user_id=form.data["user_id"],
       review=form.data["review"],
       rating=form.data["rating"]
     )
     db.session.add(new_review)
     db.session.commit()
-    return review.to_dict()
+    return new_review.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@review_routes.route("/<int:id>/delete", methods=["DELETE"])
+@login_required
+def delete_review(id):
+  user = User.query.filter(User.id == current_user.get_id()).first()
+  review = Review.query.get(id)
+
+  if review:
+    db.session.delete(review)
+    db.session.commit()
+    return f"Congrats {user.firstName} you successfully DELETED review # {review.id}"
+
+  return "Sorry No Review Was DELETED"

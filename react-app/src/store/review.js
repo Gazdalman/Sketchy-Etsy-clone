@@ -45,9 +45,10 @@ export const createAReview = (productId, payload) => async (dispatch) => {
   console.log("INSIDE THE CREATION REVIEW THUNK");
   const response = await fetch(`/api/reviews/${productId}/new`, {
     method: "POST",
-    body: { ...payload },
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
-  console.log("🚀 ~ file: review.js:48 ~ createAReview ~ response:", response)
+  console.log("🚀 ~ file: review.js:48 ~ createAReview ~ response:", response);
   // if (response.ok) {
   const review = await response.json();
   console.log("SHOULD BE DISPATCHING FROM THE CREATION REVIEW THUNK");
@@ -73,17 +74,15 @@ export const deleteAReview = (payload, reviewId) => async (dispatch) => {
     return errors;
   }
 };
-
 const review = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case ALL_REVIEWS: {
-      console.log(
-        "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
-        action
-      );
-      return action.payload.reviews;
-    }
+    case ALL_REVIEWS:
+      newState = {};
+      action.payload.reviews.forEach((review) => {
+        newState[review.id] = review;
+      });
+      return newState;
     case CREATE_REVIEW:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
@@ -97,5 +96,28 @@ const review = (state = initialState, action) => {
       return state;
   }
 };
+// const review = (state = initialState, action) => {
+//   let newState;
+//   switch (action.type) {
+//     case ALL_REVIEWS: {
+//       console.log(
+//         "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
+//         action
+//       );
+//       return action.payload.reviews;
+//     }
+//     case CREATE_REVIEW:
+//       newState = { ...state };
+//       newState[action.payload.id] = action.payload;
+//       return newState;
+//     // case DELETE_REVIEW:
+//     //   let deleteState;
+//     //   deleteState = { ...state };
+//     //   delete deleteState[action.payload];
+//     //   return deleteState;
+//     default:
+//       return state;
+//   }
+// };
 
 export default review;

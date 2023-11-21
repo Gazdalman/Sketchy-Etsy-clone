@@ -7,9 +7,17 @@ function Reviews() {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const user = useSelector((state) => state.session.user);
-  const reviews = useSelector((state) => state.review);
+  const unorderedReviews = useSelector((state) => state.review);
+  const reviews = orderReviews(Object.values(unorderedReviews));
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
+  function orderReviews(list) {
+    let newwie = [];
+    for (let i = list.length - 1; i >= 0; i--) {
+      newwie.push(list[i]);
+    }
+    return newwie;
+  }
   let sum = 0;
   if (reviewsLength >= 1) {
     //   for (let ele in reviews) {
@@ -101,7 +109,17 @@ function Reviews() {
       <div>
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "50%",
+              }}
+            >
+              <div>
+                <p>{review}</p>
+              </div>
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <label>
                   <div
@@ -145,9 +163,6 @@ function Reviews() {
                     ></i>
                   </div>
                 </label>
-              </div>
-              <div>
-                <p>{review}</p>
               </div>
             </div>
           ))

@@ -7,19 +7,21 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
 
 function Reviews() {
-  //   console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", product);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
-  console.log("🚀 ~ file: index.js:14 ~ Reviews ~ productId:", productId);
   const user = useSelector((state) => state.session.user);
-  //   const users = useSelector((state) => state.user);
-  //   console.log("🚀 ~ file: index.js:13 ~ Reviews ~ users:", users);
-  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ user:", user);
-  const reviews = useSelector((state) => state.review);
-  console.log("🚀 ~ file: index.js:12 ~ Reviews ~ reviews:", reviews);
+  const unorderedReviews = useSelector((state) => state.review);
+  const reviews = orderReviews(Object.values(unorderedReviews));
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
+  function orderReviews(list) {
+    let newwie = [];
+    for (let i = list.length - 1; i >= 0; i--) {
+      newwie.push(list[i]);
+    }
+    return newwie;
+  }
   let sum = 0;
   if (reviewsLength >= 1) {
     // reviews?.forEach((ele) => {
@@ -45,10 +47,9 @@ function Reviews() {
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
     dispatch(allTheReviews(productId));
-  }, [dispatch, productId]);
+  }, [dispatch, reviewsLength]);
   return (
     <>
-      <h1>REVIEWS APPEAR</h1>
       <div
         style={{
           display: "flex",
@@ -123,10 +124,8 @@ function Reviews() {
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
-        ) : (
-          //   <h1>Needs Button</h1>
-          <h2>you already commented</h2>
-        )}
+        ) : //   <h1>Needs Button</h1>
+        null}
 
         {reviewsLength >= 1 ? (
           reviews?.map(({ user_id, review, rating, created_at }) => (
