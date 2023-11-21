@@ -17,6 +17,7 @@ import ProductShow from "./components/ProductShow";
 import Profile from "./components/Profile";
 import ProductFormPage from "./components/ProductForm";
 import Reviews from "./components/Review";
+import PastOrder from "./components/Profile/userOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route path="/reviews/:userId">
             <Reviews />
+          </Route>
+          <Route path="/past-order">
+            <PastOrder />
           </Route>
         </Switch>
       )}
