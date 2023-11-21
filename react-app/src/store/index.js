@@ -8,6 +8,7 @@ import productsReducer from "./product";
 import singleProductReducer from "./singleProduct";
 import userProducts from "./userProducts";
 import orderReducer from "./order";
+import userProducts from "./userProducts";
 
 const rootReducer = combineReducers({
   session,
