@@ -110,6 +110,28 @@ export const deleteUser = () => async (dispatch) => {
   }
 };
 
+export const editUser =
+  (userId, firstName, lastName, email) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+      }),
+    });
+    const userData = await res.json();
+    if (userData.errors) {
+      console.log(userData.errors);
+      return userData.errors;
+    }
+    // console.log(userData);
+    dispatch(setUser(userData));
+  };
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

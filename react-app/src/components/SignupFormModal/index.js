@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
@@ -9,6 +9,7 @@ import OpenModalButton from "../OpenModalButton";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

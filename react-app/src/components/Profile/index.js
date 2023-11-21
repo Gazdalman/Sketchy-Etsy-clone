@@ -1,57 +1,125 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import DeleteAccount from "../DeleteModal/deleteModalUser";
-
-/*
-- ? optional adds to model as well:
-    phone#
-    bio
-
-- if userId in url == current_user.get_id() - display all
-- else display bare min
-*/
+import { getUser } from "../../store/users";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import UserOrders from "./userOrders";
+import UserProducts from "./userProducts";
+import UserReviews from "./userReviews";
 
 export default function Profile() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+
+  const targetUser = useSelector((state) => state.users);
   const { userId } = useParams();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadProducts, setLoadProducts] = useState(true);
+  const [loadReviews, setLoadReviews] = useState(false);
+  const [loadOrders, setLoadOrders] = useState(false);
 
-  if (Number(user.id) === Number(userId)) {
-    return (
-      <div>
-        <h1>
-          Hello, {user.firstName} {user.lastName}
-        </h1>
+  useEffect(() => {
+    dispatch(getUser(userId)).then(() => setIsLoaded(true));
+  }, [dispatch]);
 
-        <button>New Product</button>
-        {/* might move the following 2 buttons to an account setting menu */}
-        <button>Edit Profile</button>
-        {/* Following buttons needs to render modal to confirm deletion */}
-        <OpenModalButton
-          modalClasses={["delete-button-container"]}
-          buttonText="Delete your Account"
-          modalComponent={<DeleteAccount />}
-        />
-
+  if (user) {
+    if (Number(user.id) === Number(userId)) {
+      return (
         <div>
-          Tabs will render here - will be rendered from another .js file and
-          only when respective tab clicked
-          {/*
-            - tab -> pop with orders (5 at a time)
-                + button for view all orders
-            - tab -> reviews authored by user
-            */}
+          <h1>
+            Hello, {user.firstName} {user.lastName}
+          </h1>
+
+          <NavLink to="/new_product">
+            <button>New Product</button>
+          </NavLink>
+          <NavLink to="/editAccount">
+            <button>Edit Profile</button>
+          </NavLink>
+          <OpenModalButton
+            modalClasses={["delete-button-container"]}
+            buttonText="Delete your Account"
+            modalComponent={<DeleteAccount />}
+          />
+
+          <div style={{ display: "flex", gap: "15px" }}>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(true);
+                  setLoadReviews(false);
+                  setLoadOrders(false);
+                }}
+              >
+                Your Products
+              </h3>
+              {loadProducts && <UserProducts user={user} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(true);
+                  setLoadOrders(false);
+                }}
+              >
+                Your Reviews
+              </h3>
+              {loadReviews && <UserReviews user={user} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(false);
+                  setLoadOrders(true);
+                }}
+              >
+                Your Orders
+              </h3>
+              {loadOrders && <UserOrders user={user} />}
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
   return (
     <div>
-      <h1>
-        Welcome to {user.firstName} {user.lastName}'s Profile
-      </h1>
-      <div>Products being sold by user will render here</div>
+      {isLoaded && (
+        <>
+          <h1>Welcome to {targetUser.username}'s Profile</h1>
+          <div style={{ display: "flex", gap: "15px" }}>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(true);
+                  setLoadReviews(false);
+                  setLoadOrders(false);
+                }}
+              >
+                Products
+              </h3>
+              {loadProducts && <UserProducts user={targetUser} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(true);
+                  setLoadOrders(false);
+                }}
+              >
+                Reviews
+              </h3>
+              {loadReviews && <UserReviews user={targetUser} />}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

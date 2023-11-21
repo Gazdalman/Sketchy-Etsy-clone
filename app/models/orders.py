@@ -3,11 +3,6 @@ from .joins import OrderProduct
 from .products import Product
 from datetime import datetime
 
-# order_products = db.Table(
-#   "order_products",
-#   db.Column("order_id", db.INTEGER, db.ForeignKey("orders.id")),
-#   db.Column("product_id", db.INTEGER, db.ForeignKey("products.id"))
-# )
 
 class Order(db.Model):
   __tablename__ = "orders"
@@ -27,12 +22,17 @@ class Order(db.Model):
   )
 
   def get_records(self):
-    order_items = OrderProduct.query.filter(OrderProduct.order_id == self.id).all()
+    items = self.products
     products = []
-    for item in order_items:
-      product = Product.query.get(item.product_id)
-      products.append(product)
-
+    print(items)
+    for product in items:
+      prod_dict = product.to_dict()
+      order_item = OrderProduct.query.filter(OrderProduct.product_id == prod_dict['id'], OrderProduct.order_id == self.id).order_by(OrderProduct.quantity.desc()).first()
+      prod_dict['quantity'] = order_item.quantity
+      products.append(prod_dict)
+    # for item in order_items:
+    #   product = Product.query.get(item.product_id)
+    #   products.append(product)
     return products
 
   @property
@@ -40,7 +40,7 @@ class Order(db.Model):
     products = self.get_records()
     price = 0
     for product in products:
-      price += product.price
+      price += product['price'] * product['quantity']
 
     return price
 
@@ -48,7 +48,7 @@ class Order(db.Model):
   def to_dict(self):
     return {
       "user_id": self.user_id,
-      "products": [{'id': product.id,'name': product.name, 'price': product.price} for product in self.get_records()],
+      "products": [{'id': product['id'],'name': product['name'], 'price': product['price'], 'quantity': product['quantity']} for product in self.get_records()],
       "total": f'${self.price}',
       "placed": datetime.utcnow(),
       "fulfilled": datetime.utcnow()

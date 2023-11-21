@@ -14,25 +14,27 @@ function Navigation({ isLoaded }) {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/new_product">
+          Create Spot
+        </NavLink>
+      </li>
+
       {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />
         </li>
       )}
-      {sessionUser && (
-        <>
-          <li>
-            <NavLink to="/wishlist">
-              <button>Wishlist</button>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/cart">
-              <button>Cart</button>
-            </NavLink>
-          </li>
-        </>
-      )}
+      <li>
+        <NavLink to="/wishlist">
+          <button>Wishlist</button>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/cart">
+          <button>Cart</button>
+        </NavLink>
+      </li>
     </ul>
   );
 }

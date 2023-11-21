@@ -43,22 +43,6 @@ export const editProduct = (product, productId, images) => async dispatch => {
     }
   })
 
-  // if (res.ok) {
-  //   const product = await res.json()
-  //   const newImagesPromise = await fetch(`/api/products/${product.id}/images`, {
-  //     method: 'PUT',
-  //     body: JSON.stringify({
-  //       images
-  //     }),
-  //     user: {
-  //       id: product.seller_id
-  //     }
-  //   })
-  //   const allImages = newImagesPromise.json()
-
-  //   return allImages
-  // }
-
   return res.json();
 }
 

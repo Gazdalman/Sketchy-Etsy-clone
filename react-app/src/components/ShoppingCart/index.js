@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { getCart, updateQuantity } from "../../store/cart";
+import { useHistory, NavLink } from "react-router-dom";
+import { getCart, removeItem, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteItem from "../DeleteModal/deleteModalCart";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Cart() {
   const history = useHistory();
@@ -13,9 +14,11 @@ export default function Cart() {
   const cart = useSelector((state) => state.cart);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [loadedCart, setLoadedCart] = useState(Object.values(cart));
 
   useEffect(() => {
+    if (!user) {
+      return history.push("/login");
+    }
     if (user.id) {
       dispatch(getCart()).then(() => {
         setIsLoaded(true);
@@ -23,54 +26,34 @@ export default function Cart() {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    setLoadedCart(Object.values(cart));
-  }, [isLoaded]);
-
-  const removeItem = (itemId) => {
-    // ! WHY ARE YOU FUCKING LOOPING?!?!?!?!
-    // * open delete modal
-  };
-
-  const decQuant = (item) => {
-    // dispatch to change quantity
+  const decQuant = async (item) => {
     const change = "dec";
+    const itemId = item.id;
     if (Number(item.quantity) === 1) {
-      // ! WHY ARE YOU FUCKING LOOPING?!?!?!?!
-      // * open delete modal
+      await dispatch(removeItem(itemId));
     } else {
-      dispatch(updateQuantity(item.id, change));
+      await dispatch(updateQuantity(itemId, change));
     }
   };
-  const incQuant = (item) => {
-    // dispatch to change quantity
+  const incQuant = async (itemId) => {
     const change = "inc";
-    dispatch(updateQuantity(item.id, change));
+    await dispatch(updateQuantity(itemId, change));
   };
 
   return (
     <div>
       <h1>Shopping Cart</h1>
       {isLoaded &&
-        loadedCart.map((item) => (
+        Object.values(cart).map((item) => (
           <div key={item.id}>
             <h3>{item.name}</h3>
             <p>{item.price}</p>
             <p>{item.description}</p>
             <p>
-              {item.quantity}
-              {/* Buttons curretly disabled */}
-              {/* plus & minus buttons alter quantity -> when quantity hits 0, item fully removed from cart */}
-              <button onClick={() => decQuant(item)} disabled={true}>
-                {" "}
-                -{" "}
-              </button>
-              <button onClick={() => incQuant(item)} disabled={true}>
-                {" "}
-                +{" "}
-              </button>
+              {item["quantity"]}
+              <button onClick={() => decQuant(item)}> - </button>
+              <button onClick={() => incQuant(item.id)}> + </button>
             </p>
-            {/* remove removes item from cart entirely */}
             <>
               <OpenModalButton
                 modalClasses={["delete-button-container"]}
@@ -80,7 +63,12 @@ export default function Cart() {
             </>
           </div>
         ))}
-      <button onClick={() => history.push("/")}>Continue Shopping</button>
+      <NavLink to="/">
+        <button>Continue Shopping</button>
+      </NavLink>
+      <NavLink to="/checkout">
+        <button>Checkout</button>
+      </NavLink>
     </div>
   );
 }

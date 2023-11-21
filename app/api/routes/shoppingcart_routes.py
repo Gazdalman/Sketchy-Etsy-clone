@@ -11,21 +11,16 @@ def shoppingCart():
     cart = Cart.query.filter(Cart.user_id == userId).first()
     cartDict = cart.to_dict()
     # * toggle line 14 in and out of comment if it ever stops working -.- typically the line that fucks shit up lol
-    itemList = []
+    itemList = {}
     for item in cartDict["cart"]:
         item = item.to_dict()
-        item["quantity"] = 0
-        product = CartProduct.query.filter(CartProduct.product_id == item["id"] and CartProduct.cart_id == cart["id"]).all()
-        # ! this if statement may change due to quantity updates being send to PUT method route below from front end
-        if item["quantity"] < 1:
-            item["quantity"] = 1
-        else:
-            item["quantity"] = item["quantity"] + 1
-        itemList.append(item)
-    return itemList
+        product = CartProduct.query.filter(CartProduct.product_id == item["id"], CartProduct.cart_id == cart.id).first()
+        item["quantity"] = int(product.quantity)
+        itemList[item["id"]] = item
+    return { "cart": itemList }
 
 
-@shoppingcart_routes.route("/<int:id>", methods=["DELETE"])
+@shoppingcart_routes.route("/product/<int:id>", methods=["DELETE"])
 def delItem(id):
     """ delete item from cart """
     userId = current_user.get_id()
@@ -41,23 +36,28 @@ def delItem(id):
         return { "error": "Product doesn't exist in your cart..." }
 
 
-@shoppingcart_routes.route("/<int:id>", methods=["PUT"])
-def updateQunatity(id):
+@shoppingcart_routes.route("/<string:change>/<int:itemId>", methods=["PUT"])
+def updateQuantity(change, itemId):
     """ update item quantity """
-    quant = request.get_json()
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    cartDict = cart.to_dict()
-    product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).first()
-    if quant == "inc":
-        product["quantity"] = product["quantity"] + 1
-        print(product["quantity"])
-        # db.session.commit()
+    item = Product.query.get(itemId)
+    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
+    if change == "inc":
+        product.quantity = product.quantity + 1
+        # print(product["quantity"])
+        new_link = CartProduct(
+            cart_id=cart.id,
+            product_id=itemId
+        )
+        db.session.add(new_link)
+        db.session.commit()
         return { "message": "success" }
-    elif quant == "dec":
-        product["quantity"] = product["quantity"] - 1
-        print(product["quantity"])
-        # db.session.commit()
+    elif change == "dec":
+        product.quantity = product.quantity - 1
+        link = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
+        db.session.delete(link)
+        db.session.commit()
         return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }

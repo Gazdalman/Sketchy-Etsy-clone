@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, Cart, Wishlist, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -85,8 +85,8 @@ def sign_up():
         db.session.add(user_wishlist)
         db.session.commit()
 
-        login_user(user)
-        return user.to_dict()
+        login_user(new_user)
+        return new_user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
