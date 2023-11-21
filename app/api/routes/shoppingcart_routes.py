@@ -41,14 +41,20 @@ def updateQunatity(change, itemId):
     """ update item quantity """
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
-    if change == "inc":
-        product.quantity = product.quantity + 1
+    cartDict = cart.to_dict()
+    item = Product.query.get(id)
+    product = CartProduct.query.filter(CartProduct.product_id == id and CartProduct.cart_id == cart["id"]).order_by(CartProduct.quantity.desc()).first()
+    if quant == "inc":
+        product["quantity"] = product["quantity"] + 1
+        print(product["quantity"])
+        cart.products.append(item)
         db.session.commit()
-        return { "message": "success", "new quantity": product.quantity }
-    elif change == "dec":
-        product.quantity = product.quantity - 1
+        return { "message": "success" }
+    elif quant == "dec":
+        product["quantity"] = product["quantity"] - 1
+        print(product["quantity"])
+        cart.products.remove(item)
         db.session.commit()
-        return { "message": "success", "new quantity": product.quantity }
+        return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }

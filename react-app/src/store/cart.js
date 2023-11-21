@@ -1,5 +1,4 @@
 const GET_CART = "cart/GET_CART";
-// const REMOVE_ITEM = "cart/REMOVE_ITEM";
 
 const getAllCartItems = (userCart) => ({
   type: GET_CART,
@@ -56,6 +55,6 @@ export default function reducer(state = {}, action) {
       const new_state = { ...action.payload.cart };
       return new_state;
     default:
-      return state;
+      return state
   }
 }
