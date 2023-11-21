@@ -26,20 +26,19 @@ export default function Cart() {
     }
   }, [dispatch]);
 
-  const decQuant = (item) => {
+  const decQuant = async (item) => {
     const change = "dec";
     const itemId = item.id;
     const itemId = item.id;
     if (Number(item.quantity) === 1) {
-      dispatch(removeItem(itemId));
+      await dispatch(removeItem(itemId));
     } else {
-      dispatch(updateQuantity(itemId, change));
+      await dispatch(updateQuantity(itemId, change));
     }
   };
   const incQuant = async (itemId) => {
     const change = "inc";
-    const itemId = item.id;
-    dispatch(updateQuantity(itemId, change));
+    await dispatch(updateQuantity(itemId, change));
   };
 
   return (
