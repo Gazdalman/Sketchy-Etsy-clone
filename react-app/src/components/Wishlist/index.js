@@ -33,22 +33,23 @@ export default function Wishlist() {
 
   return isLoaded && (
     <>
-      <h1>Wishlist</h1>
-      {allProducts && allProducts.length > 0 && (
-        <>
-          {allProducts.map((product) => (
-            <div className="all-products" key={product.id}>
-              <div>{product.name}</div>
-              <div>{product.price}</div>
-              <OpenModalButton
-                modalClasses={["delete-button-container"]}
-                buttonText="Delete Product"
-                modalComponent={<DeleteWish product={product} />}
-              />
-            </div>
-          ))}
-        </>
-      )}
+        <h1>Wishlist</h1>
+        { allProducts && allProducts.length > 0 && (
+            <>
+                {allProducts.map((product) =>
+                    <div className="all-products" key={product.id}>
+                        <div>{product.name}</div>
+                        <div>{product.price}</div>
+                        <OpenModalButton
+                        modalClasses={['delete-button-container']}
+                        buttonText="Delete Product"
+                        modalComponent={<DeleteWish product={ product } />}
+                        />
+                        <button>Add to cart</button>
+                    </div>
+                )}
+            </>
+        )}
     </>
   );
 }
