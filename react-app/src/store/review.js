@@ -27,15 +27,12 @@ export const allTheReviews = (productId) => async (dispatch) => {
   console.log("DO I ENTER THE REvIEW THUNK");
   const response = await fetch(`/api/reviews/${productId}`);
   const reviews = await response.json();
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
   return reviews;
 };
 export const allYourReviews = (userId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${userId}`);
   const reviews = await response.json();
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
   // return reviews;
 };
@@ -45,7 +42,6 @@ export const createAReview = (productId, payload) => async (dispatch) => {
     method: "POST",
     body: { ...payload },
   });
-  console.log("🚀 ~ file: review.js:48 ~ createAReview ~ response:", response)
   // if (response.ok) {
   const review = await response.json();
   console.log("SHOULD BE DISPATCHING FROM THE CREATION REVIEW THUNK");
@@ -76,10 +72,6 @@ const review = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ALL_REVIEWS: {
-      console.log(
-        "🚀 ~ file: review.js:77 ~ action.payload.Reviews.forEach ~ action:",
-        action
-      );
       return action.payload.reviews;
     }
     case CREATE_REVIEW:
