@@ -18,9 +18,6 @@ import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
 import Reviews from "./components/Review";
 
-/* Import state */
-import { getAllProducts } from "./store/product";
-
 function App() {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.session.user);
