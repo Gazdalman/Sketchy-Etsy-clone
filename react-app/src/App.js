@@ -21,6 +21,9 @@ import ProductFormPage from "./components/ProductForm";
 /* Import state */
 import { getAllProducts } from "./store/product";
 
+/* Import state */
+import { getAllProducts } from "./store/product";
+
 function App() {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.session.user);
