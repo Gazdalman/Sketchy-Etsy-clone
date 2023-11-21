@@ -33,6 +33,7 @@ export const allTheReviews = (productId) => async (dispatch) => {
 export const allYourReviews = (userId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${userId}`);
   const reviews = await response.json();
+  console.log(reviews);
   dispatch(allReviews(reviews));
   // return reviews;
 };
@@ -71,9 +72,12 @@ export const deleteAReview = (payload, reviewId) => async (dispatch) => {
 const review = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case ALL_REVIEWS: {
-      return action.payload.reviews;
-    }
+    case ALL_REVIEWS:
+      newState = {};
+      action.payload.reviews.forEach((review) => {
+        newState[review.id] = review;
+      });
+      return newState;
     case CREATE_REVIEW:
       newState = { ...state };
       newState[action.payload.id] = action.payload;

@@ -21,22 +21,50 @@ def place_order():
   """
   user_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).first()
   cart_items = CartProduct.query.filter(CartProduct.cart_id == user_cart.id).all()
-  # if not len(user_cart.cart_product_list):
-  #   return {"errors": "Cannot place orders with empty cart"}
 
   order = Order(
     user_id=current_user.get_id()
   )
 
-  # order.products.extend(user_cart.cart_product_list.all())
-
-  for item in cart_items:
-    product = Product.query.get(item.product_id)
-    order.products.append(product)
-    product.units_available = product.units_available - 1
-
-  order_dict = order.to_dict()
   db.session.add(order)
   db.session.commit()
 
+  errors = {"errors": []}
+
+  for item in cart_items:
+
+
+    product = Product.query.get(item.product_id) # Query for the product based on the cart item ids
+
+    # Check whether product has enough units available to be added to order
+    if product.units_available < 1:
+      errors['errors'].append(f'Order could not be placed! "{product.name} only has {product.units_available} units in stock!"')
+
+    # Check if product has already been added to the order by querying the joins table ordered by quantity
+    link = OrderProduct.query.filter(OrderProduct.product_id == item.product_id, OrderProduct.order_id == order.id).order_by(OrderProduct.quantity).first()
+
+    # If so, increase the quantity
+    if link:
+      link.quantity = link.quantity + 1
+
+    # Add the product to the order (regardless of if it has been added already) Might change
+    order.products.append(product)
+
+    # Decrease the available units of the product
+    product.units_available = product.units_available - 1
+
+    # Commit the session to save unit decrease
+    db.session.commit()
+
+  # If an error was added, return the errors dictionary
+  if len(errors['errors']):
+    db.session.delete(order)
+    db.session.commit()
+    return errors
+
+  # Convert the order to a dictionary
+  order_dict = order.to_dict()
+  for item in cart_items:
+    db.session.delete(item)
+    db.session.commit()
   return order_dict
