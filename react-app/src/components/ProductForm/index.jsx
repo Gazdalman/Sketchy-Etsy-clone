@@ -5,13 +5,14 @@ const ProductFormPage = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch()
   const [name, setName] = useState('')
-  const [categories, setCategories] = useState([])
+  const [category, setCategory] = useState('')
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
   const [unitsAvailable, setUnitsAvailable] = useState(0)
   const [preview, setPreview] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
 
+  let starterKey = -1
   useEffect(() => {
     setIsLoaded(true)
   }, [])
@@ -32,11 +33,17 @@ const ProductFormPage = () => {
         <span>
           Product Categories:
           <div>
-            {categories.map(category => (
-
-              <span>{category}</span>
-
-            ))}
+            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">Select...</option>
+              <option value="Jackets and Coats">Jackets and Coats</option>
+              <option value="Shirts and Tops">Shirts and Tops</option>
+              <option value="Bottoms and Pants">Bottoms and Pants</option>
+              <option value="Kitchen/Home">Kitchen/Home</option>
+              <option value="Bathroom">Bathroom</option>
+              <option value="Gardening">Gardening</option>
+              <option value="Other">Other</option>
+              {/* Add more options as needed */}
+            </select>
           </div>
 
 
@@ -46,13 +53,6 @@ const ProductFormPage = () => {
           value={categories}
           onChange={(e) => setCategories(e.target.value)}
           /> */}
-          <select
-            placeholder="--Category--"
-            value={categories}
-            onSelect={(e) => setCategories([...categories, e.target.value])}
-          >
-            <option>banana</option>
-          </select>
         </span>
       </form>
 
