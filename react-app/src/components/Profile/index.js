@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import UserOrders from "./userOrders";
 import UserProducts from "./userProducts";
 import UserReviews from "./userReviews";
+import UserWishlist from "./userWishlist";
 
 export default function Profile() {
   const history = useHistory();
@@ -20,6 +21,7 @@ export default function Profile() {
   const [loadProducts, setLoadProducts] = useState(true);
   const [loadReviews, setLoadReviews] = useState(false);
   const [loadOrders, setLoadOrders] = useState(false);
+  const [loadWishlist, setLoadWishlist] = useState(false);
 
   useEffect(() => {
     dispatch(getUser(userId)).then(() => setIsLoaded(true));
@@ -52,6 +54,7 @@ export default function Profile() {
                   setLoadProducts(true);
                   setLoadReviews(false);
                   setLoadOrders(false);
+                  setLoadWishlist(false)
                 }}
               >
                 Your Products
@@ -64,6 +67,7 @@ export default function Profile() {
                   setLoadProducts(false);
                   setLoadReviews(true);
                   setLoadOrders(false);
+                  setLoadWishlist(false)
                 }}
               >
                 Your Reviews
@@ -76,11 +80,25 @@ export default function Profile() {
                   setLoadProducts(false);
                   setLoadReviews(false);
                   setLoadOrders(true);
+                  setLoadWishlist(false)
                 }}
               >
                 Your Orders
               </h3>
               {loadOrders && <UserOrders user={user} />}
+            </div>
+            <div>
+              <h3
+                onClick={() => {
+                  setLoadProducts(false);
+                  setLoadReviews(false);
+                  setLoadOrders(false);
+                  setLoadWishlist(true)
+                }}
+              >
+                Your Wishlist
+              </h3>
+              {loadWishlist && <UserWishlist user={user} />}
             </div>
           </div>
         </div>

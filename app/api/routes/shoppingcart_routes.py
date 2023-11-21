@@ -20,16 +20,31 @@ def shoppingCart():
     return { "cart": itemList }
 
 
+@shoppingcart_routes.route("/<int:id>", methods=["POST"])
+def addItem(id):
+    """ add item to cart """
+    userId = current_user.get_id()
+    cart = Cart.query.filter(Cart.user_id == userId).first()
+    product = Product.query.filter(Product.id == int(id)).first()
+    print(product)
+    prodDict = product.to_dict()
+    print(prodDict)
+    cart.cart_product_list.extend([product])
+    db.session.commit()
+
+    return { "message": "success" }
+
+
 @shoppingcart_routes.route("/product/<int:id>", methods=["DELETE"])
 def delItem(id):
     """ delete item from cart """
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    cartDict = cart.to_dict()
     product = Product.query.get(id)
-    if product:
-        print(cart.cart_product_list)
-        cart.cart_product_list.remove(product)
+    products = CartProduct.query.filter(CartProduct.product_id == id, CartProduct.cart_id == cart.id).all()
+    if product and len(products) > 0:
+        for prod in products:
+            db.session.delete(prod)
         db.session.commit()
         return { "message": "delete successful" }
     else:
@@ -54,7 +69,7 @@ def updateQuantity(change, itemId):
         return { "message": "success" }
     elif change == "dec":
         product.quantity = product.quantity - 1
-        link = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).first()
+        link = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
         db.session.delete(link)
         db.session.commit()
         return { "message": "success" }

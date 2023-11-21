@@ -4,11 +4,13 @@ import { useHistory } from "react-router-dom";
 import { getWish } from "../../store/wishlist";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
+import { addItemToCart, updateQuantity } from "../../store/cart";
 
 export default function Wishlist() {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const cart = useSelector((state) => state.cart);
   const wishlist = useSelector((state) => state.wishlist);
   const allProducts = wishlist.products
     ? Object.values(wishlist.products)
@@ -28,9 +30,14 @@ export default function Wishlist() {
     history.push("/login");
   }
 
-  const handleClick = (e) => {
+  const handleClick = (e, product) => {
     e.preventDefault();
-    // * Add item to cart -> finish thunk
+    const productId = product.id;
+    if (cart[productId]) {
+      dispatch(updateQuantity(productId, "inc"));
+    } else {
+      dispatch(addItemToCart(productId));
+    }
   };
 
   return (
@@ -48,7 +55,12 @@ export default function Wishlist() {
                   buttonText="Delete Product"
                   modalComponent={<DeleteWish product={product} />}
                 />
-                <button onClick={(e) => handleClick(e)}>Add to cart</button>
+                <button
+                  value={product.id}
+                  onClick={(e) => handleClick(e, product)}
+                >
+                  Add to cart
+                </button>
               </div>
             ))}
           </>

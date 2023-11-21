@@ -6,11 +6,10 @@ const getAllCartItems = (userCart) => ({
   payload: userCart,
 });
 
-const addItemToCart = (updatedCart) => ({
+const addToCart = (newItem) => ({
   type: ADD_TO_CART,
-  payload: updatedCart,
+  payload: newItem,
 });
-
 
 export const getCart = () => async (dispatch) => {
   const res = await fetch("/api/cart/");
@@ -20,7 +19,6 @@ export const getCart = () => async (dispatch) => {
       console.log(cartData.errors);
       return;
     }
-    // console.log(cartData);
     dispatch(getAllCartItems(cartData));
   }
 };
@@ -35,13 +33,11 @@ export const removeItem = (itemId) => async (dispatch) => {
       console.log(cartData.error);
       return;
     }
-    // console.log(cartData);
     dispatch(getCart());
   }
 };
 
 export const updateQuantity = (itemId, change) => async (dispatch) => {
-  console.log(itemId);
   const res = await fetch(`/api/cart/${change}/${itemId}`, {
     method: "PUT",
   });
@@ -51,19 +47,29 @@ export const updateQuantity = (itemId, change) => async (dispatch) => {
       console.log(cartData.error);
       return;
     }
-    // console.log(cartData);
+    dispatch(getCart());
+  }
+};
+
+export const addItemToCart = (itemId) => async (dispatch) => {
+  const res = await fetch(`/api/cart/${itemId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (res.ok) {
     dispatch(getCart());
   }
 };
 
 export default function reducer(state = { cart: [] }, action) {
-  // * CRUD -> create on signup & delete on checkout
   let new_state = {};
   switch (action.type) {
     case GET_CART:
       new_state = { ...action.payload.cart };
       return new_state;
     default:
-      return state
+      return state;
   }
 }
