@@ -11,3 +11,4 @@ node_modules
 .env
 *.db
 dev.db
+instance/dev.db
