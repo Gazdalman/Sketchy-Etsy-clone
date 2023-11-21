@@ -39,6 +39,8 @@ def get_all_user_reviews(id):
 def make_new_review(productId):
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  form['rating'] = form.data["rating"]
+  form['review'] = form.data["review"]
   seven = list(form)
   print("🐍 File: routes/reviews_routes.py | Line: 33 | make_new_review ~ seven",seven)
   if form.validate_on_submit():
