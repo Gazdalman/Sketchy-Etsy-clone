@@ -10,7 +10,7 @@ class Wishlist (db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    #wishlist.product.append(product_id)
+
 
     products = db.relationship(
        "Product",
@@ -40,4 +40,3 @@ class WishlistDetail(db.Model):
     wishlist_id = db.Column(db.Integer, db.ForeignKey("wishlists.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
 
-    # wishlist =  db.relationship("Wishlist", back_populate="products" )
