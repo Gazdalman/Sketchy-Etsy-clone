@@ -30,7 +30,7 @@ class Product(db.Model):
 
   orders = db.relationship(
     "Order",
-    secondary="OrderProduct",
+    secondary="order_products",
     back_populates="products"
   )
 
