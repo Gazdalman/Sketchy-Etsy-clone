@@ -1,66 +1,145 @@
-# Sketchy Etsy
+# Flask React Project
 
-## Welcome to Sketchy our take on etsy that will in leave you on edge and questioning our methods with our unbelievable delivery speeds.
+This is the starter for the Flask React project.
 
-### Please keep in mind that the site is for fun and meant to look rather questionable.
+## Getting started
 
-# Sketchy - Your Artistic Marketplace
+1. Clone this repository (only this branch)
 
-### Welcome to Sketchy, where creativity meets questionable! This particular variation is a lively worldwide marketplace designed for artists and other show people to display their "unique" items as well as sell their "unique" goods. If you are a supporter of small independent artists and showing love to their "various" items, Sketchy is the place of legend for you.
+2. Install dependencies
 
-# Features
+   ```bash
+   pipenv install -r requirements.txt
+   ```
 
-1. Explore One-Of-A-Kind Art-man-ship/Art-woman-ship/Art-they/them-ship
+3. Create a **.env** file based on the example with proper settings for your
+   development environment
 
-**_ Take some time to appreciate how Woke we are _**
+4. Make sure the SQLite3 database connection URL is in the **.env** file
 
-- Explore an array of products crafted by talented artists.
+5. This starter organizes all tables inside the `flask_schema` schema, defined
+   by the `SCHEMA` environment variable. Replace the value for
+   `SCHEMA` with a unique name, **making sure you use the snake_case
+   convention**.
 
-- From paintings to sculptures to custom pieces to otherworldly items, find the perfect piece to satisfy your desires.
+6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
 
-2. Open Your Store at the Touch of a Button
+   ```bash
+   pipenv shell
+   ```
 
-- Artists, open your own store to display and sell your "finds"
+   ```bash
+   flask db upgrade
+   ```
 
-- Easily manage your inventory, prices, and orders through an easy to use seller/owner dashboard without even having to manage shipping. WE DO THAT!!
+   ```bash
+   flask seed all
+   ```
 
-3. Secure Transactions.... for US ;)
+   ```bash
+   flask run
+   ```
 
-- Shop with confidence knowing that transactions are secure on our end and protected for us.
-- Sketchy prioritizes user privacy and employs robust encryption measures to ensure we have access to all your funds.
+7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-4. Community Involvement
+## Deployment through Render.com
 
-- Communicate with fellow appreciators, and love your favorite items for later use, and view item reviews in the same hour as the item is bought in the review section.
+First, refer to your Render.com deployment articles for more detailed
+instructions about getting started with [Render.com], creating a production
+database, and deployment debugging tips.
 
-- Add your favorite listings to your wishlist and stay updated on their latest changes.
+From the [Dashboard], click on the "New +" button in the navigation bar, and
+click on "Web Service" to create the application that will be deployed.
 
-5. Personalized Recommendations
+Look for the name of the application you want to deploy, and click the "Connect"
+button to the right of the name.
 
-- Uncover uncovered hidden gems that resonates with your soul
+Now, fill out the form to configure the build and start commands, as well as add
+the environment variables to properly deploy the application.
 
-6. What are you wait for?? Lets get to getting Started
+### Part A: Configure the Start and Build Commands
 
--     	Sign Up or Log In
+Start by giving your application a name.
 
-  - Create your Sketchy account to start scouring and buying.
+Leave the root directory field blank. By default, Render will run commands from
+the root directory.
 
-  - Creators, sign up and set up your own shop and share your finds from your questionable journeys.
+Make sure the Environment field is set set to "Python 3", the Region is set to
+the location closest to you, and the Branch is set to "main".
 
--     	Browse our Stores
+Next, add your Build command. This is a script that should include everything
+that needs to happen _before_ starting the server.
 
-  - Take a leap of faith into the sketchy world of selling and find anything that speaks to you.
+For your Flask project, enter the following command into the Build field, all in
+one line:
 
-  - Add your loved items to your cart and proceed to a seamlessly quick checkout experience.
+```shell
+# build command - enter all in one line
+npm install --prefix react-app && npm run build --prefix react-app &&pip install -r requirements.txt && pip install psycopg2 && flask db upgrade && flask seed all
+```
 
--     	Sell Your Items
+filetemplate = %%(year)d%%(month).2d%%(day).2d\*%%(hour).2d%%(minute).2d%%(second).2d\_%%(slug)s
 
-      * Are you a creator? Open your shop NOW and start SELLING your creations.
+This script will install dependencies for the frontend, and run the build
+command in the **package.json** file for the frontend, which builds the React
+application. Then, it will install the dependencies needed for the Python
+backend, and run the migration and seed files.
 
-      * Set your prices to whatever your heart desires, manage your orders, and connect with your fans.
+Now, add your start command in the Start field:
 
-  Feedback and Support
+```shell
+# start script
+gunicorn app:app
+```
 
-  We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
+_If you are using websockets, use the following start command instead for increased performance:_
 
-  Thank you for being a part of the Sketchy community. Let's celebrate creativity together! 🎨
+`gunicorn --worker-class eventlet -w 1 app:app`
+
+### Part B: Add the Environment Variables
+
+Click on the "Advanced" button at the bottom of the form to configure the
+environment variables your application needs to access to run properly. In the
+development environment, you have been securing these variables in the **.env**
+file, which has been removed from source control. In this step, you will need to
+input the keys and values for the environment variables you need for production
+into the Render GUI.
+
+Click on "Add Environment Variable" to start adding all of the variables you
+need for the production environment.
+
+Add the following keys and values in the Render GUI form:
+
+- SECRET_KEY (click "Generate" to generate a secure secret for production)
+- FLASK_ENV production
+- FLASK_APP app
+- SCHEMA (your unique schema name, in snake_case)
+- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
+  https://this-application-name.onrender.com)
+
+In a new tab, navigate to your dashboard and click on your Postgres database
+instance.
+
+Add the following keys and values:
+
+- DATABASE_URL (copy value from Internal Database URL field)
+
+_Note: Add any other keys and values that may be present in your local **.env**
+file. As you work to further develop your project, you may need to add more
+environment variables to your local **.env** file. Make sure you add these
+environment variables to the Render GUI as well for the next deployment._
+
+Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
+application every time you push to main.
+
+Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
+project. The deployment process will likely take about 10-15 minutes if
+everything works as expected. You can monitor the logs to see your build and
+start commands being executed, and see any errors in the build process.
+
+When deployment is complete, open your deployed site and check to see if you
+successfully deployed your Flask application to Render! You can find the URL for
+your site just below the name of the Web Service at the top of the page.
+
+[Render.com]: https://render.com/
+[Dashboard]: https://dashboard.render.com/
