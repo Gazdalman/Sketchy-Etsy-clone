@@ -8,6 +8,7 @@ import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
+import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews({ product }) {
   const dispatch = useDispatch();
@@ -21,8 +22,12 @@ function Reviews({ product }) {
   const review = orderReviews(Object.values(unorderedReviews));
   const reviews = addUsers(review, users);
   const [isLoaded, setIsLoaded] = useState(false);
+  const review = orderReviews(Object.values(unorderedReviews));
+  const reviews = addUsers(review, users);
+  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
+    let newbie = [];
     let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
       newbie.push(list[i]);
@@ -60,6 +65,9 @@ function Reviews({ product }) {
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
+    dispatch(allTheReviews(productId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
     dispatch(allTheReviews(productId))
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
@@ -147,10 +155,9 @@ function Reviews({ product }) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 && (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
-              {console.log(reviews)}
+        {isLoaded && reviewsLength >= 1 ? (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+            <>
               <div
                 style={{
                   display: "flex",
