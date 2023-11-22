@@ -39,7 +39,7 @@ export default function () {
   return (
     isLoaded && (
       <div className="pastOrdersBody">
-        <h1>History Order</h1>
+        <h1>Orders History</h1>
         {Object.values(allOrders).map((order) => (
           <div
             key={order.id}
