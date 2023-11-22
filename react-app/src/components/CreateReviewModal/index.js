@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
 import OpenModalButton from "../OpenModalButton";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { createAReview } from "../../store/review";
+import {
+  Redirect,
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { allTheReviews, createAReview } from "../../store/review";
 
 function ReviewFormModal({ productId }) {
   const dispatch = useDispatch();
@@ -12,44 +16,39 @@ function ReviewFormModal({ productId }) {
     (state) => state.session.user
   );
   const { closeModal } = useModal();
-  console.log(
-    "🚀 ~ file: index.js:22 ~ ReviewFormModal ~ productId:",
-    productId
-  );
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
   const [errors, setErrors] = useState({});
-  const disabled = reviewText.length < 10;
+  const disabled = reviewText.length < 4;
+  const reviews = useSelector((state) => state.review);
 
-  //   console.log("🚀 ~ file: index.js:14 ~ PostAReviewFormModal ~ stars:", rating);
+  function checkCredentials() {
+    console.log("INSIDE THE CREDENTIAL CHECK");
+    const errObj = {};
+    if (!rating) errObj.rating = "Rating is required";
+    if (!reviewText || reviewText.length < 4)
+      errObj.reviewText = "Review text must be at least 4 characters";
+    setErrors(errObj);
+  }
   const newReview = {
     user_id: id,
     product_id: productId,
     review: reviewText,
     rating,
   };
-  console.log(
-    "🚀 ~ file: index.js:33 ~ ReviewFormModal ~ newReview:",
-    newReview
-  );
-  function checkCredentials() {
-    console.log("INSIDE THE CREDENTIAL CHECK");
-    const errObj = {};
-    if (!rating) errObj.rating = "Rating is required";
-    if (!reviewText || reviewText.length < 10)
-      errObj.reviewText = "Review text must be at least 10 characters";
-    setErrors(errObj);
-  }
+
   const handleSubmit = async (e) => {
-    console.log("🚀 ~ file: index.js:24 ~ ReviewFormModal ~ errors:", errors);
-    console.log("INSIDE THE HANDLE SUBMIT?");
+    checkCredentials();
     e.preventDefault();
-    // if (errors && !Object.values(errors).length) {
-    console.log("AM I GETTING INSIDE THE IF STATMENT");
-    await dispatch(createAReview(productId, newReview)).then(closeModal);
-    // }
+    await dispatch(createAReview(productId, newReview)).then(() =>
+      closeModal()
+    );
+
+    history.push(`/products/${productId}`);
+    return Redirect(`/products/${productId}`);
   };
 
   return (
@@ -185,7 +184,7 @@ function ReviewFormModal({ productId }) {
             {errors.rating && <p className="errors">{errors.rating}</p>}
             <button
               type="submit"
-              onClick={checkCredentials}
+              // onClick={checkCredentials}
               // onClick={handleSubmit}
               disabled={disabled}
               style={{

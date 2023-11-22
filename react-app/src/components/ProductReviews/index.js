@@ -5,34 +5,38 @@ import { allTheReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import DeleteReview from "../DeleteModal/deleteModalReview";
+import EditReview from "../EditReviewModal/editModalReview";
 
 function Reviews() {
-  //   console.log("🚀 ~ file: index.js:7 ~ Reviews ~ productId:", product);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
-  console.log("🚀 ~ file: index.js:14 ~ Reviews ~ productId:", productId);
   const user = useSelector((state) => state.session.user);
-  //   const users = useSelector((state) => state.user);
-  //   console.log("🚀 ~ file: index.js:13 ~ Reviews ~ users:", users);
-  console.log("🚀 ~ file: index.js:11 ~ Reviews ~ user:", user);
-  const reviews = useSelector((state) => state.review);
-  console.log("🚀 ~ file: index.js:12 ~ Reviews ~ reviews:", reviews);
+  const unorderedReviews = useSelector((state) => state.review);
+  const reviews = orderReviews(Object.values(unorderedReviews));
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
+  function orderReviews(list) {
+    let newwie = [];
+    for (let i = list.length - 1; i >= 0; i--) {
+      newwie.push(list[i]);
+    }
+    return newwie;
+  }
   let sum = 0;
   if (reviewsLength >= 1) {
     // reviews?.forEach((ele) => {
     //   sum = sum + ele.rating;
     // });
-    sum = reviews.reduce((acc, review) => review.rating + acc, 0);
+    sum = reviews?.reduce((acc, review) => review?.rating + acc, 0);
   }
   let avg;
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
   let commented = false;
-  const exists = (element) => element.user_id == user.id;
+  const exists = (element) => element?.user_id == user.id;
   if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
@@ -45,10 +49,9 @@ function Reviews() {
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
     dispatch(allTheReviews(productId));
-  }, [dispatch, productId]);
+  }, [dispatch, reviewsLength]);
   return (
     <>
-      <h1>REVIEWS APPEAR</h1>
       <div
         style={{
           display: "flex",
@@ -58,7 +61,7 @@ function Reviews() {
           alignItems: "center",
         }}
       >
-        {reviewsLength == 1 ? (
+        {reviewsLength < 1 ? (
           <span>
             <h1>
               {reviewsLength} Reviews {avg?.toFixed(2)} Stars
@@ -123,65 +126,92 @@ function Reviews() {
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
-        ) : (
-          //   <h1>Needs Button</h1>
-          <h2>you already commented</h2>
-        )}
+        ) : //   <h1>Needs Button</h1>
+        null}
 
         {reviewsLength >= 1 ? (
-          reviews?.map(({ user_id, review, rating, created_at }) => (
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <label>
-                  <div
-                    class="rating"
-                    style={{ display: "flex", flexDirection: "row" }}
-                  >
-                    <i
-                      className={
-                        rating >= 1 || rating > 1
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 2 || rating > 2
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 3 || rating > 3
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 4 || rating > 3
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                    <i
-                      className={
-                        rating >= 5 || rating > 4
-                          ? "fa-solid fa-star"
-                          : "fa-regular fa-star"
-                      }
-                    ></i>
-                  </div>
-                </label>
+          reviews?.map(({ id, user_id, review, rating, created_at }) => (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "50%",
+                }}
+              >
+                <div>
+                  <p>{review}</p>
+                  <span>
+                    <p>{created_at}</p>
+                  </span>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-around" }}
+                >
+                  <label>
+                    <div
+                      class="rating"
+                      style={{ display: "flex", flexDirection: "row" }}
+                    >
+                      <i
+                        className={
+                          rating >= 1 || rating > 1
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 2 || rating > 2
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 3 || rating > 3
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 4 || rating > 3
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          rating >= 5 || rating > 4
+                            ? "fa-solid fa-star"
+                            : "fa-regular fa-star"
+                        }
+                      ></i>
+                    </div>
+                  </label>
+                </div>
               </div>
-              <div>
-                <p>{review}</p>
-                <span>
-                  <p>{created_at}</p>
-                </span>
-              </div>
-            </div>
+              {user?.id == user_id ? (
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Delete Review"
+                  modalComponent={
+                    <DeleteReview reviewId={id} productId={productId} />
+                  }
+                />
+              ) : null}
+              {/* {user?.id == user_id ? (
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Edit Review"
+                  modalComponent={
+                    <EditReview reviewId={id} productId={productId} />
+                  }
+                />
+              ) : null} */}
+            </>
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>
