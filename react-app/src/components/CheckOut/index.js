@@ -10,7 +10,7 @@ export default function CheckOut() {
   let subtotal = 0;
 
   Object.values(cart).map((item) => {
-    subtotal += parseFloat(item.price * item.quantity);
+    return subtotal += parseFloat(item.price * item.quantity);
   });
 
   const handleClick = (e) => {

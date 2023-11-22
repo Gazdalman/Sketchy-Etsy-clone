@@ -8,14 +8,15 @@ const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const history = useHistory();
-  const [previewImage, setPreviewImage] = useState({
-    url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png",
-  });
   const [revAvg, setRevAvg] = useState(0);
   const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
 
   let imgNum = 0;
+
+  if (product) {
+    console.log(product);
+  }
 
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
@@ -43,14 +44,14 @@ const ProductShow = () => {
         available
       </h3>
       <div id="product-images-container">
-        {/* <img id="preview-image" src={previewImage.url} alt={`Product ${product.id}`} />
+        <img id="preview-image" src={product.preview} alt={`Product ${product.id}`} />
         <span id="none-prev">
-          {product.ProductImages.length > 0 && product.ProductImages.map(image => (
+          {/* {product.ProductImages.length > 0 && product.ProductImages.map(image => (
             image.id !== previewImage.id ? (
               <img className="product-img" id={`img-${imgNum++}`} key={image.id} src={image.url} alt={`Product ${image.id}`} />
             ) : null
-          ))}
-        </span> */}
+          ))} */}
+        </span>
       </div>
       <h4 id="product-owner">Sold by {product.seller}</h4>
       <div id="product-details-lower">

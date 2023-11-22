@@ -11,3 +11,10 @@ class ProductImage(db.Model):
     "Product",
     back_populates="images"
   )
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "url": self.url,
+      "product_id": self.product_id
+    }
