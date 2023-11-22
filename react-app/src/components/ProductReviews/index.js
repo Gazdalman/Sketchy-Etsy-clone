@@ -148,9 +148,9 @@ function Reviews({product}) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 ? (
+        {isLoaded && reviewsLength >= 1 && (
           reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               {console.log(reviews)}
               <div
                 style={{
@@ -229,30 +229,27 @@ function Reviews({product}) {
                     </div>
                   </label>
                 </div>
+                {curruser?.id == user_id && (
+                  <><OpenModalButton
+                    modalClasses={["delete-button-container"]}
+                    buttonText="Delete Review"
+                    modalComponent={
+                      <DeleteReview reviewId={id} productId={productId} />
+                    }
+                  />
+                  <OpenModalButton
+                    modalClasses={["edit-button-container"]}
+                    buttonText="Edit Review"
+                    modalComponent={
+                      <EditReview reviewId={id} productId={productId} />
+                    }
+                  /></>
+
+                  )}
               </div>
-              {curruser?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["delete-button-container"]}
-                  buttonText="Delete Review"
-                  modalComponent={
-                    <DeleteReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
-              {curruser?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["edit-button-container"]}
-                  buttonText="Edit Review"
-                  modalComponent={
-                    <EditReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
-            </div>
-          ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>
-        )}
+        )))}
       </div>
     </>
   );
