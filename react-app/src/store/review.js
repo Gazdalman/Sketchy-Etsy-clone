@@ -75,13 +75,13 @@ export const editAReview = (reviewId, payload) => async (dispatch) => {
     // body: JSON.stringify(payload),
     body: JSON.stringify(payload),
   });
-  console.log("🚀 ~ file: review.js:76 ~ editAReview ~ response:", response);
-  console.log("DO I GET PAST THE FETCH??");
+  // console.log("🚀 ~ file: review.js:76 ~ editAReview ~ response:", response);
+  // console.log("DO I GET PAST THE FETCH??");
   const review = await response.json();
-  review.id = reviewId;
-  console.log("🚀 ~ file: review.js:81 ~ editAReview ~ review:", review);
-  dispatch(editReview(review));
-  console.log("AM I RETURNING ANYTHING??");
+  // review.id = reviewId;
+  // console.log("🚀 ~ file: review.js:81 ~ editAReview ~ review:", review);
+  // dispatch(editReview(review));
+  // console.log("AM I RETURNING ANYTHING??");
   return review;
 };
 const review = (state = initialState, action) => {
