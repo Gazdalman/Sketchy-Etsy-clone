@@ -14,11 +14,6 @@ function Navigation({ isLoaded }) {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/new_product">
-          Create Spot
-        </NavLink>
-      </li>
 
       {isLoaded && (
         <li>

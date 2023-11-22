@@ -3,12 +3,20 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
+import { addItemToCart, updateQuantity } from "../../store/cart";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const history = useHistory();
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.session.user);
+  const [previewImage, setPreviewImage] = useState({
+    url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png",
+  });
   const [revAvg, setRevAvg] = useState(0);
+  const [numReviews, setNumReviews] = useState(0);
+  const product = useSelector((state) => state.requestedProduct);
   const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
 
@@ -36,6 +44,16 @@ const ProductShow = () => {
   //   history.replace("/not-found")
   // }
 
+  const handleClick = (e, prod) => {
+    e.preventDefault();
+    const prodId = prod.id;
+    if (cart[prodId]) {
+      dispatch(updateQuantity(prodId, "inc"));
+    } else {
+      dispatch(addItemToCart(prodId));
+    }
+  };
+
   return Object.keys(product).length > 0 && +product.id === +productId ? (
     <div id="product-show">
       <h1 id="product-name">{product.name}</h1>
@@ -58,6 +76,11 @@ const ProductShow = () => {
         <p id="product-description">{product.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
+      {user.id != product.seller_id && (
+        <button value={product.id} onClick={(e) => handleClick(e, product)}>
+          Add to cart
+        </button>
+      )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />
     </div>

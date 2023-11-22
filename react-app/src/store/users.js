@@ -22,7 +22,7 @@ export default function reducer(state = {}, action) {
   let new_state = {};
   switch (action.type) {
     case GET_USER:
-      console.log(action.payload);
+      // console.log(action.payload);
       new_state = { ...action.payload };
       return new_state;
     default:

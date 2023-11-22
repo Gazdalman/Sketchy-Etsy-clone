@@ -1,8 +1,14 @@
 const GET_CART = "cart/GET_CART";
+const ADD_TO_CART = "cart/ADD_TO_CART";
 
 const getAllCartItems = (userCart) => ({
   type: GET_CART,
   payload: userCart,
+});
+
+const addToCart = (newItem) => ({
+  type: ADD_TO_CART,
+  payload: newItem,
 });
 
 export const getCart = () => async (dispatch) => {
@@ -13,7 +19,6 @@ export const getCart = () => async (dispatch) => {
       console.log(cartData.errors);
       return;
     }
-    // console.log(cartData);
     dispatch(getAllCartItems(cartData));
   }
 };
@@ -28,13 +33,11 @@ export const removeItem = (itemId) => async (dispatch) => {
       console.log(cartData.error);
       return;
     }
-    // console.log(cartData);
     dispatch(getCart());
   }
 };
 
 export const updateQuantity = (itemId, change) => async (dispatch) => {
-  console.log(itemId);
   const res = await fetch(`/api/cart/${change}/${itemId}`, {
     method: "PUT",
   });
@@ -44,15 +47,27 @@ export const updateQuantity = (itemId, change) => async (dispatch) => {
       console.log(cartData.error);
       return;
     }
-    // console.log(cartData);
     dispatch(getCart());
   }
 };
 
-export default function reducer(state = {}, action) {
+export const addItemToCart = (itemId) => async (dispatch) => {
+  const res = await fetch(`/api/cart/${itemId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (res.ok) {
+    dispatch(getCart());
+  }
+};
+
+export default function reducer(state = { cart: [] }, action) {
+  let new_state = {};
   switch (action.type) {
     case GET_CART:
-      const new_state = { ...action.payload.cart };
+      new_state = { ...action.payload.cart };
       return new_state;
     default:
       return state

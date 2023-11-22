@@ -27,6 +27,11 @@ class Review(db.Model):
         back_populates="reviews"
     )
 
+    user = db.relationship(
+        "User",
+        back_populates="reviews"
+    )
+
     def to_dict(self):
         dictionary = {
             "id": self.id,

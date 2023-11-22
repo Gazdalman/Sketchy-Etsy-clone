@@ -1,9 +1,9 @@
 from flask import Blueprint, session, jsonify, request
-from flask_login import login_required
-from app.models import Product, Review, db
+from flask_login import login_required, current_user
+from app.models import db, Review
 from app.forms import ReviewForm
 
-review_routes = Blueprint("reviews", __name__, url_prefix='/reviews')
+review_routes = Blueprint("/reviews", __name__)
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -52,5 +52,5 @@ def make_new_review(productId):
     )
     db.session.add(new_review)
     db.session.commit()
-    return review.to_dict()
+    return new_review.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401

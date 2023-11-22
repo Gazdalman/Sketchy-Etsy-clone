@@ -13,12 +13,13 @@ import CheckOut from "./components/CheckOut";
 import Wishlist from "./components/Wishlist";
 import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductShow";
-import Profile from "./components/Profile";
 import ProductFormPage from "./components/ProductForm";
+import Profile from "./components/Profile";
 // import Reviews from "./components/Review";
 import EditAccountPage from "./components/EditAccountPage";
+import Reviews from "./components/Review";
 
-/* Import state */
+/* Import thunks */
 import { getAllProducts } from "./store/product";
 
 function App() {
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:userId">
             <Profile />
+          </Route>
+          <Route path="/:userId/reviews/">
+            <Reviews />
           </Route>
           <Route exact path="/editAccount">
             <EditAccountPage />
