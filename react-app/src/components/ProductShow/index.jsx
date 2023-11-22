@@ -11,9 +11,6 @@ const ProductShow = () => {
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session.user);
-  const [previewImage, setPreviewImage] = useState({
-    url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png",
-  });
   const [revAvg, setRevAvg] = useState(0);
   const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
@@ -74,7 +71,7 @@ const ProductShow = () => {
         <p id="product-description">{product.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {user.id != product.seller_id && (
+      {(user && user.id != product.seller_id) && (
         <button value={product.id} onClick={(e) => handleClick(e, product)}>
           Add to cart
         </button>
