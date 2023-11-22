@@ -49,13 +49,14 @@ export const editProduct = (product, productId, images) => async dispatch => {
 export const createProduct = (product) => async dispatch => {
   const res = await fetch('/api/products/form', {
     method: 'POST',
-    body: {...product}
+    body: product
   });
 
   if (res.ok) {
     const product = await res.json();
+    console.log(product);
     dispatch(changeProducts(product))
-    return product
+    return product.id
   }
 
   return res.json()

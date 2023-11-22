@@ -1,6 +1,6 @@
 /* BoilerPlate */
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 
@@ -15,7 +15,7 @@ import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductShow";
 import Profile from "./components/Profile";
 import ProductFormPage from "./components/ProductForm";
-import Reviews from "./components/Review";
+// import Reviews from "./components/Review";
 import EditAccountPage from "./components/EditAccountPage";
 
 /* Import state */

@@ -12,7 +12,7 @@ class Product(db.Model):
   seller_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='SET NULL'))
   price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
   description = db.Column(db.String(2000), nullable=False)
-  categories = db.Column(db.String(20000))
+  category = db.Column(db.String(20000))
   units_available = db.Column(db.INTEGER, nullable=False)
   preview_image = db.Column(db.String(2000))
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -56,7 +56,7 @@ class Product(db.Model):
       'id': self.id,
       'name': self.name,
       'seller_id': self.seller_id,
-      'categories': self.categories.split(', ') if self.categories else 'NULL',
+      'category': self.category,
       'price': self.price,
       'description': self.description,
       'units_available': self.units_available,
@@ -64,5 +64,6 @@ class Product(db.Model):
       'updated_at': self.updated_at,
       "seller": self.seller.to_dict()['username'] if self.seller else 'deleted',
       "reviews": [review.to_dict() for review in self.reviews],
+      "preview": self.preview_image,
       "images": [image.to_dict() for image in self.images]
     }

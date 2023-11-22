@@ -59,15 +59,17 @@ def create_prod():
       name=data['name'],
       price=data['price'],
       description=data['description'],
+      category=data['category'],
       units_available=data['units_available'],
       seller_id=current_user.get_id(),
-      preview=upload["url"]
+      preview_image=upload["url"]
     )
 
     db.session.add(product)
 
     db.session.commit()
     return product.to_dict()
+  print('form data ===>>', form.data)
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @product_routes.route("/<int:id>", methods=["DELETE"])
