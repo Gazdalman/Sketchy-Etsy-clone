@@ -147,19 +147,11 @@ function Reviews({ product }) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 ? (
+        {isLoaded && reviewsLength >= 1 && (
           reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            <div
-              style={{
-                display: "flex",
-                borderBottom: "1px solid grey",
-                padding: "5px",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+              {console.log(reviews)}
               <div
-                className="review-info"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -263,7 +255,7 @@ function Reviews({ product }) {
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>
-        )}
+        )))}
       </div>
     </>
   );
