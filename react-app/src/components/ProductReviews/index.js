@@ -16,7 +16,7 @@ function Reviews({product}) {
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const target = Object.values(products).find((ele) => ele.id == productId);
-  const curruser = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
   const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
@@ -37,8 +37,9 @@ function Reviews({product}) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].User = users.find((ele) => ele.id == list[i].user_id);
-      list[i].Owns = newbie.push(list[i]);
+      list[i].User = users?.find((ele) => ele.id == list[i].user_id);
+      list[i].commented = false;
+      newbie.push(list[i]);
     }
     return newbie;
   }
@@ -60,7 +61,7 @@ function Reviews({product}) {
     commented = reviews?.some(exists);
   }
 
-  const owns = (ele) => ele.seller_id == curruser.id;
+  const owns = (ele) => ele.seller_id == user.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
