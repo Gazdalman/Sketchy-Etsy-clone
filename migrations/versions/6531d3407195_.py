@@ -1,13 +1,12 @@
 """empty message
 
-Revision ID: ddad329e79cb
+Revision ID: 6531d3407195
 Revises:
-Create Date: 2023-11-22 08:10:53.346258
+Create Date: 2023-11-22 00:23:39.139457
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 
 import os
 environment = os.getenv("FLASK_ENV")
@@ -15,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ddad329e79cb'
+revision = '6531d3407195'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,7 +35,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -46,7 +44,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
 
@@ -56,7 +53,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
 
@@ -73,7 +69,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['seller_id'], ['users.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
 
@@ -83,7 +78,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE wishlists SET SCHEMA {SCHEMA};")
 
@@ -96,7 +90,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE cart_products SET SCHEMA {SCHEMA};")
 
@@ -109,7 +102,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE order_products SET SCHEMA {SCHEMA};")
 
@@ -120,7 +112,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
 
@@ -137,7 +128,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
 
@@ -149,7 +139,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['wishlist_id'], ['wishlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE wishlist_details SET SCHEMA {SCHEMA};")
 
