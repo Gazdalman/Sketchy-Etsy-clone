@@ -72,7 +72,7 @@ const ProductShow = () => {
         <img
           id="preview-image"
           src={product.preview}
-          alt={`Product ${product.id} Img`}
+          alt={`Product ${product.id}`}
         />
         <span id="none-prev">
           {product.images.length > 0 &&
@@ -87,7 +87,7 @@ const ProductShow = () => {
             ))}
         </span>
       </div>
-      <h4 id="product-owner">Sold by {product.seller}</h4>
+      <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
         <h4 id="prod-cat">Category: {product.category}</h4>
         <p id="product-description">{product.description}</p>
