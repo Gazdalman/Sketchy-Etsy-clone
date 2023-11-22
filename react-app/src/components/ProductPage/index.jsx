@@ -3,27 +3,38 @@ import { useState, useEffect } from "react";
 
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/product";
-import { addWish } from "../../store/wishlist";
+import { getWish, addWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 
 // import './SpotsIndex.css';
 
 const ProductPage = () => {
   const history = useHistory();
-  const products = useSelector((state) => state.products);
-  const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.session.user);
-  const prodArr = Object.values(products);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session)
+  const products = useSelector((state) => state.products)
+  const userWish =  useSelector((state) => state.wishlist)
+  const prodArr = Object.values(products)
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("products state", products);
+
+  console.log('user', user)
+  console.log('products state', products)
+  console.log('user wish', userWish)
+
 
   useEffect(() => {
-    dispatch(getAllProducts()).then(() => {
-      setIsLoaded(true);
-    });
+
+    dispatch(getAllProducts())
+      .then(() => {
+        setIsLoaded(true);
+      });
+
+    dispatch(getWish());
+
   }, [dispatch]);
+
+
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -53,6 +64,9 @@ const ProductPage = () => {
                 <span>${product.price}</span>
                 <span>{product.seller}</span>
               </a>
+
+            {user && !userWish.products[product.id] && (
+
               <div style={{ margin: 20 }}>
                 {user.id != product.seller_id && (
                   <>

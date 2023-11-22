@@ -22,7 +22,8 @@ export default function Wishlist() {
 
   useEffect(() => {
     if (user) {
-      dispatch(getWish()).then(() => setIsLoaded(true));
+      dispatch(getWish())
+      .then(() => setIsLoaded(true))
     }
   }, [dispatch]);
 

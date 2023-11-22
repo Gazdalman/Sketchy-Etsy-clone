@@ -17,6 +17,7 @@ import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
 // import Reviews from "./components/Review";
 import EditAccountPage from "./components/EditAccountPage";
+import PastOrder from "./components/Profile/PastOrder";
 import Reviews from "./components/Review";
 
 /* Import thunks */
@@ -68,6 +69,9 @@ function App() {
           </Route>
           <Route exact path="/checkout">
             <CheckOut />
+          </Route>
+          <Route exact path="/past-order">
+            <PastOrder />
           </Route>
           <Route>"404: Route doesn't exist"</Route>
         </Switch>
