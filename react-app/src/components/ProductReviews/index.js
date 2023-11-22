@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
+import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews() {
   const dispatch = useDispatch();
@@ -14,15 +15,24 @@ function Reviews() {
   const { productId } = useParams();
   const user = useSelector((state) => state.session.user);
   const unorderedReviews = useSelector((state) => state.review);
-  const reviews = orderReviews(Object.values(unorderedReviews));
-  const [activeRating, setActiveRating] = useState(0);
+  const review = orderReviews(Object.values(unorderedReviews));
+  const reviews = addUsers(review, users);
+  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
-    let newwie = [];
+    let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
-      newwie.push(list[i]);
+      newbie.push(list[i]);
     }
-    return newwie;
+    return newbie;
+  }
+  function addUsers(list, users) {
+    let newbie = [];
+    for (let i = 0; i < list.length; i++) {
+      list[i].User = users.find((ele) => ele.id == list[i].user_id);
+      list[i].Owns = newbie.push(list[i]);
+    }
+    return newbie;
   }
   let sum = 0;
   if (reviewsLength >= 1) {
@@ -41,11 +51,13 @@ function Reviews() {
     commented = reviews?.some(exists);
   }
   console.log("🚀 ~ file: index.js:29 ~ Reviews ~ commented:", commented);
-  const owns = (ele) => ele.user_id == user.id;
+  const owns = (ele) => ele.seller_id == user.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
-    dispatch(allTheReviews(productId));
+    dispatch(allTheReviews(productId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
   return (
     <>
@@ -125,8 +137,8 @@ function Reviews() {
           />
         ) : null}
 
-        {reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at }) => (
+        {isLoaded && reviewsLength >= 1 ? (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
             <>
               <div
                 style={{
@@ -138,9 +150,9 @@ function Reviews() {
               >
                 <div>
                   <p>{review}</p>
-                  <span>
-                    <p>{created_at}</p>
-                  </span>
+                  <p>
+                    {User.firstName} {User.username} {created_at}
+                  </p>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}

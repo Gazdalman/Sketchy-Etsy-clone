@@ -60,7 +60,11 @@ const ProductShow = () => {
         available
       </h3>
       <div id="product-images-container">
-        <img id="preview-image" src={product.preview} alt={`Product ${product.id}`} />
+        <img
+          id="preview-image"
+          src={product.preview}
+          alt={`Product ${product.id}`}
+        />
         <span id="none-prev">
           {/* {product.ProductImages.length > 0 && product.ProductImages.map(image => (
             image.id !== previewImage.id ? (
@@ -69,12 +73,12 @@ const ProductShow = () => {
           ))} */}
         </span>
       </div>
-      <h4 id="product-owner">Sold by {product.seller}</h4>
+      <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
-        <p id="product-description">{product.description}</p>
+        <p id="product-description">{product?.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {user.id != product.seller_id && (
+      {user?.id != product?.seller_id && (
         <button value={product.id} onClick={(e) => handleClick(e, product)}>
           Add to cart
         </button>

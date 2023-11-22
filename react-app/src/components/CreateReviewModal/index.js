@@ -12,9 +12,6 @@ import { allTheReviews, createAReview } from "../../store/review";
 
 function ReviewFormModal({ productId }) {
   const dispatch = useDispatch();
-  const { id, firstName, lastName } = useSelector(
-    (state) => state.session.user
-  );
   const { closeModal } = useModal();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -34,11 +31,14 @@ function ReviewFormModal({ productId }) {
     setErrors(errObj);
   }
   const newReview = {
-    user_id: id,
+    user_id: user?.id,
     product_id: productId,
     review: reviewText,
     rating,
   };
+  if (!user) {
+    history.push("/login");
+  }
 
   const handleSubmit = async (e) => {
     checkCredentials();
