@@ -17,8 +17,6 @@ const ProductShow = () => {
   const [revAvg, setRevAvg] = useState(0);
   const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
-  const [numReviews, setNumReviews] = useState(0);
-  const product = useSelector((state) => state.requestedProduct);
 
   let imgNum = 0;
 

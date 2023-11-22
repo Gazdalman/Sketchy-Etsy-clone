@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../store/order";
-import {addItemToCart, updateQuantity} from "../../store/cart";
+import { addItemToCart, updateQuantity } from "../../store/cart";
 
 export default function UserOrders({ user }) {
   const dispatch = useDispatch();
@@ -35,35 +35,32 @@ export default function UserOrders({ user }) {
     }
   };
 
-  return (
-    <>
-      {isLoaded && (
-        <div>
-          {Object.values(orders).toReversed().slice(0, 1).map((order) => (
-            <div key={order.id}>
-              {order.products.map((item) => (
-                <div key={item.id}>
-                  <h4>{item.name}</h4>
-                  <p>{item.price}</p>
-                  <button disabled>Write Review</button>
-                  <button onClick={(e) => handleClick(e)}>Return Item</button>
-                  <button value={item.id}
-                  onClick={(e) => handleAddToCart(e, item)>Buy Again</button>
-                </div>
-              ))}
+  return isLoaded ? (
+    <div>
+      {Object.values(orders).toReversed().slice(0, 1).map((order) => (
+        <div key={order.id}>
+          {order.products.map((item) => (
+            <div key={item.id}>
+              <h4>{item.name}</h4>
+              <p>{item.price}</p>
+              <button disabled>Write Review</button>
+              <button onClick={(e) => handleClick(e)}>Return Item</button>
+              <button value={item.id}
+                onClick={(e) => handleAddToCart(e, item)}>Buy Again</button>
             </div>
           ))}
-          <div style={{marginTop: 30}}>
-                <Link
-                to="/past-order"
-                style={{ textDecoration: 'none'}}>
-
-                See All Orders...
-                </Link>
-            </div>
         </div>
-      )}
-    </>
-  );
+      ))}
+      <div style={{ marginTop: 30 }}>
+        <div>
+          <Link
+            to="/past-order"
+            style={{ textDecoration: 'none' }}>
 
+            See All Orders...
+          </Link>
+        </div>
+      </div>
+    </div>
+  ) : null
 }

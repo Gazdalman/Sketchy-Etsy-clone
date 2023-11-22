@@ -12,6 +12,7 @@ const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session)
+  const cart = useSelector(state => state.cart)
   const products = useSelector((state) => state.products)
   const userWish = useSelector((state) => state.wishlist)
   const prodArr = Object.values(products)
