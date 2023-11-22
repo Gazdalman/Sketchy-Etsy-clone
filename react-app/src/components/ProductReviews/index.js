@@ -8,6 +8,7 @@ import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
+import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews({ product }) {
   const dispatch = useDispatch();
@@ -21,8 +22,12 @@ function Reviews({ product }) {
   const review = orderReviews(Object.values(unorderedReviews));
   const reviews = addUsers(review, users);
   const [isLoaded, setIsLoaded] = useState(false);
+  const review = orderReviews(Object.values(unorderedReviews));
+  const reviews = addUsers(review, users);
+  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
+    let newbie = [];
     let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
       newbie.push(list[i]);
@@ -32,9 +37,8 @@ function Reviews({ product }) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].user = users?.find((ele) => ele.id == list[i].user_id);
-      list[i].commented = false;
-      newbie.push(list[i]);
+      list[i].User = users.find((ele) => ele.id == list[i].user_id);
+      list[i].Owns = newbie.push(list[i]);
     }
     return newbie;
   }
@@ -60,6 +64,9 @@ function Reviews({ product }) {
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
+    dispatch(allTheReviews(productId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
     dispatch(allTheReviews(productId))
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
