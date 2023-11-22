@@ -58,13 +58,13 @@ const ProductPage = () => {
 
         {prodArr.map((product) => (
           <div key={product.id}>
-            <a key={product.id} href={`/products/${product.id}`}>
+            <a href={`/products/${product.id}`}>
               <div>{product.name}</div>
               <span>${product.price}</span>
               <span>{product.seller}</span>
             </a>
 
-            {user && !userWish.products[product.id] && (
+            {user && (
               <div style={{ margin: 20 }}>
                 {user.id != product.seller_id && (
                   <>
