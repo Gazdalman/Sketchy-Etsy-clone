@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { allYourReviews } from "../../store/review";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
-import DeleteReview from "../DeleteModal/deleteModalReview.js";
+import DeleteReview from "../DeleteModal/deleteModalReview";
 
 function Reviews() {
   const dispatch = useDispatch();

@@ -1,15 +1,19 @@
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { allYourReviews, deleteAReview } from "../../store/review";
+import { allYourReviews, deleteAReview, removeItem } from "../../store/review";
 
 import "./deleteModal.css";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect } from "react";
 
 //PLEASE CHANGE names/variables
 
-function DeleteReview({ reviewId }) {
+function DeleteReview({ reviewId, productId }) {
+  console.log(
+    "🚀 ~ file: deleteModalReview.js:13 ~ DeleteReview ~ productId:",
+    productId
+  );
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -29,7 +33,10 @@ function DeleteReview({ reviewId }) {
   const deleteReview = async (e) => {
     e.preventDefault();
 
-    await dispatch(deleteAReview(reviewId)).then(closeModal);
+    await dispatch(deleteAReview(reviewId))
+      .then(closeModal)
+      .then(() => history.push(`/reviews/${productId}`))
+      .then(() => history.push(`/products/${productId}`));
 
     // history.push(`/reviews/${user.id}`);
     // return Redirect(`/products/${user.id}`);
