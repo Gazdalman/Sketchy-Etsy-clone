@@ -151,9 +151,9 @@ function Reviews({ product }) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 ? (
+        {isLoaded && reviewsLength >= 1 && (
           reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               {console.log(reviews)}
               <div
                 className="review-info"
@@ -261,7 +261,7 @@ function Reviews({ product }) {
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>
-        )}
+        )))}
       </div>
     </>
   );
