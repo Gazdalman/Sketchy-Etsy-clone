@@ -13,7 +13,7 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session)
   const products = useSelector((state) => state.products)
-  const userWish =  useSelector((state) => state.wishlist)
+  const userWish = useSelector((state) => state.wishlist)
   const prodArr = Object.values(products)
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -52,21 +52,19 @@ const ProductPage = () => {
     }
   };
 
-  return (
-    isLoaded && (
+  return isLoaded ? (
       <div>
         <h1>Peruse Our Products</h1>
-        <div>
-          {prodArr.map((product) => (
-            <div key={product.id}>
-              <a key={product.id} href={`/products/${product.id}`}>
-                <div>{product.name}</div>
-                <span>${product.price}</span>
-                <span>{product.seller}</span>
-              </a>
+
+        {prodArr.map((product) => (
+          <div key={product.id}>
+            <a key={product.id} href={`/products/${product.id}`}>
+              <div>{product.name}</div>
+              <span>${product.price}</span>
+              <span>{product.seller}</span>
+            </a>
 
             {user && !userWish.products[product.id] && (
-
               <div style={{ margin: 20 }}>
                 {user.id != product.seller_id && (
                   <>
@@ -85,12 +83,11 @@ const ProductPage = () => {
                   </>
                 )}
               </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+    ))}
       </div>
-    )
-  );
+  ) : null
 };
 
 export default ProductPage;
