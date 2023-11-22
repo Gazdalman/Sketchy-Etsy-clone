@@ -75,12 +75,7 @@ one line:
 
 ```shell
 # build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
+npm install --prefix react-app && npm run build --prefix react-app &&pip install -r requirements.txt && pip install psycopg2 && flask db upgrade && flask seed all
 ```
 
 This script will install dependencies for the frontend, and run the build

@@ -4,7 +4,7 @@ __pycache__/
 .DS_Store
 .vscode/
 
-migrations
+
 instance
 node_modules
 .venv
