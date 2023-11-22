@@ -27,11 +27,10 @@ const ProductPage = () => {
   useEffect(() => {
 
     dispatch(getAllProducts())
+      .then(() => dispatch(getWish()))
       .then(() => {
         setIsLoaded(true);
       });
-
-    dispatch(getWish());
 
   }, [dispatch]);
 
