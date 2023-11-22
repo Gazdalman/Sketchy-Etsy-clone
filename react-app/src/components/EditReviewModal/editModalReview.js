@@ -7,10 +7,6 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 
 function EditReview({ reviewId, productId }) {
-  console.log(
-    "🚀 ~ file: editModalReview.js:10 ~ EditReview ~ reviewId:",
-    reviewId
-  );
   const dispatch = useDispatch();
   const { id, firstName, lastName } = useSelector(
     (state) => state.session.user
@@ -39,17 +35,11 @@ function EditReview({ reviewId, productId }) {
 
   const handleSubmit = async (e) => {
     const newStock = {
-      // id: reviewId,
       user_id: user.id,
       product_id: productId,
       review,
       rating,
     };
-    // console.log(
-    //   "🚀 ~ file: editModalReview.js:46 ~ EditReview ~ newStock:",
-    //   newStock
-    // );
-    console.log("DO I HIT THE HANDLE SUBMITE??");
     e.preventDefault();
     await dispatch(editAReview(reviewId, newStock, productId))
       .then(() => closeModal())
@@ -57,9 +47,6 @@ function EditReview({ reviewId, productId }) {
       .then(() => history.push(`/products/${productId}`));
     console.log("DO I GET PAST THE DISPATCH??");
   };
-  // useEffect(() => {
-  //   allYourReviews(user.id);
-  // }, [reviewsLength]);
 
   return (
     <>

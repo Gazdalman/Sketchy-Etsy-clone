@@ -42,10 +42,7 @@ function Reviews() {
   }
   console.log("🚀 ~ file: index.js:29 ~ Reviews ~ commented:", commented);
   const owns = (ele) => ele.user_id == user.id;
-  //   const openMenu = () => {
-  //     if (showMenu) return;
-  //     setShowMenu(true);
-  //   };
+
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
     dispatch(allTheReviews(productId));
@@ -126,8 +123,7 @@ function Reviews() {
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
-        ) : //   <h1>Needs Button</h1>
-        null}
+        ) : null}
 
         {reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at }) => (
