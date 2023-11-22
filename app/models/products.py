@@ -30,19 +30,19 @@ class Product(db.Model):
 
   orders = db.relationship(
     "Order",
-    secondary="order_products",
+    secondary=add_prefix_for_prod("order_products"),
     back_populates="products"
   )
 
   cart = db.relationship(
     "Cart",
-    secondary="cart_products",
+    secondary=add_prefix_for_prod("cart_products"),
     back_populates="cart_product_list"
   )
 
   wishlist = db.relationship(
     "Wishlist",
-    secondary="wishlist_details",
+    secondary=add_prefix_for_prod("wishlist_details"),
     back_populates="wishproducts"
   )
 
