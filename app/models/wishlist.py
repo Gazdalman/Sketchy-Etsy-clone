@@ -9,7 +9,7 @@ class Wishlist (db.Model):
      __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
 
     products = db.relationship(
@@ -39,4 +39,3 @@ class WishlistDetail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     wishlist_id = db.Column(db.Integer, db.ForeignKey("wishlists.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
-
