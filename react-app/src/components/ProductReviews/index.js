@@ -202,7 +202,7 @@ function Reviews() {
                   }
                 />
               ) : null}
-              {user?.id == user_id ? (
+              {/* {user?.id == user_id ? (
                 <OpenModalButton
                   modalClasses={["delete-button-container"]}
                   buttonText="Edit Review"
@@ -210,7 +210,7 @@ function Reviews() {
                     <EditReview reviewId={id} productId={productId} />
                   }
                 />
-              ) : null}
+              ) : null} */}
             </>
           ))
         ) : (
