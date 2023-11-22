@@ -18,8 +18,8 @@ export default function Wishlist() {
     : null;
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("product id", wishlist.products);
-  console.log("all product", allProducts);
+  // console.log("product id", wishlist.products);
+  // console.log("all product", allProducts);
 
   useEffect(() => {
     if (user) {
