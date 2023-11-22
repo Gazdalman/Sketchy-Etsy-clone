@@ -63,7 +63,7 @@ def edit_review(id):
 
   if form.validate_on_submit():
 
-    if review.user_id == int(review.user_id) and int(current_user.get_id()) == int(review.user_id):
+    if int(current_user.get_id()) == int(review.user_id):
       review.product_id=form.data["product_id"],
       review.user_id=form.data["user_id"],
       review.review=form.data["review"],

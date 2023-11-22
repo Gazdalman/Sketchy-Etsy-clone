@@ -29,14 +29,14 @@ function Reviews() {
     // reviews?.forEach((ele) => {
     //   sum = sum + ele.rating;
     // });
-    sum = reviews.reduce((acc, review) => review.rating + acc, 0);
+    sum = reviews?.reduce((acc, review) => review?.rating + acc, 0);
   }
   let avg;
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
   let commented = false;
-  const exists = (element) => element.user_id == user.id;
+  const exists = (element) => element?.user_id == user.id;
   if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }

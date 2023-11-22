@@ -74,12 +74,14 @@ export const editAReview = (reviewId, payload) => async (dispatch) => {
   console.log("DO I ENTER THE THUNK???");
   const response = await fetch(`/api/reviews/${reviewId}/edit`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    // headers: { "Content-Type": "application/json" },
+    // body: JSON.stringify(payload),
     body: JSON.stringify(payload),
   });
   console.log("🚀 ~ file: review.js:76 ~ editAReview ~ response:", response);
   console.log("DO I GET PAST THE FETCH??");
   const review = await response.json();
+  review.id = reviewId;
   console.log("🚀 ~ file: review.js:81 ~ editAReview ~ review:", review);
   dispatch(editReview(review));
   console.log("AM I RETURNING ANYTHING??");
