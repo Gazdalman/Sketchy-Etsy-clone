@@ -21,6 +21,7 @@ const ProductFormPage = ({ type, product }) => {
   const [unitsAvailable, setUnitsAvailable] = useState(type == 'edit' ? product.units_available : '')
   const [isLoaded, setIsLoaded] = useState(false)
 
+
   const removeImgs = (e) => {
     if (!e.target.value) {
       setImg1('')
@@ -46,34 +47,26 @@ const ProductFormPage = ({ type, product }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const formData = new FormData()
-    product = {
-      name,
-      description,
-      category,
-      price,
-      units_available: unitsAvailable,
-      preview: prevImg
-    }
-
-
-    formData.append('name', name)
-    formData.append('description', description)
-    formData.append('category', category)
-    formData.append('price', price)
-    formData.append('units_available', unitsAvailable)
-    formData.append('preview', prevImg)
+    const product = new FormData()
+    const images = []
+    product.append('name', name)
+    product.append('description', description)
+    product.append('category', category)
+    product.append('price', price)
+    product.append('units_available', unitsAvailable)
+    product.append('preview', prevImg)
 
     let num = 1
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        formData.append(`img${num}`, img)
+        const image = new FormData()
+        image.append(`image`, img)
+        images.push(image)
       }
-      num += 1
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(formData))
+    const id = await dispatch(createProduct(product, images))
     return history.push(`/products/${id}`)
   }
 

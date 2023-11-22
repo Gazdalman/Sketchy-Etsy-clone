@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Product, Review, db, User, ProductImage
-from app.forms import ProductForm
+from app.forms import ProductForm, ProductImageForm
 from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 product_routes = Blueprint("products", __name__, url_prefix="/products")
 
@@ -89,13 +89,15 @@ def delete_product(id):
   if product:
     user.products.remove(product)
     product.seller_id = 0
-    product.images = []
+    remove_file_from_s3(product.preview_image)
+    _=[remove_file_from_s3(image.url) for image in product.images]
     product.description = 'N/A'
     product.units_available = 0
     db.session.commit()
+    print("done")
     return {"message": f"Successfully deleted Product {product.id} - {product.name}"}
 
-  return "No product with that id found"
+  return {"errors": "No product with that id found"}
 
 @product_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
@@ -104,7 +106,8 @@ def edit_product(id):
   Updates product
   """
   product = Product.query.get(id)
-  form = ProductForm
+  form = ProductForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     data=form.data
     product = Product.query.get(id)
@@ -128,5 +131,33 @@ def remove_images(id):
   """
   image = ProductImage.query.get(id)
 
+  remove_file_from_s3(image.url)
   db.session.delete(image)
   db.session.commit()
+
+@product_routes.route("/<int:id>/images", methods=["POST"])
+@login_required
+def add_images(id):
+  form = ProductImageForm()
+  product = Product.query.get(int(id))
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    print("made it into image validation")
+    data = form.data
+    img = data['image']
+    img.filename = get_unique_filename(img.filename)
+    upload = upload_file_to_s3(img)
+
+    if 'url' not in upload:
+      return upload
+    image = ProductImage(
+      url=upload['url'],
+      product_id=int(id)
+    )
+    product.images.append(image)
+    db.session.add(image)
+    db.session.commit()
+    return image.to_dict()
+
+  print(form.errors)
+  return {"errors": "No product with that id found"}
