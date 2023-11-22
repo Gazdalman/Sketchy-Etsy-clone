@@ -58,21 +58,15 @@ def make_new_review(productId):
 @login_required
 def edit_review(id):
   review = Review.query.get(id)
-  print("🐍 File: routes/reviews_routes.py | Line: 61 | edit_review ~ review",review)
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  print("🐍 File: routes/reviews_routes.py | Line: 63 | edit_review ~ form",form.data)
 
   if form.validate_on_submit():
 
-    # if int(current_user.get_id()) == int(review.user_id):
       review.product_id=form.data["product_id"]
       review.user_id=form.data["user_id"]
       review.review=form.data["review"]
       review.rating=form.data["rating"]
-  # else:
-  #   return "You do not own this product"
-  print("🐍 File: routes/reviews_routes.py | Line: 65 | edit_review ~ form",form.errors)
 
   db.session.commit()
   return review.to_dict()
