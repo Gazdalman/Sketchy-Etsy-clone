@@ -22,7 +22,9 @@ export default function reducer(state = {}, action) {
   let new_state = {};
   switch (action.type) {
     case GET_ALL:
-      new_state = { ...action.payload };
+      action.payload.users.forEach((user) => {
+        new_state[user.id] = user;
+      });
       return new_state;
     default:
       return state;

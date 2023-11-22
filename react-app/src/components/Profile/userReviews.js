@@ -7,7 +7,7 @@ export default function UserReviews({ user }) {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.review);
   const products = useSelector((state) => state.products);
-  const users = useSelector((state) => state.allUsers.users);
+  const users = useSelector((state) => state.allUsers);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,15 +27,21 @@ export default function UserReviews({ user }) {
     <>
       {isLoaded && (
         <div>
-          {Object.values(reviews).map((review) => (
-            <div key={review.id}>
-              <h4>{products[review.product_id].name}</h4>
-              <p>{review.rating} Stars</p>
-              <p>{review.review}</p>
-              <p>Author: {users[review.user_id].username}</p>
-              {!review.seller_commented && <button>Respond</button>}
-            </div>
-          ))}
+          {Object.values(reviews).length > 0 ? (
+            <>
+              {Object.values(reviews).map((review) => (
+                <div key={review.id}>
+                  <h4>{products[review.product_id].name}</h4>
+                  <p>{review.rating} Stars</p>
+                  <p>{review.review}</p>
+                  <p>Author: {users[review.user_id].username}</p>
+                  {!review.seller_commented && <button>Respond</button>}
+                </div>
+              ))}
+            </>
+          ) : (
+            <h4>You have no reviews</h4>
+          )}
         </div>
       )}
     </>
