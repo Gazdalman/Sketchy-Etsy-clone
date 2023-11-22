@@ -43,7 +43,7 @@ class Product(db.Model):
   wishlist = db.relationship(
     "Wishlist",
     secondary="wishlist_details",
-    back_populates="products"
+    back_populates="wishproducts"
   )
 
   images = db.relationship(

@@ -41,7 +41,7 @@ class User(db.Model, UserMixin):
 
     wishlist = db.relationship(
         "Wishlist",
-        back_populates="user",
+        back_populates="userwish",
         cascade='all, delete-orphan'
     )
     reviews = db.relationship(

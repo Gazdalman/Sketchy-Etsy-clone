@@ -21,13 +21,13 @@ class Wishlist (db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
 
-    products = db.relationship(
+    wishproducts = db.relationship(
        "Product",
        secondary="wishlist_details",
        back_populates="wishlist"
     )
 
-    user = db.relationship(
+    userwish = db.relationship(
       "User",
       back_populates="wishlist"
    )
