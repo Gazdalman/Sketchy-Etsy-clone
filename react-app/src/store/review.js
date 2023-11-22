@@ -34,8 +34,6 @@ export const allTheReviews = (productId) => async (dispatch) => {
   console.log("DO I ENTER THE REvIEW THUNK");
   const response = await fetch(`/api/reviews/${productId}`);
   const reviews = await response.json();
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
   dispatch(allReviews(reviews));
   return reviews;
 };
@@ -43,10 +41,9 @@ export const allYourReviews = (userId) => async (dispatch) => {
   console.log("🚀 ~ file: review.js:36 ~ allYourReviews ~ userId:", userId);
   const response = await fetch(`/api/reviews/${userId}/reviews`);
   const reviews = await response.json();
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ response:", response);
-  console.log("🚀 ~ file: review.js:29 ~ allYourReviews ~ reviews:", reviews);
+  console.log(reviews);
   dispatch(allReviews(reviews));
-  return reviews;
+  // return reviews;
 };
 export const createAReview = (productId, payload) => async (dispatch) => {
   console.log("INSIDE THE CREATION REVIEW THUNK");

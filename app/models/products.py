@@ -16,16 +16,10 @@ class Product(db.Model):
   units_available = db.Column(db.INTEGER, nullable=False)
   preview_image = db.Column(db.String(2000))
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-  updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
+
 
   seller = db.relationship(
     "User",
-    back_populates="products"
-  )
-
-  wishlist = db.relationship(
-    "Wishlist",
-    secondary="wishlist_details",
     back_populates="products"
   )
 
@@ -36,14 +30,20 @@ class Product(db.Model):
 
   orders = db.relationship(
     "Order",
-    secondary="order_products",
+    secondary=add_prefix_for_prod("order_products"),
     back_populates="products"
   )
 
   cart = db.relationship(
     "Cart",
-    secondary="cart_products",
+    secondary=add_prefix_for_prod("cart_products"),
     back_populates="cart_product_list"
+  )
+
+  wishlist = db.relationship(
+    "Wishlist",
+    secondary=add_prefix_for_prod("wishlist_details"),
+    back_populates="products"
   )
 
   images = db.relationship(
@@ -61,7 +61,6 @@ class Product(db.Model):
       'description': self.description,
       'units_available': self.units_available,
       'created_at': self.created_at,
-      'updated_at': self.updated_at,
       "seller": self.seller.to_dict()['username'] if self.seller else 'deleted',
       "reviews": [review.to_dict() for review in self.reviews],
       "preview": self.preview_image,

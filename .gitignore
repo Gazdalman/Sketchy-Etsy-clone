@@ -4,10 +4,12 @@ __pycache__/
 .DS_Store
 .vscode/
 
-migrations
+
 instance
 node_modules
 .venv
 .env
 *.db
 tasklist.txt
+dev.db
+instance/dev.db

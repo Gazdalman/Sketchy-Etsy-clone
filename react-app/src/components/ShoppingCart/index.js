@@ -4,7 +4,6 @@ import { useHistory, NavLink } from "react-router-dom";
 import { getCart, removeItem, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteItem from "../DeleteModal/deleteModalCart";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Cart() {
   const history = useHistory();

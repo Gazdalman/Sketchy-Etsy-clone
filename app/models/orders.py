@@ -17,7 +17,7 @@ class Order(db.Model):
 
   products = db.relationship(
     "Product",
-    secondary="order_products",
+    secondary=add_prefix_for_prod("order_products"),
     back_populates="orders"
   )
 

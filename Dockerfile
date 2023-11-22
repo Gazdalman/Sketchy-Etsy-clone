@@ -11,6 +11,9 @@ ARG DATABASE_URL
 ARG SCHEMA
 ARG REACT_APP_BASE_URL
 ARG SECRET_KEY
+ARG S3_BUCKET
+ARG S3_KEY
+ARG S3_SECRET
 WORKDIR /var/www
 COPY requirements.txt .
 RUN pip install -r requirements.txt

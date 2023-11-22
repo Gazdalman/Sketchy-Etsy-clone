@@ -1,9 +1,9 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Product, Review, db, User
+from app.models import Product, Review, db, User, ProductImage
 from app.forms import ProductForm
 from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
-product_routes = Blueprint("products", __name__)
+product_routes = Blueprint("products", __name__, url_prefix="/products")
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -27,6 +27,9 @@ def get_all():
 
 @product_routes.route("/user/<int:id>")
 def user_products(id):
+  """
+  Gets the products sold by a user
+  """
   products = Product.query.filter((id) == Product.seller_id).all()
 
   return dict((product.id, product.to_dict()) for product in products)
@@ -44,6 +47,9 @@ def specific_product(id):
 @product_routes.route("/form", methods=["POST"])
 @login_required
 def create_prod():
+  """
+  Creating a product
+  """
   form = ProductForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
@@ -62,9 +68,8 @@ def create_prod():
       category=data['category'],
       units_available=data['units_available'],
       seller_id=current_user.get_id(),
-      preview_image=upload["url"]
+      preview_image=upload["url"],
     )
-
     db.session.add(product)
 
     db.session.commit()
@@ -75,6 +80,9 @@ def create_prod():
 @product_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_product(id):
+  """
+  Removes all information from an item related to being sold
+  """
   user = User.query.get(current_user.get_id())
   product = Product.query.get(id)
 
@@ -92,6 +100,9 @@ def delete_product(id):
 @product_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_product(id):
+  """
+  Updates product
+  """
   product = Product.query.get(id)
   form = ProductForm
   if form.validate_on_submit():
@@ -109,3 +120,13 @@ def edit_product(id):
 
     db.session.commit()
     return product.to_dict()
+
+@product_routes.route("/images/<int:id>", methods=["DELETE"])
+def remove_images(id):
+  """
+  Deletes a selected image
+  """
+  image = ProductImage.query.get(id)
+
+  db.session.delete(image)
+  db.session.commit()

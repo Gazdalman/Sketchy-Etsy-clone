@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory
+  const history = useHistory();
   const [name, setName] = useState(type == 'edit' ? product.name : '')
   const [category, setCategory] = useState(type == 'edit' ? product.categories : '')
   const [price, setPrice] = useState(type == 'edit' ? product.price : '')
@@ -18,7 +18,7 @@ const ProductFormPage = ({ type, product }) => {
   const [img3, setImg3] = useState('')
   const [img4, setImg4] = useState('')
   const [img5, setImg5] = useState('')
-  const [unitsAvailable, setUnitsAvailable] = useState(type == 'edit' ? product.units_available : null)
+  const [unitsAvailable, setUnitsAvailable] = useState(type == 'edit' ? product.units_available : '')
   const [isLoaded, setIsLoaded] = useState(false)
 
   const removeImgs = (e) => {
@@ -90,7 +90,7 @@ const ProductFormPage = ({ type, product }) => {
             type="text"
             placeholder="Name must be 3-50 characters"
             value={name}
-            onChange={removeImgs}
+            onChange={e => setName(e.target.value)}
           />
         </span>
         <span>
@@ -122,50 +122,61 @@ const ProductFormPage = ({ type, product }) => {
               Preview Image*
               <input
                 type="file"
-                onChange={removeImgs}
+                value={undefined}
+                onChange={e => removeImgs(e)}
                 accept="image/*"
               />
             </span>
-            {prevImg && <span>
+            <span>
               Add Image
               <input
                 type="file"
+                disabled={!prevImg}
+                value={undefined}
                 onChange={e => setImg1(e.target.files[0])}
                 accept="image/*"
               />
-            </span>}
-            {(prevImg && img1) && <span>
+            </span>
+            <span>
               Add Image
               <input
                 type="file"
+                value={undefined}
+                disabled={!prevImg}
                 onChange={e => setImg2(e.target.files[0])}
                 accept="image/*"
               />
-            </span>}
-            {(prevImg && img2) && <span>
+            </span>
+            <span>
               Add Image
               <input
                 type="file"
+                value={undefined}
+                disabled={!prevImg}
                 onChange={e => setImg3(e.target.files[0])}
                 accept="image/*"
               />
-            </span>}
-            {(prevImg && img3) && <span>
+            </span>
+            <span>
               Add Image
               <input
                 type="file"
+                disabled={!prevImg}
+                value={undefined}
                 onChange={e => setImg4(e.target.files[0])}
                 accept="image/*"
               />
-            </span>}
-            {(prevImg && img4) && <span>
+            </span>
+            <span>
               Add Image
               <input
                 type="file"
+                value={undefined}
+                disabled={!prevImg}
                 onChange={e => setImg5(e.target.files[0])}
                 accept="image/*"
               />
-            </span>}
+            </span>
           </>
         )}
         <span>

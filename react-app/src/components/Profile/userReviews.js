@@ -1,13 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { allYourReviews } from "../../store/review";
+import { getAllUsers } from "../../store/otherUsers";
 
 export default function UserReviews({ user }) {
   const dispatch = useDispatch();
+  const reviews = useSelector((state) => state.review);
   const products = useSelector((state) => state.products);
+  const users = useSelector((state) => state.allUsers);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // ! dispatch for user's products
-    console.log(user);
+    const userId = user.id;
+    dispatch(allYourReviews(userId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
-  return <h4>Coming Soon...</h4>;
+
+  // useEffect(() => {
+  //   console.log("reiews => ", reviews);
+  //   console.log("products => ", products);
+  //   console.log("users => ", users);
+  // }, [isLoaded]);
+
+  return (
+    <>
+      {isLoaded && (
+        <div>
+          {Object.values(reviews).length > 0 ? (
+            <>
+              {Object.values(reviews).map((review) => (
+                <div key={review.id}>
+                  <h4>{products[review.product_id].name}</h4>
+                  <p>{review.rating} Stars</p>
+                  <p>{review.review}</p>
+                  <p>Author: {users[review.user_id].username}</p>
+                  {!review.seller_commented && <button>Respond</button>}
+                </div>
+              ))}
+            </>
+          ) : (
+            <h4>You have no reviews</h4>
+          )}
+        </div>
+      )}
+    </>
+  );
 }

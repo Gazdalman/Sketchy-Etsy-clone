@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_login import login_required, current_user
 from app.models import db, Product, Order, Cart, CartProduct,  OrderProduct
 
-order_routes = Blueprint("orders", __name__)
+order_routes = Blueprint("orders", __name__, url_prefix="/orders")
 
 @order_routes.route('/')
 @login_required

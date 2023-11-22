@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Product, Review, db, User
 from app.forms import ReviewForm
 
-review_routes = Blueprint("reviews", __name__, url_prefix='/reviews')
+review_routes = Blueprint("/reviews", __name__)
 
 def validation_errors_to_error_messages(validation_errors):
     """
