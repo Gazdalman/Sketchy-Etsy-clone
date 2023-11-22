@@ -16,7 +16,7 @@ class Product(db.Model):
   units_available = db.Column(db.INTEGER, nullable=False)
   preview_image = db.Column(db.String(2000))
   created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-  updated_at = db.Column(db.DATETIME, default=datetime.utcnow, onupdate=datetime.utcnow)
+  updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
   seller = db.relationship(
     "User",
