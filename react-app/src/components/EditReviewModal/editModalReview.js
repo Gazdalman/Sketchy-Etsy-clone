@@ -48,7 +48,6 @@ function EditReview({ reviewId, productId }) {
 
   const handleSubmit = async (e) => {
     const newStock = {
-      // id: reviewId,
       user_id: user.id,
       product_id: productId,
       review,
