@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../store/order";
+import {addItemToCart, updateQuantity} from "../../store/cart";
 
 export default function UserOrders({ user }) {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+  const cart = useSelector((state) => state.cart)
   const [isLoaded, setIsLoaded] = useState(false);
 
   console.log('orders Arr', Object.values(orders))
@@ -23,6 +25,16 @@ export default function UserOrders({ user }) {
     }
   };
 
+  const handleAddToCart = (e, product) => {
+    e.preventDefault();
+    const productId = product.id;
+    if (cart[productId]) {
+      dispatch(updateQuantity(productId, "inc"));
+    } else {
+      dispatch(addItemToCart(productId));
+    }
+  };
+
   return (
     <>
       {isLoaded && (
@@ -34,8 +46,9 @@ export default function UserOrders({ user }) {
                   <h4>{item.name}</h4>
                   <p>{item.price}</p>
                   <button disabled>Write Review</button>
-                  <button onClick={(e) => handleClick(e)}>Return Item</button>
-                  <button disabled>Buy Again</button>
+                  <button onClick={(e) => handleClick(e)}>Return Item</button>               
+                  <button value={item.id}
+                  onClick={(e) => handleAddToCart(e, item)>Buy Again</button>
                 </div>
               ))}
             </div>
