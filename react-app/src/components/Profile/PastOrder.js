@@ -52,7 +52,7 @@ export default function () {
               <div key={item.id}>
                 <h4>{item.name}</h4>
                 <p>{item.price}</p>
-                <button disabled>Write Review</button>
+                <button>Write Review</button>
                 <button onClick={(e) => handleClick(e)}>Return Item</button>
                 <button
                   value={item.id}
