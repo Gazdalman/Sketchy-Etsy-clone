@@ -23,12 +23,6 @@ class Product(db.Model):
     back_populates="products"
   )
 
-  wishlist = db.relationship(
-    "Wishlist",
-    secondary="wishlist_details",
-    back_populates="products"
-  )
-
   reviews = db.relationship(
     "Review",
     back_populates="product"
@@ -44,6 +38,12 @@ class Product(db.Model):
     "Cart",
     secondary="cart_products",
     back_populates="cart_product_list"
+  )
+
+  wishlist = db.relationship(
+    "Wishlist",
+    secondary="wishlist_details",
+    back_populates="products"
   )
 
   images = db.relationship(
