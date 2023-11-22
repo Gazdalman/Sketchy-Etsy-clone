@@ -6,7 +6,6 @@ import { getAllProducts } from "../../store/product";
 import { getWish, addWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 
-// import './SpotsIndex.css';
 
 const ProductPage = () => {
   const history = useHistory();
@@ -26,10 +25,10 @@ const ProductPage = () => {
 
   useEffect(() => {
 
-    dispatch(getAllProducts())
-      .then(() => {
+    // dispatch(getAllProducts())
+    //   .then(() => {
         setIsLoaded(true);
-      });
+      // });
 
     dispatch(getWish());
 
