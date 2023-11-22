@@ -23,7 +23,7 @@ class Wishlist (db.Model):
 
     wishproducts = db.relationship(
        "Product",
-       secondary="wishlist_details",
+       secondary=add_prefix_for_prod("wishlist_details"),
        back_populates="wishlist"
     )
 
