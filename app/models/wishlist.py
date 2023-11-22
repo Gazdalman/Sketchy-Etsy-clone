@@ -14,7 +14,7 @@ class Wishlist (db.Model):
 
     products = db.relationship(
        "Product",
-       secondary="wishlist_details",
+       secondary=WishlistDetail,
        back_populates="wishlist"
     )
 
