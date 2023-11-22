@@ -66,41 +66,27 @@ const ProductShow = () => {
       <div id="product-images-container">
         <img
           id="preview-image"
-          src={imgNum == -1 ? product.preview  : images[imgNum].url }
+          src={product.preview}
           alt={`Product ${product.id}`}
         />
-        <div id="image-buttons">
-          <div id="change-photo-down" disabled={imgNum == -1} onClick={() => changeImage('down')}><i className="fa-solid fa-arrow-right fa-rotate-180"></i></div>
-          <div id="change-photo-up" disabled={imgNum >= imgLen} onClick={() => changeImage('up')}><i className="fa-solid fa-arrow-right"></i></div>
-        </div>
-
-        {/* <span id="none-prev"> */}
-        {/* {product.images.length > 0 &&
-            product.images.map((image) => (
-              <img
-                className="product-img"
-                id={`img-${imgNum++}`}
-                key={image.id}
-                src={image.url}
-                alt={`Product ${image.id}`}
-              />
-            ))} */}
-        {/* </span> */}
+        <span id="none-prev">
+          {/* {product.ProductImages.length > 0 && product.ProductImages.map(image => (
+            image.id !== previewImage.id ? (
+              <img className="product-img" id={`img-${imgNum++}`} key={image.id} src={image.url} alt={`Product ${image.id}`} />
+            ) : null
+          ))} */}
+        </span>
       </div>
       <h4 id="product-owner">Sold by {product?.seller}</h4>
+      <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
-        <h4 id="prod-cat">Category: {product.category}</h4>
-        <p id="product-description">{product.description}</p>
+        <p id="product-description">{product?.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {user && user.id != product.seller_id && (
-        <OpenModalButton
-          buttonText="Add to Cart"
-          modalComponent={<ConfirmAdd product={product} user={user} />}
-        />
-      )}
-      {user && user.id == product.seller_id && (
-        <button onClick={edit}>Edit Product</button>
+      {user?.id != product?.seller_id && (
+        <button value={product.id} onClick={(e) => handleClick(e, product)}>
+          Add to cart
+        </button>
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />

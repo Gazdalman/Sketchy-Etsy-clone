@@ -8,6 +8,7 @@ import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
+import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews({product}) {
   const dispatch = useDispatch();
@@ -21,8 +22,12 @@ function Reviews({product}) {
   const review = orderReviews(Object.values(unorderedReviews));
   const reviews = addUsers(review, users);
   const [isLoaded, setIsLoaded] = useState(false);
+  const review = orderReviews(Object.values(unorderedReviews));
+  const reviews = addUsers(review, users);
+  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
+    let newbie = [];
     let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
       newbie.push(list[i]);
@@ -32,11 +37,9 @@ function Reviews({product}) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].user = users?.find((ele) => ele.id == list[i].user_id);
-      list[i].commented = false;
-      newbie.push(list[i]);
+      list[i].User = users.find((ele) => ele.id == list[i].user_id);
+      list[i].Owns = newbie.push(list[i]);
     }
-    console.log('This is newbie', newbie);
     return newbie;
   }
   let sum = 0;
@@ -61,6 +64,9 @@ function Reviews({product}) {
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
+    dispatch(allTheReviews(productId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
     dispatch(allTheReviews(productId))
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
@@ -148,10 +154,9 @@ function Reviews({product}) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 && (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
-              {console.log(reviews)}
+        {isLoaded && reviewsLength >= 1 ? (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+            <>
               <div
                 style={{
                   display: "flex",
@@ -161,26 +166,9 @@ function Reviews({product}) {
                 }}
               >
                 <div>
-                  <p
-                    style={{
-                      fontSize: "20px",
-                    }}
-                  >
-                    {review}
-                  </p>
-                  <p
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: "16px",
-                      color: "darkgray",
-                    }}
-                  >
-                    {`${user.firstName}, ${user.username}`}
-                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
-                      {" "}
-                      commented at{" "}
-                    </span>
-                    {`${created_at}`}
+                  <p>{review}</p>
+                  <p>
+                    {User.firstName} {User.username} {created_at}
                   </p>
                 </div>
                 <div
