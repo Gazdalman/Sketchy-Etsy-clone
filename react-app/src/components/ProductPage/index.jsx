@@ -37,6 +37,9 @@ const ProductPage = () => {
       .then(() => {
         setIsLoaded(true);
       });
+
+    dispatch(getWish());
+
   }, [dispatch]);
 
   const addToWish = (e, product) => {
