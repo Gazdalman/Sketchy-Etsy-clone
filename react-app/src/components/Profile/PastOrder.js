@@ -28,7 +28,7 @@ export default function () {
                             <p>{item.price}</p>
                             <button>Write Review</button>
                             <button>Return Item</button>
-                            <button disabled>Buy Again</button>
+                            <button>Buy Again</button>
                         </div>
                     ))}
                 </div>
