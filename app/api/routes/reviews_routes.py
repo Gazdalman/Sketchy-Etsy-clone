@@ -58,8 +58,10 @@ def make_new_review(productId):
 @login_required
 def edit_review(id):
   review = Review.query.get(id)
+  print("🐍 File: routes/reviews_routes.py | Line: 61 | edit_review ~ review",review)
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  print("🐍 File: routes/reviews_routes.py | Line: 63 | edit_review ~ form",form.data)
 
   if form.validate_on_submit():
 
