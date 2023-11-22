@@ -26,6 +26,7 @@ const ProductPage = () => {
       .then(() => {
         setIsLoaded(true);
       });
+
   }, [dispatch]);
 
   const addToWish = (e, product) => {
