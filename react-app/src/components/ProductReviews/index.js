@@ -32,9 +32,8 @@ function Reviews({ product }) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].user = users?.find((ele) => ele.id == list[i].user_id);
-      list[i].commented = false;
-      newbie.push(list[i]);
+      list[i].User = users.find((ele) => ele.id == list[i].user_id);
+      list[i].Owns = newbie.push(list[i]);
     }
     return newbie;
   }
