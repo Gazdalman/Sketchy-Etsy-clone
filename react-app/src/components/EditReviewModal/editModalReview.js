@@ -18,14 +18,11 @@ function EditReview({ reviewId, productId }) {
   const reviews = Object.values(useSelector((state) => state.review));
   const target = reviews.find((ele) => ele.id == reviewId);
   const [activeRating, setActiveRating] = useState(0);
-  // console.log(
-  //   "🚀 ~ file: editModalReview.js:20 ~ EditReview ~ target:",
-  //   target
-  // );
+
   const { closeModal } = useModal();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
-  // console.log("🚀 ~ file: editModalReview.js:28 ~ EditReview ~ user:", user);
+
   const stock = {
     user_id: user.id,
     product_id: productId,
@@ -36,40 +33,33 @@ function EditReview({ reviewId, productId }) {
   const [rating, setRating] = useState(stock.rating);
   const [errors, setErrors] = useState({});
 
-  // function checkCredentials() {
-  //   console.log("INSIDE THE CREDENTIAL CHECK");
-  //   const errObj = {};
-  //   if (!rating) errObj.rating = "Rating is require";
-  //   if (review.length < 4)
-  //     errObj.reviewText = "Review text must be at least 4 characters";
-  //   setErrors(errObj);
-  // }
   const reviewsLength = Object.values(
     useSelector((state) => state.review)
   ).length;
 
   const handleSubmit = async (e) => {
     const newStock = {
+      // id: reviewId,
       user_id: user.id,
       product_id: productId,
       review,
       rating,
     };
-    console.log(
-      "🚀 ~ file: editModalReview.js:46 ~ EditReview ~ newStock:",
-      newStock
-    );
+    // console.log(
+    //   "🚀 ~ file: editModalReview.js:46 ~ EditReview ~ newStock:",
+    //   newStock
+    // );
     console.log("DO I HIT THE HANDLE SUBMITE??");
     e.preventDefault();
-    await dispatch(editAReview(reviewId, newStock))
+    await dispatch(editAReview(reviewId, newStock, productId))
       .then(() => closeModal())
       .then(() => history.push(`/products/${productId + 1}`))
       .then(() => history.push(`/products/${productId}`));
     console.log("DO I GET PAST THE DISPATCH??");
   };
-  useEffect(() => {
-    allYourReviews(user.id);
-  }, [reviewsLength]);
+  // useEffect(() => {
+  //   allYourReviews(user.id);
+  // }, [reviewsLength]);
 
   return (
     <>
