@@ -13,7 +13,10 @@ function Reviews() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
+  const products = useSelector((state) => state.products);
+  const target = Object.values(products).find((ele) => ele.id == productId);
   const user = useSelector((state) => state.session.user);
+  const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
   const reviews = addUsers(review, users);
@@ -29,8 +32,9 @@ function Reviews() {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].User = users.find((ele) => ele.id == list[i].user_id);
-      list[i].Owns = newbie.push(list[i]);
+      list[i].User = users?.find((ele) => ele.id == list[i].user_id);
+      list[i].commented = false;
+      newbie.push(list[i]);
     }
     return newbie;
   }
@@ -45,12 +49,13 @@ function Reviews() {
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
+
   let commented = false;
   const exists = (element) => element?.user_id == user.id;
   if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
-  console.log("🚀 ~ file: index.js:29 ~ Reviews ~ commented:", commented);
+
   const owns = (ele) => ele.seller_id == user.id;
 
   const closeMenu = () => setShowMenu(false);
