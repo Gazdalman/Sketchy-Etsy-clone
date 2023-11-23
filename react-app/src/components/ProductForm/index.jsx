@@ -70,6 +70,11 @@ const ProductFormPage = ({ type, product }) => {
     return history.push(`/products/${id}`)
   }
 
+  const goBack = (e) => {
+    e.preventDefault()
+    return history.goBack()
+  }
+
   return !imageLoading ? (
     <div>
       <h1>What Are Yuh Sellin'?</h1>
@@ -193,6 +198,7 @@ const ProductFormPage = ({ type, product }) => {
           />
         </span>
         <button type="submit">Create Product</button>
+        <button onClick={e => goBack(e)}>Cancel</button>
       </form>
 
     </div>
