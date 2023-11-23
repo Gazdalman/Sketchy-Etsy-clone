@@ -2,6 +2,7 @@ from flask import Blueprint, session, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Product, Review, db, User
 from app.forms import ReviewForm
+from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
 review_routes = Blueprint("/reviews", __name__)
 
@@ -38,8 +39,12 @@ def get_all_user_reviews(id):
 @review_routes.route("/<int:productId>/new", methods=["POST"])
 @login_required
 def make_new_review(productId):
+  """Making a new review"""
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  prev_img = form.data['preview']
+  prev_img.filename = get_unique_filename(prev_img.filename)
+  upload = upload_file_to_s3(prev_img)
 
   if form.validate_on_submit():
 
@@ -47,7 +52,8 @@ def make_new_review(productId):
       product_id=form.data["product_id"],
       user_id=form.data["user_id"],
       review=form.data["review"],
-      rating=form.data["rating"]
+      rating=form.data["rating"],
+      preview_image=upload["url"],
     )
     db.session.add(new_review)
     db.session.commit()
@@ -57,6 +63,7 @@ def make_new_review(productId):
 @review_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_review(id):
+  """Editing a review"""
   review = Review.query.get(id)
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -74,6 +81,7 @@ def edit_review(id):
 @review_routes.route("/<int:id>/delete", methods=["DELETE"])
 @login_required
 def delete_review(id):
+  """Deleting a review"""
   user = User.query.filter(User.id == current_user.get_id()).first()
   review = Review.query.get(id)
 

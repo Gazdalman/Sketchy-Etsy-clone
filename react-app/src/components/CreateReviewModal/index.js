@@ -18,10 +18,17 @@ function ReviewFormModal({ productId }) {
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
+  const [preview, setPreview] = useState("");
+  // const [img1, setImg1] = useState("");
+  // const [img2, setImg2] = useState("");
+  // const [img3, setImg3] = useState("");
   const [errors, setErrors] = useState({});
   const disabled = reviewText.length < 4;
   const reviews = useSelector((state) => state.review);
 
+  const removeImgs = (e) => {
+    setPreview(e.target.files[0]);
+  };
   function checkCredentials() {
     console.log("INSIDE THE CREDENTIAL CHECK");
     const errObj = {};
@@ -35,6 +42,7 @@ function ReviewFormModal({ productId }) {
     product_id: productId,
     review: reviewText,
     rating,
+    preview,
   };
   if (!user) {
     history.push("/login");
@@ -181,6 +189,15 @@ function ReviewFormModal({ productId }) {
                 </div>
               </label>
             </div>
+            <span>
+              Preview Image*
+              <input
+                type="file"
+                value={undefined}
+                onChange={(e) => removeImgs(e)}
+                accept="image/*"
+              />
+            </span>
             {errors.rating && <p className="errors">{errors.rating}</p>}
             <button
               type="submit"

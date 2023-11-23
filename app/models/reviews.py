@@ -13,6 +13,7 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     review = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
+    preview_image = db.Column(db.String(2000), default="SET NULL")
     seller_commented = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.Date, nullable=False, default = date.today())
     updated_at = db.Column(db.Date, nullable=False, default = date.today())
@@ -26,6 +27,10 @@ class Review(db.Model):
         "User",
         back_populates="reviews"
     )
+    # images = db.relationship(
+    # "ReviewImage",
+    # back_populates="reviews"
+    # )
 
 
     def to_dict(self):
@@ -37,7 +42,9 @@ class Review(db.Model):
             "rating": self.rating,
             "seller_commented": self.seller_commented,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
+            "preview": self.preview_image,
+            # "images": [image.to_dict() for image in self.images]
         }
 
         return dictionary
