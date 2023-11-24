@@ -16,7 +16,7 @@ function SignupFormModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
@@ -38,52 +38,62 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="signUpModal">
+      <h1 className="signUpTitle">Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
         <label>
           First Name
           <input
+            className="signUpInput"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
+          {errors.firstName && (
+            <p className="signUpErrors">* {errors.firstName}</p>
+          )}
         </label>
         <label>
           Last Name
           <input
+            className="signUpInput"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+          {errors.lastName && (
+            <p className="signUpErrors">* {errors.lastName}</p>
+          )}
         </label>
         <label>
           Email
           <input
+            className="signUpInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {errors.email && <p className="signUpErrors">* {errors.email}</p>}
         </label>
         <label>
           Username
           <input
+            className="signUpInput"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+          {errors.username && (
+            <p className="signUpErrors">* {errors.username}</p>
+          )}
         </label>
         <label>
           Password
           <input
+            className="signUpInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -93,23 +103,31 @@ function SignupFormModal() {
         <label>
           Confirm Password
           <input
+            className="signUpInput"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button
+          className="signUpButton"
+          type="submit"
+          disabled={password.length < 6 || password != confirmPassword}
+        >
+          Sign Up
+        </button>
       </form>
 
       <span>
         Have an account?{" "}
         <OpenModalButton
+          modalClasses={["signUpRedirect"]}
           modalComponent={<LoginFormModal />}
-          itemText="Log In Here"
+          buttonText="Log In Here"
         />
       </span>
-    </>
+    </div>
   );
 }
 
