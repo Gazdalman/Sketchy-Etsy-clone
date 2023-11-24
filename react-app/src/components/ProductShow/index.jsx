@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import { deleteProductThunk } from "../../store/product";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -11,9 +12,6 @@ const ProductShow = () => {
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session.user);
-  const [previewImage, setPreviewImage] = useState({
-    url: "https://cdn.drawception.com/images/panels/2017/5-21/pKkCMdsbbp-1.png",
-  });
   const [revAvg, setRevAvg] = useState(0);
   const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
@@ -21,7 +19,7 @@ const ProductShow = () => {
   let imgNum = 0;
 
   if (product) {
-    console.log(product);
+    console.log('This is the product', product);
   }
 
   useEffect(() => {
@@ -42,6 +40,13 @@ const ProductShow = () => {
   //   history.replace("/not-found")
   // }
 
+  const deleteProd = (e) => {
+    e.preventDefault()
+    const prod = e.target.value
+    dispatch(deleteProductThunk(prod))
+    return history.push('/')
+  }
+
   const handleClick = (e, prod) => {
     e.preventDefault();
     const prodId = prod.id;
@@ -52,21 +57,21 @@ const ProductShow = () => {
     }
   };
 
-  return Object.keys(product).length > 0 && +product.id === +productId ? (
+  return Object.keys(product).length > 0 && +product.id === +productId && +product.seller_id ? (
     <div id="product-show">
       <h1 id="product-name">{product.name}</h1>
       <h3>
-        S{product.price} | Product #:{product.id} | {product.units_available}{" "}
+        ${product.price} | Product #:{product.id} | {product.units_available}{" "}
         available
       </h3>
       <div id="product-images-container">
         <img id="preview-image" src={product.preview} alt={`Product ${product.id}`} />
         <span id="none-prev">
-          {/* {product.ProductImages.length > 0 && product.ProductImages.map(image => (
-            image.id !== previewImage.id ? (
+          {product.images.length > 0 && product.images.map(image => (
+            (
               <img className="product-img" id={`img-${imgNum++}`} key={image.id} src={image.url} alt={`Product ${image.id}`} />
-            ) : null
-          ))} */}
+            )
+          ))}
         </span>
       </div>
       <h4 id="product-owner">Sold by {product.seller}</h4>
@@ -74,15 +79,20 @@ const ProductShow = () => {
         <p id="product-description">{product.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {user.id != product.seller_id && (
+      {(user && user.id != product.seller_id) && (
         <button value={product.id} onClick={(e) => handleClick(e, product)}>
           Add to cart
+        </button>
+      )}
+      {(user && user.id == product.seller_id) && (
+        <button value={product.id} onClick={(e) => deleteProd(e)}>
+          Delete product
         </button>
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />
     </div>
-  ) : null;
+  ) : ((product && !product.seller_id) ? <h1>Not Available</h1> : null);
 };
 
 export default ProductShow;
