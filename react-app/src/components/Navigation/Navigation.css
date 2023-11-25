@@ -76,32 +76,8 @@
   width: fit-content;
   text-align: center;
   position: absolute;
-  background-color: #e2dcc2;
-  border: 1px solid #322e3f;
-  border-radius: 15px;
-  color: #322e3f;
-  padding: 25px;
-  list-style: none;
-
-  z-index: 10000;
 }
 
-.dropdown-btn {
-  cursor: pointer;
-  color: #f0efeb;
-  border-radius: 12px;
-  border: 1px solid #a93d44;
-  background-color: #a93d44;
-  cursor: pointer;
-
-  padding: 5px;
-}
-
-.dropdown-btn:hover {
-  background-color: #322e3f;
-  border: 1px solid #322e3f;
-}
-
-.nav-link {
-  color: #322e3f;
+.hidden {
+  display: none;
 }
