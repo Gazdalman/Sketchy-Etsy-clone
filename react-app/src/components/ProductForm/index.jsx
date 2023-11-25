@@ -65,59 +65,36 @@ const ProductFormPage = ({ type, product }) => {
   }
 
   const handleCreate = async (e) => {
-    e.preventDefault()
-    const product = new FormData()
-    const images = []
-    product.append('name', name)
-    product.append('description', description)
-    product.append('category', category)
-    product.append('price', price)
-    product.append('units_available', unitsAvailable)
-    product.append('preview', prevImg)
+    e.preventDefault();
+    const formData = new FormData();
+    product = {
+      name,
+      description,
+      category,
+      price,
+      units_available: unitsAvailable,
+      preview: prevImg,
+    };
 
-    let num = 1
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("units_available", unitsAvailable);
+    formData.append("preview", prevImg);
+
+    let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const image = new FormData()
-        image.append(`image`, img)
-        images.push(image)
+        formData.append(`img${num}`, img);
       }
+      num += 1;
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product, images))
-    return history.push(`/products/${id}`)
-  }
-
-  const handleEdit = async (e) => {
-    e.preventDefault()
-    const productData = new FormData()
-    productData.append('name', name)
-    productData.append('description', description)
-    productData.append('category', category)
-    productData.append('price', price)
-    productData.append('units_available', unitsAvailable)
-
-    const updated = await dispatch(editProduct(productData, product.id))
-    if (updated.errors) {
-      const errs = {}
-      for (const err in updated.errors) {
-        const parts = err.split(' : ')
-        errs[parts[0]] = parts[1]
-      }
-      setErrors(errs)
-      if (errors.not_found || errors.unauthorized) {
-        return history.replace("/")
-      }
-    } else {
-      return history.push(`/products/${updated.id}`)
-    }
-  }
-
-  const goBack = (e) => {
-    e.preventDefault()
-    return history.goBack()
-  }
+    const id = await dispatch(createProduct(formData));
+    return history.push(`/products/${id}`);
+  };
 
   return !imageLoading ? (
     <div>
