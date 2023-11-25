@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 
 export default function () {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((state) => state.session.user);
   const allOrders = useSelector((state) => state.orders);
   const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -12,6 +15,9 @@ export default function () {
   console.log("order state", allOrders);
 
   useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
     dispatch(getAllOrders()).then(() => setIsLoaded(true));
   }, [dispatch]);
 

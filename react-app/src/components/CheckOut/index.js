@@ -9,17 +9,21 @@ import { getCart } from "../../store/cart";
 export default function CheckOut() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.session.user);
   const cart = useSelector((state) => state.cart);
   const [clicked, setClicked] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   let subtotal = 0;
 
   useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    }
     dispatch(getCart()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   Object.values(cart).map((item) => {
-    return subtotal += parseFloat(item.price * item.quantity);
+    return (subtotal += parseFloat(item.price * item.quantity));
   });
 
   const handleClick = (e) => {
