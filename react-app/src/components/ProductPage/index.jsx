@@ -19,6 +19,10 @@ const ProductPage = () => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [favorite, setFavorite ] = useState([]);
+
+
+
 
   // console.log("user", user);
   // console.log("products state", products);
@@ -35,17 +39,18 @@ const ProductPage = () => {
         }
       })
       .then(() => {
-        setIsLoaded(true);
+        setIsLoaded(true)
       });
-
-    dispatch(getWish());
-
   }, [dispatch]);
 
   const addToWish = (e, product) => {
     e.preventDefault();
 
     const productId = product.id;
+    // const savedFavorite = favorite.find((item) => item == productId);
+    const removeFav = favorite.indexOf(productId);
+
+    if (favorite.includes(productId)) {
 
     if (userWish && userWish.products) {
 
