@@ -1,12 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  const location = useLocation()
   return (
     <ul>
       <li>
@@ -15,9 +15,9 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </li>
 
-      {isLoaded && (
+      {(isLoaded) && (
         <li>
-          <ProfileButton user={sessionUser} />
+          <ProfileButton user={sessionUser} disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
         </li>
       )}
       <li>

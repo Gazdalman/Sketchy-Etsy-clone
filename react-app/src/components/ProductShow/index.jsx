@@ -5,6 +5,8 @@ import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import { deleteProductThunk } from "../../store/product";
+import OpenModalButton from "../OpenModalButton";
+import DeleteProduct from "../DeleteModal/deleteModalProduct";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -40,11 +42,9 @@ const ProductShow = () => {
   //   history.replace("/not-found")
   // }
 
-  const deleteProd = (e) => {
+  const edit = (e) => {
     e.preventDefault()
-    const prod = e.target.value
-    dispatch(deleteProductThunk(prod))
-    return history.push('/')
+    return history.push(`/products/${productId}/edit`)
   }
 
   const handleClick = (e, prod) => {
@@ -65,7 +65,7 @@ const ProductShow = () => {
         available
       </h3>
       <div id="product-images-container">
-        <img id="preview-image" src={product.preview} alt={`Product ${product.id}`} />
+        <img id="preview-image" src={product.preview} alt={`Product ${product.id} Img`} />
         <span id="none-prev">
           {product.images.length > 0 && product.images.map(image => (
             (
@@ -76,18 +76,17 @@ const ProductShow = () => {
       </div>
       <h4 id="product-owner">Sold by {product.seller}</h4>
       <div id="product-details-lower">
+        <h4 id="prod-cat">Category: {product.category}</h4>
         <p id="product-description">{product.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {(user && user.id != product.seller_id) && (
-        <button value={product.id} onClick={(e) => handleClick(e, product)}>
+        <button onClick={(e) => handleClick(e, product)}>
           Add to cart
         </button>
       )}
       {(user && user.id == product.seller_id) && (
-        <button value={product.id} onClick={(e) => deleteProd(e)}>
-          Delete product
-        </button>
+        <button onClick={edit} >Edit Product</button>
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />

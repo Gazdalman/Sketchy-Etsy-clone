@@ -51,7 +51,7 @@ export default function Profile() {
             <div>
               <h3
                 onClick={() => {
-                  setLoadProducts(true);
+                  setLoadProducts(!loadProducts);
                   setLoadReviews(false);
                   setLoadOrders(false);
                   setLoadWishlist(false)
@@ -59,45 +59,41 @@ export default function Profile() {
               >
                 Your Products
               </h3>
-              {loadProducts && <UserProducts user={user} />}
-            </div>
-            <div>
               <h3
                 onClick={() => {
                   setLoadProducts(false);
-                  setLoadReviews(true);
+                  setLoadReviews(!loadOrders);
                   setLoadOrders(false);
                   setLoadWishlist(false)
                 }}
               >
                 Your Reviews
               </h3>
-              {loadReviews && <UserReviews user={user} />}
-            </div>
-            <div>
               <h3
                 onClick={() => {
                   setLoadProducts(false);
                   setLoadReviews(false);
-                  setLoadOrders(true);
+                  setLoadOrders(!loadOrders);
                   setLoadWishlist(false)
                 }}
               >
                 Your Orders
               </h3>
-              {loadOrders && <UserOrders user={user} />}
-            </div>
-            <div>
               <h3
                 onClick={() => {
                   setLoadProducts(false);
                   setLoadReviews(false);
                   setLoadOrders(false);
-                  setLoadWishlist(true)
+                  setLoadWishlist(!loadWishlist)
                 }}
               >
                 Your Wishlist
               </h3>
+            </div>
+            <div>
+              {loadProducts && <UserProducts user={user} />}
+              {loadReviews && <UserReviews user={user} />}
+              {loadOrders && <UserOrders user={user} />}
               {loadWishlist && <UserWishlist user={user} />}
             </div>
           </div>
@@ -105,6 +101,7 @@ export default function Profile() {
       );
     }
   }
+
   return (
     <div>
       {isLoaded && (

@@ -47,7 +47,7 @@ export default function UserOrders({ user }) {
           <div key={order.id}>
             {order.products.map((item) => (
               <div key={item.id}>
-                <h4>{item.name}</h4>
+                <a href={`/products/${item.id}`}><h4>{item.name}</h4></a>
                 <p>{item.price}</p>
                 <button disabled>Write Review</button>
                 <button onClick={(e) => handleClick(e)}>Return Item</button>

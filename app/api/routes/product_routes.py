@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Product, Review, db, User, ProductImage
-from app.forms import ProductForm, ProductImageForm
+from app.forms import ProductForm, ProductImageForm, ProductEditForm
 from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 product_routes = Blueprint("products", __name__, url_prefix="/products")
 
@@ -74,30 +74,29 @@ def create_prod():
 
     db.session.commit()
     return product.to_dict()
-  print('form data ===>>', form.data)
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @product_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_product(id):
   """
-  Removes all information from an item related to being sold
+  Removes or edits all information on an item
   """
+
   user = User.query.get(current_user.get_id())
   product = Product.query.get(id)
 
   if product:
-    user.products.remove(product)
-    product.seller_id = 0
-    remove_file_from_s3(product.preview_image)
-    _=[remove_file_from_s3(image.url) for image in product.images]
-    product.description = 'N/A'
-    product.units_available = 0
-    db.session.commit()
-    print("done")
-    return {"message": f"Successfully deleted Product {product.id} - {product.name}"}
+      user.products.remove(product)
+      product.seller_id = 0
+      _=[remove_file_from_s3(image.url) for image in product.images]
+      product.description = 'N/A'
+      product.units_available = 0
+      db.session.commit()
+      print("done")
+      return {"message": f"Successfully deleted Product {product.id} - {product.name}"}
 
-  return {"errors": "No product with that id found"}
+  return {"errors": ["not_found : No product with that id found"]}, 401
 
 @product_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
@@ -106,7 +105,7 @@ def edit_product(id):
   Updates product
   """
   product = Product.query.get(id)
-  form = ProductForm()
+  form = ProductEditForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     data=form.data
@@ -117,12 +116,13 @@ def edit_product(id):
       product.description=data['description']
       product.units_available=data['units_available']
     elif current_user.get_id() != product.seller_id:
-      return {"errors": "You do not own this product."}
+      return {"errors": ["unauthorized : You do not own this product."]}, 401
     else:
-      return {"errors": "Product not own."}
+      return {"errors": ["not_found : Product not found."]}, 401
 
     db.session.commit()
     return product.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @product_routes.route("/images/<int:id>", methods=["DELETE"])
 def remove_images(id):
@@ -160,4 +160,4 @@ def add_images(id):
     return image.to_dict()
 
   print(form.errors)
-  return {"errors": "No product with that id found"}
+  return {"errors": ["not_found : No product with that id found"]}, 401
