@@ -56,8 +56,8 @@ def updateQuantity(change, itemId):
     """ update item quantity """
     userId = current_user.get_id()
     cart = Cart.query.filter(Cart.user_id == userId).first()
-    item = Product.query.get(itemId)
-    product = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
+    # item = Product.query.get(itemId)
+    product = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
     if change == "inc":
         product.quantity = product.quantity + 1
         new_link = CartProduct(
@@ -69,7 +69,7 @@ def updateQuantity(change, itemId):
         return { "message": "success" }
     elif change == "dec":
         product.quantity = product.quantity - 1
-        link = CartProduct.query.filter(CartProduct.product_id == itemId, CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
+        link = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
         db.session.delete(link)
         db.session.commit()
         return { "message": "success" }

@@ -23,7 +23,7 @@ function ReviewFormModal({ productId }) {
   const reviews = useSelector((state) => state.review);
 
   function checkCredentials() {
-    console.log("INSIDE THE CREDENTIAL CHECK");
+
     const errObj = {};
     if (!rating) errObj.rating = "Rating is required";
     if (!reviewText || reviewText.length < 4)

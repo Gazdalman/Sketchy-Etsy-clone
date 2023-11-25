@@ -7,7 +7,7 @@ Run seeds - from pipenv shell:
 flask seed all
 
 Set the date name format for alembic if you have to erase your migrations folder
-file_template = %%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d%%(second).2d_%%(slug)s
+file_template = %%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d%%(second).2d_%%(slug)
 
 Build from Dockerfile:
 docker build - < Dockerfile
