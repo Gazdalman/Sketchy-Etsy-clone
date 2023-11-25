@@ -42,26 +42,30 @@ function ProfileButton({ user, disabled }) {
 
   return (
     <>
-      <button disabled={disabled} onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div
+      onClick={openMenu}
+      style={{fontSize:35, cursor:"pointer"}}
+      className="nav-btn"
+      >
+          <i class="fa-solid fa-user"></i>
+      </div>
+      <ul className={`${ulClassName} profile-dropdown`} ref={ulRef}>
         {user ? (
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
               <NavLink to={`/profile/${user.id}`}>
-                <button>View Profile</button>
+                <button className="dropdown-btn">View Profile</button>
               </NavLink>
             </li>
             <li>
               <NavLink to="/new_product">
-                <button>List New Product</button>
+                <button className="dropdown-btn">List New Product</button>
               </NavLink>
             </li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button onClick={handleLogout} className="dropdown-btn" >Log Out</button>
             </li>
           </>
         ) : (
