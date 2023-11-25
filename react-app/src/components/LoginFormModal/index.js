@@ -14,6 +14,8 @@ function LoginFormModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
+  const demoUsers = ["nina", "ann", "toney", "rod", "demoUser5"];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(creds, password));
@@ -55,6 +57,23 @@ function LoginFormModal() {
           errors.password != "No such user exists." ? (
             <p className="loginErrors">* {errors.password}</p>
           ) : null}
+        </label>
+        <label>
+          or Select Demo User
+          <select
+            className="loginSelect"
+            value={creds}
+            onChange={(e) => {
+              setCreds(e.target.value);
+              setPassword("password");
+            }}
+          >
+            {demoUsers.map((user) => (
+              <option key={user} value={user}>
+                {user}
+              </option>
+            ))}
+          </select>
         </label>
         <button className="loginButton" type="submit">
           Log In

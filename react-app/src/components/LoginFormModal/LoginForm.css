@@ -16,6 +16,7 @@
 }
 
 .loginInput,
+.loginSelect,
 .logInRedirect {
   border: 1px solid #322e3f;
   background-color: rgba(74, 135, 128, 0.15);
