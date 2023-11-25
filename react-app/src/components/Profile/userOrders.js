@@ -10,7 +10,7 @@ export default function UserOrders({ user }) {
   const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("orders Arr", Object.values(orders));
+  // console.log("orders Arr", Object.values(orders));
 
   useEffect(() => {
     dispatch(getAllOrders()).then(() => setIsLoaded(true));
@@ -19,7 +19,6 @@ export default function UserOrders({ user }) {
   const handleClick = (e) => {
     e.preventDefault();
     if (e.target.innerText == "No...") {
-      // * PopUp w/ message => "You don't even know how we got it to you, how do you think you're going to return it -.- "
       const message =
         "You don't even know how your packages are appearing in your house, how do you think you're going to return them if we did give you the option? 🤣";
       alert(message);
@@ -39,26 +38,43 @@ export default function UserOrders({ user }) {
   };
 
   return isLoaded ? (
-    <div>
+    <div className="userOrdersContainer">
       {Object.values(orders)
         .toReversed()
         .slice(0, 1)
         .map((order) => (
           <div key={order.id}>
-            {order.products.map((item) => (
-              <div key={item.id}>
-                <h4>{item.name}</h4>
-                <p>{item.price}</p>
-                <button disabled>Write Review</button>
-                <button onClick={(e) => handleClick(e)}>Return Item</button>
-                <button
-                  value={item.id}
-                  onClick={(e) => handleAddToCart(e, item)}
-                >
-                  Buy Again
-                </button>
-              </div>
-            ))}
+            <h3>
+              Order#: {Object.keys(orders).find((key) => orders[key] === order)}
+            </h3>
+            <p>Order Total: {order.total}</p>
+            <div className="userOrderItemsContainer">
+              {order.products.map((item) => (
+                <div key={item.id} className="indvUserOrderItems">
+                  <div>
+                    <h4>{item.name}</h4>
+                    <div className="orderItemPriceQuantDiv">
+                      <p># Purchased: {item.quantity}</p>
+                      <p className="orderedItemPrice">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                    <div className="userOrderButtons">
+                      <button disabled>Write Review</button>
+                      <button onClick={(e) => handleClick(e)}>
+                        Return Item
+                      </button>
+                      <button
+                        value={item.id}
+                        onClick={(e) => handleAddToCart(e, item)}
+                      >
+                        Buy Again
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       <div style={{ marginTop: 30 }}>

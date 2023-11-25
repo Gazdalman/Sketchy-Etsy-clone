@@ -5,8 +5,6 @@ import { deleteUser } from "../../store/session";
 
 import "./deleteModal.css";
 
-//PLEASE CHANGE names/variables
-
 function DeleteAccount() {
   const { closeModal } = useModal();
   const history = useHistory();
@@ -20,15 +18,17 @@ function DeleteAccount() {
   };
 
   return (
-    <div className="delete-button-container">
-      <h2>Confirm Delete</h2>
-      <p>Are you sure you want to delete your account?</p>
-      <button id="delete-btn" onClick={deleteAccount}>
-        Yes (Delete account)
-      </button>
-      <button id="keep-btn" onClick={closeModal}>
-        No (Keep account)
-      </button>
+    <div className="delete-button-container" id="deleteModel">
+      <h2 id="delModalTitle">Confirm Delete</h2>
+      <p id="delModalText">Are you sure you want to delete your account?</p>
+      <div id="delModalButtons">
+        <button id="delete-btn" onClick={deleteAccount}>
+          Yes (Delete account)
+        </button>
+        <button id="keep-btn" onClick={closeModal}>
+          No (Keep account)
+        </button>
+      </div>
     </div>
   );
 }

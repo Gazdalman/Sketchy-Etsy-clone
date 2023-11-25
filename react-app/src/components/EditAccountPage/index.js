@@ -26,26 +26,24 @@ export default function EditAccountPage() {
   };
 
   return (
-    <>
+    <div className="editAccountFormContainer">
       <h1>Edit Account</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {/* errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          )) */}
-        </ul>
         <label>
           First Name
           <input
+            className="editAcctInput"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
+          {/* revieving of errors need adding */}
         </label>
         <label>
           Last Name
           <input
+            className="editAcctInput"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -54,11 +52,13 @@ export default function EditAccountPage() {
         <label>
           Email
           <input
+            className="editAcctInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {/* revieving of errors need adding */}
         </label>
         {/* <label>
           Password
@@ -77,11 +77,15 @@ export default function EditAccountPage() {
             onChange={(e) => setNewPassword(e.target.value)}
           />
         </label> */}
-        <button type="submit">Save</button>
+        <div className="editAcctButtonsContainer">
+          <button id="editButton" type="submit">
+            Save
+          </button>
+          <NavLink to={`/profile/${user.id}`}>
+            <button id="editButton">Cancel</button>
+          </NavLink>
+        </div>
       </form>
-      <NavLink to={`/profile/${user.id}`}>
-        <button>Cancel</button>
-      </NavLink>
-    </>
+    </div>
   );
 }

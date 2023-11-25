@@ -20,18 +20,19 @@ function DeleteProduct({ product }) {
   };
 
   return (
-    <div className="delete-button-container">
-      <h2>Confirm Delete</h2>
-      <p>
+    <div className="delete-button-container" id="deleteModel">
+      <h2 id="delModalTitle">Confirm Delete</h2>
+      <p id="delModalText">
         Are you sure you want to remove this product from your product list?
-        (Functionality Coming Soon...)
       </p>
-      <button id="delete-btn" onClick={deleteButton}>
-        Yes (Delete product)
-      </button>
-      <button id="keep-btn" onClick={closeModal}>
-        No (Keep product)
-      </button>
+      <div id="delModalButtons">
+        <button id="delete-btn" onClick={deleteButton}>
+          Yes (Delete product)
+        </button>
+        <button id="keep-btn" onClick={closeModal}>
+          No (Keep product)
+        </button>
+      </div>
     </div>
   );
 }
