@@ -43,12 +43,12 @@ export default function UserProducts({ user }) {
                 <p className="userProductDescription">{item.description}</p>
                 <p className="userProductPrice">${item.price}</p>
                 <div className="userProductButtons">
-                  <button disabled>Edit</button>
+                  <button onClick={(e) => edit(e, item.id)}>Edit</button>
                   <OpenModalButton
-                    modalClasses={["delete-button-container"]}
-                    buttonText="Delete Product"
-                    modalComponent={<DeleteProduct />}
-                  />
+                        buttonText={'Delete Product'}
+                    modalComponent={<DeleteProduct product={item} refresh={true}/>}
+                    modalClasses={['delete-product']}
+              />
                 </div>
               </div>
             </div>

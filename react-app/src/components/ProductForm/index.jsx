@@ -92,9 +92,39 @@ const ProductFormPage = ({ type, product }) => {
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(formData));
-    return history.push(`/products/${id}`);
-  };
+    const id = await dispatch(createProduct(product, images))
+    return history.push(`/products/${id}`)
+  }
+
+  const handleEdit = async (e) => {
+    e.preventDefault()
+    const productData = new FormData()
+    productData.append('name', name)
+    productData.append('description', description)
+    productData.append('category', category)
+    productData.append('price', price)
+    productData.append('units_available', unitsAvailable)
+
+    const updated = await dispatch(editProduct(productData, product.id))
+    if (updated.errors) {
+      const errs = {}
+      for (const err in updated.errors) {
+        const parts = err.split(' : ')
+        errs[parts[0]] = parts[1]
+      }
+      setErrors(errs)
+      if ( errors.not_found || errors.unauthorized ) {
+        return history.replace("/")
+      }
+    } else {
+      return history.push(`/products/${updated.id}`)
+    }
+  }
+
+  const goBack = (e) => {
+    e.preventDefault()
+    return history.goBack()
+  }
 
   return !imageLoading ? (
     <div>
