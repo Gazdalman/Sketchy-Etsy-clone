@@ -2,16 +2,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   list-style-type: none;
-
-  width: 100%;
-  height: 250px;
-
-
-  background: url(../../assets/wave.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  margin: 3%;
 }
 
 .nav-sub-container {
@@ -19,9 +12,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  margin: 5%;
-
+  margin-right: 5%;
 
 }
 
@@ -29,31 +20,59 @@
   margin-right: 40%;
 }
 
-.nav-btn {
-  transition: transform 250ms;
+
+.nav-btn:hover{
+  transform: translateY(-1.1rem);
+  transition: all 0.4s;
+
 }
 
-.nav-btn:hover {
-  transform: translateY(-10px);
-}
 
 .profile-dropdown {
-  display: flex;
-  right: 25px;
-  flex-direction: column;
-  text-align: center;
+  color: #a93d44;
   position: absolute;
-  background-color: #e2dcc2;
-  border: 1px solid #322e3f;
-  border-radius: 15px;
-  color: #322e3f;
-  padding: 25px;
-  list-style: none;
+  /* display: flex; */
+  /* right: 25px; */
+  /* flex-direction: column; */
+  /* text-align: center; */
+  top: 15%;
+  right: 50px;
+  list-style-type: none;
+  cursor: pointer;
+  border: 1px solid #dddddd;
+  background-color: #fbfbfb;
+  border-radius: 12px;
+  width: fit-content;
+
+  padding: 15px;
+  margin-bottom: 4px;
+
+  z-index: 10000;
+}
+
+.dropdown-btn {
+  color: #f0efeb;
+  border-radius: 12px;
+  border: 1px solid #a93d44;
+  background-color: #a93d44;
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+.dropdown-btn:hover {
+  background-color: #322e3f;
+  border: 1px solid #322e3f;;
 }
 
 .hidden {
   display: none;
 }
+
+.nav-link {
+  color: #322e3f;
+}
+
 
 .nav-link {
   color: #322e3f;
