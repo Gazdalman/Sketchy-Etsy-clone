@@ -21,6 +21,10 @@ const ProductPage = ({ prods, word }) => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [favorite, setFavorite ] = useState([]);
+
+
+
 
   // console.log("user", user);
   // console.log("products state", products);
@@ -37,7 +41,7 @@ const ProductPage = ({ prods, word }) => {
         }
       })
       .then(() => {
-        setIsLoaded(true);
+        setIsLoaded(true)
       });
   }, [dispatch]);
 
@@ -45,15 +49,36 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
+    // const savedFavorite = favorite.find((item) => item == productId);
+    const removeFav = favorite.indexOf(productId);
 
-    if (userWish && userWish.products) {
-      if (userWish.products[productId]) {
+    if (favorite.includes(productId)) {
+
+        setFavorite(favorite.splice(removeFav, 1));
         dispatch(removeWish(productId));
-        if (e.target.className == "fa-solid fa-heart") {
-          e.target.className = "fa-regular fa-heart";
-        }
-      } else {
+
+          if (e.target.className == "fa-solid fa-heart") {
+              e.target.className = "fa-regular fa-heart"
+          }
+
+    }else {
+
+        setFavorite(favorite.concat(productId));
         dispatch(addWish(productId));
+
+        if (e.target.className == "fa-regular fa-heart") {
+            e.target.className="fa-solid fa-heart"
+        }
+    }
+
+  };
+
+  const handleClick = (e, prodId) => {
+    e.preventDefault();
+    if (cart[prodId]) {
+      dispatch(updateQuantity(prodId, "inc"));
+    } else {
+      dispatch(addWish(productId));
 
         if (e.target.className == "fa-regular fa-heart") {
           e.target.className = "fa-solid fa-heart";

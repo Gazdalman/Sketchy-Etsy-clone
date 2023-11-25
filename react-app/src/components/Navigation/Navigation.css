@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   list-style-type: none;
 
   width: 100%;
@@ -50,6 +50,7 @@
   cursor: text;
 }
 
+
 .category {
   background-color: #322e3f;
   color: #efebeb;
@@ -71,21 +72,10 @@
 
   cursor: text;
 }
-
-.category {
-  background-color: #322e3f;
-  color: #efebeb;
-  border: 3px solid #322e3f;
-  border-radius: 6px;
-  margin-left: 20px;
-  padding: 10px;
-
-  cursor: pointer;
-}
 .search-bar {
   text-align: center;
-  width: 30%;
-  border: 2px solid #322e3f;
+  width: 300px;
+  border: 3px solid #322e3f;
   background-color: #efebeb;
   color: #322e3f;
   padding: 10px;
@@ -94,15 +84,14 @@
   cursor: text;
 }
 
-.nav-btn {
-  transition: transform 250ms;
+
+
+.nav-btn:hover{
+  transform: translateY(-1.1rem);
+  transition: all 0.4s;
+
 }
 
-.nav-btn:hover {
-  transform: translateY(-10px);
-}
-
-/*Ann dropdown profile*/
 
 .profile-dropdown {
   display: flex;
@@ -114,8 +103,49 @@
   cursor: pointer;
   text-align: center;
   position: absolute;
+  /* display: flex; */
+  /* right: 25px; */
+  /* flex-direction: column; */
+  /* text-align: center; */
+  top: 15%;
+  right: 50px;
+  list-style-type: none;
+  cursor: pointer;
+  border: 1px solid #dddddd;
+  background-color: #fbfbfb;
+  border-radius: 12px;
+  width: fit-content;
+
+  padding: 15px;
+  margin-bottom: 4px;
+
+  z-index: 10000;
+}
+
+.dropdown-btn {
+  color: #f0efeb;
+  border-radius: 12px;
+  border: 1px solid #a93d44;
+  background-color: #a93d44;
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+.dropdown-btn:hover {
+  background-color: #322e3f;
+  border: 1px solid #322e3f;;
 }
 
 .hidden {
   display: none;
+}
+
+.nav-link {
+  color: #322e3f;
+}
+
+
+.nav-link {
+  color: #322e3f;
 }
