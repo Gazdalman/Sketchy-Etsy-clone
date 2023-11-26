@@ -77,6 +77,7 @@
 .userProductDescription,
 .userProductReview {
   display: flex;
+  overflow-wrap: anywhere;
   flex-wrap: wrap;
   min-width: 150px;
   max-width: 150px;
