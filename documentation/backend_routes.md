@@ -114,6 +114,18 @@ Route to get all user orders
 
 ### `GET /api/orders/`
 
+# Get Specific Order Details
+
+Route to get a specific order placed by the user
+
+### `GET /api/orders/<int:id>`
+
+# Place a New Order
+
+Route to place a new order
+
+### `POST /api/orders/place`
+
 # Shopping Cart
 
 # Wish List
