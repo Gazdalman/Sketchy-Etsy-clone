@@ -75,6 +75,7 @@ function EditReview({ reviewId, productId }) {
             cols="45"
             value={review}
             onChange={(e) => setReview(e.target.value)}
+            required
           />
         </label>
         {errors.reviewText ? (
