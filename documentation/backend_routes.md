@@ -72,6 +72,12 @@ Route to delete a specific image on a post
 
 ### `DELETE /api/products/images/<int:id>`
 
+# Add a Product Image
+
+Route to add a product image to a product post
+
+### `POST /api/products/<int:id>/images`
+
 # Shopping Cart
 
 # Wish List
