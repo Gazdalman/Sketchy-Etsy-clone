@@ -175,3 +175,19 @@ Route to create a user
 ### `POST /api/users/<int:id>`
 
 # Wish List
+
+Route to retrieve wishlist of current user
+
+### `GET /api/wishlist/`
+
+# Add product to the current users Wish list
+
+Route to add an intem to the current users wish list
+
+### `POST /api/wishlist/add-wish/<int:id>`
+
+# Delete from wishlist
+
+Route to delete an item from the current users wish list
+
+### `DELETE /api/delete-wish/<int:id>`
