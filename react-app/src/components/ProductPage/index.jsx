@@ -17,8 +17,6 @@ const ProductPage = () => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-
   // console.log("user", user);
   // console.log("products state", products);
   // console.log("favorite", favorite)
@@ -29,10 +27,9 @@ const ProductPage = () => {
     dispatch(getAllProducts())
       .then(() => dispatch(getWish()))
       .then(() => {
-        setIsLoaded(true)
+        setIsLoaded(true);
       });
   }, [dispatch]);
-
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -54,9 +51,6 @@ const ProductPage = () => {
     }
   };
 
-
-
-
   const handleClick = (e, prodId) => {
     e.preventDefault();
     if (cart[prodId]) {
@@ -77,7 +71,7 @@ const ProductPage = () => {
               <img
                 className="products-img"
                 src={product.preview}
-                alt="product"
+                alt={`Product #${product.id} - ${product.name}`}
               />
 
               <div className="products-detail">
