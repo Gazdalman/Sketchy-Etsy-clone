@@ -21,6 +21,12 @@
   overflow-y: scroll;
 }
 
+.shopping-cart-container {
+    width: 50%;
+
+    margin-left: 5%;
+}
+
 .cart-card {
   background-color: #fff;
   padding: 15px;
