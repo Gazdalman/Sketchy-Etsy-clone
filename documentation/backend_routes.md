@@ -78,6 +78,24 @@ Route to add a product image to a product post
 
 ### `POST /api/products/<int:id>/images`
 
+# Review list for a Product
+
+Route to view all reviews for a product
+
+### `GET /api/reviews/<int:productId>`
+
+# Review list for a User
+
+Route to view all reviews by a user
+
+### `GET /api/reviews/<int:id>/reviews`
+
+# Create a Review
+
+Route to create a review for a post
+
+### `POST /api/reviews/<int:productId>/new`
+
 # Shopping Cart
 
 # Wish List
