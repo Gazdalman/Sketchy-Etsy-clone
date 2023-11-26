@@ -16,8 +16,6 @@ const ProductPage = () => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
@@ -33,7 +31,8 @@ const ProductPage = () => {
       .then(() => {
         setIsLoaded(true)
       });
-  }, [dispatch, favorite]);
+  }, [dispatch]);
+
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -54,6 +53,9 @@ const ProductPage = () => {
       }
     }
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
