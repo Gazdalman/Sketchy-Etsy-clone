@@ -156,4 +156,22 @@ Route to query for all users and return them in a dictionary
 
 ### `GET /api/users/`
 
+# Get specific User
+
+Route to query for a specific user by id
+
+### `GET /api/users/<int:id>`
+
+# Delete a User
+
+Route to delete a user
+
+### `DELETE /api/users/`
+
+# Create a User
+
+Route to create a user
+
+### `POST /api/users/<int:id>`
+
 # Wish List
