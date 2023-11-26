@@ -123,10 +123,13 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin: 20px auto;
     transition: all 0.2s ease-in-out;
+
+
 }
 .products-card:hover{
     transform: translateY(-10px);
     box-shadow: 3px 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border: 5px solid #322e3f;
 }
 
 
@@ -163,7 +166,7 @@ body {
     font-size: 16px;
     width: 100%;
     color: #ffffff;
-    border: 1px solid #ab434a;
+    border: 5px solid #ab434a;
     border-radius: 12px;
     background-color: #ab434a;
     cursor: pointer;
@@ -174,7 +177,7 @@ body {
 
 .add-to-cart-btn:hover {
     background-color: #49867f;
-    border: 1px solid #49867f;
+    border: 5px solid #322e3f;
 }
 
 a:link {
