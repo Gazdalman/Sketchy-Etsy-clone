@@ -69,50 +69,37 @@ const ProductPage = () => {
           <a key={product.id} href={`/products/${product.id}`}>
             <div>
               <img
-                className="products-img"
                 src={product.preview}
-                alt="product"
+                alt={`Product #${product.id} - ${product.name}`}
               />
-
-              <div className="products-detail">
-                <div>{product.name}</div>
-                <span id="price">
-                  {"  "}${product.price}
-                  {"  "}
-                </span>
-              </div>
-              <span>By {product.seller}</span>
             </div>
+            <div>{product.name}</div>
+            <span>${product.price}</span>
+            <span>{product.seller}</span>
           </a>
-
-          <div style={{ margin: 20 }} className="prod-btns-container">
-            {user && user.id != product.seller_id && (
-              <div id="prod-page-btn-container">
-                {userWish.products[product.id] == undefined && (
-                  <div
-                    className="add-wish-btn"
-                    onClick={(e) => addToWish(e, product)}
+          {user && products.seller_id != user.id && (
+            <div style={{ margin: 20 }}>
+              {user.id != product.seller_id && (
+                <>
+                  {user && userWish.products && userWish.products[product.id] == undefined && (
+                    <button
+                      className="add-wish-btn"
+                      onClick={(e) => addToWish(e, product)}
+                    >
+                      Add to Wishlist
+                    </button>
+                  )}
+                  <button
+                    value={product.id}
+                    onClick={(e) => handleClick(e, product.id)}
+                    className="add-to-cart-btn"
                   >
-                    {user &&
-                    userWish.products &&
-                    userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart"></i>
-                    ) : (
-                      <i className="fa-regular fa-heart"></i>
-                    )}
-                  </div>
-                )}
-
-                <button
-                  value={product.id}
-                  onClick={(e) => handleClick(e, product.id)}
-                  className="add-to-cart-btn"
-                >
-                  Add to cart
-                </button>
-              </div>
-            )}
-          </div>
+                    Add to cart
+                  </button>
+                </>
+              )}
+            </div>
+          )}
         </div>
       ))}
     </div>
