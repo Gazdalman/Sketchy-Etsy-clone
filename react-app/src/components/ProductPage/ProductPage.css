@@ -24,6 +24,7 @@
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
+
 .products-detail {
   margin-top: 10px;
   font-size: 18px;
@@ -34,6 +35,8 @@
   align-items: center;
 }
 
+
+
 #price {
   background-color: #49867f;
   color: #f6f9f9;
@@ -41,6 +44,7 @@
   padding: 9px;
   margin-right: 10px;
 }
+
 
 .products-img {
   width: 350px;

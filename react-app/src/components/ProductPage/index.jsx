@@ -21,8 +21,6 @@ const ProductPage = ({ prods, word }) => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
@@ -43,7 +41,8 @@ const ProductPage = ({ prods, word }) => {
       .then(() => {
         setIsLoaded(true)
       });
-  }, [dispatch, favorite]);
+  }, [dispatch]);
+
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -64,6 +63,9 @@ const ProductPage = ({ prods, word }) => {
       }
     }
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
@@ -89,7 +91,7 @@ const ProductPage = ({ prods, word }) => {
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
+          <div key={product.id} className="products-card" >
             <a key={product.id} href={`/products/${product.id}`}>
               <div>
                 <img
