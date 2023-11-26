@@ -82,36 +82,37 @@ const ProductPage = () => {
                 </span>
               </div>
               <span>By {product.seller}</span>
-            </a>
+            </div>
+          </a>
 
-            <div style={{ margin: 20 }} className="prod-btns-container">
-              {user && user.id != product.seller_id && (
-                <div id="prod-page-btn-container">
-                  { userWish.products[product.id] == undefined  &&  (
+          <div style={{ margin: 20 }} className="prod-btns-container">
+            {user && user.id != product.seller_id && (
+              <div id="prod-page-btn-container">
+                {userWish.products[product.id] == undefined && (
                   <div
                     className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {user && userWish.products && userWish.products[product.id] ? (
+                    {user &&
+                    userWish.products &&
+                    userWish.products[product.id] ? (
                       <i className="fa-solid fa-heart"></i>
                     ) : (
                       <i className="fa-regular fa-heart"></i>
                     )}
                   </div>
+                )}
 
-                  )}
-
-                  <button
-                    value={product.id}
-                    onClick={(e) => handleClick(e, product.id)}
-                    className="add-to-cart-btn"
-                  >
-                    Add to cart
-                  </button>
-                </>
-              )}
-            </div>
-          )}
+                <button
+                  value={product.id}
+                  onClick={(e) => handleClick(e, product.id)}
+                  className="add-to-cart-btn"
+                >
+                  Add to cart
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </div>

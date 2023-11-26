@@ -61,10 +61,6 @@ const ProductFormPage = ({ type, product }) => {
     else if (!prevImg && type != "edit") setDisabled(true)
     else setDisabled(false)
   }, [name, description, prevImg]);
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
-    if (!description || description.length < 10) setDisabled(true);
-    if (!prevImg && type != "edit") setDisabled(true);
-  }, [name, description, prevImg]);
 
   if (!user) {
     return history.replace("/");
@@ -82,10 +78,9 @@ const ProductFormPage = ({ type, product }) => {
     product.append("preview", prevImg);
 
     let num = 1;
-    let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        images.push(img);
+        product.append(`img${num}`, img);
       }
       num += 1;
     }
@@ -103,22 +98,11 @@ const ProductFormPage = ({ type, product }) => {
     productData.append("category", category);
     productData.append("price", price);
     productData.append("units_available", unitsAvailable);
-    e.preventDefault();
-    const productData = new FormData();
-    productData.append("name", name);
-    productData.append("description", description);
-    productData.append("category", category);
-    productData.append("price", price);
-    productData.append("units_available", unitsAvailable);
 
-    const updated = await dispatch(editProduct(productData, product.id));
     const updated = await dispatch(editProduct(productData, product.id));
     if (updated.errors) {
       const errs = {};
-      const errs = {};
       for (const err in updated.errors) {
-        const parts = err.split(" : ");
-        errs[parts[0]] = parts[1];
         const parts = err.split(" : ");
         errs[parts[0]] = parts[1];
       }
@@ -128,15 +112,10 @@ const ProductFormPage = ({ type, product }) => {
       }
     } else {
       return history.push(`/products/${updated.id}`);
-      return history.push(`/products/${updated.id}`);
     }
-  };
   };
 
   const goBack = (e) => {
-    e.preventDefault();
-    return history.goBack();
-  };
     e.preventDefault();
     return history.goBack();
   };
@@ -189,15 +168,7 @@ const ProductFormPage = ({ type, product }) => {
             placeholder={
               '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
             }
-            placeholder={
-              '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
-            }
           />
-          <p
-            className={`char-count ${
-              2000 - description.length <= 50 ? "low-count" : ""
-            }`}
-          >
           <p
             className={`char-count ${
               2000 - description.length <= 50 ? "low-count" : ""
@@ -295,10 +266,6 @@ const ProductFormPage = ({ type, product }) => {
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button type="submit" disabled={disabled}>
-          {type == "edit" ? "Edit Product" : "Create Product"}
-        </button>
-        <button onClick={(e) => goBack(e)}>Cancel</button>
         <button type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
