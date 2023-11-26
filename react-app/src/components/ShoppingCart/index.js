@@ -169,5 +169,6 @@ export default function Cart() {
         Shop Now!
       </button>
     </div>
+
   );
 }
