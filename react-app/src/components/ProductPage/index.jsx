@@ -21,8 +21,6 @@ const ProductPage = ({ prods, word }) => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
@@ -49,12 +47,11 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-    // const savedFavorite = favorite.find((item) => item == productId);
-    const removeFav = favorite.indexOf(productId);
 
-    if (favorite.includes(productId)) {
 
-        setFavorite(favorite.splice(removeFav, 1));
+    if (userWish.products[productId]) {
+
+
         dispatch(removeWish(productId));
 
           if (e.target.className == "fa-solid fa-heart") {
@@ -63,15 +60,18 @@ const ProductPage = ({ prods, word }) => {
 
     }else {
 
-        setFavorite(favorite.concat(productId));
+
         dispatch(addWish(productId));
 
         if (e.target.className == "fa-regular fa-heart") {
-            e.target.className="fa-solid fa-heart"
+            e.target.className = "fa-solid fa-heart"
         }
     }
 
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
