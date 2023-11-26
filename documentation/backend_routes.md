@@ -150,6 +150,10 @@ Route to update an items quantity in the shopping cart
 
 ### `PUT /api/cart/<string:change>/<int:itemId>`
 
-# Wish List
+# List of Users
 
-# Past Orders
+Route to query for all users and return them in a dictionary
+
+### `GET /api/users/`
+
+# Wish List
