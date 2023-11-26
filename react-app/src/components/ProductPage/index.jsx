@@ -37,7 +37,7 @@ const ProductPage = () => {
 
     const productId = product.id;
 
-    if (userWish.products[productId]) {
+    if (userWish && userWish.products && userWish.products[productId]) {
       dispatch(removeWish(productId));
 
       if (e.target.className == "fa-solid fa-heart") {
@@ -92,7 +92,7 @@ const ProductPage = () => {
                     className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {user && userWish.products[product.id] ? (
+                    {user && userWish.products && userWish.products[product.id] ? (
                       <i className="fa-solid fa-heart"></i>
                     ) : (
                       <i className="fa-regular fa-heart"></i>
