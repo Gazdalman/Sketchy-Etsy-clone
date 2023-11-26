@@ -11,6 +11,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 
+  z-index: 100000000;
 }
 
 .nav-sub-container {
@@ -20,7 +21,6 @@
   align-items: center;
 
   margin: 5%;
-
 }
 
 .nav-sub-container > * {
@@ -31,10 +31,9 @@
   transition: transform 250ms;
 }
 
-.nav-btn:hover{
+.nav-btn:hover {
   transform: translateY(-10px);
 }
-
 
 .profile-dropdown {
   display: flex;
@@ -52,7 +51,6 @@
 .hidden {
   display: none;
 }
-
 
 .nav-link {
   color: #322e3f;

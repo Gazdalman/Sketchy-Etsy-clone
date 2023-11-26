@@ -26,7 +26,7 @@ const ProductFormPage = ({ type, product }) => {
     type == "edit" ? product.units_available : 1
   );
   const [errors, setErrors] = useState("");
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const removeImgs = (e) => {
@@ -55,17 +55,18 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
-    if (!description || description.length < 10) setDisabled(true)
-    if (!prevImg && type != 'edit') setDisabled(true)
-  }, [name, description, prevImg])
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
+    if (!description || description.length < 10) setDisabled(true);
+    if (!prevImg && type != "edit") setDisabled(true);
+  }, [name, description, prevImg]);
 
   if (!user) {
-    return history.replace("/")
+    return history.replace("/");
   }
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    // const images = [];
     const formData = new FormData();
     product = {
       name,
@@ -92,45 +93,45 @@ const ProductFormPage = ({ type, product }) => {
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product, images))
-    return history.push(`/products/${id}`)
-  }
+    const id = await dispatch(createProduct(product));
+    return history.push(`/products/${id}`);
+  };
 
   const handleEdit = async (e) => {
-    e.preventDefault()
-    const productData = new FormData()
-    productData.append('name', name)
-    productData.append('description', description)
-    productData.append('category', category)
-    productData.append('price', price)
-    productData.append('units_available', unitsAvailable)
+    e.preventDefault();
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("description", description);
+    productData.append("category", category);
+    productData.append("price", price);
+    productData.append("units_available", unitsAvailable);
 
-    const updated = await dispatch(editProduct(productData, product.id))
+    const updated = await dispatch(editProduct(productData, product.id));
     if (updated.errors) {
-      const errs = {}
+      const errs = {};
       for (const err in updated.errors) {
-        const parts = err.split(' : ')
-        errs[parts[0]] = parts[1]
+        const parts = err.split(" : ");
+        errs[parts[0]] = parts[1];
       }
-      setErrors(errs)
-      if ( errors.not_found || errors.unauthorized ) {
-        return history.replace("/")
+      setErrors(errs);
+      if (errors.not_found || errors.unauthorized) {
+        return history.replace("/");
       }
     } else {
-      return history.push(`/products/${updated.id}`)
+      return history.push(`/products/${updated.id}`);
     }
-  }
+  };
 
   const goBack = (e) => {
-    e.preventDefault()
-    return history.goBack()
-  }
+    e.preventDefault();
+    return history.goBack();
+  };
 
   return !imageLoading ? (
     <div>
       <h1>What Are Yuh Sellin'?</h1>
       <form
-        onSubmit={type !== 'edit' ? handleCreate : handleEdit}
+        onSubmit={type !== "edit" ? handleCreate : handleEdit}
         encType="multipart/form-data"
       >
         <span>
@@ -170,10 +171,15 @@ const ProductFormPage = ({ type, product }) => {
             maxLength={2000}
             cols={50}
             rows={5}
-            placeholder=
-            {'10 or more characters \n(Add any tags at the bottom with an "#" before it)'}
+            placeholder={
+              '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
+            }
           />
-          <p className={`char-count ${2000 - description.length <= 50 ? 'low-count' : ''}`}>
+          <p
+            className={`char-count ${
+              2000 - description.length <= 50 ? "low-count" : ""
+            }`}
+          >
             Characters remaining: {2000 - description.length} / {2000}
           </p>
         </span>
@@ -248,7 +254,7 @@ const ProductFormPage = ({ type, product }) => {
             step=".01"
             value={checkPrice(price)}
             placeholder="$USD"
-            onChange={e => setPrice(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
             onBlur={(e) => {
               const parsedValue = parseFloat(e.target.value).toFixed(2);
               setPrice(parsedValue);
@@ -260,14 +266,16 @@ const ProductFormPage = ({ type, product }) => {
           {errors.units_available && <p>{errors.units_available}</p>}
           <input
             type="number"
-            min={type == 'edit' ? 0 : 1}
+            min={type == "edit" ? 0 : 1}
             value={unitsAvailable}
             placeholder="# of units you have"
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button type="submit" disabled={disabled}>{type == 'edit' ? 'Edit Product' : 'Create Product'}</button>
-        <button onClick={e => goBack(e)}>Cancel</button>
+        <button type="submit" disabled={disabled}>
+          {type == "edit" ? "Edit Product" : "Create Product"}
+        </button>
+        <button onClick={(e) => goBack(e)}>Cancel</button>
       </form>
     </div>
   ) : (
