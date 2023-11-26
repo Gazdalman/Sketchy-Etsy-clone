@@ -17,14 +17,12 @@ const ProductPage = () => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
   // console.log("user", user);
   console.log("products state", products);
-  console.log("favorite", favorite)
+  // console.log("favorite", favorite)
   // console.log("local storage fav", storedFavorite)
   console.log("user wish", userWish);
 
@@ -34,19 +32,18 @@ const ProductPage = () => {
       .then(() => {
         setIsLoaded(true)
       });
-
   }, [dispatch]);
+
 
   const addToWish = (e, product) => {
     e.preventDefault();
 
     const productId = product.id;
-    // const savedFavorite = favorite.find((item) => item == productId);
-    const removeFav = favorite.indexOf(productId);
 
-    if (favorite.includes(productId)) {
 
-        setFavorite(favorite.splice(removeFav, 1));
+    if (userWish.products[productId]) {
+
+
         dispatch(removeWish(productId));
 
           if (e.target.className == "fa-solid fa-heart") {
@@ -55,15 +52,18 @@ const ProductPage = () => {
 
     }else {
 
-        setFavorite(favorite.concat(productId));
+
         dispatch(addWish(productId));
 
         if (e.target.className == "fa-regular fa-heart") {
-            e.target.className="fa-solid fa-heart"
+            e.target.className = "fa-solid fa-heart"
         }
     }
 
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
@@ -75,29 +75,32 @@ const ProductPage = () => {
   };
 
   return isLoaded ? (
-    <>
+
+    <div id="product-page">
       <h1>Peruse Our Products</h1>
-      <div className="products-main-contianer">
+      <div className="products-main-contianer" >
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
+          <div key={product.id} className="products-card" >
             <a key={product.id} href={`/products/${product.id}`}>
-              <img className="products-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/640px-Banana-Single.jpg" alt="product"/>
+
+                <img className="products-img" src="https://images.unsplash.com/photo-1627798133922-270bb80af5ed?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="product"/>
+
               <div className="products-detail">
                 <div>{product.name}</div>
                 <span id="price">{"  "}${product.price}{"  "}</span>
               </div>
-                <span>{product.seller}</span>
+                <span>By {product.seller}</span>
             </a>
 
               <div style={{ margin: 20 }} className="prod-btns-container">
                 {user.id != product.seller_id && (
-                  <>
+                  <div id="prod-page-btn-container">
                     {/* { userWish.products[product.id] == undefined  &&  ( */}
                       <div
                         className="add-wish-btn"
                         onClick={(e) => addToWish(e, product)}
                       >
-                        { Object.values(userWish.products).includes(product.id)  ?  <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart" ></i> }
+                        { userWish.products[product.id] ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart" ></i> }
                       </div>
 
                     {/* )} */}
@@ -110,14 +113,14 @@ const ProductPage = () => {
                     >
                       Add to cart
                     </button>
-                  </>
+                  </div>
                 )}
               </div>
 
           </div>
         ))}
       </div>
-    </>
+    </div>
   ) : null;
 };
 
