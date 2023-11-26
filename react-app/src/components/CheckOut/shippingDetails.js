@@ -3,8 +3,8 @@ import "./CheckOut.css"
 export default function ShippingDetails() {
 
   return (
-    <div id="form-container">
-      {/* <form id="checkout-form"> */}
+    <div >
+      <form className="checkout-form">
         <label>
           {" "}
           Address:
@@ -23,7 +23,7 @@ export default function ShippingDetails() {
         <label>
           {" "}
           Country:
-          <input  type="text" />
+          <input type="text" />
         </label>
         <label>
           {" "}
@@ -38,14 +38,14 @@ export default function ShippingDetails() {
         <label>
           {" "}
           CVV:
-          <input  type="text" />
+          <input type="text" />
         </label>
         <label>
           {" "}
           Expiration Date:
-          <input  type="month" min={Date.now()} />
+          <input type="month" min={Date.now()} />
         </label>
-      {/* </form> */}
+      </form>
     </div>
   );
 }
