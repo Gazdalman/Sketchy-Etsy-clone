@@ -58,39 +58,28 @@ export default function Cart() {
 
   return cart.length ? (
     <div className="shopping-cart-page">
-      {isLoaded &&
-        cart.map((item) => (
-          <div key={item.id} className="cart-card">
-            {console.log(cart)}
-            <img
-              src={item.preview}
-              alt="item preview"
-              className="productImageCart"
-            />
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-            <p>{item.description}</p>
-            <p>
-              {item.quantity}
-              <button onClick={(e) => changeQuant(e, "dec", item.id)}>
-                {" "}
-                -{" "}
-              </button>
-              <button onClick={(e) => changeQuant(e, "inc", item.id)}>
-                {" "}
-                +{" "}
-              </button>
-            </p>
-            <>
-              <OpenModalButton
-                modalClasses={["delete-button-container"]}
-                buttonText="Remove from Cart"
-                modalComponent={<DeleteItem product={item} />}
-              />
-            </>
-          </div>
-        ))}
-      {cart.length ? (
+      <div className="shopping-cart-container">
+        {isLoaded &&
+          Object.values(cart).map((item) => (
+            <div key={item.id} className="cart-card">
+              <h3 style={{fontSize:33}}>{item.name}</h3>
+              <p>$ {item.price}</p>
+              <p>{item.description}</p>
+              <p style={{fontSize:30}}>
+                <button className="quantity-btn" onClick={() => decQuant(item)}> - </button>
+                {item["quantity"]}
+                <button className="quantity-btn" onClick={() => incQuant(item.id)}> + </button>
+              </p>
+              <>
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Remove from Cart"
+                  modalComponent={<DeleteItem product={item} />}
+                />
+              </>
+            </div>
+          ))}
+      </div>
         <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-input-payment">

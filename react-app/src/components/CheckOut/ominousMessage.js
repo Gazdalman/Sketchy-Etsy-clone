@@ -5,13 +5,11 @@ export default function CheckOutMessage() {
   const { closeModal } = useModal();
 
   return (
-    <>
-    {/* <img src={logo} alt="logo" style={{width:300, height:300}}/> */}
     <div className="checkout-message">
-      <p style={{fontSize:30}} className="blue"> Hello, Don't worry! 😈 </p>
-      <p className="purple">We already know where you live...</p>
-      <p className="red">...and we've already got your card info</p>
-      <p className="green">...No we will not be explaining how...</p>
+      <h1>Don't worry! 😈 </h1>
+      <p>We already know where you live...</p>
+      <p>...and we've already got your card info</p>
+      <h3>...No we will not be explaining how...</h3>
     </div>
     </>
   );
