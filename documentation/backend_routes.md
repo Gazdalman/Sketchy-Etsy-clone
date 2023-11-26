@@ -96,6 +96,18 @@ Route to create a review for a post
 
 ### `POST /api/reviews/<int:productId>/new`
 
+# Edit a Review
+
+Route to edit a review current user made
+
+### `PUT /api/reviews/<int:id>/edit`
+
+# Delete a Review
+
+Route to delete a review made by the current user
+
+### `DELETE /api/reviews/<int:id>/delete`
+
 # Shopping Cart
 
 # Wish List
