@@ -17,7 +17,7 @@ const ProductPage = () => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
 
 
   // console.log("user", user);
