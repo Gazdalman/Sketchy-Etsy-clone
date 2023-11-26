@@ -6,6 +6,8 @@ Backend Routes
 
 Route that verifies users existence
 
+### `GET /api/auth/`
+
 # Login
 
 Route to log in a user
