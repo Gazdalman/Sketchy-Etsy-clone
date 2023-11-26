@@ -157,7 +157,7 @@ function Reviews({ product }) {
 
         {isLoaded && reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <>
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
                 style={{
                   display: "flex",
