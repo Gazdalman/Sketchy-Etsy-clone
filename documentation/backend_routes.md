@@ -108,6 +108,12 @@ Route to delete a review made by the current user
 
 ### `DELETE /api/reviews/<int:id>/delete`
 
+# All user orders
+
+Route to get all user orders
+
+### `GET /api/orders/`
+
 # Shopping Cart
 
 # Wish List
