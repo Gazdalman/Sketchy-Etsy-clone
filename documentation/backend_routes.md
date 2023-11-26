@@ -182,7 +182,7 @@ Route to retrieve wishlist of current user
 
 # Add product to the current users Wish list
 
-Route to add an intem to the current users wish list
+Route to add an item to the current users wish list
 
 ### `POST /api/wishlist/add-wish/<int:id>`
 
