@@ -47,70 +47,77 @@ export default function Cart() {
   }
 
   return (
-
     <div className="shopping-cart-page">
-      {isLoaded &&
-        Object.values(cart).map((item) => (
-          <div key={item.id} className="cart-card">
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-            <p>{item.description}</p>
-            <p>
-              {item["quantity"]}
-              <button onClick={() => decQuant(item)}> - </button>
-              <button onClick={() => incQuant(item.id)}> + </button>
-            </p>
-            <>
-              <OpenModalButton
-                modalClasses={["delete-button-container"]}
-                buttonText="Remove from Cart"
-                modalComponent={<DeleteItem product={item} />}
-              />
-            </>
-          </div>
-        ))}
-      <div className="payment">
-          <h2>How will you pay?</h2>
-          <div className="radio-input-payment">
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op1"
-              value="option1"
-              checked={payment === "option1"}
-              onChange={onOptionChange}
-            />
-            <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
-
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op2"
-              value="option2"
-              checked={payment === "option2"}
-              onChange={onOptionChange}
-            />
-            <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
-
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op3"
-              value="option3"
-              checked={payment === "option3"}
-              onChange={onOptionChange}
-            />
-            <label for="op3"><i class="fa-solid fa-ice-cream"></i></label>
-          </div>
-
-
-          <NavLink to="/">
-            <button>Continue Shopping</button>
-          </NavLink>
-          <NavLink to="/checkout">
-            <button>Checkout</button>
-          </NavLink>
+      <div className="shopping-cart-container">
+        {isLoaded &&
+          Object.values(cart).map((item) => (
+            <div key={item.id} className="cart-card">
+              <h3 style={{fontSize:33}}>{item.name}</h3>
+              <p>$ {item.price}</p>
+              <p>{item.description}</p>
+              <p style={{fontSize:30}}>
+                <button className="quantity-btn" onClick={() => decQuant(item)}> - </button>
+                {item["quantity"]}
+                <button className="quantity-btn" onClick={() => incQuant(item.id)}> + </button>
+              </p>
+              <>
+                <OpenModalButton
+                  modalClasses={["delete-button-container"]}
+                  buttonText="Remove from Cart"
+                  modalComponent={<DeleteItem product={item} />}
+                />
+              </>
+            </div>
+          ))}
       </div>
+        <div className="payment">
+            <h2 style={{fontSize:33, color:"#322e3f"}}>How will you pay?</h2>
+            <div className="radio-input-payment">
+              <div className="radio-inner">
+                <input
+                  className="radio-btn"
+                  type="radio"
+                  id="op1"
+                  value="option1"
+                  checked={payment === "option1"}
+                  onChange={onOptionChange}
+                />
+                <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
+              </div>
+              <div className="radio-inner">
+                <input
+                  className="radio-btn"
+                  type="radio"
+                  id="op2"
+                  value="option2"
+                  checked={payment === "option2"}
+                  onChange={onOptionChange}
+                />
+                <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
+              </div>
+
+              <div className="radio-inner">
+                <input
+                  className="radio-btn"
+                  type="radio"
+                  id="op3"
+                  value="option3"
+                  checked={payment === "option3"}
+                  onChange={onOptionChange}
+                />
+                <label for="op3"><i class="fa-solid fa-ice-cream"></i></label>
+              </div>
+            </div>
+
+
+            <NavLink to="/">
+              <button className="payment-btn">Continue Shopping</button>
+            </NavLink>
+            <NavLink to="/checkout">
+              <button className="payment-btn">Checkout</button>
+            </NavLink>
+        </div>
     </div>
+
   );
 }

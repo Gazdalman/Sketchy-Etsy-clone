@@ -21,7 +21,7 @@ function DeleteItem({ product }) {
   };
 
   return (
-    <div className="delete-button-container">
+    <div className="delete-cart-modal">
       <h2>Confirm Delete</h2>
       <p>Are you sure you want to remove this product from your cart?</p>
       <button id="delete-btn" onClick={deleteItem}>

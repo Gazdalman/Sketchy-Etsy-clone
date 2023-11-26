@@ -4,7 +4,7 @@ export default function CheckOutMessage() {
   const { closeModal } = useModal();
 
   return (
-    <div>
+    <div className="checkout-message">
       <h1>Don't worry! 😈 </h1>
       <p>We already know where you live...</p>
       <p>...and we've already got your card info</p>
