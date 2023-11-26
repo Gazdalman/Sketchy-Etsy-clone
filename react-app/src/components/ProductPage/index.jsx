@@ -21,8 +21,6 @@ const ProductPage = ({ prods, word }) => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
@@ -43,7 +41,8 @@ const ProductPage = ({ prods, word }) => {
       .then(() => {
         setIsLoaded(true)
       });
-  }, [dispatch, favorite]);
+  }, [dispatch]);
+
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -64,6 +63,9 @@ const ProductPage = ({ prods, word }) => {
       }
     }
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
@@ -89,23 +91,14 @@ const ProductPage = ({ prods, word }) => {
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
+          <div key={product.id} className="products-card" >
             <a key={product.id} href={`/products/${product.id}`}>
-              <div>
-                <img
-                  className="products-img"
-                  src={product.preview}
-                  alt={`Product #${product.id} - ${product.name}`}
-                />
 
-                <div className="products-detail">
-                  <div>{product.name}</div>
-                  <span id="price">
-                    {"  "}${product.price}
-                    {"  "}
-                  </span>
-                </div>
-                {/* <span>By {product.seller}</span> */}
+                <img className="products-img" src="https://images.unsplash.com/photo-1627798133922-270bb80af5ed?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="product"/>
+
+              <div className="products-detail">
+                <div>{product.name}</div>
+                <span id="price">{"  "}${product.price}{"  "}</span>
               </div>
               <span>By {product.seller}</span>
             </a>
