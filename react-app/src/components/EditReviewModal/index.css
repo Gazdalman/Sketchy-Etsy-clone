@@ -1,0 +1,27 @@
+.edit-review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: orange;
+  width: 100%;
+  color: white;
+}
+.title {
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+#update-review {
+  background-color: tan;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  margin-bottom: 5px;
+  width: 50%;
+}
+.form {
+  width: 100%;
+}
+.textarea {
+  width: 90%;
+}

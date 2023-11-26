@@ -10,7 +10,6 @@ import { useEffect } from "react";
 //PLEASE CHANGE names/variables
 
 function DeleteReview({ reviewId, productId }) {
-
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -18,14 +17,6 @@ function DeleteReview({ reviewId, productId }) {
   const reviewsLength = Object.values(
     useSelector((state) => state.review)
   ).length;
-  console.log(
-    "🚀 ~ file: deleteModalReview.js:17 ~ DeleteReview ~ reviews:",
-    reviewsLength
-  );
-  console.log(
-    "🚀 ~ file: deleteModalReview.js:16 ~ DeleteReview ~ user:",
-    user
-  );
 
   const deleteReview = async (e) => {
     e.preventDefault();
@@ -46,6 +37,7 @@ function DeleteReview({ reviewId, productId }) {
     <div className="delete-button-container">
       <h2>Confirm Delete</h2>
       <p>Are you sure you want to permanently DELETE this Review?</p>
+
       <button id="delete-btn" onClick={deleteReview}>
         Yes (Delete Review)
       </button>

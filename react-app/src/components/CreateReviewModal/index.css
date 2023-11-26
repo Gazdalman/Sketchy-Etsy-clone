@@ -1,0 +1,28 @@
+.add-review-button-container {
+  background-color: green;
+  width: 100%;
+  color: white;
+}
+#add-review {
+  background-color: tan;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  margin-bottom: 5px;
+  width: 50%;
+}
+.title {
+  font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.form {
+  width: 100%;
+}
+.textarea {
+  width: 90%;
+}
+.textarea.textarea {
+  display: flex;
+  justify-content: center;
+}

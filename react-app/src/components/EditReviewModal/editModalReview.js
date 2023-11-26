@@ -2,9 +2,9 @@ import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { allYourReviews, editAReview } from "../../store/review";
-
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
+import "./index.css";
 
 function EditReview({ reviewId, productId }) {
   const dispatch = useDispatch();
@@ -49,20 +49,18 @@ function EditReview({ reviewId, productId }) {
   };
 
   return (
-    <>
-      <h1>Edit Review</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Update Your Review
-          <label style={{ width: "80%" }}>
-            <textarea
-              rows="10"
-              cols="45"
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              required
-            />
-          </label>
+    <div className="edit-review-container">
+      <h1 className="title">Update Your Review</h1>
+      <form className="form" onSubmit={handleSubmit}>
+        <label style={{ width: "100%" }}>
+          <textarea
+            className="textarea"
+            rows="10"
+            cols="45"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            required
+          />
         </label>
         <label>Rating</label>
 
@@ -171,9 +169,11 @@ function EditReview({ reviewId, productId }) {
             </div>
           </label>
         </div>
-        <button type="submit">Update</button>
+        <button id="update-review" type="submit">
+          Update My Review
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

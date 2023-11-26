@@ -9,6 +9,7 @@ import {
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { allTheReviews, createAReview } from "../../store/review";
+import "./index.css";
 
 function ReviewFormModal({ productId }) {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ function ReviewFormModal({ productId }) {
   const reviews = useSelector((state) => state.review);
 
   function checkCredentials() {
-
     const errObj = {};
     if (!rating) errObj.rating = "Rating is required";
     if (!reviewText || reviewText.length < 4)
@@ -52,7 +52,7 @@ function ReviewFormModal({ productId }) {
   };
 
   return (
-    <>
+    <div className="add-review-button-container">
       {user == null ? (
         <h1>PLEASE SIGN IN</h1>
       ) : (
@@ -63,10 +63,11 @@ function ReviewFormModal({ productId }) {
             alignItems: "center",
           }}
         >
-          <h1>Describe the Product in Your own Words</h1>
-          <form onSubmit={handleSubmit}>
-            <label style={{ width: "80%" }}>
+          <h1 className="title">Describe the Product in Your own Words</h1>
+          <form className="form" onSubmit={handleSubmit}>
+            <label style={{ width: "100%" }}>
               <textarea
+                className="textarea"
                 rows="10"
                 cols="45"
                 placeholder="Leave your review here"
@@ -184,11 +185,10 @@ function ReviewFormModal({ productId }) {
             {errors.rating && <p className="errors">{errors.rating}</p>}
             <button
               type="submit"
-              // onClick={checkCredentials}
-              // onClick={handleSubmit}
+              id="add-review"
               disabled={disabled}
               style={{
-                backgroundColor: "red",
+                // backgroundColor: "tan",
                 maxWidth: "100%",
                 width: "300px",
               }}
@@ -198,7 +198,7 @@ function ReviewFormModal({ productId }) {
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

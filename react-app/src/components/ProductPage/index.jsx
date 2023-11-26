@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/product";
 import { getWish, addWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import "./index.css"
 
 const ProductPage = () => {
   const history = useHistory();
@@ -45,14 +45,17 @@ const ProductPage = () => {
   };
 
   return isLoaded ? (
-    <div>
+    <div className="product-container">
       <h1>Peruse Our Products</h1>
 
       {prodArr.map((product) => (
         <div key={product.id}>
           <a key={product.id} href={`/products/${product.id}`}>
             <div>
-              <img src={product.preview} alt={`Product #${product.id} - ${product.name}`} />
+              <img
+                src={product.preview}
+                alt={`Product #${product.id} - ${product.name}`}
+              />
             </div>
             <div>{product.name}</div>
             <span>${product.price}</span>

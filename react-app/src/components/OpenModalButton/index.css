@@ -1,0 +1,12 @@
+.delete-button-container {
+  color: white;
+  background-color: red;
+}
+.edit-button-container {
+  color: white;
+  background-color: orange;
+}
+.add-edit-button-container {
+  color: white;
+  background-color: green;
+}
