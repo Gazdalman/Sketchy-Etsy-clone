@@ -19,8 +19,6 @@ const ProductPage = () => {
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [favorite, setFavorite ] = useState([]);
-
 
 
 
@@ -47,12 +45,11 @@ const ProductPage = () => {
     e.preventDefault();
 
     const productId = product.id;
-    // const savedFavorite = favorite.find((item) => item == productId);
-    const removeFav = favorite.indexOf(productId);
 
-    if (favorite.includes(productId)) {
 
-        setFavorite(favorite.splice(removeFav, 1));
+    if (userWish.products[productId]) {
+
+
         dispatch(removeWish(productId));
 
           if (e.target.className == "fa-solid fa-heart") {
@@ -61,15 +58,18 @@ const ProductPage = () => {
 
     }else {
 
-        setFavorite(favorite.concat(productId));
+
         dispatch(addWish(productId));
 
         if (e.target.className == "fa-regular fa-heart") {
-            e.target.className="fa-solid fa-heart"
+            e.target.className = "fa-solid fa-heart"
         }
     }
 
   };
+
+
+
 
   const handleClick = (e, prodId) => {
     e.preventDefault();
@@ -87,9 +87,9 @@ const ProductPage = () => {
   return isLoaded ? (
     <div id="product-page">
       <h1>Peruse Our Products</h1>
-      <div className="products-main-contianer">
+      <div className="products-main-contianer" >
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
+          <div key={product.id} className="products-card" >
             <a key={product.id} href={`/products/${product.id}`}>
               <div>
                 <img
@@ -105,8 +105,9 @@ const ProductPage = () => {
                     {"  "}
                   </span>
                 </div>
-                <span>By {product.seller}</span>
+                {/* <span>By {product.seller}</span> */}
               </div>
+                <span>By {product.seller}</span>
             </a>
 
             <div style={{ margin: 20 }} className="prod-btns-container">
