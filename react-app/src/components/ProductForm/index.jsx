@@ -23,8 +23,10 @@ const ProductFormPage = ({ type, product }) => {
   const [img4, setImg4] = useState("");
   const [img5, setImg5] = useState("");
   const [unitsAvailable, setUnitsAvailable] = useState(
-    type == "edit" ? product.units_available : ""
+    type == "edit" ? product.units_available : 1
   );
+  const [errors, setErrors] = useState("");
+  const [disabled, setDisabled] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false);
 
   const removeImgs = (e) => {
@@ -58,12 +60,12 @@ const ProductFormPage = ({ type, product }) => {
     if (!prevImg && type != 'edit') setDisabled(true)
   }, [name, description, prevImg])
 
-if (!user) {
-  return history.replace("/")
-}
+  if (!user) {
+    return history.replace("/")
+  }
 
-const handleCreate = async (e) => {
-  e.preventDefault()
+  const handleCreate = async (e) => {
+    e.preventDefault()
     const product = new FormData()
     const images = []
     product.append('name', name)
@@ -104,7 +106,7 @@ const handleCreate = async (e) => {
         errs[parts[0]] = parts[1]
       }
       setErrors(errs)
-      if ( errors.not_found || errors.unauthorized ) {
+      if (errors.not_found || errors.unauthorized) {
         return history.replace("/")
       }
     } else {
@@ -240,7 +242,10 @@ const handleCreate = async (e) => {
             value={checkPrice(price)}
             placeholder="$USD"
             onChange={e => setPrice(e.target.value)}
-            onBlur={(e) => parseInt(e.target.value).toFixed(2)}
+            onBlur={(e) => {
+              const parsedValue = parseFloat(e.target.value).toFixed(2);
+              setPrice(parsedValue);
+            }}
           />
         </span>
         <span>
@@ -248,13 +253,13 @@ const handleCreate = async (e) => {
           {errors.units_available && <p>{errors.units_available}</p>}
           <input
             type="number"
-            min='1'
+            min={type == 'edit' ? 0 : 1}
             value={unitsAvailable}
             placeholder="# of units you have"
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button type="submit" disabled={disabled}>Create Product</button>
+        <button type="submit" disabled={disabled}>{type == 'edit' ? 'Edit Product' : 'Create Product'}</button>
         <button onClick={e => goBack(e)}>Cancel</button>
       </form>
     </div>

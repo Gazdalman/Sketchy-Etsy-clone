@@ -7,5 +7,5 @@ class ProductEditForm(FlaskForm):
   name = StringField("Product Name", validators=[DataRequired(), Length(3,50)])
   price = FloatField("Price $", validators=[DataRequired()])
   description = TextAreaField("Description", validators=[DataRequired(), Length(10, 2000)])
-  units_available = IntegerField("# Available", validators=[DataRequired()])
+  units_available = IntegerField("# Available")
   category = StringField("Category", validators=[DataRequired()])
