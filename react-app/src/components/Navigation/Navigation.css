@@ -2,9 +2,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   list-style-type: none;
-  margin: 3%;
+
+  width: 100%;
+  height: 350px;
+  background: url(../../assets/wave.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 .nav-sub-container1 {
@@ -26,33 +32,14 @@
   margin-right: 40%;
 }
 
-.category {
-  background-color: #322e3f;
-  color: #efebeb;
-  border: 3px solid #322e3f;
-  padding: 10px;
-  border-radius: 6px;
-  margin-left: 20px;
-
-  cursor: pointer;
-}
-.search-bar {
-  text-align: center;
-  width: 300px;
-  border: 3px solid #322e3f;
-  background-color: #efebeb;
-  color: #322e3f;
-  padding: 10px;
-  border-radius: 6px;
-
-  cursor: text;
+.nav-btn {
+  transition: transform 250ms;
 }
 
-
-
-.nav-btn:hover {
+.nav-btn:hover{
   transform: translateY(-10px);
 }
+
 
 .profile-dropdown {
   color: #a93d44;
