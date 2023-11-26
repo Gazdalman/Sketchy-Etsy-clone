@@ -34,7 +34,7 @@ export default function CheckOut() {
   // * Will need to override input & label styling later
 
   return (
-    <div>
+    <div className="checkout-form">
       <h2>Check Out</h2>
       <div onClick={() => setClicked(!clicked)}>
         {clicked ? <CheckOutMessage /> : <ShippingDetails />}

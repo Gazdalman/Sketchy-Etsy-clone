@@ -47,7 +47,6 @@ export default function Cart() {
   }
 
   return (
-
     <div className="shopping-cart-page">
       {isLoaded &&
         Object.values(cart).map((item) => (
@@ -92,25 +91,28 @@ export default function Cart() {
             />
             <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
 
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op3"
-              value="option3"
-              checked={payment === "option3"}
-              onChange={onOptionChange}
-            />
-            <label for="op3"><i class="fa-solid fa-ice-cream"></i></label>
-          </div>
+              <div className="radio-inner">
+                <input
+                  className="radio-btn"
+                  type="radio"
+                  id="op3"
+                  value="option3"
+                  checked={payment === "option3"}
+                  onChange={onOptionChange}
+                />
+                <label for="op3"><i class="fa-solid fa-ice-cream"></i></label>
+              </div>
+            </div>
 
 
-          <NavLink to="/">
-            <button>Continue Shopping</button>
-          </NavLink>
-          <NavLink to="/checkout">
-            <button>Checkout</button>
-          </NavLink>
-      </div> : <h2>Your cart is empty</h2>}
+            <NavLink to="/">
+              <button className="payment-btn">Continue Shopping</button>
+            </NavLink>
+            <NavLink to="/checkout">
+              <button className="payment-btn">Checkout</button>
+            </NavLink>
+        </div>
     </div>
+
   );
 }
