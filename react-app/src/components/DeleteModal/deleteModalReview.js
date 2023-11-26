@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { allYourReviews, deleteAReview, removeItem } from "../../store/review";
 
 import "./deleteModal.css";
+
 import { Redirect, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect } from "react";
 
@@ -34,16 +35,19 @@ function DeleteReview({ reviewId, productId }) {
   }, [reviewsLength]);
 
   return (
-    <div className="delete-button-container">
-      <h2>Confirm Delete</h2>
-      <p>Are you sure you want to permanently DELETE this Review?</p>
-
-      <button id="delete-btn" onClick={deleteReview}>
-        Yes (Delete Review)
-      </button>
-      <button id="keep-btn" onClick={closeModal}>
-        No (Keep Review)
-      </button>
+    <div className="delete-button-container" id="deleteModel">
+      <h2 id="delModalTitle">Confirm Delete</h2>
+      <p id="delModalText">
+        Are you sure you want to permanently DELETE this Review?
+      </p>
+      <div id="delModalButtons">
+        <button id="delete-btn" onClick={deleteReview}>
+          Yes (Delete Review)
+        </button>
+        <button id="keep-btn" onClick={closeModal}>
+          No (Keep Review)
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,34 +1,32 @@
-#modal-content {
-  height: fit-content;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-}
-.delete-button-container {
-  width: 100%;
+#deleteModel {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 15px;
 }
-#delete-btn {
-  width: 50%;
-  padding: 10px;
-  background-color: green;
-  color: white;
-  margin: 0;
-  margin-bottom: 3px;
+
+#delModalTitle {
+  text-align: center;
 }
+
+#delModalText {
+  text-align: center;
+  max-width: 300px;
+  font-size: 20px;
+  /* text-wrap: wrap; */
+}
+
+#delModalButtons {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+}
+
+#delete-btn,
 #keep-btn {
-  width: 50%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  margin: 0;
-  margin-bottom: 3px;
-}
-h2 {
-  font-size: 40px;
-  margin-top: 10px;
-  margin-bottom: 0;
+  padding: 5px;
 }

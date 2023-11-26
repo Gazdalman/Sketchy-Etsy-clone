@@ -63,8 +63,7 @@ const ProductShow = () => {
     <div id="product-show">
       <h1 id="product-name">{product.name}</h1>
       <h3>
-        ${product.price} | Product #:{product.id} | {product.units_available}{" "}
-        available
+        ${product.price} | Product #:{product.id} | {+product.units_available > 0 ? `${product.units_available} available` : 'SOLD OUT'}
       </h3>
       <div id="product-images-container">
         <img

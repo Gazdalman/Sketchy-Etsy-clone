@@ -4,48 +4,55 @@ import { createProduct, editProduct } from "../../store/product";
 import { useHistory, useParams } from "react-router-dom";
 
 const ProductFormPage = ({ type, product }) => {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [name, setName] = useState(type == 'edit' ? product.name : '')
-  const [category, setCategory] = useState(type == 'edit' ? product.category : '')
-  const [price, setPrice] = useState(type == 'edit' ? product.price : '')
-  const [description, setDescription] = useState(type == 'edit' ? product.description : '')
-  const [imageLoading, setImageLoading] = useState(false)
-  const [prevImg, setPrevImg] = useState('')
+  const [name, setName] = useState(type == "edit" ? product.name : "");
+  const [category, setCategory] = useState(
+    type == "edit" ? product.categories : ""
+  );
+  const [price, setPrice] = useState(type == "edit" ? product.price : "");
+  const [description, setDescription] = useState(
+    type == "edit" ? product.description : ""
+  );
+  const [imageLoading, setImageLoading] = useState(false);
+  const [prevImg, setPrevImg] = useState("");
+  const [img1, setImg1] = useState("");
+  const [img2, setImg2] = useState("");
+  const [img3, setImg3] = useState("");
+  const [img4, setImg4] = useState("");
+  const [img5, setImg5] = useState("");
+  const [unitsAvailable, setUnitsAvailable] = useState(
+    type == "edit" ? product.units_available : 1
+  );
+  const [errors, setErrors] = useState("");
   const [disabled, setDisabled] = useState(false)
-  const [errors, setErrors] = useState({})
-  const [img1, setImg1] = useState('')
-  const [img2, setImg2] = useState('')
-  const [img3, setImg3] = useState('')
-  const [img4, setImg4] = useState('')
-  const [img5, setImg5] = useState('')
-  const [unitsAvailable, setUnitsAvailable] = useState(type == 'edit' ? product.units_available : 1)
-  const [isLoaded, setIsLoaded] = useState(false)
-
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const removeImgs = (e) => {
     if (!e.target.value) {
-      setImg1('')
-      setImg2('')
-      setImg3('')
-      setImg4('')
-      setImg5('')
+      setImg1("");
+      setImg2("");
+      setImg3("");
+      setImg4("");
+      setImg5("");
     }
-    setPrevImg(e.target.files[0])
-
-  }
+    setPrevImg(e.target.files[0]);
+  };
   const checkPrice = (price) => {
     if (price < 1) {
-      setPrice(1)
+      setPrice(1);
       return 1;
     }
     return price;
-  }
+  };
 
   useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+    if (!user) {
+      history.push("/login");
+    }
+    setIsLoaded(true);
+  }, []);
 
   useEffect(() => {
     if (!name || name.length < 3 || name.length > 50) setDisabled(true)
@@ -53,12 +60,12 @@ const ProductFormPage = ({ type, product }) => {
     if (!prevImg && type != 'edit') setDisabled(true)
   }, [name, description, prevImg])
 
-if (!user) {
-  return history.replace("/")
-}
+  if (!user) {
+    return history.replace("/")
+  }
 
-const handleCreate = async (e) => {
-  e.preventDefault()
+  const handleCreate = async (e) => {
+    e.preventDefault()
     const product = new FormData()
     const images = []
     product.append('name', name)
@@ -99,7 +106,7 @@ const handleCreate = async (e) => {
         errs[parts[0]] = parts[1]
       }
       setErrors(errs)
-      if ( errors.not_found || errors.unauthorized ) {
+      if (errors.not_found || errors.unauthorized) {
         return history.replace("/")
       }
     } else {
@@ -126,13 +133,16 @@ const handleCreate = async (e) => {
             type="text"
             placeholder="Name must be 3-50 characters"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </span>
         <span>
           Product Category*
           {errors.category && <p>{errors.category}</p>}
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
             <option value="">Select...</option>
             <option value="Jackets and Coats">Jackets and Coats</option>
             <option value="Shirts and Tops">Shirts and Tops</option>
@@ -160,14 +170,14 @@ const handleCreate = async (e) => {
             Characters remaining: {2000 - description.length} / {2000}
           </p>
         </span>
-        {type != 'edit' && (
+        {type != "edit" && (
           <>
             <span>
               Preview Image*
               <input
                 type="file"
                 value={undefined}
-                onChange={e => removeImgs(e)}
+                onChange={(e) => removeImgs(e)}
                 accept="image/*"
               />
             </span>
@@ -177,7 +187,7 @@ const handleCreate = async (e) => {
                 type="file"
                 disabled={!prevImg}
                 value={undefined}
-                onChange={e => setImg1(e.target.files[0])}
+                onChange={(e) => setImg1(e.target.files[0])}
                 accept="image/*"
               />
             </span>
@@ -187,7 +197,7 @@ const handleCreate = async (e) => {
                 type="file"
                 value={undefined}
                 disabled={!prevImg}
-                onChange={e => setImg2(e.target.files[0])}
+                onChange={(e) => setImg2(e.target.files[0])}
                 accept="image/*"
               />
             </span>
@@ -197,7 +207,7 @@ const handleCreate = async (e) => {
                 type="file"
                 value={undefined}
                 disabled={!prevImg}
-                onChange={e => setImg3(e.target.files[0])}
+                onChange={(e) => setImg3(e.target.files[0])}
                 accept="image/*"
               />
             </span>
@@ -207,7 +217,7 @@ const handleCreate = async (e) => {
                 type="file"
                 disabled={!prevImg}
                 value={undefined}
-                onChange={e => setImg4(e.target.files[0])}
+                onChange={(e) => setImg4(e.target.files[0])}
                 accept="image/*"
               />
             </span>
@@ -217,7 +227,7 @@ const handleCreate = async (e) => {
                 type="file"
                 value={undefined}
                 disabled={!prevImg}
-                onChange={e => setImg5(e.target.files[0])}
+                onChange={(e) => setImg5(e.target.files[0])}
                 accept="image/*"
               />
             </span>
@@ -232,7 +242,10 @@ const handleCreate = async (e) => {
             value={checkPrice(price)}
             placeholder="$USD"
             onChange={e => setPrice(e.target.value)}
-            onBlur={(e) => parseInt(e.target.value).toFixed(2)}
+            onBlur={(e) => {
+              const parsedValue = parseFloat(e.target.value).toFixed(2);
+              setPrice(parsedValue);
+            }}
           />
         </span>
         <span>
@@ -240,21 +253,19 @@ const handleCreate = async (e) => {
           {errors.units_available && <p>{errors.units_available}</p>}
           <input
             type="number"
-            min='1'
+            min={type == 'edit' ? 0 : 1}
             value={unitsAvailable}
             placeholder="# of units you have"
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button type="submit" disabled={disabled}>Create Product</button>
+        <button type="submit" disabled={disabled}>{type == 'edit' ? 'Edit Product' : 'Create Product'}</button>
         <button onClick={e => goBack(e)}>Cancel</button>
       </form>
-
     </div>
-
   ) : (
     <h1>We loading...</h1>
-  )
-}
+  );
+};
 
-export default ProductFormPage
+export default ProductFormPage;

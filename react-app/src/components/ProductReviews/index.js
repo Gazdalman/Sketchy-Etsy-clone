@@ -89,10 +89,14 @@ function Reviews() {
           </span>
         )}
         <div
-          className="insideman"
-          style={{ display: "flex", justifyContent: "space-around" }}
+          className="inside-man"
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            padding: "0 5px 0 10px",
+          }}
         >
-          <h1 style={{ padding: "0 5px 0 5px" }}>{avg?.toFixed(2)}</h1>
+          <h1 style={{ padding: "0 5px" }}>{avg?.toFixed(2)}</h1>
           <label>
             <div
               class="rating"

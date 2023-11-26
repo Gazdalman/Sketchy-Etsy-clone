@@ -1,6 +1,44 @@
 /* TODO Add site wide styles */
-/* // "start": "npm start", */
-/* /"build": "npm install --prefix react-app && npm run build --prefix react-app &&pip install -r requirements.txt && pip install psycopg2 && flask db upgrade && flask seed all"; */
-/* * {
-  margin: 0;
-} */
+body {
+  background-color: rgba(226, 220, 193, 0.75);
+  color: #322e3f;
+}
+
+h1 {
+  width: fit-content;
+  margin-top: 0;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #322e3f;
+  background-color: rgba(74, 135, 128, 0.5);
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgba(58, 102, 115, 0.75);
+}
+button:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}

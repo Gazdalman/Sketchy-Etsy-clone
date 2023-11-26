@@ -1,0 +1,35 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+
+.loginTitle {
+  width: 100%;
+  color: #322e3f;
+}
+
+.loginInput,
+.loginSelect {
+  border: 1px solid #322e3f;
+  background-color: rgba(74, 135, 128, 0.15);
+}
+
+.loginErrors {
+  color: #ab434a;
+}
+
+.loginButton {
+  border: 1px solid #322e3f;
+  background-color: rgba(74, 135, 128, 0.5);
+  cursor: pointer;
+}
+.loginButton:hover {
+  background-color: rgba(58, 102, 115, 0.75);
+}
+
+.redirectToSignUp {
+  text-decoration: none;
+  color: #322e3f;
+}
