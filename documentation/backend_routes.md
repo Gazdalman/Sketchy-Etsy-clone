@@ -128,6 +128,28 @@ Route to place a new order
 
 # Shopping Cart
 
+Route to get the current users shopping cart
+
+### `GET /api/cart/`
+
+# Add to Shopping Cart
+
+Route to add an item to the cart
+
+### `POST /apo/cart/<int:id>`
+
+# Delete an item from Shopping Cart
+
+Route to delete an item from the shopping cart
+
+### `/api/cart/product/<int:id>`
+
+# Change the quantity in Shopping Cart
+
+Route to update an items quantity in the shopping cart
+
+### `PUT /api/cart/<string:change>/<int:itemId>`
+
 # Wish List
 
 # Past Orders
