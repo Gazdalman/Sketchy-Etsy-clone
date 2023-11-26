@@ -1,5 +1,14 @@
 .profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   position: absolute;
+  background-color: #e2dcc2;
+  border: 1px solid #322e3f;
+  border-radius: 15px;
+  color: #322e3f;
+  padding: 25px;
+  list-style: none;
 }
 
 .hidden {

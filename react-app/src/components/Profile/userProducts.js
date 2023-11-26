@@ -6,6 +6,8 @@ import DeleteProduct from "../DeleteModal/deleteModalProduct";
 import { editAReview } from "../../store/review";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+import "./Profile.css";
+
 export default function UserProducts({ user }) {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -26,20 +28,29 @@ export default function UserProducts({ user }) {
   return (
     <>
       {isLoaded && (
-        <div>
+        <div className="userProductsContainer">
           {Object.values(products).map((item) => (
-            <div key={item.id}>
-              <a href={`/products/${item.id}`}>
+            <div key={item.id} className="indvUserProducts">
+              <div className="userProductImage">
+                <p>Product Image</p>
+                <p>Coming Soon...</p>
+              </div>
+              <div>
+                <a href={`/products/${item.id}`}>
                 <h4>{item.name}</h4>
                 <img src={item.preview} />
                 </a>
-              <p>{item.price}</p>
-              <button onClick={(e) => edit(e, item.id)}>Edit</button>
-              <OpenModalButton
-                buttonText={'Delete Product'}
-                modalComponent={<DeleteProduct product={item} refresh={true}/>}
-                modalClasses={['delete-product']}
-              />
+                <p className="userProductDescription">{item.description}</p>
+                <p className="userProductPrice">${item.price}</p>
+                <div className="userProductButtons">
+                  <button disabled>Edit</button>
+                  <OpenModalButton
+                    modalClasses={["delete-button-container"]}
+                    buttonText="Delete Product"
+                    modalComponent={<DeleteProduct />}
+                  />
+                </div>
+              </div>
             </div>
           ))}
         </div>

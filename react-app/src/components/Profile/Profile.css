@@ -1,0 +1,79 @@
+.profileTab {
+  cursor: pointer;
+  text-align: center;
+  background-color: rgba(74, 135, 128, 0.25);
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+.profileTab:hover {
+  background-color: rgba(58, 102, 115, 0.75);
+}
+
+.profileTabDisplay {
+  display: flex;
+  padding-top: 15px;
+  overflow-wrap: wrap;
+}
+
+.profileButtonContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.userOrdersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.userProductsContainer,
+.userReviewsContainer,
+.userOrderItemsContainer,
+.userWishlistContainer {
+  display: flex;
+  gap: 15px;
+  /* text-wrap: wrap; */
+  flex-wrap: wrap;
+  overflow-y: scroll hidden;
+  /* overflow-y: hidden; */
+}
+.indvUserProducts,
+.indvUserReviews,
+.indvUserOrderItems,
+.indvUserWishItems {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: fit-content;
+  padding: 25px;
+  gap: 15px;
+  border: 1px solid #322e3f;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.userProductImage {
+  max-width: 150px;
+  padding: 5px;
+}
+.userProductDescription,
+.userProductReview {
+  min-width: 150px;
+  max-width: 150px;
+}
+.orderItemPriceQuantDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.userProductPrice,
+.orderedItemPrice {
+  display: flex;
+  justify-content: flex-end;
+}
+.userProductButtons,
+.userOrderButtons,
+.userWishlistButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}

@@ -17,33 +17,29 @@ export default function UserReviews({ user }) {
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log("reiews => ", reviews);
-  //   console.log("products => ", products);
-  //   console.log("users => ", users);
-  // }, [isLoaded]);
-
   return (
-    <>
+    <div>
       {isLoaded && (
-        <div>
+        <>
           {Object.values(reviews).length > 0 ? (
-            <>
+            <div className="userReviewsContainer">
               {Object.values(reviews).map((review) => (
-                <div key={review.id}>
-                  <h4>{products[review.product_id].name}</h4>
-                  <p>{review.rating} Stars</p>
-                  <p>{review.review}</p>
-                  <p>Author: {users[review.user_id].username}</p>
-                  {!review.seller_commented && <button>Respond</button>}
+                <div key={review.id} className="indvUserReviews">
+                  <div>
+                    <h4>{products[review.product_id].name}</h4>
+                    <p>{review.rating} Stars</p>
+                    <p className="userProductReview">{review.review}</p>
+                    <p>Author: {users[review.user_id].username}</p>
+                    {!review.seller_commented && <button>Respond</button>}
+                  </div>
                 </div>
               ))}
-            </>
+            </div>
           ) : (
-            <h4>You have no reviews</h4>
+            <h3>You have no reviews</h3>
           )}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
