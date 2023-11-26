@@ -64,6 +64,7 @@ function Reviews() {
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
+  const commentedat = "commented at";
   return (
     <>
       <div
@@ -73,6 +74,7 @@ function Reviews() {
           flexWrap: "nowrap",
           justifyContent: "flex-start",
           alignItems: "center",
+          width: "20%",
         }}
       >
         {reviewsLength < 1 ? (
@@ -86,8 +88,11 @@ function Reviews() {
             <h1>{reviewsLength} Reviews</h1>
           </span>
         )}
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <h1>{avg?.toFixed(2)}</h1>
+        <div
+          className="insideman"
+          style={{ display: "flex", justifyContent: "space-around" }}
+        >
+          <h1 style={{ padding: "0 5px 0 5px" }}>{avg?.toFixed(2)}</h1>
           <label>
             <div
               class="rating"
@@ -136,7 +141,7 @@ function Reviews() {
         {!commented ? (
           <OpenModalButton
             buttonText="Add Review"
-            className="dropdownLi"
+            modalClasses={["add-edit-button-container"]}
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
@@ -144,19 +149,36 @@ function Reviews() {
 
         {isLoaded && reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <>
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  width: "50%",
+                  width: "90%",
                 }}
               >
                 <div>
-                  <p>{review}</p>
-                  <p>
-                    {User.firstName} {User.username} {created_at}
+                  <p
+                    style={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    {review}
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      color: "darkgray",
+                    }}
+                  >
+                    {`${User.firstName}, ${User.username}`}
+                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
+                      {" "}
+                      commented at{" "}
+                    </span>
+                    {`${created_at}`}
                   </p>
                 </div>
                 <div
@@ -217,14 +239,14 @@ function Reviews() {
               ) : null}
               {user?.id == user_id ? (
                 <OpenModalButton
-                  modalClasses={["delete-button-container"]}
+                  modalClasses={["edit-button-container"]}
                   buttonText="Edit Review"
                   modalComponent={
                     <EditReview reviewId={id} productId={productId} />
                   }
                 />
               ) : null}
-            </>
+            </div>
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>

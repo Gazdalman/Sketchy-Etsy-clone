@@ -19,6 +19,9 @@
 }
 
 #modal-content {
+  height: fit-content;
+  width: 50%;
+  display: flex;
   position: absolute;
   background-color: #e2dcc2;
   color: #322e3f;

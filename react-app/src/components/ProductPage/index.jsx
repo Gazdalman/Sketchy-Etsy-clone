@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/product";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
@@ -19,10 +18,10 @@ const ProductPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // console.log("user", user);
-  console.log("products state", products);
+  // console.log("products state", products);
   // console.log("favorite", favorite)
   // console.log("local storage fav", storedFavorite)
-  console.log("user wish", userWish);
+  // console.log("user wish", userWish);
 
   useEffect(() => {
     dispatch(getAllProducts())
@@ -64,46 +63,32 @@ const ProductPage = () => {
   return isLoaded ? (
     <div id="product-page">
       <h1>Peruse Our Products</h1>
-      <div className="products-main-contianer">
-        {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
-            <a key={product.id} href={`/products/${product.id}`}>
+
+      {prodArr.map((product) => (
+        <div key={product.id}>
+          <a key={product.id} href={`/products/${product.id}`}>
+            <div>
               <img
-                className="products-img"
-                src="https://images.unsplash.com/photo-1627798133922-270bb80af5ed?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="product"
+                src={product.preview}
+                alt={`Product #${product.id} - ${product.name}`}
               />
-
-              <div className="products-detail">
-                <div>{product.name}</div>
-                <span id="price">
-                  {"  "}${product.price}
-                  {"  "}
-                </span>
-              </div>
-              <span>By {product.seller}</span>
-            </a>
-
-            <div style={{ margin: 20 }} className="prod-btns-container">
-              {user && user.id != product.seller_id && (
-                <div id="prod-page-btn-container">
-                  {/* { userWish.products[product.id] == undefined  &&  ( */}
-                  <div
-                    className="add-wish-btn"
-                    onClick={(e) => addToWish(e, product)}
-                  >
-                    <>
-                      {console.log(userWish.products[product.id])}
-                      {user && userWish.products[product.id] ? (
-                        <i className="fa-solid fa-heart"></i>
-                      ) : (
-                        <i className="fa-regular fa-heart"></i>
-                      )}
-                    </>
-                  </div>
-
-                  {/* )} */}
-
+            </div>
+            <div>{product.name}</div>
+            <span>${product.price}</span>
+            <span>{product.seller}</span>
+          </a>
+          {user && products.seller_id != user.id && (
+            <div style={{ margin: 20 }}>
+              {user.id != product.seller_id && (
+                <>
+                  {userWish.products[product.id] == undefined && (
+                    <button
+                      className="add-wish-btn"
+                      onClick={(e) => addToWish(e, product)}
+                    >
+                      Add to Wishlist
+                    </button>
+                  )}
                   <button
                     value={product.id}
                     onClick={(e) => handleClick(e, product.id)}
@@ -111,14 +96,16 @@ const ProductPage = () => {
                   >
                     Add to cart
                   </button>
-                </div>
+                </>
               )}
             </div>
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      ))}
     </div>
-  ) : null;
+  ) : (
+    <h3>Loading...</h3>
+  );
 };
 
 export default ProductPage;
