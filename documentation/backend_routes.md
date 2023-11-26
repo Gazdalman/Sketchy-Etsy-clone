@@ -10,9 +10,15 @@ Route that verifies users existence
 
 # Login
 
-Route to log in a user
-
 ### `POST /api/auth/login`
+
+# Sign Up
+
+### `POST /api/auth/signup`
+
+# Log out
+
+### `GET /api/auth/logout`
 
 # Sign Up
 
