@@ -4,9 +4,19 @@ Backend Routes
 
 # User Authentification
 
+Route that verifies users existence
+
 # Login
 
-### `api/auth/login`
+### `POST /api/auth/login`
+
+# Sign Up
+
+### `POST /api/auth/signup`
+
+# Log out
+
+### `GET /api/auth/logout`
 
 route to log in
 
