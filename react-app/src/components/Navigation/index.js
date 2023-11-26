@@ -43,7 +43,8 @@ function Navigation({ isLoaded }) {
             </li>
             {(isLoaded) && (
             <li>
-              <ProfileButton user={sessionUser} disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
+              <ProfileButton user={sessionUser}
+              disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
             </li>
             )}
         </div>

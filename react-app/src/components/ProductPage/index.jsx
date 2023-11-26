@@ -36,7 +36,7 @@ const ProductPage = () => {
 
     const productId = product.id;
 
-    if (userWish.products[productId]) {
+    if (userWish && userWish.products && userWish.products[productId]) {
       dispatch(removeWish(productId));
 
       if (e.target.className == "fa-solid fa-heart") {
@@ -72,23 +72,34 @@ const ProductPage = () => {
                 src={product.preview}
                 alt={`Product #${product.id} - ${product.name}`}
               />
-            </div>
-            <div>{product.name}</div>
-            <span>${product.price}</span>
-            <span>{product.seller}</span>
-          </a>
-          {user && products.seller_id != user.id && (
-            <div style={{ margin: 20 }}>
-              {user.id != product.seller_id && (
-                <>
-                  {userWish.products[product.id] == undefined && (
-                    <button
-                      className="add-wish-btn"
-                      onClick={(e) => addToWish(e, product)}
-                    >
-                      Add to Wishlist
-                    </button>
+
+              <div className="products-detail">
+                <div>{product.name}</div>
+                <span id="price">
+                  {"  "}${product.price}
+                  {"  "}
+                </span>
+              </div>
+              <span>By {product.seller}</span>
+            </a>
+
+            <div style={{ margin: 20 }} className="prod-btns-container">
+              {user && user.id != product.seller_id && (
+                <div id="prod-page-btn-container">
+                  { userWish.products[product.id] == undefined  &&  (
+                  <div
+                    className="add-wish-btn"
+                    onClick={(e) => addToWish(e, product)}
+                  >
+                    {user && userWish.products && userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart"></i>
+                    ) : (
+                      <i className="fa-regular fa-heart"></i>
+                    )}
+                  </div>
+
                   )}
+
                   <button
                     value={product.id}
                     onClick={(e) => handleClick(e, product.id)}
