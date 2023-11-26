@@ -21,7 +21,7 @@ const ProductShow = () => {
   let imgNum = 0;
 
   if (product) {
-    console.log('This is the product', product);
+    console.log("This is the product", product);
   }
 
   useEffect(() => {
@@ -43,9 +43,9 @@ const ProductShow = () => {
   // }
 
   const edit = (e) => {
-    e.preventDefault()
-    return history.push(`/products/${productId}/edit`)
-  }
+    e.preventDefault();
+    return history.push(`/products/${productId}/edit`);
+  };
 
   const handleClick = (e, prod) => {
     e.preventDefault();
@@ -57,20 +57,34 @@ const ProductShow = () => {
     }
   };
 
-  return Object.keys(product).length > 0 && +product.id === +productId && +product.seller_id ? (
+  return Object.keys(product).length > 0 &&
+    +product.id === +productId &&
+    +product.seller_id ? (
     <div id="product-show">
       <h1 id="product-name">{product.name}</h1>
       <h3>
-        ${product.price} | Product #:{product.id} | {+product.units_available > 0 ? `${product.units_available} available` : 'SOLD OUT'}
+        ${product.price} | Product #:{product.id} |{" "}
+        {+product.units_available > 0
+          ? `${product.units_available} available`
+          : "SOLD OUT"}
       </h3>
       <div id="product-images-container">
-        <img id="preview-image" src={product.preview} alt={`Product ${product.id} Img`} />
+        <img
+          id="preview-image"
+          src={product.preview}
+          alt={`Product ${product.id} Img`}
+        />
         <span id="none-prev">
-          {product.images.length > 0 && product.images.map(image => (
-            (
-              <img className="product-img" id={`img-${imgNum++}`} key={image.id} src={image.url} alt={`Product ${image.id}`} />
-            )
-          ))}
+          {product.images.length > 0 &&
+            product.images.map((image) => (
+              <img
+                className="product-img"
+                id={`img-${imgNum++}`}
+                key={image.id}
+                src={image.url}
+                alt={`Product ${image.id}`}
+              />
+            ))}
         </span>
       </div>
       <h4 id="product-owner">Sold by {product.seller}</h4>
@@ -79,18 +93,18 @@ const ProductShow = () => {
         <p id="product-description">{product.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {(user && user.id != product.seller_id) && (
-        <button onClick={(e) => handleClick(e, product)}>
-          Add to cart
-        </button>
+      {user && user.id != product.seller_id && (
+        <button onClick={(e) => handleClick(e, product)}>Add to cart</button>
       )}
-      {(user && user.id == product.seller_id) && (
-        <button onClick={edit} >Edit Product</button>
+      {user && user.id == product.seller_id && (
+        <button onClick={edit}>Edit Product</button>
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />
     </div>
-  ) : ((product && !product.seller_id) ? <h1>Not Available</h1> : null);
+  ) : product && !product.seller_id ? (
+    <h1>Not Available</h1>
+  ) : null;
 };
 
 export default ProductShow;

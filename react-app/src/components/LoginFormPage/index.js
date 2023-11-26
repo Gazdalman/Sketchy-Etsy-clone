@@ -72,7 +72,11 @@ function LoginFormPage() {
             ))}
           </select>
         </label>
-        <button className="loginButton" type="submit">
+        <button
+          className="loginButton"
+          type="submit"
+          disabled={creds.length === 0 || password.length === 0}
+        >
           Log In
         </button>
       </form>

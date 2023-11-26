@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import OpenModalButton from "../OpenModalButton";
+import ReviewFormModal from "../CreateReviewModal";
 
 export default function UserOrders({ user }) {
   const dispatch = useDispatch();
@@ -60,7 +62,10 @@ export default function UserOrders({ user }) {
                       </p>
                     </div>
                     <div className="userOrderButtons">
-                      <button disabled>Write Review</button>
+                      <OpenModalButton
+                        buttonText="Write Review"
+                        modalComponent={<ReviewFormModal productId={item.id} />}
+                      />
                       <button onClick={(e) => handleClick(e)}>
                         Return Item
                       </button>

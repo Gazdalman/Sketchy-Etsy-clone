@@ -1,10 +1,12 @@
 /* BoilerPlate */
 import React, { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { authenticate } from "./store/session";
 
 /* Import Routes */
+  /* Landing Page*/
+import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
@@ -21,12 +23,14 @@ import PastOrder from "./components/Profile/PastOrder";
 import Reviews from "./components/Review";
 import EditProduct from "./components/EditComponent";
 
+
 /* Import thunks */
 import { getAllProducts } from "./store/product";
 
 function App() {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.session.user);
+  const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(getAllProducts());
@@ -35,12 +39,15 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+    {location.pathname === '/' ? null : <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <ProductPage />
+            <LandingPage />
           </Route>
+          <Route exact path="/home">
+            <ProductPage />
+          </Route> 
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
