@@ -159,12 +159,10 @@ function Reviews({ product }) {
           />
         ) : null}
 
-        {isLoaded && reviewsLength >= 1 && (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            < style={{ borderBottom: "1px solid grey", padding: "5px" }}>
-              {console.log(reviews)}
+        {isLoaded && reviewsLength >= 1 ? (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
-                className="review-info"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -172,31 +170,28 @@ function Reviews({ product }) {
                   width: "85%",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                  }}
-                >
+                <div>
                   <p
                     style={{
                       fontSize: "20px",
-                      wordWrap: "anywhere",
-                      padding: "0 10px",
                     }}
                   >
                     {review}
                   </p>
-                  <span
+                  <p
                     style={{
                       fontWeight: "bold",
-                      fontSize: "12px",
-                      color: "hwb(49 76% 11%)",
+                      fontSize: "16px",
+                      color: "darkgray",
                     }}
                   >
-                    {`${user.firstName}, ${user.username} commented at ${created_at}`}
-                  </span>
+                    {`${User.firstName}, ${User.username}`}
+                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
+                      {" "}
+                      commented at{" "}
+                    </span>
+                    {`${created_at}`}
+                  </p>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}
