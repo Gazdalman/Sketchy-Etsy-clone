@@ -157,7 +157,7 @@ function Reviews({product}) {
 
         {isLoaded && reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <>
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
                 style={{
                   display: "flex",
@@ -167,9 +167,26 @@ function Reviews({product}) {
                 }}
               >
                 <div>
-                  <p>{review}</p>
-                  <p>
-                    {User.firstName} {User.username} {created_at}
+                  <p
+                    style={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    {review}
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      color: "darkgray",
+                    }}
+                  >
+                    {`${User.firstName}, ${User.username}`}
+                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
+                      {" "}
+                      commented at{" "}
+                    </span>
+                    {`${created_at}`}
                   </p>
                 </div>
                 <div
