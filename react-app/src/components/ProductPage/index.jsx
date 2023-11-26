@@ -51,6 +51,9 @@ const ProductPage = () => {
       {prodArr.map((product) => (
         <div key={product.id}>
           <a key={product.id} href={`/products/${product.id}`}>
+            <div>
+              <img src={product.preview} alt={`Product #${product.id} - ${product.name}`} />
+            </div>
             <div>{product.name}</div>
             <span>${product.price}</span>
             <span>{product.seller}</span>

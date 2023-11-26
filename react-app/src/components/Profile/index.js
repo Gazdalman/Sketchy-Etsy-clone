@@ -52,6 +52,7 @@ export default function Profile() {
           />
         </div>
 
+
         <div style={{ display: "flex", gap: "15px" }}>
           <div>
             <h3

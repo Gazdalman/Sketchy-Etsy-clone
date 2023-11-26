@@ -35,18 +35,19 @@ export const getAllProducts = () => async dispatch => {
   }
 }
 
-export const editProduct = (product, productId, images) => async dispatch => {
-  const res = await fetch(`/api/products/${productId}`, {
+export const editProduct = (product, productId) => async dispatch => {
+  const res = await fetch(`/api/products/${productId}/edit`, {
     method: 'PUT',
-    body: {
-      ...product
-    }
+    body: product
   })
-
-  return res.json();
+  if (res.ok) {
+    const prod = await res.json()
+    return prod
+  }
+  return res.json()
 }
 
-export const createProduct = (product) => async dispatch => {
+export const createProduct = (product, images) => async dispatch => {
   const res = await fetch('/api/products/form', {
     method: 'POST',
     body: product
@@ -54,7 +55,12 @@ export const createProduct = (product) => async dispatch => {
 
   if (res.ok) {
     const product = await res.json();
-    console.log(product);
+    for (const image of images) {
+      await fetch(`/api/products/${product.id}/images`, {
+        method: 'POST',
+        body: image
+      })
+    }
     dispatch(changeProducts(product))
     return product.id
   }
@@ -78,7 +84,7 @@ export const deleteProductThunk = (productId) => async dispatch => {
   const res = await fetch(`/api/products/${productId}`, {
     method: "DELETE"
   });
-  dispatch(deleteProduct(productId))
+  dispatch(getAllProducts())
   return res
 }
 
