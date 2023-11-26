@@ -47,10 +47,10 @@ export default function CheckOut() {
               <p>{parseFloat(item.price * item.quantity).toFixed(2)}</p>
             </div>
           ))}
-          <h4>Total: {subtotal.toFixed(2)}</h4>
-          <button onClick={(e) => handleClick(e)}>Confirm</button>
+          <h4>Total: ${subtotal.toFixed(2)}</h4>
+          <button className="checkout-btn" onClick={(e) => handleClick(e)}>Confirm</button>
           <NavLink to="/cart">
-            <button>Cancel</button>
+            <button className="checkout-btn" >Cancel</button>
           </NavLink>
         </>
       )}
