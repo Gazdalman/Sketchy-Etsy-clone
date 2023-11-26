@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
 
             <NavLink className="nav-link"  to="/home">
                <i className="fa-solid fa-skull nav-btn"
-                  style={{fontSize:40, cursor: "pointer", marginLeft:50}}
+                  style={{fontSize:70, cursor: "pointer", marginLeft:50, marginTop:50}}
                 >
               </i>
             </NavLink>
