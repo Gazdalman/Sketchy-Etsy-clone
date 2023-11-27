@@ -68,6 +68,7 @@ export default function UserWishlist({ user }) {
                     modalComponent={<DeleteWish product={product} />}
                   />
                   <button
+                    className="addItemToCartBtn"
                     value={product.id}
                     onClick={(e) => handleClick(e, product)}
                   >

@@ -49,7 +49,9 @@ export default function UserReviews({ user }) {
                     {!review.seller_commented &&
                       currUser &&
                       currUser.id == user.id && (
-                        <button disabled>Respond</button>
+                        <button style={{ width: "100%" }} disabled>
+                          Respond
+                        </button>
                       )}
                   </div>
                 </div>
