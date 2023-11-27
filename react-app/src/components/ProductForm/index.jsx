@@ -55,9 +55,10 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
-    if (!description || description.length < 10) setDisabled(true);
-    if (!prevImg && type != "edit") setDisabled(true);
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
+    else if (!description || description.length < 10) setDisabled(true)
+    else if (!prevImg && type != "edit") setDisabled(true)
+    else setDisabled(false)
   }, [name, description, prevImg]);
 
   if (!user) {
@@ -78,13 +79,13 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        product.append(`img${num}`, img);
+        images.push(img);
       }
       num += 1;
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product));
+    const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
 
