@@ -68,13 +68,13 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
-    else if (!description || description.length < 10) setDisabled(true)
-    else if (!prevImg && type != "edit") setDisabled(true)
-    else setDisabled(false)
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
+    if (!description || description.length < 10) setDisabled(true);
+    if (!prevImg && type != "edit") setDisabled(true);
   }, [name, description, prevImg]);
 
   if (!user) {
+    return history.replace("/");
     return history.replace("/");
   }
 
@@ -88,18 +88,31 @@ const ProductFormPage = ({ type, product }) => {
     product.append("price", price);
     product.append("units_available", unitsAvailable);
     product.append("preview", prevImg);
+    e.preventDefault();
+    const product = new FormData();
+    const images = [];
+    product.append("name", name);
+    product.append("description", description);
+    product.append("category", category);
+    product.append("price", price);
+    product.append("units_available", unitsAvailable);
+    product.append("preview", prevImg);
 
+    let num = 1;
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const imageData = new FormData()
-        imageData.append('image', img)
-        images.push(imageData);
+        const image = new FormData();
+        image.append(`image`, img);
+        images.push(image);
       }
       num += 1;
     }
 
     setImageLoading(true);
+    const id = await dispatch(createProduct(product, images));
+    return history.push(`/products/${id}`);
+  };
     const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
@@ -112,32 +125,52 @@ const ProductFormPage = ({ type, product }) => {
     productData.append("category", category);
     productData.append("price", price);
     productData.append("units_available", unitsAvailable);
+    e.preventDefault();
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("description", description);
+    productData.append("category", category);
+    productData.append("price", price);
+    productData.append("units_available", unitsAvailable);
 
     const updated = await dispatch(editProduct(productData, product.id));
+    const updated = await dispatch(editProduct(productData, product.id));
     if (updated.errors) {
+      const errs = {};
       const errs = {};
       for (const err in updated.errors) {
         const parts = err.split(" : ");
         errs[parts[0]] = parts[1];
+        const parts = err.split(" : ");
+        errs[parts[0]] = parts[1];
       }
       setErrors(errs);
+      setErrors(errs);
       if (errors.not_found || errors.unauthorized) {
+        return history.replace("/");
         return history.replace("/");
       }
     } else {
       return history.push(`/products/${updated.id}`);
+      return history.push(`/products/${updated.id}`);
     }
+  };
   };
 
   const goBack = (e) => {
     e.preventDefault();
     return history.goBack();
   };
+    e.preventDefault();
+    return history.goBack();
+  };
 
   return !imageLoading ? (
     <div className="productForm">
+    <div className="productForm">
       <h1>What Are Yuh Sellin'?</h1>
       <form
+        onSubmit={type !== "edit" ? handleCreate : handleEdit}
         onSubmit={type !== "edit" ? handleCreate : handleEdit}
         encType="multipart/form-data"
       >
@@ -181,7 +214,15 @@ const ProductFormPage = ({ type, product }) => {
             placeholder={
               '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
             }
+            placeholder={
+              '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
+            }
           />
+          <p
+            className={`char-count ${
+              2000 - description.length <= 50 ? "low-count" : ""
+            }`}
+          >
           <p
             className={`char-count ${
               2000 - description.length <= 50 ? "low-count" : ""
@@ -261,6 +302,7 @@ const ProductFormPage = ({ type, product }) => {
             step=".01"
             value={checkPrice(price)}
             placeholder="$USD"
+            onChange={(e) => setPrice(e.target.value)}
             onChange={(e) => setPrice(e.target.value)}
             onBlur={(e) => {
               const parsedValue = parseFloat(e.target.value).toFixed(2);
