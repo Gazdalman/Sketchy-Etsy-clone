@@ -126,4 +126,5 @@
   display: inline-flex;
   justify-content: flex-start;
   gap: 15px;
+  color: hwb(173 29% 47%);
 }

@@ -4,6 +4,7 @@ import { getWish } from "../../store/wishlist";
 import { addItemToCart, getCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
+import "./Profile.css";
 
 export default function UserWishlist({ user }) {
   const dispatch = useDispatch();
