@@ -28,7 +28,7 @@ function LoginFormPage() {
       <h1 className="loginTitle">Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Username/Email
+          Username
           <input
             className="loginInput"
             type="text"

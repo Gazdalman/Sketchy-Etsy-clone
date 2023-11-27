@@ -12,9 +12,11 @@ export default function UserWishlist({ user }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getWish())
-      .then(() => dispatch(getCart()))
-      .then(() => setIsLoaded(true));
+    if (user) {
+      dispatch(getWish())
+        .then(() => dispatch(getCart()))
+        .then(() => setIsLoaded(true));
+    }
   }, [dispatch]);
 
   // useEffect(() => {
@@ -29,6 +31,7 @@ export default function UserWishlist({ user }) {
     } else {
       dispatch(addItemToCart(productId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return (

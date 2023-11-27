@@ -56,6 +56,7 @@ const ProductShow = () => {
     } else {
       dispatch(addItemToCart(prodId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return Object.keys(product).length > 0 &&

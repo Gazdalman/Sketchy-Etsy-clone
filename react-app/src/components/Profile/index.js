@@ -32,7 +32,7 @@ export default function Profile() {
     }
   }, [dispatch]);
 
-  if (isLoaded && Number(user.id) === Number(userId)) {
+  if (isLoaded && user && Number(user.id) === Number(userId)) {
     return (
       <div className="profileContainer">
         <h1>
@@ -40,14 +40,14 @@ export default function Profile() {
         </h1>
         <div className="profileButtonContainer">
           <NavLink to="/new_product">
-            <button>List New Product</button>
+            <button className="proNewProdBtn">List New Product</button>
           </NavLink>
           <NavLink to="/editAccount">
-            <button>Edit Profile</button>
+            <button className="editProfileBtn">Edit Profile</button>
           </NavLink>
 
           <OpenModalButton
-            modalClasses={["delete-button-container"]}
+            modalClasses={["delete-button-container", "delAcountButton"]}
             buttonText="Delete your Account"
             modalComponent={<DeleteAccount />}
           />
