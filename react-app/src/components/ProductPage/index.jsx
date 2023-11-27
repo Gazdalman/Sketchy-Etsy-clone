@@ -115,17 +115,17 @@ const ProductPage = () => {
 
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
-                <div className="prod-page-btn-container">
-                  {/* {  userWish.products[product.id] == undefined  &&  ( */}
-
+                <div id="prod-page-btn-container">
                   <div
-                    className="wish-btn"
+                    className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                    {user &&
+                    userWish.products &&
+                    userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart"></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-regular fa-heart"></i>
                     )}
                   </div>
 

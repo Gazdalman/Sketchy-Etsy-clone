@@ -67,8 +67,8 @@
 .userWishlistContainer {
   display: flex;
   justify-items: flex-start;
-  flex-wrap: wrap;
   gap: 15px;
+  flex-wrap: wrap;
   /* overflow-y: scroll hidden; */
 }
 .indvUserProducts,

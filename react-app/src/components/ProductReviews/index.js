@@ -153,15 +153,8 @@ function Reviews({ product }) {
 
         {isLoaded && reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            <div
-              style={{
-                display: "flex",
-                borderBottom: "1px solid grey",
-                padding: "5px",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+              {console.log(reviews)}
               <div
                 className="review-info"
                 style={{
