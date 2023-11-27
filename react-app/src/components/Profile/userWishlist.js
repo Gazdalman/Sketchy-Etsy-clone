@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWish } from "../../store/wishlist";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import ConfirmAdd from "../ConfirmAddTo";
+import "./Profile.css";
 
 export default function UserWishlist({ user }) {
   const dispatch = useDispatch();
