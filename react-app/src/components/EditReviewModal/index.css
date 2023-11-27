@@ -39,3 +39,10 @@
 .textarea {
   width: 90%;
 }
+.errorsE {
+  color: white;
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  text-align: center;
+}

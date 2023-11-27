@@ -65,8 +65,6 @@ function Reviews({ product }) {
       .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
 
-  const commentedat = "commented at";
-
   return (
     <>
       <div
@@ -183,6 +181,8 @@ function Reviews({ product }) {
                   <p
                     style={{
                       fontSize: "20px",
+                      wordWrap: "anywhere",
+                      padding: "0 10px",
                     }}
                   >
                     {review}
