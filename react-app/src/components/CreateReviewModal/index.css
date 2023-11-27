@@ -52,5 +52,6 @@
   color: red;
   font-size: 18px;
   font-family: "Times New Roman", Times, serif;
-  font-weight: bolder;
+  font-weight: bold;
+  text-align: center;
 }
