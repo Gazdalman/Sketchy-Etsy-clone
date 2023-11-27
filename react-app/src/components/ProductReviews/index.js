@@ -184,8 +184,13 @@ function Reviews({ product }) {
                       color: "darkgray",
                     }}
                   >
-                    {`${user.firstName}, ${user.username} commented at ${created_at}`}
-                  </span>
+                    {`${user.firstName}, ${user.username}`}
+                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
+                      {" "}
+                      commented at{" "}
+                    </span>
+                    {`${created_at}`}
+                  </p>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}

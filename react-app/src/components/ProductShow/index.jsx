@@ -40,6 +40,20 @@ const ProductShow = () => {
     return history.push(`/products/${productId}/edit`);
   };
 
+  const changeImage = (direction) => {
+    let num = imgNum
+    if (direction == 'up' && num < - 1) {
+      num++
+      setImgNum(num)
+      console.log(imgNum);
+    } else if (direction =='down' && num > -1) {
+      num--
+      setImgNum(num)
+      console.log(imgNum);
+    }
+    alert("Item added to your shopping cart! 😊");
+  };
+
   return Object.keys(product).length > 0 &&
     +product.id === +productId &&
     +product.seller_id ? (
