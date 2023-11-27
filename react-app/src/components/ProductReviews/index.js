@@ -64,7 +64,9 @@ function Reviews({ product }) {
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
+
   const commentedat = "commented at";
+
   return (
     <>
       <div

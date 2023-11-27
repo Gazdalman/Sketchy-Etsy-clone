@@ -1,23 +1,15 @@
 .add-review-button-container {
-<<<<<<< HEAD
-  background-color: #49867f;
-=======
   background-color: green;
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167
   width: 100%;
   color: white;
 }
 #add-review {
   background-color: tan;
   color: white;
-<<<<<<< HEAD
   font-size: 20px;
   font-family: sans-serif;
   font-weight: bolder;
   padding: 15px;
-=======
-  padding: 10px;
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167
   margin: 0;
   margin-bottom: 5px;
   width: 50%;
@@ -25,10 +17,7 @@
 .title {
   font-size: 40px;
   margin-top: 10px;
-<<<<<<< HEAD
   padding: 0 10px;
-=======
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167
   margin-bottom: 0;
 }
 .form {
@@ -36,18 +25,12 @@
 }
 .textarea {
   width: 90%;
-<<<<<<< HEAD
   font-size: 20px;
-=======
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167
 }
 .textarea.textarea {
   display: flex;
   justify-content: center;
 }
-<<<<<<< HEAD
 .stars {
   font-size: 30px;
 }
-=======
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167
