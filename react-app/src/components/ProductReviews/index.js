@@ -239,7 +239,7 @@ function Reviews({ product }) {
                 </div>
               </div>
               <div className="review-buttons">
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["delete-button-container"]}
                     buttonText="Delete Review"
@@ -248,7 +248,7 @@ function Reviews({ product }) {
                     }
                   />
                 ) : null}
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["add-edit-button-container"]}
                     buttonText="Edit Review"
