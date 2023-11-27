@@ -55,10 +55,18 @@ const ProductPage = ({ prods, word }) => {
       } else {
         dispatch(addWish(productId));
 
-        if (e.target.className == "fa-regular fa-heart") {
-          e.target.className = "fa-solid fa-heart";
-        }
+      if (e.target.className == "fa-regular fa-heart") {
+        e.target.className = "fa-solid fa-heart";
       }
+    }
+  };
+
+  const handleClick = (e, prodId) => {
+    e.preventDefault();
+    if (cart[prodId]) {
+      dispatch(updateQuantity(prodId, "inc"));
+    } else {
+      dispatch(addItemToCart(prodId));
     }
   };
 
@@ -100,30 +108,27 @@ const ProductPage = ({ prods, word }) => {
 
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
-                <div className="prod-page-btn-container">
-                  {/* {  userWish.products[product.id] == undefined  &&  ( */}
-
+                <div id="prod-page-btn-container">
                   <div
-                    className="wish-btn"
+                    className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user &&
                     userWish.products &&
                     userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
+                      <i className="fa-solid fa-heart"></i>
                     ) : (
-                      <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
+                      <i className="fa-regular fa-heart"></i>
                     )}
                   </div>
 
-                  <div className="add-to-cart-btn">
-                    <OpenModalButton
-                      buttonText="Add to Cart"
-                      modalComponent={
-                        <ConfirmAdd product={product} user={user} />
-                      }
-                    />
-                  </div>
+                  <button
+                    value={product.id}
+                    onClick={(e) => handleClick(e, product.id)}
+                    className="add-to-cart-btn"
+                  >
+                    Add to cart
+                  </button>
                 </div>
               )}
             </div>
