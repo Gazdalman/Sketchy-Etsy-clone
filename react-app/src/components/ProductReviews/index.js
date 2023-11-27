@@ -73,8 +73,6 @@ function Reviews({ product }) {
       .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
 
-  const commentedat = "commented at";
-
   return (
     <>
       <div
