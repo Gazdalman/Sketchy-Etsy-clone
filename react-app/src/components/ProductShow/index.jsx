@@ -116,7 +116,7 @@ const ProductShow = () => {
       <Reviews product={product} />
     </div>
   ) : product && !product.seller_id ? (
-    <h1>Not Available</h1>
+    <h1>Loading...</h1>
   ) : null;
 };
 
