@@ -4,4 +4,5 @@ from .editAccount_form import EditAccountForm
 from .product_form import ProductForm
 from .reviewForm import ReviewForm
 from .prod_image_form import ProductImageForm
+from .product_edit_form import ProductEditForm
 # from .chechout_form import CheckoutForm

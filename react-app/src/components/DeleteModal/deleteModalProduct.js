@@ -3,10 +3,11 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 
 import "./deleteModal.css";
+import { deleteProductThunk } from "../../store/product";
 
 //PLEASE CHANGE names/variables
 
-function DeleteProduct({ product }) {
+function DeleteProduct({ product, refresh }) {
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -14,24 +15,25 @@ function DeleteProduct({ product }) {
   const deleteButton = async (e) => {
     e.preventDefault();
 
-    // await dispatch(removeProduct(product.id)).then(closeModal);
+    await dispatch(deleteProductThunk(product.id)).then(() => refresh ? history.go(0) : history.goBack()).then(closeModal);
 
     history.push("/");
   };
 
   return (
-    <div className="delete-button-container">
-      <h2>Confirm Delete</h2>
-      <p>
+    <div className="delete-button-container" id="deleteModel">
+      <h2 id="delModalTitle">Confirm Delete</h2>
+      <p id="delModalText">
         Are you sure you want to remove this product from your product list?
-        (Functionality Coming Soon...)
       </p>
-      <button id="delete-btn" onClick={deleteButton}>
-        Yes (Delete product)
-      </button>
-      <button id="keep-btn" onClick={closeModal}>
-        No (Keep product)
-      </button>
+      <div id="delModalButtons">
+        <button id="delete-btn" onClick={deleteButton}>
+          Yes (Delete product)
+        </button>
+        <button id="keep-btn" onClick={closeModal}>
+          No (Keep product)
+        </button>
+      </div>
     </div>
   );
 }

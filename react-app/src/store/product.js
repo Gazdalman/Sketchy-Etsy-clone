@@ -35,15 +35,16 @@ export const getAllProducts = () => async dispatch => {
   }
 }
 
-export const editProduct = (product, productId, images) => async dispatch => {
-  const res = await fetch(`/api/products/${productId}`, {
+export const editProduct = (product, productId) => async dispatch => {
+  const res = await fetch(`/api/products/${productId}/edit`, {
     method: 'PUT',
-    body: {
-      ...product
-    }
+    body: product
   })
-
-  return res.json();
+  if (res.ok) {
+    const prod = await res.json()
+    return prod
+  }
+  return res.json()
 }
 
 export const createProduct = (product, images) => async dispatch => {

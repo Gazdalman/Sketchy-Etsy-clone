@@ -10,7 +10,6 @@
   background: url(../../assets/wave.png);
   background-size: cover;
   background-repeat: no-repeat;
-
 }
 
 .nav-sub-container {
@@ -20,7 +19,6 @@
   align-items: center;
 
   margin: 5%;
-
 }
 
 .nav-sub-container > * {

@@ -21,6 +21,8 @@ import Profile from "./components/Profile";
 import EditAccountPage from "./components/EditAccountPage";
 import PastOrder from "./components/Profile/PastOrder";
 import Reviews from "./components/Review";
+import EditProduct from "./components/EditComponent";
+
 
 
 /* Import thunks */
@@ -57,7 +59,10 @@ function App() {
             <ProductShow />
           </Route>
           <Route exact path="/new_product">
-            <ProductFormPage type={"create"} />
+            <ProductFormPage />
+          </Route>
+          <Route exact path="/products/:productId/edit">
+            <EditProduct />
           </Route>
           <Route exact path="/cart">
             <Cart />

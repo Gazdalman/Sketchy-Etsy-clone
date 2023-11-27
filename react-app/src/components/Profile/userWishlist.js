@@ -17,9 +17,9 @@ export default function UserWishlist({ user }) {
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(wishlist);
-  }, [isLoaded]);
+  // useEffect(() => {
+  //   console.log(wishlist);
+  // }, [isLoaded]);
 
   const handleClick = (e, product) => {
     e.preventDefault();
@@ -34,22 +34,38 @@ export default function UserWishlist({ user }) {
   return (
     <>
       {isLoaded && (
-        <div>
+        <div className="userWishlistContainer">
           {Object.values(wishlist.products).map((product) => (
-            <div key={product.id}>
-              <div>{product.name}</div>
-              <div>{product.price}</div>
-              <OpenModalButton
-                modalClasses={["delete-button-container"]}
-                buttonText="Delete Product"
-                modalComponent={<DeleteWish product={product} />}
-              />
-              <button
-                value={product.id}
-                onClick={(e) => handleClick(e, product)}
-              >
-                Add to cart
-              </button>
+            <div key={product.id} className="indvUserWishItems">
+              <div className="userProductImage">
+                <>
+                  {product.product_image ? (
+                    <img src={product.product_image} />
+                  ) : (
+                    <>
+                      <p>Product Image</p>
+                      <p>Coming Soon...</p>
+                    </>
+                  )}
+                </>
+              </div>
+              <div>
+                <h4>{product.name}</h4>
+                <div className="userProductPrice">{product.price}</div>
+                <div className="userWishlistButtons">
+                  <OpenModalButton
+                    modalClasses={["delete-button-container"]}
+                    buttonText="Delete Product"
+                    modalComponent={<DeleteWish product={product} />}
+                  />
+                  <button
+                    value={product.id}
+                    onClick={(e) => handleClick(e, product)}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

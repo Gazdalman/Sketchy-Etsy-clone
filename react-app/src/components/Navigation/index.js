@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -10,7 +10,7 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-
+  const location = useLocation()
   return (
 
     <nav className="nav-main-container">
@@ -41,9 +41,10 @@ function Navigation({ isLoaded }) {
                 </div>
               </NavLink>
             </li>
-            {isLoaded && (
+            {(isLoaded) && (
             <li>
-              <ProfileButton user={sessionUser} />
+              <ProfileButton user={sessionUser}
+              disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
             </li>
             )}
         </div>
