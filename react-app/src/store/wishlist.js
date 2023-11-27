@@ -61,12 +61,13 @@ export const addWish = (productId) => async (dispatch) => {
     },
   });
 
-  if (response.ok) {
-    const message = response.json();
+    if (response.ok) {
+        const message = response.json();
 
-    dispatch(getWish());
-    return message;
-  }
+        dispatch(getWish());
+        return message
+    };
+
 };
 
 export default function wishlist(state = initialState, action) {

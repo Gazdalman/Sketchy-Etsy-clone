@@ -44,10 +44,10 @@ function ProfileButton({ user, disabled }) {
     <>
       <div
       onClick={openMenu}
-      style={{fontSize:50, cursor:"pointer"}}
+      style={{cursor:"pointer"}}
       className="nav-btn"
       >
-          <i class="fa-solid fa-user" style={{color: "#322e3f", fontSize:40}}></i>
+          <i class="fa-solid fa-user" style={{color: "#322e3f", fontSize:30}}></i>
       </div>
       <ul className={`${ulClassName} profile-dropdown`} ref={ulRef}>
         {user ? (
