@@ -63,7 +63,7 @@ function ReviewFormModal({ productId }) {
             alignItems: "center",
           }}
         >
-          <h1 className="title">Describe the Product in Your own Words</h1>
+          <h1 className="title">Add ProductReview</h1>
           <form className="form" onSubmit={handleSubmit}>
             <label style={{ width: "100%" }}>
               <textarea
