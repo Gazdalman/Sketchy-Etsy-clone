@@ -120,7 +120,7 @@ export default function Cart() {
             </div>
 
 
-            <NavLink to="/">
+            <NavLink to="/home">
               <button className="payment-btn">Continue Shopping</button>
             </NavLink>
             <NavLink to="/checkout">
