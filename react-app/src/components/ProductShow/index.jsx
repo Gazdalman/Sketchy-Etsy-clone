@@ -7,6 +7,7 @@ import { addItemToCart, updateQuantity } from "../../store/cart";
 import { deleteProductThunk } from "../../store/product";
 import OpenModalButton from "../OpenModalButton";
 import DeleteProduct from "../DeleteModal/deleteModalProduct";
+import "./index.css";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
