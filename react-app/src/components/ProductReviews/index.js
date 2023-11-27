@@ -179,8 +179,8 @@ function Reviews({product}) {
                   <p
                     style={{
                       fontWeight: "bold",
-                      fontSize: "16px",
-                      color: "darkgray",
+                      fontSize: "12px",
+                      color: "hwb(49 76% 11%)",
                     }}
                   >
                     {`${User.firstName}, ${User.username}`}
