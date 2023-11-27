@@ -1,8 +1,4 @@
 /* TODO Add site wide styles */
-/* body {
-  background-color: rgba(226, 220, 193, 0.75);
-  color: #322e3f;
-} */
 body {
   margin: 0;
   background: rgb(174, 169, 190) 50%;
@@ -51,4 +47,12 @@ button:hover {
 button:disabled {
   background-color: grey;
   cursor: not-allowed;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a {
+  color: #49867f;
 }

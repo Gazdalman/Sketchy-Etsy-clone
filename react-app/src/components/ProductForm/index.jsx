@@ -56,10 +56,10 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
-    else if (!description || description.length < 10) setDisabled(true)
-    else if (!prevImg && type != "edit") setDisabled(true)
-    else setDisabled(false)
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
+    else if (!description || description.length < 10) setDisabled(true);
+    else if (!prevImg && type != "edit") setDisabled(true);
+    else setDisabled(false);
   }, [name, description, prevImg]);
 
   if (!user) {

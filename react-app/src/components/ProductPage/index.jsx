@@ -63,58 +63,59 @@ const ProductPage = () => {
   return isLoaded ? (
     <div id="product-page">
       <h1>Peruse Our Products</h1>
+      <div className="products-main-contianer">
+        {prodArr.map((product) => (
+          <div key={product.id} className="products-card">
+            <a key={product.id} href={`/products/${product.id}`}>
+              <div>
+                <img
+                  className="products-img"
+                  src={product.preview}
+                  alt={`Product #${product.id} - ${product.name}`}
+                />
 
-      {prodArr.map((product) => (
-        <div key={product.id}>
-          <a key={product.id} href={`/products/${product.id}`}>
-            <div>
-              <img
-                className="products-img"
-                src={product.preview}
-                alt={`Product #${product.id} - ${product.name}`}
-              />
-
-              <div className="products-detail">
-                <div>{product.name}</div>
-                <span id="price">
-                  {"  "}${product.price}
-                  {"  "}
-                </span>
+                <div className="products-detail">
+                  <div>{product.name}</div>
+                  <span id="price">
+                    {"  "}${product.price}
+                    {"  "}
+                  </span>
+                </div>
+                <span>By {product.seller}</span>
               </div>
-              <span>By {product.seller}</span>
-            </div>
-          </a>
+            </a>
 
-          <div style={{ margin: 20 }} className="prod-btns-container">
-            {user && user.id != product.seller_id && (
-              <div id="prod-page-btn-container">
-                {userWish.products[product.id] == undefined && (
-                  <div
-                    className="add-wish-btn"
-                    onClick={(e) => addToWish(e, product)}
+            <div style={{ margin: 20 }} className="prod-btns-container">
+              {user && user.id != product.seller_id && (
+                <div id="prod-page-btn-container">
+                  {userWish.products[product.id] == undefined && (
+                    <div
+                      className="add-wish-btn"
+                      onClick={(e) => addToWish(e, product)}
+                    >
+                      {user &&
+                      userWish.products &&
+                      userWish.products[product.id] ? (
+                        <i className="fa-solid fa-heart"></i>
+                      ) : (
+                        <i className="fa-regular fa-heart"></i>
+                      )}
+                    </div>
+                  )}
+
+                  <button
+                    value={product.id}
+                    onClick={(e) => handleClick(e, product.id)}
+                    className="add-to-cart-btn"
                   >
-                    {user &&
-                    userWish.products &&
-                    userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart"></i>
-                    ) : (
-                      <i className="fa-regular fa-heart"></i>
-                    )}
-                  </div>
-                )}
-
-                <button
-                  value={product.id}
-                  onClick={(e) => handleClick(e, product.id)}
-                  className="add-to-cart-btn"
-                >
-                  Add to cart
-                </button>
-              </div>
-            )}
+                    Add to cart
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   ) : (
     <h3>Loading...</h3>
