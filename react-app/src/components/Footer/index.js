@@ -2,7 +2,9 @@ import "./index.css";
 function Footer() {
   return (
     <>
-      <h4>Take a Looker at our illustrious Creation Team</h4>
+      <h4 className="footer-header">
+        Take a Looker at our illustrious Creation Team
+      </h4>
       <div className="bodody">
         <h6 style={{ color: "red" }}>
           The Naphthenic "Nina (Krystina) Bell"{" "}
