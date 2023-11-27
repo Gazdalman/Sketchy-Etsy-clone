@@ -22,8 +22,6 @@ const ProductPage = ({ prods, word }) => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-
   // console.log("user", user);
   // console.log("products state", products);
   // console.log("favorite", favorite)
@@ -39,10 +37,9 @@ const ProductPage = ({ prods, word }) => {
         }
       })
       .then(() => {
-        setIsLoaded(true)
+        setIsLoaded(true);
       });
   }, [dispatch]);
-
 
   const addToWish = (e, product) => {
     e.preventDefault();
@@ -58,12 +55,14 @@ const ProductPage = ({ prods, word }) => {
       } else {
         dispatch(addWish(productId));
 
-      if (e.target.className == "fa-regular fa-heart") {
-        e.target.className = "fa-solid fa-heart";
-      }
-    }
-  };
+          if (e.target.className == "fa-regular fa-heart") {
+            e.target.className = "fa-solid fa-heart";
+          };
+    };
 
+    }
+
+  };
 
 
 

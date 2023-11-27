@@ -57,6 +57,13 @@ export const addWish = (productId) => async (dispatch) => {
     },
   });
 
+    if (response.ok) {
+        const message = response.json();
+
+        dispatch(getWish());
+        return message
+    };
+
   if (response.ok) {
     const message = response.json();
 
