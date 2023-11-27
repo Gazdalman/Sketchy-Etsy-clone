@@ -72,6 +72,7 @@ function LoginFormModal() {
               setPassword("password");
             }}
           >
+            <option value={null}>--Select--</option>
             {demoUsers.map((user) => (
               <option key={user} value={user}>
                 {user}

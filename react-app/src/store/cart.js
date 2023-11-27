@@ -37,18 +37,17 @@ export const removeItem = (itemId) => async (dispatch) => {
   }
 };
 
-export const updateQuantity = (itemId, change) => async (dispatch) => {
-  const res = await fetch(`/api/cart/${change}/${itemId}`, {
+export const updateQuantity = (itemId, change, quantity) => async (dispatch) => {
+  const res = await fetch(`/api/cart/${change}/${itemId}/${quantity}`, {
     method: "PUT",
   });
   if (res.ok) {
     const cartData = await res.json();
-    if (cartData.error) {
-      console.log(cartData.error);
-      return;
-    }
     dispatch(getCart());
+    return cartData
   }
+  let errors = await res.json()
+  return errors;
 };
 
 export const addItemToCart = (itemId) => async (dispatch) => {
@@ -60,6 +59,10 @@ export const addItemToCart = (itemId) => async (dispatch) => {
   });
   if (res.ok) {
     dispatch(getCart());
+  } else {
+    let errors = await res.json()
+    return errors
+
   }
 };
 

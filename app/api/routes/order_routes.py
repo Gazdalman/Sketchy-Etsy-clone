@@ -22,7 +22,7 @@ def get_one(id):
   order = Order.query.get(id)
   if order:
     return order.to_dict()
-  return {"error": f"Order #{id} not found"}
+  return {"errors": f"Order #{id} not found"}, 401
 
 @order_routes.route('/place', methods=["POST"])
 @login_required
@@ -40,7 +40,7 @@ def place_order():
   db.session.add(order)
   db.session.commit()
 
-  errors = {"errors": []}
+  errors = {}
 
   for item in cart_items:
 
@@ -49,7 +49,7 @@ def place_order():
 
     # Check whether product has enough units available to be added to order
     if product.units_available < 1:
-      errors['errors'].append(f'Order could not be placed! "{product.name} only has {product.units_available} units in stock!"')
+      errors[f'{product.name}'] = f'Order could not be placed! "{product.name} only has {product.units_available} units in stock!"'
 
     # Check if product has already been added to the order by querying the joins table ordered by quantity
     link = OrderProduct.query.filter(OrderProduct.product_id == item.product_id, OrderProduct.order_id == order.id).order_by(OrderProduct.quantity).first()
@@ -64,6 +64,10 @@ def place_order():
     # Decrease the available units of the product
     product.units_available = product.units_available - 1
 
+    # Remove product from cart
+    user_cart.cart_product_list.remove(product)
+
+
     # Commit the session to save unit decrease
     db.session.commit()
 
@@ -71,7 +75,7 @@ def place_order():
   if len(errors['errors']):
     db.session.delete(order)
     db.session.commit()
-    return errors
+    return errors, 401
 
   # Convert the order to a dictionary
   order_dict = order.to_dict()
