@@ -125,7 +125,6 @@ const ProductFormPage = ({ type, product }) => {
       <h1>What Are Yuh Sellin'?</h1>
       <form
         onSubmit={type !== "edit" ? handleCreate : handleEdit}
-        onSubmit={type !== "edit" ? handleCreate : handleEdit}
         encType="multipart/form-data"
       >
         <span>
