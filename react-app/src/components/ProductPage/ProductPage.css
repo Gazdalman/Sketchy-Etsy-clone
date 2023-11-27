@@ -108,9 +108,7 @@ body {
 
 } */
 
-#prod-page-btn-container {
-    background-color: #fff;
-}
+
 
 .products-main-contianer {
     display: flex;
@@ -166,20 +164,28 @@ body {
 
 .add-to-cart-btn {
     font-size: 16px;
-    width: 100%;
+    width: 80%;
     color: #ffffff;
     border: 5px solid #ab434a;
     border-radius: 12px;
     background-color: #ab434a;
     cursor: pointer;
 
-    position: relative;
+
     padding: 15px;
 }
 
 .add-to-cart-btn:hover {
     background-color: #49867f;
-    border: 5px solid #322e3f;
+    border: 5px solid #49867f;
+}
+
+.prod-page-btn-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+
+
 }
 
 a:link {

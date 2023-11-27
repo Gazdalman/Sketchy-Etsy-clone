@@ -20,8 +20,6 @@ const ProductPage = () => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-
   // console.log("user", user);
   // console.log("products state", products);
   // console.log("favorite", favorite)
@@ -37,7 +35,7 @@ const ProductPage = () => {
         }
       })
       .then(() => {
-        setIsLoaded(true)
+        setIsLoaded(true);
       });
   }, [dispatch]);
 
@@ -46,21 +44,36 @@ const ProductPage = () => {
 
     const productId = product.id;
 
-
-    if (userWish.products[productId]) {
-
-
     if (userWish && userWish.products) {
 
       if (userWish.products[productId]) {
 
-        dispatch(removeWish(productId));
-        if (e.target.className == "fa-solid fa-heart") {
-          e.target.className = "fa-regular fa-heart";
-        };
+          dispatch(removeWish(productId));
+          if (e.target.className == "fa-solid fa-heart") {
+            e.target.className = "fa-regular fa-heart";
+          };
 
-      } else {
-        dispatch(addWish(productId));
+      }else {
+          dispatch(addWish(productId));
+
+          if (e.target.className == "fa-regular fa-heart") {
+            e.target.className = "fa-solid fa-heart";
+          };
+    };
+
+    }
+
+
+  };
+
+
+
+  const handleClick = (e, prodId) => {
+    e.preventDefault();
+    if (cart[prodId]) {
+      dispatch(updateQuantity(prodId, "inc"));
+    } else {
+      dispatch(addWish(productId));
 
       if (e.target.className == "fa-regular fa-heart") {
         e.target.className = "fa-solid fa-heart";
@@ -96,15 +109,25 @@ const ProductPage = () => {
 
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
-                <div id="prod-page-btn-container">
+                <div className="prod-page-btn-container">
+                  {/* {  userWish.products[product.id] == undefined  &&  ( */}
+
+                    <button
+                      value={product.id}
+                      onClick={(e) => handleClick(e, product.id)}
+                      className="add-to-cart-btn"
+                    >
+                      Add to cart
+                    </button>
+
                   <div
-                    className="add-wish-btn"
+                    className="wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart"></i>
+                    {user && userWish.products && userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5}}></i>
                     ) : (
-                      <i className="fa-regular fa-heart"></i>
+                      <i className="fa-regular fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5}}></i>
                     )}
                   </div>
 

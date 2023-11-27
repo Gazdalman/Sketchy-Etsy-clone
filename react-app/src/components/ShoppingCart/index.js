@@ -13,7 +13,7 @@ export default function Cart() {
 
   const user = useSelector((state) => state.session.user);
   const cart = useSelector((state) => state.cart);
-  const [ payment, setPayment ] = useState("option1")
+  const [payment, setPayment] = useState("option1");
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -62,13 +62,22 @@ export default function Cart() {
         {isLoaded &&
           Object.values(cart).map((item) => (
             <div key={item.id} className="cart-card">
-              <h3 style={{fontSize:33}}>{item.name}</h3>
+              <h3 style={{ fontSize: 33 }}>{item.name}</h3>
               <p>$ {item.price}</p>
               <p>{item.description}</p>
-              <p style={{fontSize:30}}>
-                <button className="quantity-btn" onClick={() => decQuant(item)}> - </button>
+              <p style={{ fontSize: 30 }}>
+                <button className="quantity-btn" onClick={() => decQuant(item)}>
+                  {" "}
+                  -{" "}
+                </button>
                 {item["quantity"]}
-                <button className="quantity-btn" onClick={() => incQuant(item.id)}> + </button>
+                <button
+                  className="quantity-btn"
+                  onClick={() => incQuant(item.id)}
+                >
+                  {" "}
+                  +{" "}
+                </button>
               </p>
               <>
                 <OpenModalButton
@@ -80,55 +89,56 @@ export default function Cart() {
             </div>
           ))}
       </div>
-        <div className="payment">
-          <h2>How will you pay?</h2>
-          <div className="radio-input-payment">
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op1"
-              value="option1"
-              checked={payment === "option1"}
-              onChange={onOptionChange}
-            />
-            <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
-          </div>
-          <div className="radio-inner">
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op2"
-              value="option2"
-              checked={payment === "option2"}
-              onChange={onOptionChange}
-            />
-            <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
-          </div>
-
-          <div className="radio-inner">
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op3"
-              value="option3"
-              checked={payment === "option3"}
-              onChange={onOptionChange}
-            />
-            <label for="op3">
-              <i class="fa-solid fa-ice-cream"></i>
-            </label>
-          </div>
-          <NavLink to="/home">
-            <button className="payment-btn">Continue Shopping</button>
-          </NavLink>
-          <NavLink to="/checkout">
-            <button className="payment-btn">Checkout</button>
-          </NavLink>
+      <div className="payment">
+        <h2>How will you pay?</h2>
+        <div className="radio-input-payment">
+          <input
+            className="radio-btn"
+            type="radio"
+            id="op1"
+            value="option1"
+            checked={payment === "option1"}
+            onChange={onOptionChange}
+          />
+          <label for="op1">
+            <i class="fa-regular fa-credit-card"></i>
+          </label>
+        </div>
+        <div className="radio-inner">
+          <input
+            className="radio-btn"
+            type="radio"
+            id="op2"
+            value="option2"
+            checked={payment === "option2"}
+            onChange={onOptionChange}
+          />
+          <label for="op2">
+            <i class="fa-solid fa-pizza-slice"></i>
+          </label>
         </div>
 
-      ) : (
-        <h2>Your cart is empty</h2>
-      )
-      }
-    </div>) : null
+        <div className="radio-inner">
+          <input
+            className="radio-btn"
+            type="radio"
+            id="op3"
+            value="option3"
+            checked={payment === "option3"}
+            onChange={onOptionChange}
+          />
+          <label for="op3">
+            <i class="fa-solid fa-ice-cream"></i>
+          </label>
+        </div>
+        <NavLink to="/home">
+          <button className="payment-btn">Continue Shopping</button>
+        </NavLink>
+        <NavLink to="/checkout">
+          <button className="payment-btn">Checkout</button>
+        </NavLink>
+      </div>
+      ) : (<h2>Your cart is empty</h2>) }
+    </div>
+  ) : null;
 }
