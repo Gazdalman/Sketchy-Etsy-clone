@@ -70,3 +70,35 @@
   height: 200px;
   width: 100%;
 } */
+img {
+  width: 1000px;
+  height: auto;
+}
+.add-button {
+  font-size: 18px;
+  width: 25%;
+  color: #ffffff;
+  border: 5px solid #3a6673;
+  border-radius: 12px;
+  background-color: #3a6673;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-button:hover {
+  background-color: #e2dcc2;
+  border: 5px solid #322e3f;
+}
+#product-images-container {
+  text-align: center;
+}
+#product-show {
+  margin: 0 10px;
+}
+#product-name {
+  text-transform: capitalize;
+}

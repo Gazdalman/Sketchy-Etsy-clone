@@ -1,11 +1,11 @@
 /* BoilerPlate */
 import React, { useState, useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { authenticate } from "./store/session";
 
 /* Import Routes */
-  /* Landing Page*/
+/* Landing Page*/
 import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import SignupFormPage from "./components/SignupFormPage";
@@ -17,13 +17,11 @@ import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductShow";
 import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
-// import Reviews from "./components/Review";
+import Footer from "./components/Footer";
 import EditAccountPage from "./components/EditAccountPage";
 import PastOrder from "./components/Profile/PastOrder";
 import Reviews from "./components/Review";
 import EditProduct from "./components/EditComponent";
-
-
 
 /* Import thunks */
 import { getAllProducts } from "./store/product";
@@ -40,7 +38,7 @@ function App() {
 
   return (
     <>
-    {location.pathname === '/' ? null : <Navigation isLoaded={isLoaded} />}
+      {location.pathname === "/" ? null : <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route exact path="/">
@@ -48,7 +46,7 @@ function App() {
           </Route>
           <Route exact path="/home">
             <ProductPage />
-          </Route> 
+          </Route>
           <Route exact path="/login">
             <LoginFormPage />
           </Route>
@@ -88,6 +86,7 @@ function App() {
           <Route>"404: Route doesn't exist"</Route>
         </Switch>
       )}
+      {location.pathname === "/" ? null : <Footer isLoaded={isLoaded} />}
     </>
   );
 }

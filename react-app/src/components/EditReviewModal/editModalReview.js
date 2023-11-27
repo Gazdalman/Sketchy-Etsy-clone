@@ -32,6 +32,19 @@ function EditReview({ reviewId, productId }) {
   const reviewsLength = Object.values(
     useSelector((state) => state.review)
   ).length;
+  function checkCredentials() {
+    const errObj = {};
+    if (!rating) {
+      errObj.rating = "** Rating is required";
+    }
+    if (!review || review.length < 4) {
+      errObj.reviewText = "** Review text must be at least 4 characters";
+    }
+    if (review.length > 2000) {
+      errObj.reviewText = `** MANNNN YOU AINT SLICK!! That's a whole ${review.length} characters?!! Nobody tryna read dat`;
+    }
+    setErrors(errObj);
+  }
 
   const handleSubmit = async (e) => {
     const newStock = {
@@ -41,11 +54,14 @@ function EditReview({ reviewId, productId }) {
       rating,
     };
     e.preventDefault();
-    await dispatch(editAReview(reviewId, newStock, productId))
-      .then(() => closeModal())
-      .then(() => history.push(`/products/${productId + 1}`))
-      .then(() => history.push(`/products/${productId}`));
-    console.log("DO I GET PAST THE DISPATCH??");
+    if (errors && !Object.values(errors).length) {
+      await dispatch(editAReview(reviewId, newStock, productId))
+        .then(() => closeModal())
+        .then(() => history.push(`/products/${productId + 1}`))
+        .then(() => history.push(`/products/${productId}`));
+    } else {
+      console.log("ERRORS PRESENT");
+    }
   };
 
   return (
@@ -59,10 +75,11 @@ function EditReview({ reviewId, productId }) {
             cols="45"
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            required
           />
         </label>
-        <label>Rating</label>
+        {errors.reviewText ? (
+          <p className="errorsE">{errors.reviewText}</p>
+        ) : null}
 
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <label>
@@ -169,7 +186,8 @@ function EditReview({ reviewId, productId }) {
             </div>
           </label>
         </div>
-        <button id="update-review" type="submit">
+        {errors.rating && <p className="errorsE">{errors.rating}</p>}
+        <button id="update-review" type="submit" onClick={checkCredentials}>
           Update My Review
         </button>
       </form>

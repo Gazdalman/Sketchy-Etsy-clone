@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/product";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import "./index.css";
 
 import "./ProductPage.css";
 

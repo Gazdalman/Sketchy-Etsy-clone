@@ -129,7 +129,9 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {user && user.id != product.seller_id && (
-        <button onClick={(e) => handleClick(e, product)}>Add to cart</button>
+        <button className="add-button" onClick={(e) => handleClick(e, product)}>
+          Add to cart
+        </button>
       )}
       {user && user.id == product.seller_id && (
         <button onClick={edit}>Edit Product</button>
