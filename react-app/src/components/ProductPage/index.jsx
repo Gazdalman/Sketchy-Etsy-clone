@@ -55,10 +55,18 @@ const ProductPage = ({ prods, word }) => {
       } else {
         dispatch(addWish(productId));
 
-        if (e.target.className == "fa-regular fa-heart") {
-          e.target.className = "fa-solid fa-heart";
-        }
+      if (e.target.className == "fa-regular fa-heart") {
+        e.target.className = "fa-solid fa-heart";
       }
+    }
+  };
+
+  const handleClick = (e, prodId) => {
+    e.preventDefault();
+    if (cart[prodId]) {
+      dispatch(updateQuantity(prodId, "inc"));
+    } else {
+      dispatch(addItemToCart(prodId));
     }
   };
 
