@@ -1,5 +1,6 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 <<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 Revision ID: 6506cb7e81a2
 Revises: 
@@ -9,6 +10,11 @@ Revision ID: 2cfb087e8c2d
 Revises: 
 Create Date: 2023-11-22 08:25:31.237377
 >>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
+=======
+Revision ID: 1a8224881521
+Revises:
+Create Date: 2023-11-27 17:28:43.564369
+>>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
 
 """
 from alembic import op
@@ -16,11 +22,15 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 <<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 revision = '6506cb7e81a2'
 ========
 revision = '2cfb087e8c2d'
 >>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
+=======
+revision = '1a8224881521'
+>>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -110,6 +120,14 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
+=======
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+
+
+>>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
     op.create_table('wishlist_details',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('wishlist_id', sa.Integer(), nullable=True),
@@ -118,6 +136,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['wishlist_id'], ['wishlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
+=======
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE wishlist_details SET SCHEMA {SCHEMA};")
+>>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
     # ### end Alembic commands ###
 
 
