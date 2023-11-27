@@ -67,13 +67,18 @@ export default function UserOrders({ user }) {
                     </div>
                     <div className="userOrderButtons">
                       <OpenModalButton
+                        modalClasses={["ordersWriteReview"]}
                         buttonText="Write Review"
                         modalComponent={<ReviewFormModal productId={item.id} />}
                       />
-                      <button onClick={(e) => handleClick(e)}>
+                      <button
+                        className="ordersReturnItemBtn"
+                        onClick={(e) => handleClick(e)}
+                      >
                         Return Item
                       </button>
                       <button
+                        className="ordersAddToCartBtn"
                         value={item.id}
                         onClick={(e) => handleAddToCart(e, item)}
                       >
