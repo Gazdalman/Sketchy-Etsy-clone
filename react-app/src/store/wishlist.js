@@ -53,7 +53,9 @@ export const removeWish = (productId) => async (dispatch) => {
             return
         };
 
-        dispatch(deleteWish(productId));
+        dispatch(getWish());
+        // dispatch(deleteWish(productId));
+
         return message;
     };
 };
@@ -70,7 +72,7 @@ export const addWish = (productId) => async (dispatch) => {
 
     if (response.ok) {
         const message = response.json();
-        
+
         dispatch(getWish());
         return message
     };
