@@ -36,8 +36,8 @@ export default function UserProducts({ user }) {
                 <div key={item.id} className="indvUserProducts">
                   <div className="userProductImage">
                     <>
-                      {item.product_image ? (
-                        <img src={item.product_image} />
+                      {item.preview ? (
+                        <img src={item.preview} />
                       ) : (
                         <>
                           <p>Product Image</p>
@@ -49,7 +49,6 @@ export default function UserProducts({ user }) {
                   <div>
                     <a href={`/products/${item.id}`}>
                       <h4>{item.name}</h4>
-                      <img src={item.preview} />
                     </a>
                     <p className="userProductDescription">{item.description}</p>
                     <p className="userProductPrice">${item.price}</p>

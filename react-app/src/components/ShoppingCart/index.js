@@ -69,7 +69,7 @@ export default function Cart() {
             </>
           </div>
         ))}
-      <div className="payment">
+      { Object.values(cart).length ? <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-input-payment">
             <input
@@ -110,7 +110,7 @@ export default function Cart() {
           <NavLink to="/checkout">
             <button>Checkout</button>
           </NavLink>
-      </div>
+      </div> : <h2>Your cart is empty</h2>}
     </div>
   );
 }

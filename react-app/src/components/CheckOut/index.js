@@ -28,7 +28,7 @@ export default function CheckOut() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(placeOrder()).then(() => history.push("/"));
+    dispatch(placeOrder()).then(() => history.push("/home"));
   };
 
   // * Will need to override input & label styling later
