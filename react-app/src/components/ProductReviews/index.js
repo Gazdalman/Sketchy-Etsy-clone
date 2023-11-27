@@ -9,7 +9,7 @@ import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
 
-function Reviews() {
+function Reviews({ product }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
@@ -142,7 +142,7 @@ function Reviews() {
         </div>
       </div>
       <div>
-        {!commented ? (
+        {!commented && user && user.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}

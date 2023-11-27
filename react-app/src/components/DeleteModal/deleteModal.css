@@ -31,6 +31,35 @@
   padding: 5px;
 }
 
+<<<<<<< HEAD
+=======
+.delete-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete-btn {
+  width: 50%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+#keep-btn {
+  width: 50%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  margin: 0;
+  margin-bottom: 3px;
+}
+
+>>>>>>> 949648e6553dfde6025fa17dea581961ae270167
 /* Rod Delete  */
 #deleteReviewModel {
   display: flex;
@@ -64,6 +93,7 @@
 #keep-review-btn {
   padding: 5px;
 }
+<<<<<<< HEAD
 
 #delete-review-btn {
   background-color: green;
@@ -74,3 +104,5 @@
   background-color: red;
   color: white;
 }
+=======
+>>>>>>> 949648e6553dfde6025fa17dea581961ae270167

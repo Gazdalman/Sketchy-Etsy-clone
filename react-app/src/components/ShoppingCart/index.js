@@ -5,7 +5,7 @@ import { getCart, removeItem, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteItem from "../DeleteModal/deleteModalCart";
 
-import "./ShoppingCart.css"
+import "./ShoppingCart.css";
 
 export default function Cart() {
   const history = useHistory();
@@ -13,7 +13,7 @@ export default function Cart() {
 
   const user = useSelector((state) => state.session.user);
   const cart = useSelector((state) => state.cart);
-  const [ payment, setPayment ] = useState("option1")
+  const [payment, setPayment] = useState("option1");
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -42,12 +42,11 @@ export default function Cart() {
     await dispatch(updateQuantity(itemId, change));
   };
 
-  const onOptionChange = e => {
-    setPayment(e.target.value)
-  }
+  const onOptionChange = (e) => {
+    setPayment(e.target.value);
+  };
 
   return (
-
     <div className="shopping-cart-page">
       {isLoaded &&
         Object.values(cart).map((item) => (
@@ -69,7 +68,8 @@ export default function Cart() {
             </>
           </div>
         ))}
-      { Object.values(cart).length ? <div className="payment">
+      {Object.values(cart).length ? (
+        <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-input-payment">
             <input
@@ -80,7 +80,9 @@ export default function Cart() {
               checked={payment === "option1"}
               onChange={onOptionChange}
             />
-            <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
+            <label for="op1">
+              <i class="fa-regular fa-credit-card"></i>
+            </label>
 
             <input
               className="radio-btn"
@@ -90,27 +92,35 @@ export default function Cart() {
               checked={payment === "option2"}
               onChange={onOptionChange}
             />
-            <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
+            <label for="op2">
+              <i class="fa-solid fa-pizza-slice"></i>
+            </label>
 
-            <input
-              className="radio-btn"
-              type="radio"
-              id="op3"
-              value="option3"
-              checked={payment === "option3"}
-              onChange={onOptionChange}
-            />
-            <label for="op3"><i class="fa-solid fa-ice-cream"></i></label>
+            <div className="radio-inner">
+              <input
+                className="radio-btn"
+                type="radio"
+                id="op3"
+                value="option3"
+                checked={payment === "option3"}
+                onChange={onOptionChange}
+              />
+              <label for="op3">
+                <i class="fa-solid fa-ice-cream"></i>
+              </label>
+            </div>
           </div>
 
-
-          <NavLink to="/">
+          <NavLink to="/home">
             <button>Continue Shopping</button>
           </NavLink>
           <NavLink to="/checkout">
             <button>Checkout</button>
           </NavLink>
-      </div> : <h2>Your cart is empty</h2>}
+        </div>
+      ) : (
+        <h2>Your cart is empty</h2>
+      )}
     </div>
   );
 }

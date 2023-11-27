@@ -84,7 +84,14 @@ export default function UserOrders({ user }) {
         ))}
       <div style={{ marginTop: 30 }}>
         <div>
-          <Link to="/past-order" style={{ textDecoration: "none" }}>
+          <Link
+            to="/past-order"
+            style={{
+              textDecoration: "none",
+              color: "rgb(29, 51, 57)",
+              fontWeight: "bold",
+            }}
+          >
             See All Orders...
           </Link>
         </div>

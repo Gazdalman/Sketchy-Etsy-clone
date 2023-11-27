@@ -19,8 +19,24 @@
 }
 
 #modal-content {
+  height: fit-content;
+  width: 50%;
+  display: flex;
   position: absolute;
+  /* background-color: #e2dcc2; */
+  color: #322e3f;
+  border-radius: 15px;
+  justify-content: center;
+  align-content: center;
+}
+
+#modal-content > .logInModal,
+#modal-content > .signUpModal {
   background-color: #e2dcc2;
+  padding: 50px;
+  height: fit-content;
+  width: 50%;
+  display: flex;
   color: #322e3f;
   border-radius: 15px;
   justify-content: center;

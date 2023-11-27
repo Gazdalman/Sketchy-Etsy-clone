@@ -73,7 +73,7 @@ const ProductShow = () => {
         <img
           id="preview-image"
           src={product.preview}
-          alt={`Product ${product.id} Img`}
+          alt={`Product ${product.id}`}
         />
         <span id="none-prev">
           {product.images.length > 0 &&

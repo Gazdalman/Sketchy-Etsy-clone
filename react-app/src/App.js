@@ -24,6 +24,7 @@ import Reviews from "./components/Review";
 import EditProduct from "./components/EditComponent";
 
 
+
 /* Import thunks */
 import { getAllProducts } from "./store/product";
 
