@@ -105,13 +105,13 @@ export default function Cart() {
             </div>
 
 
-            <NavLink to="/">
-              <button className="payment-btn">Continue Shopping</button>
-            </NavLink>
-            <NavLink to="/checkout">
-              <button className="payment-btn">Checkout</button>
-            </NavLink>
-        </div>
+          <NavLink to="/">
+            <button>Continue Shopping</button>
+          </NavLink>
+          <NavLink to="/checkout">
+            <button>Checkout</button>
+          </NavLink>
+      </div> : <h2>Your cart is empty</h2>}
     </div>
 
   );
