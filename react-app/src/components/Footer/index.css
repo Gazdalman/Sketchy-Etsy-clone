@@ -1,3 +1,10 @@
 .bodody {
   background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h4 {
+  text-align: center;
 }
