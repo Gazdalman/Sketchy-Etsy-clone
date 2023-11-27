@@ -46,32 +46,41 @@ export default function Wishlist() {
     isLoaded && (
       <>
         <h1>Wishlist</h1>
-        {allProducts && allProducts.length > 0 && (
-          <>
-            {allProducts.map((product) => (
-              <div className="all-products" key={product.id}>
-                <div>{product.name}</div>
-                <div>{product.price}</div>
-                <div className="wishlist-buttons">
-                  <div className="delete-buttons">
-                    <OpenModalButton
-                      modalClasses={["delete-button-container"]}
-                      buttonText="Delete Product"
-                      modalComponent={<DeleteWish product={product} />}
+        <div className="wishlist-container">
+          {allProducts && allProducts.length > 0 && (
+            <>
+              {allProducts.map((product) => (
+                <div className="all-products" key={product.id}>
+                  <div>{product.name}</div>
+                  <div className="img-div">
+                    <img
+                      src={pic}
+                      alt="stock pic"
+                      style={{ width: "90%", height: "auto" }}
                     />
                   </div>
-                  <button
-                    className="cart-button"
-                    value={product.id}
-                    onClick={(e) => handleClick(e, product)}
-                  >
-                    Add to cart
-                  </button>
+                  <div>{product.price}</div>
+                  <div className="wishlist-buttons">
+                    <div className="delete-buttons">
+                      <OpenModalButton
+                        modalClasses={["delete-button-container"]}
+                        buttonText="Delete Product"
+                        modalComponent={<DeleteWish product={product} />}
+                      />
+                    </div>
+                    <button
+                      className="cart-button"
+                      value={product.id}
+                      onClick={(e) => handleClick(e, product)}
+                    >
+                      Add to cart
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </>
-        )}
+              ))}
+            </>
+          )}
+        </div>
       </>
     )
   );
