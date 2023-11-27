@@ -94,7 +94,7 @@ const ProductPage = () => {
                     className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {user && userWish.products && userWish.products[product.id] ? (
+                    {userWish.products && userWish.products[product.id] ? (
                       <i className="fa-solid fa-heart"></i>
                     ) : (
                       <i className="fa-regular fa-heart"></i>
