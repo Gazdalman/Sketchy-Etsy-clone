@@ -69,12 +69,13 @@ body {
     margin: 0;
     background:  rgb(174, 169, 190) 50%;
     font-family: 'Muli', sans-serif;
+
 }
 
-
-#product-page {
+/* #product-page {
     background: linear-gradient(10deg, #f2eede 50.1%,  rgb(174, 169, 190) 50%);
-}
+
+} */
 
 #prod-page-btn-container {
     background-color: #fff;
