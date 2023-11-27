@@ -69,8 +69,9 @@ const ProductPage = () => {
           <a key={product.id} href={`/products/${product.id}`}>
             <div>
               <img
+                className="products-img"
                 src={product.preview}
-                alt={`Product #${product.id} - ${product.name}`}
+                alt="product"
               />
 
               <div className="products-detail">

@@ -55,13 +55,15 @@ export const createProduct = (product, images) => async dispatch => {
 
   if (res.ok) {
     const product = await res.json();
-    for (const image of images) {
-      await fetch(`/api/products/${product.id}/images`, {
-        method: 'POST',
-        body: image
-      })
+    if (images.length) {
+      for (const image of images) {
+        await fetch(`/api/products/${product.id}/images`, {
+          method: 'POST',
+          body: image
+        })
+      }
+      dispatch(changeProducts(product))
     }
-    dispatch(changeProducts(product))
     return product.id
   }
 
