@@ -10,15 +10,16 @@ import "./Profile.css";
 
 export default function UserProducts({ user }) {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
+  const currUser = useSelector((state) => state.session.user);
   const products = useSelector((state) => state.userProducts);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
   const edit = (e, productId) => {
-    e.preventDefault()
-    return history.push(`/products/${productId}/edit`)
-  }
+    e.preventDefault();
+    return history.push(`/products/${productId}/edit`);
+  };
 
   useEffect(() => {
     const userId = user.id;
@@ -28,32 +29,54 @@ export default function UserProducts({ user }) {
   return (
     <>
       {isLoaded && (
-        <div className="userProductsContainer">
-          {Object.values(products).map((item) => (
-            <div key={item.id} className="indvUserProducts">
-              <div className="userProductImage">
-                <p>Product Image</p>
-                <p>Coming Soon...</p>
-              </div>
-              <div>
-                <a href={`/products/${item.id}`}>
-                <h4>{item.name}</h4>
-                <img src={item.preview} />
-                </a>
-                <p className="userProductDescription">{item.description}</p>
-                <p className="userProductPrice">${item.price}</p>
-                <div className="userProductButtons">
-                  <button disabled>Edit</button>
-                  <OpenModalButton
-                    modalClasses={["delete-button-container"]}
-                    buttonText="Delete Product"
-                    modalComponent={<DeleteProduct />}
-                  />
+        <>
+          {Object.values(products).length > 0 ? (
+            <div className="userProductsContainer">
+              {Object.values(products).map((item) => (
+                <div key={item.id} className="indvUserProducts">
+                  <div className="userProductImage">
+                    <>
+                      {item.product_image ? (
+                        <img src={item.product_image} />
+                      ) : (
+                        <>
+                          <p>Product Image</p>
+                          <p>Coming Soon...</p>
+                        </>
+                      )}
+                    </>
+                  </div>
+                  <div>
+                    <a href={`/products/${item.id}`}>
+                      <h4>{item.name}</h4>
+                      <img src={item.preview} />
+                    </a>
+                    <p className="userProductDescription">{item.description}</p>
+                    <p className="userProductPrice">${item.price}</p>
+                    <div className="userProductButtons">
+                      <button onClick={(e) => edit(e, item.id)}>Edit</button>
+                      <OpenModalButton
+                        buttonText={"Delete Product"}
+                        modalComponent={
+                          <DeleteProduct product={item} refresh={true} />
+                        }
+                        modalClasses={["delete-product"]}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          ) : (
+            <>
+              {currUser.id == user.id ? (
+                <h3>You don't have any listed products yet.</h3>
+              ) : (
+                <h3>{user.username} doesn't have any listed products yet.</h3>
+              )}
+            </>
+          )}
+        </>
       )}
     </>
   );

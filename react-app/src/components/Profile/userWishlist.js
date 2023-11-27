@@ -38,8 +38,16 @@ export default function UserWishlist({ user }) {
           {Object.values(wishlist.products).map((product) => (
             <div key={product.id} className="indvUserWishItems">
               <div className="userProductImage">
-                <p>Product Image</p>
-                <p>Coming Soon...</p>
+                <>
+                  {product.product_image ? (
+                    <img src={product.product_image} />
+                  ) : (
+                    <>
+                      <p>Product Image</p>
+                      <p>Coming Soon...</p>
+                    </>
+                  )}
+                </>
               </div>
               <div>
                 <h4>{product.name}</h4>

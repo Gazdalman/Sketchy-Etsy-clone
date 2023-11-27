@@ -1,7 +1,12 @@
 /* TODO Add site wide styles */
-body {
+/* body {
   background-color: rgba(226, 220, 193, 0.75);
   color: #322e3f;
+} */
+body {
+  margin: 0;
+  background: rgb(174, 169, 190) 50%;
+  font-family: "Muli", sans-serif;
 }
 
 h1 {

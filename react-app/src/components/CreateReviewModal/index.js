@@ -77,7 +77,10 @@ function ReviewFormModal({ productId }) {
               />
             </label>
             {errors.reviewText && <p className="errors">{errors.reviewText}</p>}
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div
+              className="stars"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
               <label>
                 <div
                   class="rating"

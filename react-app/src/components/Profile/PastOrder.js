@@ -12,7 +12,8 @@ export default function () {
   const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("order state", allOrders);
+  console.log("order state", allOrders);    console.log('cart', cart)
+
 
   useEffect(() => {
     if (!user) {
@@ -52,7 +53,7 @@ export default function () {
               <div key={item.id}>
                 <h4>{item.name}</h4>
                 <p>{item.price}</p>
-                <button disabled>Write Review</button>
+                <button>Write Review</button>
                 <button onClick={(e) => handleClick(e)}>Return Item</button>
                 <button
                   value={item.id}

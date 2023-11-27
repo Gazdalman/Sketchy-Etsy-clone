@@ -52,11 +52,11 @@ export default function Profile() {
           />
         </div>
 
-
         <div style={{ display: "flex", gap: "15px" }}>
           <div>
             <h3
               className="profileTab"
+              id={loadProducts ? "selected" : null}
               onClick={() => {
                 setLoadProducts(true);
                 setLoadReviews(false);
@@ -70,6 +70,7 @@ export default function Profile() {
           <div>
             <h3
               className="profileTab"
+              id={loadReviews ? "selected" : null}
               onClick={() => {
                 setLoadProducts(false);
                 setLoadReviews(true);
@@ -83,6 +84,7 @@ export default function Profile() {
           <div>
             <h3
               className="profileTab"
+              id={loadOrders ? "selected" : null}
               onClick={() => {
                 setLoadProducts(false);
                 setLoadReviews(false);
@@ -96,6 +98,7 @@ export default function Profile() {
           <div>
             <h3
               className="profileTab"
+              id={loadWishlist ? "selected" : null}
               onClick={() => {
                 setLoadProducts(false);
                 setLoadReviews(false);
@@ -126,6 +129,7 @@ export default function Profile() {
             <div>
               <h3
                 className="profileTab"
+                id={loadProducts ? "selected" : null}
                 onClick={() => {
                   setLoadProducts(true);
                   setLoadReviews(false);
@@ -138,6 +142,7 @@ export default function Profile() {
             <div>
               <h3
                 className="profileTab"
+                id={loadReviews ? "selected" : null}
                 onClick={() => {
                   setLoadProducts(false);
                   setLoadReviews(true);

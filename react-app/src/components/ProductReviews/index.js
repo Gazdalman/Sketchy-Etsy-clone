@@ -153,16 +153,31 @@ function Reviews() {
 
         {isLoaded && reviewsLength >= 1 ? (
           reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+            <div
+              style={{
+                display: "flex",
+                borderBottom: "1px solid grey",
+                padding: "5px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <div
+                className="review-info"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  width: "90%",
+                  width: "85%",
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
                   <p
                     style={{
                       fontSize: "20px",
@@ -170,20 +185,15 @@ function Reviews() {
                   >
                     {review}
                   </p>
-                  <p
+                  <span
                     style={{
                       fontWeight: "bold",
-                      fontSize: "16px",
+                      fontSize: "12px",
                       color: "darkgray",
                     }}
                   >
-                    {`${User.firstName}, ${User.username}`}
-                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
-                      {" "}
-                      commented at{" "}
-                    </span>
-                    {`${created_at}`}
-                  </p>
+                    {`${User.firstName}, ${User.username} commented at ${created_at}`}
+                  </span>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}
@@ -232,24 +242,26 @@ function Reviews() {
                   </label>
                 </div>
               </div>
-              {user?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["delete-button-container"]}
-                  buttonText="Delete Review"
-                  modalComponent={
-                    <DeleteReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
-              {user?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["edit-button-container"]}
-                  buttonText="Edit Review"
-                  modalComponent={
-                    <EditReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
+              <div className="review-buttons">
+                {user?.id == user_id ? (
+                  <OpenModalButton
+                    modalClasses={["delete-button-container"]}
+                    buttonText="Delete Review"
+                    modalComponent={
+                      <DeleteReview reviewId={id} productId={productId} />
+                    }
+                  />
+                ) : null}
+                {user?.id == user_id ? (
+                  <OpenModalButton
+                    modalClasses={["edit-button-container"]}
+                    buttonText="Edit Review"
+                    modalComponent={
+                      <EditReview reviewId={id} productId={productId} />
+                    }
+                  />
+                ) : null}
+              </div>
             </div>
           ))
         ) : (

@@ -64,3 +64,13 @@
 #keep-review-btn {
   padding: 5px;
 }
+
+#delete-review-btn {
+  background-color: green;
+  color: white;
+}
+
+#keep-review-btn {
+  background-color: red;
+  color: white;
+}
