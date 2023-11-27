@@ -41,10 +41,9 @@ function Navigation({ isLoaded }) {
                 </div>
               </NavLink>
             </li>
-            {(isLoaded) && (
+            {(isLoaded && location.pathname != '/login' && location.pathname != '/signup') && (
             <li>
-              <ProfileButton user={sessionUser}
-              disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
+              <ProfileButton user={sessionUser}/>
             </li>
             )}
         </div>
