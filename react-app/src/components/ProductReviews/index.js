@@ -146,7 +146,7 @@ function Reviews({product}) {
         </div>
       </div>
       <div>
-        {!commented && user && user.id != product.seller_id ? (
+        {!commented && curruser && curruser.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
