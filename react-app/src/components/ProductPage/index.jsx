@@ -22,8 +22,6 @@ const ProductPage = ({ prods, word }) => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-
   // console.log("user", user);
   // console.log("products state", products);
   // console.log("favorite", favorite)
@@ -39,7 +37,7 @@ const ProductPage = ({ prods, word }) => {
         }
       })
       .then(() => {
-        setIsLoaded(true)
+        setIsLoaded(true);
       });
   }, [dispatch]);
 
@@ -48,28 +46,27 @@ const ProductPage = ({ prods, word }) => {
 
     const productId = product.id;
 
+    if (userWish && userWish.products) {
 
-    if (userWish.products[productId]) {
+      if (userWish.products[productId]) {
 
-
-        dispatch(removeWish(productId));
-
+          dispatch(removeWish(productId));
           if (e.target.className == "fa-solid fa-heart") {
-              e.target.className = "fa-regular fa-heart"
-          }
+            e.target.className = "fa-regular fa-heart";
+          };
 
-    }else {
+      }else {
+          dispatch(addWish(productId));
 
+          if (e.target.className == "fa-regular fa-heart") {
+            e.target.className = "fa-solid fa-heart";
+          };
+    };
 
-        dispatch(addWish(productId));
-
-        if (e.target.className == "fa-regular fa-heart") {
-            e.target.className = "fa-solid fa-heart"
-        }
     }
 
-  };
 
+  };
 
 
 
@@ -161,9 +158,9 @@ const ProductPage = ({ prods, word }) => {
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-solid fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5}}></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-regular fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5}}></i>
                     )}
                   </div>
 
