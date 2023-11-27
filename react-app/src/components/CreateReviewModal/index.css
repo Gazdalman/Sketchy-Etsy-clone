@@ -48,3 +48,9 @@
 .stars {
   font-size: 30px;
 }
+.errors {
+  color: red;
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bolder;
+}
