@@ -34,7 +34,7 @@ export default function Profile() {
 
   if (isLoaded && Number(user.id) === Number(userId)) {
     return (
-      <div>
+      <div className="profileContainer">
         <h1>
           Hello, {user.firstName} {user.lastName}
         </h1>

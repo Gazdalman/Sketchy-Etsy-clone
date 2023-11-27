@@ -1,3 +1,7 @@
+.profileContainer {
+  margin: 25px;
+}
+
 .profileTab {
   cursor: pointer;
   text-align: center;
