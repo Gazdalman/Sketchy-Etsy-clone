@@ -191,7 +191,7 @@ function Reviews({ product }) {
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
-                      color: "darkgray",
+                      color: "hwb(49 76% 11%)",
                     }}
                   >
                     {`${User.firstName}, ${User.username} commented at ${created_at}`}

@@ -40,7 +40,7 @@
 }
 
 #delete-btn {
-  width: 50%;
+  width: 75%;
   padding: 10px;
   background-color: green;
   color: white;
@@ -49,7 +49,7 @@
 }
 
 #keep-btn {
-  width: 50%;
+  width: 75%;
   padding: 10px;
   background-color: black;
   color: white;
@@ -57,7 +57,6 @@
   margin-bottom: 3px;
 }
 
-/* Rod Delete  */
 #deleteReviewModel {
   display: flex;
   flex-direction: column;
@@ -66,6 +65,11 @@
   text-align: center;
   gap: 10px;
   padding: 15px;
+}
+
+#deleteReviewModel:hover {
+  background-color: #ab434a;
+  border: 5px solid #ab434a;
 }
 
 #delReviewModalTitle {
@@ -84,19 +88,34 @@
   justify-content: center;
   align-content: center;
   gap: 15px;
+  width: 100%;
 }
 
 #delete-review-btn,
 #keep-review-btn {
-  padding: 5px;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
 }
 
 #delete-review-btn {
-  background-color: green;
-  color: white;
+  background-color: #49867f;
+  border: 5px solid #49867f;
+}
+#delete-review-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  color: #322e3f;
 }
 
 #keep-review-btn {
-  background-color: red;
-  color: white;
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+}
+#keep-review-btn:hover {
+  background-color: #e2dcc2;
+  border: 5px solid #322e3f;
+  color: #322e3f;
 }
