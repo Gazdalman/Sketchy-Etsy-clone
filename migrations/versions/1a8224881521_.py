@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-Revision ID: 6fc74bd6ff21
+Revision ID: 1a8224881521
 Revises:
-Create Date: 2023-11-26 18:12:00.052254
-========
-Revision ID: 786fd16e16f4
-Revises: 
-Create Date: 2023-11-26 22:43:07.126195
->>>>>>>> 3b2dc09241ddabff8cca8370bfa02557f75cbb23:migrations/versions/786fd16e16f4_.py
+Create Date: 2023-11-27 17:28:43.564369
 
 """
 from alembic import op
@@ -19,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '786fd16e16f4'
+revision = '1a8224881521'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -160,7 +154,6 @@ def upgrade():
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
 
 
-
     op.create_table('wishlist_details',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('wishlist_id', sa.Integer(), nullable=True),
@@ -172,7 +165,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE wishlist_details SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
