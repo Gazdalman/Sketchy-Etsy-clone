@@ -35,13 +35,13 @@ function EditReview({ reviewId, productId }) {
   function checkCredentials() {
     const errObj = {};
     if (!rating) {
-      errObj.rating = "** Rating is required";
+      errObj.rating = "Rating is required";
     }
     if (!review || review.length < 4) {
-      errObj.reviewText = "** Review text must be at least 4 characters";
+      errObj.reviewText = "Review text must be at least 4 characters";
     }
     if (review.length > 2000) {
-      errObj.reviewText = `** MANNNN YOU AINT SLICK!! That's a whole ${review.length} characters?!! Nobody tryna read dat`;
+      errObj.reviewText = `MANNNN YOU AINT SLICK!! That's a whole ${review.length} characters?!! Nobody tryna read dat`;
     }
     setErrors(errObj);
   }
