@@ -20,14 +20,19 @@ function ReviewFormModal({ productId }) {
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
   const [errors, setErrors] = useState({});
-  const disabled = reviewText.length < 4;
+  const disabled = false;
   const reviews = useSelector((state) => state.review);
 
   function checkCredentials() {
     const errObj = {};
-    if (!rating) errObj.rating = "Rating is required";
-    if (!reviewText || reviewText.length < 4)
+    if (!rating) {
+      errObj.rating = "Rating is required";
+      // disabled = true;
+    }
+    if (!reviewText || reviewText.length < 4) {
       errObj.reviewText = "Review text must be at least 4 characters";
+      // disabled = true;
+    }
     setErrors(errObj);
   }
   const newReview = {
@@ -41,14 +46,18 @@ function ReviewFormModal({ productId }) {
   }
 
   const handleSubmit = async (e) => {
-    checkCredentials();
+    // checkCredentials();
     e.preventDefault();
-    await dispatch(createAReview(productId, newReview)).then(() =>
-      closeModal()
-    );
+    if (errors && !Object.values(errors).length) {
+      await dispatch(createAReview(productId, newReview)).then(() =>
+        closeModal()
+      );
 
-    history.push(`/products/${productId}`);
-    return Redirect(`/products/${productId}`);
+      history.push(`/products/${productId}`);
+      return Redirect(`/products/${productId}`);
+    } else {
+      console.log("ERRORS PRESENT");
+    }
   };
 
   return (
@@ -73,7 +82,7 @@ function ReviewFormModal({ productId }) {
                 placeholder="Leave your review here"
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
-                required
+                // required
               />
             </label>
             {errors.reviewText && <p className="errors">{errors.reviewText}</p>}
@@ -189,9 +198,8 @@ function ReviewFormModal({ productId }) {
             <button
               type="submit"
               id="add-review"
-              disabled={disabled}
+              onClick={checkCredentials}
               style={{
-                // backgroundColor: "tan",
                 maxWidth: "100%",
                 width: "300px",
               }}
