@@ -25,7 +25,12 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(getAllProducts())
-      .then(() => dispatch(getWish()))
+      .then(() => {
+        // * Only gather wishlist if there is a user signed in otherwise unauthorized triggers in console
+        if (user) {
+          dispatch(getWish());
+        }
+      })
       .then(() => {
         setIsLoaded(true);
       });
@@ -58,6 +63,7 @@ const ProductPage = () => {
     } else {
       dispatch(addItemToCart(prodId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return isLoaded ? (
@@ -88,20 +94,18 @@ const ProductPage = () => {
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
                 <div id="prod-page-btn-container">
-                  {(userWish.products && userWish.products[product.id] == undefined) && (
-                    <div
-                      className="add-wish-btn"
-                      onClick={(e) => addToWish(e, product)}
-                    >
-                      {user &&
-                      userWish.products &&
-                      userWish.products[product.id] ? (
-                        <i className="fa-solid fa-heart"></i>
-                      ) : (
-                        <i className="fa-regular fa-heart"></i>
-                      )}
-                    </div>
-                  )}
+                  <div
+                    className="add-wish-btn"
+                    onClick={(e) => addToWish(e, product)}
+                  >
+                    {user &&
+                    userWish.products &&
+                    userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart"></i>
+                    ) : (
+                      <i className="fa-regular fa-heart"></i>
+                    )}
+                  </div>
 
                   <button
                     value={product.id}

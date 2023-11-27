@@ -56,6 +56,7 @@ const ProductShow = () => {
     } else {
       dispatch(addItemToCart(prodId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return Object.keys(product).length > 0 &&
@@ -104,7 +105,7 @@ const ProductShow = () => {
       <Reviews product={product} />
     </div>
   ) : product && !product.seller_id ? (
-    <h1>Not Available</h1>
+    <h1>Loading...</h1>
   ) : null;
 };
 

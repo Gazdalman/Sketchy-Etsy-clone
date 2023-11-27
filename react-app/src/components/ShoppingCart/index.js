@@ -29,17 +29,21 @@ export default function Cart() {
   }, [dispatch]);
 
   const decQuant = async (item) => {
-    const change = "dec";
-    const itemId = item.id;
-    if (Number(item.quantity) === 1) {
-      await dispatch(removeItem(itemId));
-    } else {
-      await dispatch(updateQuantity(itemId, change));
-    }
+    const message = "Functionality comming soon...";
+    alert(message);
+    // const change = "dec";
+    // const itemId = item.id;
+    // if (Number(item.quantity) === 1) {
+    //   await dispatch(removeItem(itemId));
+    // } else {
+    //   await dispatch(updateQuantity(itemId, change));
+    // }
   };
   const incQuant = async (itemId) => {
-    const change = "inc";
-    await dispatch(updateQuantity(itemId, change));
+    const message = "Functionality comming soon...";
+    alert(message);
+    // const change = "inc";
+    // await dispatch(updateQuantity(itemId, change));
   };
 
   const onOptionChange = (e) => {
@@ -51,11 +55,17 @@ export default function Cart() {
       {isLoaded &&
         Object.values(cart).map((item) => (
           <div key={item.id} className="cart-card">
+            {console.log(item)}
+            <img
+              src={item.preview}
+              alt="item preview"
+              className="productImageCart"
+            />
             <h3>{item.name}</h3>
             <p>{item.price}</p>
             <p>{item.description}</p>
             <p>
-              {item["quantity"]}
+              {item.quantity}
               <button onClick={() => decQuant(item)}> - </button>
               <button onClick={() => incQuant(item.id)}> + </button>
             </p>

@@ -104,3 +104,9 @@
   background-color: #49867f;
   border: 5px solid #322e3f;
 }
+
+.productImageCart {
+  height: 300px;
+  width: 300px;
+  border-radius: 15px;
+}

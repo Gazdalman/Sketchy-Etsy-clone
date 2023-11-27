@@ -24,7 +24,36 @@
 
 .profileButtonContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
+  max-width: 400px;
+}
+.proNewProdBtn,
+.editProfileBtn {
+  max-width: 150px;
+  width: 100px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+.editProfileBtn {
+  height: 50px;
+}
+.delAcountButton {
+  margin: 10px;
+  max-width: 150px;
+  width: 100px;
+  height: 50px;
+}
+.deleteProductButton {
+  background-color: #ab434a;
+  color: #fff;
+}
+.delAcountButton:hover,
+.deleteProductButton:hover {
+  border: 5px solid rgb(58, 102, 115);
 }
 
 .userOrdersContainer {
@@ -37,9 +66,10 @@
 .userOrderItemsContainer,
 .userWishlistContainer {
   display: flex;
-  gap: 15px;
+  justify-items: flex-start;
   flex-wrap: wrap;
-  overflow-y: scroll hidden;
+  gap: 15px;
+  /* overflow-y: scroll hidden; */
 }
 .indvUserProducts,
 .indvUserReviews,
@@ -48,12 +78,14 @@
   padding: 25px;
   gap: 15px;
   border: 1px solid #322e3f;
-
   background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin: 20px auto;
+  margin: 20px;
   transition: all 0.2s ease-in-out;
+}
+.indvUserOrderItems {
+  padding: 50px;
 }
 .indvUserProducts {
   width: fit-content;
@@ -62,11 +94,8 @@
 .indvUserReviews,
 .indvUserOrderItems,
 .indvUserWishItems {
-  /* display: flex; */
   min-width: 200px;
   max-height: 250px;
-  justify-content: center;
-  align-items: center;
   padding-top: 15px;
 }
 .indvUserReviews {
@@ -122,8 +151,58 @@
 .indvOrdersInAll {
   border-bottom: 1px solid rgb(58, 102, 115);
 }
-.allrdersItemsContainer {
+.allOrdersItemsContainer {
   display: inline-flex;
   justify-content: flex-start;
   gap: 15px;
+}
+.addItemToCartBtn,
+.editUserProductBtn,
+.ordersAddToCartBtn {
+  background-color: hwb(173 29% 47%);
+  border: 5px solid hwb(173 29% 47%);
+}
+.ordersReturnItemBtn {
+  background-color: rgb(58, 102, 115);
+  border: 5px solid rgb(58, 102, 115);
+}
+.ordersWriteReview {
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+  color: black;
+}
+.addItemToCartBtn,
+.editUserProductBtn,
+.ordersWriteReview,
+.ordersReturnItemBtn,
+.ordersAddToCartBtn {
+  border-radius: 12px;
+  font-size: 18px;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.addItemToCartBtn,
+.editUserProductBtn,
+.ordersReturnItemBtn,
+.ordersAddToCartBtn {
+  color: white;
+}
+.addItemToCartBtn:hover,
+.editUserProductBtn:hover,
+.ordersWriteReview:hover,
+.ordersReturnItemBtn:hover,
+.ordersAddToCartBtn:hover {
+  background-color: #322e3f;
+}
+.ordersWriteReview:hover {
+  color: white;
+}
+
+.userProductsTabBtn {
+  height: 42px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
 }
