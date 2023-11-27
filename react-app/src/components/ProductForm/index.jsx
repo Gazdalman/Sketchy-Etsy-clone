@@ -79,13 +79,13 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        product.append(`img${num}`, img);
+        images.push(img);
       }
       num += 1;
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product));
+    const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
 
