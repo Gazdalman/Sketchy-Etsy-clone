@@ -11,15 +11,7 @@
 
   background: url(../../assets/wave.svg);
   background-size: cover;
-  background-repeat: no-repeat; */
-
-  background-color: #fae27f;
-}
-
-.nav-sub-container-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-repeat: no-repeat;
 }
 
 .nav-sub-container {
@@ -28,8 +20,8 @@
   justify-content: space-around;
   align-items: center;
 
-  margin: 5%;
-
+  margin-top: 3%;
+  margin-right: 5%;
 
 }
 
