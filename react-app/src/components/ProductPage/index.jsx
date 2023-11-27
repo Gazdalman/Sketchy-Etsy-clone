@@ -51,12 +51,13 @@ const ProductPage = () => {
     }
   };
 
-  const handleClick = (e, prodId) => {
+  const handleClick = (e, prod) => {
     e.preventDefault();
-    if (cart[prodId]) {
-      dispatch(updateQuantity(prodId, "inc"));
-    } else {
-      dispatch(addItemToCart(prodId));
+    if (cart[prod.id]) {
+      dispatch(updateQuantity(prod.id, "inc", 1));
+    } else if (prod.unit_available > 0) {
+      dispatch(addItemToCart(prod.id));
+      window.alert("Added to Cart")
     }
   };
 
@@ -88,7 +89,7 @@ const ProductPage = () => {
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
                 <div id="prod-page-btn-container">
-                  {(userWish.products && userWish.products[product.id] == undefined) && (
+                  {/* {(userWish.products && userWish.products[product.id] == undefined) && ( */}
                     <div
                       className="add-wish-btn"
                       onClick={(e) => addToWish(e, product)}
@@ -101,11 +102,12 @@ const ProductPage = () => {
                         <i className="fa-regular fa-heart"></i>
                       )}
                     </div>
-                  )}
+                  {/* // )} */}
 
                   <button
                     value={product.id}
-                    onClick={(e) => handleClick(e, product.id)}
+                    disabled={!product.units_available}
+                    onClick={(e) => handleClick(e, product)}
                     className="add-to-cart-btn"
                   >
                     Add to cart

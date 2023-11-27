@@ -44,8 +44,19 @@ const ProductFormPage = ({ type, product }) => {
     if (price < 1) {
       setPrice(1);
       return 1;
+    } else if (price > 9999999) {
+      setPrice(9999999)
     }
     return price;
+  };
+  const checkUnits = (units) => {
+    if (units < 1) {
+      setUnitsAvailable(1);
+      return 1;
+    } else if (units > 9999999) {
+      setUnitsAvailable(9999999)
+    }
+    return units;
   };
 
   useEffect(() => {
@@ -80,7 +91,9 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        images.push(img);
+        const imageData = new FormData()
+        imageData.append('image', img)
+        images.push(imageData);
       }
       num += 1;
     }
@@ -260,7 +273,7 @@ const ProductFormPage = ({ type, product }) => {
           <input
             type="number"
             min={type == "edit" ? 0 : 1}
-            value={unitsAvailable}
+            value={checkUnits(unitsAvailable)}
             placeholder="# of units you have"
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />

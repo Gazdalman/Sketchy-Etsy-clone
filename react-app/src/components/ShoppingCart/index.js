@@ -34,12 +34,15 @@ export default function Cart() {
     if (Number(item.quantity) === 1) {
       await dispatch(removeItem(itemId));
     } else {
-      await dispatch(updateQuantity(itemId, change));
+      await dispatch(updateQuantity(itemId, change, -1));
     }
   };
   const incQuant = async (itemId) => {
     const change = "inc";
-    await dispatch(updateQuantity(itemId, change));
+    let res = await dispatch(updateQuantity(itemId, change, 1));
+    if (res.errors) {
+      window.alert(res.errors)
+    }
   };
 
   const onOptionChange = (e) => {

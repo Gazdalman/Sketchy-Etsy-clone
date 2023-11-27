@@ -15,22 +15,25 @@ const ProductShow = () => {
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session.user);
-  const [revAvg, setRevAvg] = useState(0);
-  const [numReviews, setNumReviews] = useState(0);
   const product = useSelector((state) => state.requestedProduct);
 
-  let imgNum = 0;
+  const images = product ? product.images : null
+  const imgLen = images ? images.length : 0
+  const [revAvg, setRevAvg] = useState(0);
+  const [imgNum, setImgNum] = useState(-1)
+  const [numReviews, setNumReviews] = useState(0);
+  const [renderSwitch, setRenderSwitch] = useState(true)
 
-  if (product) {
-    console.log("This is the product", product);
-  }
-
+  console.log('images', imgLen);
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
       history.replace("/not-found");
     }
-  }, [dispatch]);
+    setImgNum(-1)
+    console.log("object");
+  }, [dispatch, renderSwitch]);
+
 
   // useEffect(() => {
   //   if (product && product.ProductImages && product.ProductImages.length > 0) {
@@ -48,13 +51,38 @@ const ProductShow = () => {
     return history.push(`/products/${productId}/edit`);
   };
 
-  const handleClick = (e, prod) => {
+  const changeImage = (direction) => {
+    let num = imgNum
+    if (direction == 'up' && num < - 1) {
+      num++
+      setImgNum(num)
+      console.log(imgNum);
+    } else if (direction =='down' && num > -1) {
+      num--
+      setImgNum(num)
+      console.log(imgNum);
+    }
+  }
+
+  const handleClick = async (e, prod) => {
     e.preventDefault();
     const prodId = prod.id;
     if (cart[prodId]) {
-      dispatch(updateQuantity(prodId, "inc"));
+      let result = await dispatch(updateQuantity(prodId, "inc", 1));
+      if (result.errors) {
+        window.alert(result.errors)
+      } else {
+        window.alert("Added to Cart")
+      }
+      setRenderSwitch(renderSwitch ? false : true)
     } else {
-      dispatch(addItemToCart(prodId));
+      let result = await dispatch(addItemToCart(prodId));
+      if (result.errors) {
+        window.alert(result.errors)
+      } else {
+        window.alert("Added to Cart")
+      }
+      setRenderSwitch(renderSwitch ? false : true)
     }
   };
 
@@ -68,15 +96,20 @@ const ProductShow = () => {
         {+product.units_available > 0
           ? `${product.units_available} available`
           : "SOLD OUT"}
-      </h3>
+      </h3>f
       <div id="product-images-container">
         <img
           id="preview-image"
-          src={product.preview}
+          src={imgNum == -1 ? product.preview  : images[imgNum].url }
           alt={`Product ${product.id}`}
         />
-        <span id="none-prev">
-          {product.images.length > 0 &&
+        <div id="image-buttons">
+          <div id="change-photo-down" disabled={imgNum == -1} onClick={() => changeImage('down')}><i className="fa-solid fa-arrow-right fa-rotate-180"></i></div>
+          <div id="change-photo-up" disabled={imgNum >= imgLen} onClick={() => changeImage('up')}><i className="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        {/* <span id="none-prev"> */}
+        {/* {product.images.length > 0 &&
             product.images.map((image) => (
               <img
                 className="product-img"
@@ -85,8 +118,8 @@ const ProductShow = () => {
                 src={image.url}
                 alt={`Product ${image.id}`}
               />
-            ))}
-        </span>
+            ))} */}
+        {/* </span> */}
       </div>
       <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
