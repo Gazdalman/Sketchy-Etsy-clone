@@ -92,9 +92,7 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const imageData = new FormData()
-        imageData.append('image', img)
-        images.push(imageData);
+        images.push(img);
       }
       num += 1;
     }
