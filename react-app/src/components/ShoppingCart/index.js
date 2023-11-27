@@ -40,10 +40,11 @@ export default function Cart() {
     // }
   };
   const incQuant = async (itemId) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "inc";
-    // await dispatch(updateQuantity(itemId, change));
+    const change = "inc";
+    let res = await dispatch(updateQuantity(itemId, change, 1));
+    if (res.errors) {
+      window.alert(res.errors)
+    }
   };
 
   const onOptionChange = (e) => {
