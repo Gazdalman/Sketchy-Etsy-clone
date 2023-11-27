@@ -5,17 +5,13 @@
   width: 31%;
   padding: 5px;
   padding-bottom: 20px;
-  margin: auto;
 }
 .wishlist-buttons {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 15px;
 }
-
-
 .delete-buttons {
   width: 40%;
   padding: 5px;
@@ -48,22 +44,21 @@
   padding: 5px;
   margin: 0;
   margin-bottom: 5px;
-
-  &:hover {
-    background-color: #322e3f;
-    border: 5px solid #322e3f;
-  }
 }
-
-
+.cart-button:hover {
+  background-color: #ab434a;
+  border: 5px solid black;
+}
+button:hover {
+  background-color: #ab434a;
+  border: 5px solid black;
+}
 .wishlist-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  left: 5px;
-  right: 5px;
 }
 .img-div {
   width: 100%;
