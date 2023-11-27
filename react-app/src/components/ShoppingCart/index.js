@@ -29,17 +29,21 @@ export default function Cart() {
   }, [dispatch]);
 
   const decQuant = async (item) => {
-    const change = "dec";
-    const itemId = item.id;
-    if (Number(item.quantity) === 1) {
-      await dispatch(removeItem(itemId));
-    } else {
-      await dispatch(updateQuantity(itemId, change));
-    }
+    // const change = "dec";
+    // const itemId = item.id;
+    // if (Number(item.quantity) === 1) {
+    //   await dispatch(removeItem(itemId));
+    // } else {
+    //   await dispatch(updateQuantity(itemId, change));
+    // }
+    const message = "Functionality comming soon...";
+    alert(message);
   };
   const incQuant = async (itemId) => {
-    const change = "inc";
-    await dispatch(updateQuantity(itemId, change));
+    // const change = "inc";
+    // await dispatch(updateQuantity(itemId, change));
+    const message = "Functionality comming soon...";
+    alert(message);
   };
 
   const onOptionChange = e => {
