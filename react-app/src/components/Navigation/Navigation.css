@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: baseline;
   list-style-type: none;
 
   width: 100%;
@@ -13,10 +13,11 @@
   background-repeat: no-repeat;
 }
 
-/* .nav-sub-container1 {
+.nav-sub-container1 {
   display: flex;
-  align-items: flex-start;
-} */
+  align-items: center;
+  margin-left: 4%;
+}
 .nav-sub-container {
   display: flex;
   flex-direction: row;
@@ -30,6 +31,29 @@
   margin-right: 40%;
 }
 
+.category {
+  background-color: #322e3f;
+  color: #efebeb;
+  border: 3px solid #322e3f;
+  padding: 10px;
+  border-radius: 6px;
+  margin-left: 20px;
+
+  cursor: pointer;
+}
+.search-bar {
+  text-align: center;
+  width: 300px;
+  border: 3px solid #322e3f;
+  background-color: #efebeb;
+  color: #322e3f;
+  padding: 10px;
+  border-radius: 6px;
+
+  cursor: text;
+}
+
+
 .nav-btn {
   transition: transform 250ms;
 }
@@ -38,7 +62,9 @@
   transform: translateY(-10px);
 }
 
-.profile-dropdown {
+/*Ann dropdown profile*/
+
+/* .profile-dropdown {
   color: #a93d44;
   position: absolute;
   background-color: #e2dcc2;
@@ -84,9 +110,9 @@
   margin-bottom: 4px;
 
   z-index: 10000;
-}
+} */
 
-.dropdown-btn {
+/* .dropdown-btn {
   color: #f0efeb;
   border-radius: 12px;
   border: 1px solid #a93d44;
@@ -94,9 +120,9 @@
   cursor: pointer;
 
   padding: 5px;
-}
+} */
 
-.dropdown-btn:hover {
+/* .dropdown-btn:hover {
   background-color: #322e3f;
   border: 1px solid #322e3f;
 }
