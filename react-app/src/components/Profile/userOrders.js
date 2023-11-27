@@ -60,7 +60,7 @@ export default function UserOrders({ user }) {
                       <h4>{item.name}</h4>
                     </NavLink>
                     <div className="orderItemPriceQuantDiv">
-                      <p># Purchased: {item.quantity}</p>
+                      {/* <p># Purchased: {item.quantity}</p> */}
                       <p className="orderedItemPrice">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
