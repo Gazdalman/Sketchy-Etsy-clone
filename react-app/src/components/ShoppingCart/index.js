@@ -111,7 +111,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <NavLink to="/">
+          <NavLink to="/home">
             <button>Continue Shopping</button>
           </NavLink>
           <NavLink to="/checkout">

@@ -88,7 +88,7 @@ const ProductPage = () => {
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
                 <div id="prod-page-btn-container">
-                  {userWish.products[product.id] == undefined && (
+                  {(userWish.products && userWish.products[product.id] == undefined) && (
                     <div
                       className="add-wish-btn"
                       onClick={(e) => addToWish(e, product)}

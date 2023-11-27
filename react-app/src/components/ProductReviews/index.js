@@ -9,7 +9,7 @@ import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
 
-function Reviews() {
+function Reviews({product}) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
@@ -36,6 +36,7 @@ function Reviews() {
       list[i].commented = false;
       newbie.push(list[i]);
     }
+    console.log('This is newbie', newbie);
     return newbie;
   }
   let sum = 0;
@@ -138,7 +139,7 @@ function Reviews() {
         </div>
       </div>
       <div>
-        {!commented ? (
+        {!commented && user && user.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
