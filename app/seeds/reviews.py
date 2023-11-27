@@ -18,7 +18,7 @@ def seed_reviews():
     seed_review12 = Review(user_id=3, product_id=1,rating=4, review="Forgot my wedding anniversary an di remembered that these delivery times are phenomenal so i hit a lil skoopdeedoop and guess who never found out i forgot our wedding anniversary")
     seed_review13 = Review(user_id=3, product_id=3,rating=4, review="The craziest part is that they had my address and my credit card information. not sure how they did it but i havent had any OTHER strange charges so i mean Imma just let it go for now ")
     seed_review14 = Review(user_id=4, product_id=1,rating=5, review="I will forever be creeped out with how they get the packages in my house and so quickly but you know if that means i dont have to wait on my packages and nothing serious goes missing imma just chalk it up to the game")
-    seed_review15 = Review(user_id=5, product_id=4,rating=2, review="Nah nah i ordered this 18 minutes ago and its just not appearing in my living room. I am not happy. You decided to go and get me accustomed to the lightning fast delivery speeds just to hit me with this tortoise speed. PLEEEEAAAASSSEEEEEE 2 STARSSSS!!!!")
+    seed_review15 = Review(user_id=5, product_id=4,rating=2, review="Nah nah i ordered this 18 minutes ago and its just now appearing in my living room. I am NOT happy. You decided to go and get me accustomed to the lightning fast delivery speeds just to hit me with this tortoise speed. PLEEEEAAAASSSEEEEEE 2 STARSSSS!!!!")
 
     all_revs = [seed_review1, seed_review2, seed_review3, seed_review4, seed_review5, seed_review6, seed_review7, seed_review8, seed_review9, seed_review10, seed_review11, seed_review12, seed_review13, seed_review14, seed_review15]
     add_revs = [db.session.add(rev) for rev in all_revs]
