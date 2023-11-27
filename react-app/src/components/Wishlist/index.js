@@ -56,7 +56,7 @@ export default function Wishlist() {
                     <img
                       src={pic}
                       alt="stock pic"
-                      style={{ width: "90%", height: "auto" }}
+                      style={{ width: "80%", height: "auto" }}
                     />
                   </div>
                   <div>{product.price}</div>
