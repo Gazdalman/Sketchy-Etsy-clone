@@ -46,10 +46,11 @@ export const removeWish = (productId) => async (dispatch) => {
       return;
     }
 
-    // dispatch(deleteWish(productId));
-    dispatch(getWish());
-    return message;
-  }
+        dispatch(getWish());
+        // dispatch(deleteWish(productId));
+
+        return message;
+    };
 };
 
 //add to wishlist
@@ -61,12 +62,13 @@ export const addWish = (productId) => async (dispatch) => {
     },
   });
 
-  if (response.ok) {
-    const message = response.json();
+    if (response.ok) {
+        const message = response.json();
 
-    dispatch(getWish());
-    return message;
-  }
+        dispatch(getWish());
+        return message
+    };
+
 };
 
 export default function wishlist(state = initialState, action) {

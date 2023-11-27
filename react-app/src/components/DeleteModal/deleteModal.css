@@ -1,11 +1,8 @@
-#deleteModel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  padding: 15px;
+/*Ann delete from cart*/
+
+/* .delete-cart-modal {
+    padding: 50px;
+
 }
 
 #delModalTitle {
