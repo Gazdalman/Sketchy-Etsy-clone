@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
 
             <NavLink className="nav-link"  to="/home">
                <i className="fa-solid fa-skull nav-btn"
-                  style={{fontSize:70, cursor: "pointer", marginLeft:50, marginTop:50}}
+                  style={{fontSize:90, cursor: "pointer", marginLeft:50, marginTop:50}}
                 >
               </i>
             </NavLink>
@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
             <li>
               <NavLink className="nav-link" to="/wishlist">
                 <div
-                  style={{fontSize: 40}}
+                  style={{fontSize: 50}}
                   className="nav-btn">
                   <i className="fa-solid fa-heart"></i>
                 </div>
@@ -35,7 +35,7 @@ function Navigation({ isLoaded }) {
             <li>
               <NavLink className="nav-link" to="/cart">
                 <div
-                  style={{fontSize: 40, cursor: "pointer"}}
+                  style={{fontSize: 50, cursor: "pointer"}}
                   className="nav-btn">
                   <i class="fa-solid fa-cart-shopping"></i>
                 </div>

@@ -34,26 +34,30 @@ export default function CheckOut() {
   // * Will need to override input & label styling later
 
   return (
-    <div className="checkout-form">
-      <h2>Check Out</h2>
-      <div onClick={() => setClicked(!clicked)}>
+    <>
+    <h2>Check Out</h2>
+    <div className="checkout-page">
+      <div className="form-message-container" onClick={() => setClicked(!clicked)}>
         {clicked ? <CheckOutMessage /> : <ShippingDetails />}
       </div>
       {isLoaded && (
-        <>
+        <div className="checkout-card">
           {Object.values(cart).map((item) => (
             <div style={{ display: "flex", gap: "15px" }}>
               <h4>{item.name}</h4>
               <p>{parseFloat(item.price * item.quantity).toFixed(2)}</p>
             </div>
           ))}
+
           <h4>Total: ${subtotal.toFixed(2)}</h4>
-          <button className="checkout-btn" onClick={(e) => handleClick(e)}>Confirm</button>
-          <NavLink to="/cart">
-            <button className="checkout-btn" >Cancel</button>
-          </NavLink>
-        </>
+            <button className="checkout-btn" onClick={(e) => handleClick(e)}>Confirm</button>
+            <NavLink to="/cart">
+              <button className="cancel-btn" >Cancel</button>
+            </NavLink>
+
+        </div>
       )}
     </div>
+    </>
   );
 }
