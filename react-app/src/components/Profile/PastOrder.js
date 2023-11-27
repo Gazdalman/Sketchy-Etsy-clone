@@ -56,7 +56,7 @@ export default function () {
               {Object.keys(allOrders).find((key) => allOrders[key] === order)}
             </h3>
             <p>Order Total: {order.total}</p>
-            <div className="allrdersItemsContainer">
+            <div className="allOrdersItemsContainer">
               {order.products.map((item) => (
                 <div key={item.id} className="indvUserOrderItems">
                   <div>

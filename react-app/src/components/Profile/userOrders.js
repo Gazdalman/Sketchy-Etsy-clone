@@ -37,6 +37,7 @@ export default function UserOrders({ user }) {
     } else {
       dispatch(addItemToCart(productId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return isLoaded ? (

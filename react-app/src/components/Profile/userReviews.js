@@ -17,7 +17,9 @@ export default function UserReviews({ user }) {
         let revArr = [];
         Object.values(products).map((product) => {
           Object.values(product.reviews).map((prodRev) => {
-            revArr.push(prodRev);
+            if (product.seller_id == user.id) {
+              revArr.push(prodRev);
+            }
           });
         });
         setReviews(revArr);
@@ -51,18 +53,6 @@ export default function UserReviews({ user }) {
           ) : (
             <h3>You have no reviews yet</h3>
           )}
-          {/* {Object.values(reviews).length > 0 ? (
-            <div className="userReviewsContainer">
-              {Object.values(reviews).map((review) => (
-
-              ))}
-            </div>
-          ) : (
-            // {Object.values{products}.map(product => (
-            //   {Object.values{products.reviews}}
-            // ))}
-            <h3>You have no reviews</h3>
-          )} */}
         </>
       )}
     </div>
