@@ -46,7 +46,6 @@ function ReviewFormModal({ productId }) {
   }
 
   const handleSubmit = async (e) => {
-    // checkCredentials();
     e.preventDefault();
     if (errors && !Object.values(errors).length) {
       await dispatch(createAReview(productId, newReview)).then(() =>
