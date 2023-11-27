@@ -142,7 +142,7 @@ function Reviews({ product }) {
         </div>
       </div>
       <div>
-        {!commented && user && user.id != product.seller_id ? (
+        {!commented && curruser && curruser.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
@@ -245,7 +245,7 @@ function Reviews({ product }) {
                 </div>
               </div>
               <div className="review-buttons">
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["delete-button-container"]}
                     buttonText="Delete Review"
@@ -254,7 +254,7 @@ function Reviews({ product }) {
                     }
                   />
                 ) : null}
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["edit-button-container"]}
                     buttonText="Edit Review"
