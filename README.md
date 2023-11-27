@@ -4,7 +4,7 @@
 
 ### Please keep in mind that the site is for fun and meant to look rather questionable.
 
-# Sketchy - Your Artistic Marketplace
+## Sketchy - Your Artistic Marketplace
 
 ### Welcome to Sketchy, where creativity meets questionable! This particular variation is a lively worldwide marketplace designed for artists and other show people to display their "unique" items as well as sell their "unique" goods. If you are a supporter of small independent artists and showing love to their "various" items, Sketchy is the place of legend for you.
 
@@ -59,11 +59,15 @@
 
       * Set your prices to whatever your heart desires, manage your orders, and connect with your fans.
 
-### Please keep in mind that the site is for fun and meant to look rather questionable.
+Feedback and Support
 
-# Sketchy - Your Artistic Marketplace
+We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
 
-### Welcome to Sketchy, where creativity meets questionable! This particular variation is a lively worldwide marketplace designed for artists and other show people to display their "unique" items as well as sell their "unique" goods. If you are a supporter of small independent artists and showing love to their "various" items, Sketchy is the place of legend for you.
+## Getting started
+
+1. Clone this repository (only this branch)
+
+2. Install dependencies
 
    ```bash
    pipenv install -r requirements.txt
