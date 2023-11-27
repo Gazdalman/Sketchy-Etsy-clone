@@ -17,7 +17,7 @@ import ProductPage from "./components/ProductPage";
 import ProductShow from "./components/ProductShow";
 import ProductFormPage from "./components/ProductForm";
 import Profile from "./components/Profile";
-// import Reviews from "./components/Review";
+import Footer from "./components/Footer";
 import EditAccountPage from "./components/EditAccountPage";
 import PastOrder from "./components/Profile/PastOrder";
 import Reviews from "./components/Review";
@@ -86,6 +86,7 @@ function App() {
           <Route>"404: Route doesn't exist"</Route>
         </Switch>
       )}
+      {location.pathname === "/" ? null : <Footer isLoaded={isLoaded} />}
     </>
   );
 }

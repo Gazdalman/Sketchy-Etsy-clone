@@ -27,11 +27,12 @@ function ReviewFormModal({ productId }) {
     const errObj = {};
     if (!rating) {
       errObj.rating = "Rating is required";
-      // disabled = true;
     }
     if (!reviewText || reviewText.length < 4) {
       errObj.reviewText = "Review text must be at least 4 characters";
-      // disabled = true;
+    }
+    if (reviewText.length > 2000) {
+      errObj.reviewText = `Don't nobody wanna read allat. That's a whole ${reviewText.length} characters?!! Go ahead and shorten that for me bub`;
     }
     setErrors(errObj);
   }
@@ -84,8 +85,14 @@ function ReviewFormModal({ productId }) {
                 // required
               />
             </label>
-            {errors.reviewText && <p className="errors">{errors.reviewText}</p>}
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
+            {errors.reviewText ? (
+              <p className="errors">{errors.reviewText}</p>
+            ) : null}
+            <label>Rating</label>
+            <div
+              className="stars"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
               <label>
                 <div
                   class="rating"
