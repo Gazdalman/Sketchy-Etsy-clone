@@ -15,7 +15,7 @@ function Reviews({ product }) {
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const target = Object.values(products).find((ele) => ele.id == productId);
-  const user = useSelector((state) => state.session.user);
+  const curruser = useSelector((state) => state.session.user);
   const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
@@ -32,7 +32,7 @@ function Reviews({ product }) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].User = users?.find((ele) => ele.id == list[i].user_id);
+      list[i].user = users?.find((ele) => ele.id == list[i].user_id);
       list[i].commented = false;
       newbie.push(list[i]);
     }
@@ -51,12 +51,12 @@ function Reviews({ product }) {
   }
 
   let commented = false;
-  const exists = (element) => element?.user_id == user.id;
-  if (user && reviewsLength >= 1) {
+  const exists = (element) => element?.user_id == curruser.id;
+  if (curruser && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
 
-  const owns = (ele) => ele.seller_id == user.id;
+  const owns = (ele) => ele.seller_id == curruser.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
@@ -152,16 +152,8 @@ function Reviews({ product }) {
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <div
-              style={{
-                display: "flex",
-                borderBottom: "1px solid grey",
-                padding: "5px",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
+          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
                 className="review-info"
                 style={{
