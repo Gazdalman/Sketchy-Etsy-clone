@@ -5,6 +5,7 @@ import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function UserOrders({ user }) {
   const dispatch = useDispatch();
@@ -55,7 +56,9 @@ export default function UserOrders({ user }) {
               {order.products.map((item) => (
                 <div key={item.id} className="indvUserOrderItems">
                   <div>
-                    <h4>{item.name}</h4>
+                    <NavLink to={`/products/${item.id}`}>
+                      <h4>{item.name}</h4>
+                    </NavLink>
                     <div className="orderItemPriceQuantDiv">
                       <p># Purchased: {item.quantity}</p>
                       <p className="orderedItemPrice">

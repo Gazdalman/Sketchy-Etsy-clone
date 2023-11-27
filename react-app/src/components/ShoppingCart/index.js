@@ -55,11 +55,17 @@ export default function Cart() {
       {isLoaded &&
         Object.values(cart).map((item) => (
           <div key={item.id} className="cart-card">
+            {console.log(item)}
+            <img
+              src={item.preview}
+              alt="item preview"
+              className="productImageCart"
+            />
             <h3>{item.name}</h3>
             <p>{item.price}</p>
             <p>{item.description}</p>
             <p>
-              {item["quantity"]}
+              {item.quantity}
               <button onClick={() => decQuant(item)}> - </button>
               <button onClick={() => incQuant(item.id)}> + </button>
             </p>
