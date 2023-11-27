@@ -177,10 +177,7 @@ export default function Cart() {
           <NavLink to="/checkout">
             <button>Checkout</button>
           </NavLink>
-        </div>
-      ) : (
-        <h2>Your cart is empty</h2>
-      )}
+      </div> : <h2>Your cart is empty</h2>}
     </div>
   );
 }
