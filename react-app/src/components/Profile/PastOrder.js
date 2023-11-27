@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import OpenModalButton from "../OpenModalButton";
+import ReviewFormModal from "../CreateReviewModal";
 
 export default function () {
   const dispatch = useDispatch();
@@ -12,8 +14,8 @@ export default function () {
   const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("order state", allOrders);    console.log('cart', cart)
-
+  // console.log("order state", allOrders);
+  // console.log("cart", cart);
 
   useEffect(() => {
     if (!user) {
@@ -45,27 +47,48 @@ export default function () {
 
   return (
     isLoaded && (
-      <>
+      <div className="pastOrdersBody">
         <h1>History Order</h1>
         {Object.values(allOrders).map((order) => (
-          <div key={order.id}>
-            {order.products.map((item) => (
-              <div key={item.id}>
-                <h4>{item.name}</h4>
-                <p>{item.price}</p>
-                <button>Write Review</button>
-                <button onClick={(e) => handleClick(e)}>Return Item</button>
-                <button
-                  value={item.id}
-                  onClick={(e) => handleAddToCart(e, item)}
-                >
-                  Buy Again
-                </button>
-              </div>
-            ))}
+          <div key={order.id} className="indvOrdersInAll">
+            <h3>
+              Order#:{" "}
+              {Object.keys(allOrders).find((key) => allOrders[key] === order)}
+            </h3>
+            <p>Order Total: {order.total}</p>
+            <div className="allrdersItemsContainer">
+              {order.products.map((item) => (
+                <div key={item.id} className="indvUserOrderItems">
+                  <div>
+                    <h4>{item.name}</h4>
+                    <div className="orderItemPriceQuantDiv">
+                      <p># Purchased: {item.quantity}</p>
+                      <p className="orderedItemPrice">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                    <div className="userOrderButtons">
+                      <OpenModalButton
+                        buttonText="Write Review"
+                        modalComponent={<ReviewFormModal productId={item.id} />}
+                      />
+                      <button onClick={(e) => handleClick(e)}>
+                        Return Item
+                      </button>
+                      <button
+                        value={item.id}
+                        onClick={(e) => handleAddToCart(e, item)}
+                      >
+                        Buy Again
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
-      </>
+      </div>
     )
   );
 }

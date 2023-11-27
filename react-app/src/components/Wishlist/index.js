@@ -5,6 +5,7 @@ import { getWish } from "../../store/wishlist";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import "./Wishlist.css";
 
 export default function Wishlist() {
   const history = useHistory();
@@ -17,13 +18,12 @@ export default function Wishlist() {
     : null;
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log('product id', wishlist.products)
-  console.log('all product', allProducts)
+  // console.log("product id", wishlist.products);
+  // console.log("all product", allProducts);
 
   useEffect(() => {
     if (user) {
-      dispatch(getWish())
-      .then(() => setIsLoaded(true))
+      dispatch(getWish()).then(() => setIsLoaded(true));
     }
   }, [dispatch]);
 
@@ -51,17 +51,22 @@ export default function Wishlist() {
               <div className="all-products" key={product.id}>
                 <div>{product.name}</div>
                 <div>{product.price}</div>
-                <OpenModalButton
-                  modalClasses={["delete-button-container"]}
-                  buttonText="Delete Product"
-                  modalComponent={<DeleteWish product={product} />}
-                />
-                <button
-                  value={product.id}
-                  onClick={(e) => handleClick(e, product)}
-                >
-                  Add to cart
-                </button>
+                <div className="wishlist-buttons">
+                  <div className="delete-buttons">
+                    <OpenModalButton
+                      modalClasses={["delete-button-container"]}
+                      buttonText="Delete Product"
+                      modalComponent={<DeleteWish product={product} />}
+                    />
+                  </div>
+                  <button
+                    className="cart-button"
+                    value={product.id}
+                    onClick={(e) => handleClick(e, product)}
+                  >
+                    Add to cart
+                  </button>
+                </div>
               </div>
             ))}
           </>

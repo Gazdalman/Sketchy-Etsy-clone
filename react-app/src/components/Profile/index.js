@@ -34,7 +34,7 @@ export default function Profile() {
 
   if (isLoaded && Number(user.id) === Number(userId)) {
     return (
-      <div>
+      <div className="profileContainer">
         <h1>
           Hello, {user.firstName} {user.lastName}
         </h1>
@@ -45,6 +45,7 @@ export default function Profile() {
           <NavLink to="/editAccount">
             <button>Edit Profile</button>
           </NavLink>
+
           <OpenModalButton
             modalClasses={["delete-button-container"]}
             buttonText="Delete your Account"

@@ -7,22 +7,36 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
+import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { productId } = useParams();
+  const products = useSelector((state) => state.products);
+  const target = Object.values(products).find((ele) => ele.id == productId);
   const user = useSelector((state) => state.session.user);
+  const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
-  const reviews = orderReviews(Object.values(unorderedReviews));
-  const [activeRating, setActiveRating] = useState(0);
+  const review = orderReviews(Object.values(unorderedReviews));
+  const reviews = addUsers(review, users);
+  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
-    let newwie = [];
+    let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
-      newwie.push(list[i]);
+      newbie.push(list[i]);
     }
-    return newwie;
+    return newbie;
+  }
+  function addUsers(list, users) {
+    let newbie = [];
+    for (let i = 0; i < list.length; i++) {
+      list[i].User = users?.find((ele) => ele.id == list[i].user_id);
+      list[i].commented = false;
+      newbie.push(list[i]);
+    }
+    return newbie;
   }
   let sum = 0;
   if (reviewsLength >= 1) {
@@ -35,21 +49,22 @@ function Reviews() {
   if (sum > 0) {
     avg = sum / reviewsLength;
   }
+
   let commented = false;
   const exists = (element) => element?.user_id == user.id;
   if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
-  console.log("🚀 ~ file: index.js:29 ~ Reviews ~ commented:", commented);
-  const owns = (ele) => ele.user_id == user.id;
-  //   const openMenu = () => {
-  //     if (showMenu) return;
-  //     setShowMenu(true);
-  //   };
+
+  const owns = (ele) => ele.seller_id == user.id;
+
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
-    dispatch(allTheReviews(productId));
+    dispatch(allTheReviews(productId))
+      .then(() => dispatch(getAllUsers()))
+      .then(() => setIsLoaded(true));
   }, [dispatch, reviewsLength]);
+  const commentedat = "commented at";
   return (
     <>
       <div
@@ -59,6 +74,7 @@ function Reviews() {
           flexWrap: "nowrap",
           justifyContent: "flex-start",
           alignItems: "center",
+          width: "20%",
         }}
       >
         {reviewsLength < 1 ? (
@@ -72,8 +88,11 @@ function Reviews() {
             <h1>{reviewsLength} Reviews</h1>
           </span>
         )}
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <h1>{avg?.toFixed(2)}</h1>
+        <div
+          className="insideman"
+          style={{ display: "flex", justifyContent: "space-around" }}
+        >
+          <h1 style={{ padding: "0 5px 0 5px" }}>{avg?.toFixed(2)}</h1>
           <label>
             <div
               class="rating"
@@ -122,29 +141,45 @@ function Reviews() {
         {!commented ? (
           <OpenModalButton
             buttonText="Add Review"
-            className="dropdownLi"
+            modalClasses={["add-edit-button-container"]}
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
-        ) : //   <h1>Needs Button</h1>
-        null}
+        ) : null}
 
-        {reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at }) => (
-            <>
+        {isLoaded && reviewsLength >= 1 ? (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  width: "50%",
+                  width: "90%",
                 }}
               >
                 <div>
-                  <p>{review}</p>
-                  <span>
-                    <p>{created_at}</p>
-                  </span>
+                  <p
+                    style={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    {review}
+                  </p>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      color: "darkgray",
+                    }}
+                  >
+                    {`${User.firstName}, ${User.username}`}
+                    <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
+                      {" "}
+                      commented at{" "}
+                    </span>
+                    {`${created_at}`}
+                  </p>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}
@@ -202,16 +237,16 @@ function Reviews() {
                   }
                 />
               ) : null}
-              {/* {user?.id == user_id ? (
+              {user?.id == user_id ? (
                 <OpenModalButton
-                  modalClasses={["delete-button-container"]}
+                  modalClasses={["edit-button-container"]}
                   buttonText="Edit Review"
                   modalComponent={
                     <EditReview reviewId={id} productId={productId} />
                   }
                 />
-              ) : null} */}
-            </>
+              ) : null}
+            </div>
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>

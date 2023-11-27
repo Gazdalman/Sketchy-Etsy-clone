@@ -31,14 +31,13 @@ const editReview = (reviewId, payload) => {
 };
 
 export const allTheReviews = (productId) => async (dispatch) => {
-  console.log("DO I ENTER THE REvIEW THUNK");
   const response = await fetch(`/api/reviews/${productId}`);
   const reviews = await response.json();
   dispatch(allReviews(reviews));
   return reviews;
 };
 export const allYourReviews = (userId) => async (dispatch) => {
-  console.log("🚀 ~ file: review.js:36 ~ allYourReviews ~ userId:", userId);
+  // console.log("🚀 ~ file: review.js:36 ~ allYourReviews ~ userId:", userId);
   const response = await fetch(`/api/reviews/${userId}/reviews`);
   const reviews = await response.json();
   console.log(reviews);
@@ -46,16 +45,12 @@ export const allYourReviews = (userId) => async (dispatch) => {
   // return reviews;
 };
 export const createAReview = (productId, payload) => async (dispatch) => {
-  console.log("INSIDE THE CREATION REVIEW THUNK");
   const response = await fetch(`/api/reviews/${productId}/new`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  console.log("🚀 ~ file: review.js:48 ~ createAReview ~ response:", response);
-  // if (response.ok) {
   const review = await response.json();
-  console.log("SHOULD BE DISPATCHING FROM THE CREATION REVIEW THUNK");
   dispatch(createReview(review));
   return review;
 };
@@ -66,24 +61,17 @@ export const deleteAReview = (reviewId) => async (dispatch) => {
   dispatch(deleteReview(reviewId));
   return response;
 };
-export const editAReview = (reviewId, payload) => async (dispatch) => {
-  console.log("🚀 ~ file: review.js:73 ~ editAReview ~ payload:", payload);
-  console.log("DO I ENTER THE THUNK???");
-  const response = await fetch(`/api/reviews/${reviewId}/edit`, {
-    method: "PUT",
-    // headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify(payload),
-    body: JSON.stringify(payload),
-  });
-  console.log("🚀 ~ file: review.js:76 ~ editAReview ~ response:", response);
-  console.log("DO I GET PAST THE FETCH??");
-  const review = await response.json();
-  review.id = reviewId;
-  console.log("🚀 ~ file: review.js:81 ~ editAReview ~ review:", review);
-  dispatch(editReview(review));
-  console.log("AM I RETURNING ANYTHING??");
-  return review;
-};
+export const editAReview =
+  (reviewId, payload, productId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}/edit`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const review = await response.json();
+    dispatch(allTheReviews(productId));
+    return review;
+  };
 const review = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -97,11 +85,9 @@ const review = (state = initialState, action) => {
       newState = { ...state };
       newState[action.payload.id] = action.payload;
       return newState;
-    case EDIT_REVIEW:
-      newState = { ...state };
-      console.log("🚀 ~ file: review.js:101 ~ review ~ newState:", newState);
-      newState[action.id] = action.payload;
-      return newState;
+    // case EDIT_REVIEW:
+    //   newState = { ...state, [action.payload.id]: action.payload };
+    //   return newState;
     case DELETE_REVIEW:
       let deleteState;
       deleteState = { ...state };

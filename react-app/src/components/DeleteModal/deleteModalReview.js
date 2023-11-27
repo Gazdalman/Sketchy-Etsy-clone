@@ -11,7 +11,6 @@ import { useEffect } from "react";
 //PLEASE CHANGE names/variables
 
 function DeleteReview({ reviewId, productId }) {
-
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,14 +18,6 @@ function DeleteReview({ reviewId, productId }) {
   const reviewsLength = Object.values(
     useSelector((state) => state.review)
   ).length;
-  console.log(
-    "🚀 ~ file: deleteModalReview.js:17 ~ DeleteReview ~ reviews:",
-    reviewsLength
-  );
-  console.log(
-    "🚀 ~ file: deleteModalReview.js:16 ~ DeleteReview ~ user:",
-    user
-  );
 
   const deleteReview = async (e) => {
     e.preventDefault();
@@ -44,16 +35,16 @@ function DeleteReview({ reviewId, productId }) {
   }, [reviewsLength]);
 
   return (
-    <div className="delete-button-container" id="deleteModel">
-      <h2 id="delModalTitle">Confirm Delete</h2>
-      <p id="delModalText">
+    <div className="delete-button-container" id="deleteReviewModel">
+      <h2 id="delReviewModalTitle">Confirm Delete</h2>
+      <p id="delReviewModalText">
         Are you sure you want to permanently DELETE this Review?
       </p>
-      <div id="delModalButtons">
-        <button id="delete-btn" onClick={deleteReview}>
+      <div id="delReviewModalButtons">
+        <button id="deletea-review-btn" onClick={deleteReview}>
           Yes (Delete Review)
         </button>
-        <button id="keep-btn" onClick={closeModal}>
+        <button id="keep-review-btn" onClick={closeModal}>
           No (Keep Review)
         </button>
       </div>

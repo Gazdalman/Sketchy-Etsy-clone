@@ -63,13 +63,10 @@ def edit_review(id):
 
   if form.validate_on_submit():
 
-    if int(current_user.get_id()) == int(review.user_id):
-      review.product_id=form.data["product_id"],
-      review.user_id=form.data["user_id"],
-      review.review=form.data["review"],
+      review.product_id=form.data["product_id"]
+      review.user_id=form.data["user_id"]
+      review.review=form.data["review"]
       review.rating=form.data["rating"]
-    else:
-      return "You do not own this product"
 
   db.session.commit()
   return review.to_dict()

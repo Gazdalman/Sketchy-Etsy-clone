@@ -34,17 +34,15 @@ export default function UserProducts({ user }) {
             <div className="userProductsContainer">
               {Object.values(products).map((item) => (
                 <div key={item.id} className="indvUserProducts">
-                  <div className="userProductImage">
-                    <>
-                      {item.preview ? (
-                        <img src={item.preview} />
-                      ) : (
-                        <>
-                          <p>Product Image</p>
-                          <p>Coming Soon...</p>
-                        </>
-                      )}
-                    </>
+                  <div className="userProductImages">
+                    {item.preview ? (
+                      <img src={item.preview} className="userIdvProductImage" />
+                    ) : (
+                      <>
+                        <p>Product Image</p>
+                        <p>Coming Soon...</p>
+                      </>
+                    )}
                   </div>
                   <div>
                     <a href={`/products/${item.id}`}>
@@ -53,13 +51,18 @@ export default function UserProducts({ user }) {
                     <p className="userProductDescription">{item.description}</p>
                     <p className="userProductPrice">${item.price}</p>
                     <div className="userProductButtons">
-                      <button onClick={(e) => edit(e, item.id)}>Edit</button>
+                      <button
+                        onClick={(e) => edit(e, item.id)}
+                        id="editProductButton"
+                      >
+                        Edit
+                      </button>
                       <OpenModalButton
                         buttonText={"Delete Product"}
                         modalComponent={
                           <DeleteProduct product={item} refresh={true} />
                         }
-                        modalClasses={["delete-product"]}
+                        modalClasses={["deleteProductButton"]}
                       />
                     </div>
                   </div>
