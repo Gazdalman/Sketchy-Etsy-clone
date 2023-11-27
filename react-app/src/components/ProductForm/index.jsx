@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct, editProduct } from "../../store/product";
 import { useHistory, useParams } from "react-router-dom";
+import "./index.css";
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
@@ -26,7 +27,7 @@ const ProductFormPage = ({ type, product }) => {
     type == "edit" ? product.units_available : 1
   );
   const [errors, setErrors] = useState("");
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const removeImgs = (e) => {
@@ -59,32 +60,39 @@ const ProductFormPage = ({ type, product }) => {
     if (!description || description.length < 10) setDisabled(true);
     if (!prevImg && type != "edit") setDisabled(true);
   }, [name, description, prevImg]);
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
+    if (!description || description.length < 10) setDisabled(true);
+    if (!prevImg && type != "edit") setDisabled(true);
+  }, [name, description, prevImg]);
 
   if (!user) {
-    return history.replace("/")
+    return history.replace("/");
   }
 
   const handleCreate = async (e) => {
-    e.preventDefault()
-    const product = new FormData()
-    const images = []
-    product.append('name', name)
-    product.append('description', description)
-    product.append('category', category)
-    product.append('price', price)
-    product.append('units_available', unitsAvailable)
-    product.append('preview', prevImg)
+    e.preventDefault();
+    const product = new FormData();
+    const images = [];
+    product.append("name", name);
+    product.append("description", description);
+    product.append("category", category);
+    product.append("price", price);
+    product.append("units_available", unitsAvailable);
+    product.append("preview", prevImg);
 
+    let num = 1;
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        formData.append(`img${num}`, img);
+        const image = new FormData();
+        image.append(`image`, img);
+        images.push(image);
       }
       num += 1;
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product));
+    const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
 
@@ -96,32 +104,49 @@ const ProductFormPage = ({ type, product }) => {
     productData.append("category", category);
     productData.append("price", price);
     productData.append("units_available", unitsAvailable);
+    e.preventDefault();
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("description", description);
+    productData.append("category", category);
+    productData.append("price", price);
+    productData.append("units_available", unitsAvailable);
 
     const updated = await dispatch(editProduct(productData, product.id));
+    const updated = await dispatch(editProduct(productData, product.id));
     if (updated.errors) {
+      const errs = {};
       const errs = {};
       for (const err in updated.errors) {
         const parts = err.split(" : ");
         errs[parts[0]] = parts[1];
+        const parts = err.split(" : ");
+        errs[parts[0]] = parts[1];
       }
-      setErrors(errs)
+      setErrors(errs);
       if (errors.not_found || errors.unauthorized) {
-        return history.replace("/")
+        return history.replace("/");
       }
     } else {
       return history.push(`/products/${updated.id}`);
+      return history.push(`/products/${updated.id}`);
     }
+  };
   };
 
   const goBack = (e) => {
     e.preventDefault();
     return history.goBack();
   };
+    e.preventDefault();
+    return history.goBack();
+  };
 
   return !imageLoading ? (
-    <div>
+    <div className="productForm">
       <h1>What Are Yuh Sellin'?</h1>
       <form
+        onSubmit={type !== "edit" ? handleCreate : handleEdit}
         onSubmit={type !== "edit" ? handleCreate : handleEdit}
         encType="multipart/form-data"
       >
@@ -165,7 +190,15 @@ const ProductFormPage = ({ type, product }) => {
             placeholder={
               '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
             }
+            placeholder={
+              '10 or more characters \n(Add any tags at the bottom with an "#" before it)'
+            }
           />
+          <p
+            className={`char-count ${
+              2000 - description.length <= 50 ? "low-count" : ""
+            }`}
+          >
           <p
             className={`char-count ${
               2000 - description.length <= 50 ? "low-count" : ""
@@ -245,7 +278,7 @@ const ProductFormPage = ({ type, product }) => {
             step=".01"
             value={checkPrice(price)}
             placeholder="$USD"
-            onChange={e => setPrice(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
             onBlur={(e) => {
               const parsedValue = parseFloat(e.target.value).toFixed(2);
               setPrice(parsedValue);
@@ -257,12 +290,16 @@ const ProductFormPage = ({ type, product }) => {
           {errors.units_available && <p>{errors.units_available}</p>}
           <input
             type="number"
-            min={type == 'edit' ? 0 : 1}
+            min={type == "edit" ? 0 : 1}
             value={unitsAvailable}
             placeholder="# of units you have"
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
+        <button type="submit" disabled={disabled}>
+          {type == "edit" ? "Edit Product" : "Create Product"}
+        </button>
+        <button onClick={(e) => goBack(e)}>Cancel</button>
         <button type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
