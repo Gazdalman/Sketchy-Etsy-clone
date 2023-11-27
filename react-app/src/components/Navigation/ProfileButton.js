@@ -44,7 +44,7 @@ function ProfileButton({ user, disabled }) {
     <>
       <div
       onClick={openMenu}
-      style={{fontSize:35, cursor:"pointer"}}
+      style={{fontSize:50, cursor:"pointer"}}
       className="nav-btn"
       >
           <i class="fa-solid fa-user" style={{color: "#322e3f", fontSize:40}}></i>
