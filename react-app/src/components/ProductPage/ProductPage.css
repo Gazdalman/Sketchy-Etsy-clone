@@ -366,43 +366,6 @@ a {
 }
 
 .prod-page-btn-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  /* gap: 25px; */
-  cursor: pointer;
-}
-
-.fa-heart {
-  font-size: 40px;
-  color: #ab434a;
-  /* margin-right: 5px; */
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    transform: translateY(-10px);
-  }
-}
-.add-to-cart-btn {
-  width: 80%;
-}
-.add-to-cart-btn > button {
-  font-size: 16px;
-  color: #ffffff;
-  border-radius: 15px;
-  border: 5px solid #ab434a;
-  background-color: #ab434a;
-  cursor: pointer;
-  padding: 10px;
-  font-weight: bold;
-  /* padding: 25px; */
-  &:hover {
-    background-color: #49867f;
-    border: 5px solid #49867f;
-}
-
-.prod-page-btn-container {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
