@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: baseline;
   list-style-type: none;
 
   width: 100%;
@@ -165,9 +165,9 @@
   margin-bottom: 4px;
 
   z-index: 10000;
-}
+} */
 
-.dropdown-btn {
+/* .dropdown-btn {
   color: #f0efeb;
   border-radius: 12px;
   border: 1px solid #a93d44;
@@ -175,9 +175,9 @@
   cursor: pointer;
 
   padding: 5px;
-}
+} */
 
-.dropdown-btn:hover {
+/* .dropdown-btn:hover {
   background-color: #322e3f;
   border: 1px solid #322e3f;
 }
