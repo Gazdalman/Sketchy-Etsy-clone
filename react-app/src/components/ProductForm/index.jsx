@@ -310,10 +310,10 @@ const ProductFormPage = ({ type, product }) => {
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button type="submit" disabled={disabled}>
+        <button className="submit-create" type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
-        <button onClick={(e) => goBack(e)}>Cancel</button>
+        <button className="cancel-create" onClick={(e) => goBack(e)}>Cancel</button>
       </form>
     </div>
   ) : (
