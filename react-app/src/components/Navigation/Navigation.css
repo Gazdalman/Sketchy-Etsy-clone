@@ -64,7 +64,7 @@
 
 /*Ann dropdown profile*/
 
-/* .profile-dropdown {
+.profile-dropdown {
   color: #a93d44;
   position: absolute;
   background-color: #e2dcc2;
@@ -110,7 +110,7 @@
   margin-bottom: 4px;
 
   z-index: 10000;
-} */
+}
 
 /* .dropdown-btn {
   color: #f0efeb;
