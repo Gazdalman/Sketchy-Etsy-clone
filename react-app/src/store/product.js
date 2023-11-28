@@ -63,10 +63,9 @@ export const createProduct = (product, images) => async (dispatch) => {
       }
       dispatch(changeProducts(product));
     }
-    //return product.id;
+   return product.id;
   }
-  return product.id;
-  //return res.json();
+  return res.json();
 };
 
 export const addImages = (productId, images) => async (dispatch) => {
