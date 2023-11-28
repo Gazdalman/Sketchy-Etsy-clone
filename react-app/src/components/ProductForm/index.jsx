@@ -13,7 +13,7 @@ const ProductFormPage = ({ type, product }) => {
   const history = useHistory();
   const [name, setName] = useState(type == "edit" ? product.name : "");
   const [category, setCategory] = useState(
-    type == "edit" ? product.categories : ""
+    type == "edit" ? product.category : ""
   );
   const [price, setPrice] = useState(type == "edit" ? product.price : "");
   const [description, setDescription] = useState(
