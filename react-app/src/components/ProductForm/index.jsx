@@ -111,7 +111,19 @@ const ProductFormPage = ({ type, product }) => {
 
     setImageLoading(true);
     const id = await dispatch(createProduct(product, images));
-    return history.push(`/products/${id}`);
+    if (id.errors) {
+      const errs = {};
+      for (const err in updated.errors) {
+        const parts = err.split(" : ");
+        errs[parts[0]] = parts[1];
+      }
+      setErrors(errs);
+      if (errors.not_found || errors.unauthorized) {
+        return history.replace("/");
+      }
+    } else {
+      return history.push(`/products/${id}`);
+    }
   };
     const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
