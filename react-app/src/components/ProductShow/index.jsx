@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
 import { addItemToCart, updateQuantity } from "../../store/cart";
-import { deleteProductThunk } from "../../store/product";
+import { deleteProductThunk } from "../../store/asdfsadfasdfasdfas";
 import OpenModalButton from "../OpenModalButton";
 import DeleteProduct from "../DeleteModal/deleteModalProduct";
 import "./index.css";

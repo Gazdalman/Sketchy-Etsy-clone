@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { getAllProducts } from "../../store/product";
+import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import "./index.css";
