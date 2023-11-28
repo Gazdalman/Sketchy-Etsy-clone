@@ -1,19 +1,22 @@
 h1 {
     margin: 18px auto;
-
 }
 
 .new-product-page {
     width: 100%;
-
 }
 
-.new-product-form-container{
+#product-submit {
+    background-color: #322e3f;
+    color: white;
+}
+
+.productForm {
     margin: 0 auto;
     width: 50%;
     height: fit-content;
 
-    background-color:#fff;
+    background-color:#d5d5d5;
     padding: 15px;
     border-radius:6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -71,7 +74,6 @@ textarea {
 }
 
 .submit-create {
-    border: none;
     font-size: 18px;
     width: 40%;
     color: #ffffff;
@@ -80,12 +82,12 @@ textarea {
     cursor: pointer;
 
     position: relative;
-    padding: 15px;
+    padding: 5px;
 }
-/* .submit-create:hover {
+.submit-create:hover {
     background-color: #49867f;
-    border: 5px solid #322e3f;
-} */
+    border: 1px solid #322e3f;
+}
 
 
 .cancel-create {
@@ -97,9 +99,10 @@ textarea {
     cursor: pointer;
 
     position: relative;
-    padding: 15px;
+    padding: 5px;
 }
 .cancel-create:hover {
     background-color: #49867f;
-
+    border: 1px solid #322e3f;
 }
+
