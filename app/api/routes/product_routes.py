@@ -116,6 +116,7 @@ def edit_product(id):
       product.price=data['price']
       product.description=data['description']
       product.units_available=data['units_available']
+      product.category=data['category']
     elif current_user.get_id() != product.seller_id:
       return {"errors": ["unauthorized : You do not own this product."]}, 401
     else:
