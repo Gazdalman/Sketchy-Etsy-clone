@@ -50,7 +50,7 @@ export default function Cart() {
     setPayment(e.target.value);
   };
 
-  return cart.products.length ? (
+  return Object.values(cart) ? (
     <div className="shopping-cart-page">
       <div className="shopping-cart-container">
         {isLoaded &&

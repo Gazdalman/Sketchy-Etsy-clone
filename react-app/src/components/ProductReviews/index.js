@@ -152,7 +152,7 @@ function Reviews({ product }) {
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
             <div
               style={{
                 display: "flex",
@@ -194,7 +194,7 @@ function Reviews({ product }) {
                       color: "hwb(49 76% 11%)",
                     }}
                   >
-                    {`${User.firstName}, ${User.username} commented at ${created_at}`}
+                    {`${user.firstName}, ${user.username} commented at ${created_at}`}
                   </span>
                 </div>
                 <div

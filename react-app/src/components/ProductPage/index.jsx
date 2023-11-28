@@ -104,14 +104,6 @@ const ProductPage = () => {
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
 
-                    <button
-                      value={product.id}
-                      onClick={(e) => handleClick(e, product.id)}
-                      className="add-to-cart-btn"
-                    >
-                      Add to cart
-                    </button>
-
                   <div
                     className="wish-btn"
                     onClick={(e) => addToWish(e, product)}
