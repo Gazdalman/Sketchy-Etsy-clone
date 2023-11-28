@@ -385,8 +385,9 @@
 
 .profile-dropdown {
   display: flex;
-  top: 15%;
+  top: 10%;
   right: 25px;
+  margin: 5px;
   flex-direction: column;
   width: fit-content;
   cursor: pointer;
