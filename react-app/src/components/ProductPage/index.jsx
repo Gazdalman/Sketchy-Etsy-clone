@@ -65,13 +65,10 @@ const ProductPage = () => {
 
   const handleClick = (e, prod) => {
     e.preventDefault();
-    if (cart[prod.id]) {
-      dispatch(updateQuantity(prod.id, "inc", 1));
-    } else if (prod.unit_available > 0) {
-      dispatch(addItemToCart(prod.id));
-      window.alert("Added to Cart")
-    }
-    alert("Item added to your shopping cart! 😊");
+    const message = "Item added to your shopping cart! 😊"
+    alert(message);
+    dispatch(addItemToCart(prod.id))
+    
   };
 
   return isLoaded ? (
