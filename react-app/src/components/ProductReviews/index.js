@@ -160,8 +160,16 @@ function Reviews({ product }) {
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
-            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
+          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
+            <div
+              style={{
+                display: "flex",
+                borderBottom: "1px solid grey",
+                padding: "5px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <div
                 style={{
                   display: "flex",
