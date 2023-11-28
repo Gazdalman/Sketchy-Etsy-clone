@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
+import { createProduct, editProduct } from "../../store/product";
 import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
 import "./ProductForm.css";
@@ -321,4 +321,4 @@ const ProductFormPage = ({ type, product }) => {
   );
 };
 
-export default ProductFormPage
+export default ProductFormPage;
