@@ -21,7 +21,7 @@ def get_all():
   """
   Returns a list of all products on the site
   """
-  products = Product.query.filter(Product.seller_id > 0).all()
+  products = Product.query.filter(Product.seller_id > 0).order_by(Product.created_at.desc()).all()
   p_list = [product.to_dict() for product in products]
   return p_list
   # return render_template("test_products.html", p_list=p_list)
