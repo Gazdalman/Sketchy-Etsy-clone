@@ -106,12 +106,12 @@
 
 .profile-dropdown {
   display: flex;
-  top: 10%;
+  top: 15%;
   right: 25px;
   margin: 5px;
   cursor: context-menu;
   flex-direction: column;
-  width: fit-content;
+  cursor: pointer;
   text-align: center;
   position: absolute;
   background-color: #e2dcc2;
