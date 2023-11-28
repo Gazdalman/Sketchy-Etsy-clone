@@ -152,17 +152,12 @@
   /* right: 25px; */
   /* flex-direction: column; */
   /* text-align: center; */
-  top: 15%;
-  right: 50px;
-  list-style-type: none;
-  cursor: pointer;
-  border: 1px solid #dddddd;
-  background-color: #fbfbfb;
-  border-radius: 12px;
-  width: fit-content;
-
-  padding: 15px;
-  margin-bottom: 4px;
+  background-color: #e2dcc2;
+  border: 1px solid #322e3f;
+  border-radius: 15px;
+  color: #322e3f;
+  padding: 25px;
+  list-style: none;
 
   z-index: 10000;
 }
