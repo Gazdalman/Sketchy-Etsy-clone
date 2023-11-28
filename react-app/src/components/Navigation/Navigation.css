@@ -72,6 +72,7 @@
   top: 15%;
   right: 25px;
   flex-direction: column;
+  width: fit-content;
   cursor: pointer;
   text-align: center;
   position: absolute;
