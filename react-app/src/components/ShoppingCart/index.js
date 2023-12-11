@@ -69,7 +69,7 @@ export default function Cart() {
   return (
     <div className="shopping-cart-page">
       {isLoaded &&
-        Object.values(cart).map((item) => (
+        cart.map((item) => (
           <div key={item.id} className="cart-card">
             <h3>{item.name}</h3>
             <p>{item.price}</p>
@@ -88,7 +88,7 @@ export default function Cart() {
             </>
           </div>
         ))}
-      {Object.values(cart).length ? (
+      {cart.length ? (
         <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-input-payment">
