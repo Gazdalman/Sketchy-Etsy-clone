@@ -30,7 +30,9 @@ def addItem(id):
         return {"errors": f"Product is sold out"}, 401
     product.units_available = product.units_available - 1
     prodDict = product.to_dict()
-    cart.cart_product_list.append(product)
+    prodDict['quantity'] = 1
+    print(prodDict)
+    cart.cart_product_list.extend([prodDict])
     db.session.commit()
 
     return { "message": "success" }
@@ -62,26 +64,23 @@ def updateQuantity(change, itemId, quantity):
     item = Product.query.get(itemId)
     product = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
     if change == "inc":
-        if item.units_available >= quantity:
-            item.units_available = item.units_available - quantity
-        else:
-            return {'errors' : (f'Product only has {item.units_available} units in stock' if item.units_available > 0 else f'Product is out of stock')}, 401
-        product.quantity = product.quantity + int(quantity)
-        for _ in range(quantity):
-            new_link = CartProduct(
-                cart_id=cart.id,
-                product_id=itemId
-            )
-            db.session.add(new_link)
+        product.quantity = product.quantity + 1
+        # new_link = CartProduct(
+        #     cart_id=cart.id,
+        #     product_id=itemId
+        # )
+        # db.session.add(new_link)
+
         db.session.commit()
         return { "message": "success" }
     elif change == "dec":
-        product.quantity = product.quantity + quantity
-        item.units_available = item.units_available - quantity
-        for i in range(quantity):
-            link = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
-            db.session.delete(link)
+        product.quantity = product.quantity - 1
         db.session.commit()
+        if product.quantity <= 0:
+            db.session.delete(product)
+            db.session.commit()
+        # link = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
+        # db.session.delete(link)
         return { "message": "success" }
     else:
         return { "errors": "How did you even do this o.O ???" }, 401
