@@ -60,7 +60,7 @@ export default function Cart() {
     alert(message);
   };
 
-  return (
+  return cart.length ? (
     <div className="shopping-cart-page">
       <div className="shopping-cart-container">
         {isLoaded &&
