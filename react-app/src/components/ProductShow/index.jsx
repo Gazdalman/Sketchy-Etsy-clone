@@ -64,7 +64,7 @@ const ProductShow = () => {
     }
   }
 
-  const handleClick = async (e, prod) => {
+  const handleClick = (e, product) => {
     e.preventDefault();
     const message = "Item added to your shopping cart! 😊";
     alert(message);
