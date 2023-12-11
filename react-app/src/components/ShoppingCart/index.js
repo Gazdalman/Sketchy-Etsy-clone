@@ -12,37 +12,54 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart);
+  //const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
-
+  const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!user) {
       return history.push("/login");
     }
-    if (user.id) {
-      dispatch(getCart()).then(() => {
-        setIsLoaded(true);
-      });
-    }
-  }, [dispatch]);
+    const localCart = localStorage.getItem(`${user.id}Cart`);
+      console.log(localCart);
+      const parsedCart = JSON.parse(localCart);
+      console.log(parsedCart);
+      if (localCart) {
+        setCart([...Object.values(parsedCart)]);
+      }
+      setIsLoaded(true);
+  }, []);
 
-  const decQuant = async (item) => {
-    const change = "dec";
-    const itemId = item.id;
-    if (Number(item.quantity) === 1) {
-      await dispatch(removeItem(itemId));
-    } else {
-      await dispatch(updateQuantity(itemId, change, -1));
+  const changeQuant = (e, type, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+
+    let updatedCart = {};
+    if (type === "inc") {
+      currCart[itemId].quantity++;
+      updatedCart = { ...currCart };
     }
-  };
-  const incQuant = async (itemId) => {
-    const change = "inc";
-    let res = await dispatch(updateQuantity(itemId, change, 1));
-    if (res.errors) {
-      window.alert(res.errors)
+    if (type === "dec") {
+      currCart[itemId].quantity--;
+      if (!currCart[itemId].quantity) {
+        delete currCart[itemId];
+        updatedCart = { ...currCart };
+      } else {
+        updatedCart = { ...currCart };
+      }
     }
+    if (type === "remove") {
+      delete currCart[itemId];
+      updatedCart = { ...currCart };
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
   };
 
   const onOptionChange = (e) => {
@@ -59,8 +76,8 @@ export default function Cart() {
             <p>{item.description}</p>
             <p>
               {item["quantity"]}
-              <button onClick={() => decQuant(item)}> - </button>
-              <button onClick={() => incQuant(item.id)}> + </button>
+              <button onClick={(e) => changeQuant(e, "inc", item.id)}> + </button>
+              <button onClick={(e) => changeQuant(e, "dec", item.id)}> - </button>
             </p>
             <>
               <OpenModalButton
