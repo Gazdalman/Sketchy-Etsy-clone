@@ -4,6 +4,7 @@ import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
 import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
 import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
+import "./ProductForm.css"
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
