@@ -28,8 +28,9 @@ def addItem(id):
     product = Product.query.filter(Product.id == int(id)).first()
     print(product)
     prodDict = product.to_dict()
+    prodDict['quantity'] = 1
     print(prodDict)
-    cart.cart_product_list.extend([product])
+    cart.cart_product_list.extend([prodDict])
     db.session.commit()
 
     return { "message": "success" }
@@ -60,18 +61,22 @@ def updateQuantity(change, itemId):
     product = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity.desc()).first()
     if change == "inc":
         product.quantity = product.quantity + 1
-        new_link = CartProduct(
-            cart_id=cart.id,
-            product_id=itemId
-        )
-        db.session.add(new_link)
+        # new_link = CartProduct(
+        #     cart_id=cart.id,
+        #     product_id=itemId
+        # )
+        # db.session.add(new_link)
+
         db.session.commit()
         return { "message": "success" }
     elif change == "dec":
         product.quantity = product.quantity - 1
-        link = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
-        db.session.delete(link)
         db.session.commit()
+        if product.quantity <= 0:
+            db.session.delete(product)
+            db.session.commit()
+        # link = CartProduct.query.filter(CartProduct.product_id == int(itemId), CartProduct.cart_id == cart.id).order_by(CartProduct.quantity).first()
+        # db.session.delete(link)
         return { "message": "success" }
     else:
         return { "error": "How did you even do this o.O ???" }
