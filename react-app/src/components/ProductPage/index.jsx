@@ -55,10 +55,10 @@ const ProductPage = ({ prods, word }) => {
       } else {
         dispatch(addWish(productId));
 
-          if (e.target.className == "fa-regular fa-heart") {
-            e.target.className = "fa-solid fa-heart";
-          };
-    };
+        if (e.target.className == "fa-regular fa-heart") {
+          e.target.className = "fa-solid fa-heart";
+        };
+      };
 
     }
 
@@ -110,9 +110,9 @@ const ProductPage = ({ prods, word }) => {
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
                     )}
                   </div>
 
