@@ -85,9 +85,7 @@ const review = (state = initialState, action) => {
       newState = { ...state };
       newState[action.payload.id] = action.payload;
       return newState;
-    // case EDIT_REVIEW:
-    //   newState = { ...state, [action.payload.id]: action.payload };
-    //   return newState;
+
     case DELETE_REVIEW:
       let deleteState;
       deleteState = { ...state };
