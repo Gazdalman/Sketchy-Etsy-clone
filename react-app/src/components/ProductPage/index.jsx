@@ -70,13 +70,6 @@ const ProductPage = ({ prods, word }) => {
 
   const handleClick = (e, product) => {
     e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
     let currCart = null;
 
     currCart = localStorage.getItem(`${user.id}Cart`);
