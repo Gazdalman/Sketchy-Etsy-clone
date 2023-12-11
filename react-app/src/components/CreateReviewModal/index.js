@@ -20,14 +20,20 @@ function ReviewFormModal({ productId }) {
   const [rating, setRating] = useState(0);
   const [activeRating, setActiveRating] = useState(0);
   const [errors, setErrors] = useState({});
-  const disabled = reviewText.length < 4;
+  const disabled = false;
   const reviews = useSelector((state) => state.review);
 
   function checkCredentials() {
     const errObj = {};
-    if (!rating) errObj.rating = "Rating is required";
-    if (!reviewText || reviewText.length < 4)
+    if (!rating) {
+      errObj.rating = "Rating is required";
+    }
+    if (!reviewText || reviewText.length < 4) {
       errObj.reviewText = "Review text must be at least 4 characters";
+    }
+    if (reviewText.length > 2000) {
+      errObj.reviewText = `Don't nobody wanna read allat. That's a whole ${reviewText.length} characters?!! Go ahead and shorten that for me bub`;
+    }
     setErrors(errObj);
   }
   const newReview = {
@@ -41,14 +47,17 @@ function ReviewFormModal({ productId }) {
   }
 
   const handleSubmit = async (e) => {
-    checkCredentials();
     e.preventDefault();
-    await dispatch(createAReview(productId, newReview)).then(() =>
-      closeModal()
-    );
+    if (errors && !Object.values(errors).length) {
+      await dispatch(createAReview(productId, newReview)).then(() =>
+        closeModal()
+      );
 
-    history.push(`/products/${productId}`);
-    return Redirect(`/products/${productId}`);
+      history.push(`/products/${productId}`);
+      return Redirect(`/products/${productId}`);
+    } else {
+      console.log("ERRORS PRESENT");
+    }
   };
 
   return (
@@ -63,7 +72,7 @@ function ReviewFormModal({ productId }) {
             alignItems: "center",
           }}
         >
-          <h1 className="title">Describe the Product in Your own Words</h1>
+          <h1 className="title">Add ProductReview</h1>
           <form className="form" onSubmit={handleSubmit}>
             <label style={{ width: "100%" }}>
               <textarea
@@ -73,11 +82,17 @@ function ReviewFormModal({ productId }) {
                 placeholder="Leave your review here"
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
-                required
+                // required
               />
             </label>
-            {errors.reviewText && <p className="errors">{errors.reviewText}</p>}
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
+            {errors.reviewText ? (
+              <p className="errors">{errors.reviewText}</p>
+            ) : null}
+            <label>Rating</label>
+            <div
+              className="stars"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
               <label>
                 <div
                   class="rating"
@@ -186,9 +201,8 @@ function ReviewFormModal({ productId }) {
             <button
               type="submit"
               id="add-review"
-              disabled={disabled}
+              onClick={checkCredentials}
               style={{
-                // backgroundColor: "tan",
                 maxWidth: "100%",
                 width: "300px",
               }}

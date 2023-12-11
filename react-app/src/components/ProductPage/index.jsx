@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { getAllProducts } from "../../store/product";
+import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
+import "./index.css";
 
 import "./ProductPage.css";
 
@@ -25,7 +26,12 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(getAllProducts())
-      .then(() => dispatch(getWish()))
+      .then(() => {
+        // * Only gather wishlist if there is a user signed in otherwise unauthorized triggers in console
+        if (user) {
+          dispatch(getWish());
+        }
+      })
       .then(() => {
         setIsLoaded(true);
       });
@@ -36,33 +42,37 @@ const ProductPage = () => {
 
     const productId = product.id;
 
-    if (userWish && userWish.products && userWish.products[productId]) {
-      dispatch(removeWish(productId));
+    if (userWish && userWish.products) {
 
-      if (e.target.className == "fa-solid fa-heart") {
-        e.target.className = "fa-regular fa-heart";
-      }
-    } else {
-      dispatch(addWish(productId));
+      if (userWish.products[productId]) {
 
-      if (e.target.className == "fa-regular fa-heart") {
-        e.target.className = "fa-solid fa-heart";
-      }
+          dispatch(removeWish(productId));
+          if (e.target.className == "fa-solid fa-heart") {
+            e.target.className = "fa-regular fa-heart";
+          };
+
+      }else {
+          dispatch(addWish(productId));
+
+          if (e.target.className == "fa-regular fa-heart") {
+            e.target.className = "fa-solid fa-heart";
+          };
+    };
+
     }
+
   };
 
   const handleClick = (e, prod) => {
     e.preventDefault();
-    if (cart[prod.id]) {
-      dispatch(updateQuantity(prod.id, "inc", 1));
-    } else if (prod.unit_available > 0) {
-      dispatch(addItemToCart(prod.id));
-      window.alert("Added to Cart")
-    }
+    const message = "Item added to your shopping cart! 😊"
+    alert(message);
+    dispatch(addItemToCart(prod.id))
+    
   };
 
   return isLoaded ? (
-    <div id="product-page">
+    <div>
       <h1>Peruse Our Products</h1>
       <div className="products-main-contianer">
         {prodArr.map((product) => (
@@ -88,21 +98,19 @@ const ProductPage = () => {
 
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
-                <div id="prod-page-btn-container">
-                  {/* {(userWish.products && userWish.products[product.id] == undefined) && ( */}
-                    <div
-                      className="add-wish-btn"
-                      onClick={(e) => addToWish(e, product)}
-                    >
-                      {user &&
-                      userWish.products &&
-                      userWish.products[product.id] ? (
-                        <i className="fa-solid fa-heart"></i>
-                      ) : (
-                        <i className="fa-regular fa-heart"></i>
-                      )}
-                    </div>
-                  {/* // )} */}
+                <div className="prod-page-btn-container">
+                  {/* {  userWish.products[product.id] == undefined  &&  ( */}
+
+                  <div
+                    className="wish-btn"
+                    onClick={(e) => addToWish(e, product)}
+                  >
+                    {user && userWish.products && userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                    ) : (
+                      <i className="fa-regular fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                    )}
+                  </div>
 
                   <button
                     value={product.id}

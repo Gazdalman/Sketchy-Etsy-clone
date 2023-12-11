@@ -56,26 +56,31 @@ export default function () {
               {Object.keys(allOrders).find((key) => allOrders[key] === order)}
             </h3>
             <p>Order Total: {order.total}</p>
-            <div className="allrdersItemsContainer">
+            <div className="allOrdersItemsContainer">
               {order.products.map((item) => (
                 <div key={item.id} className="indvUserOrderItems">
                   <div>
                     <h4>{item.name}</h4>
                     <div className="orderItemPriceQuantDiv">
-                      <p># Purchased: {item.quantity}</p>
+                      {/* <p># Purchased: {item.quantity}</p> */}
                       <p className="orderedItemPrice">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
                     <div className="userOrderButtons">
                       <OpenModalButton
+                        modalClasses={["ordersWriteReview"]}
                         buttonText="Write Review"
                         modalComponent={<ReviewFormModal productId={item.id} />}
                       />
-                      <button onClick={(e) => handleClick(e)}>
+                      <button
+                        className="ordersReturnItemBtn"
+                        onClick={(e) => handleClick(e)}
+                      >
                         Return Item
                       </button>
                       <button
+                        className="ordersAddToCartBtn"
                         value={item.id}
                         onClick={(e) => handleAddToCart(e, item)}
                       >

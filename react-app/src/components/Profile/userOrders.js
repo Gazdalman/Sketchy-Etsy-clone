@@ -5,6 +5,7 @@ import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function UserOrders({ user }) {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export default function UserOrders({ user }) {
     } else {
       dispatch(addItemToCart(productId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return isLoaded ? (
@@ -54,22 +56,29 @@ export default function UserOrders({ user }) {
               {order.products.map((item) => (
                 <div key={item.id} className="indvUserOrderItems">
                   <div>
-                    <h4>{item.name}</h4>
+                    <NavLink to={`/products/${item.id}`}>
+                      <h4>{item.name}</h4>
+                    </NavLink>
                     <div className="orderItemPriceQuantDiv">
-                      <p># Purchased: {item.quantity}</p>
+                      {/* <p># Purchased: {item.quantity}</p> */}
                       <p className="orderedItemPrice">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
                     <div className="userOrderButtons">
                       <OpenModalButton
+                        modalClasses={["ordersWriteReview"]}
                         buttonText="Write Review"
                         modalComponent={<ReviewFormModal productId={item.id} />}
                       />
-                      <button onClick={(e) => handleClick(e)}>
+                      <button
+                        className="ordersReturnItemBtn"
+                        onClick={(e) => handleClick(e)}
+                      >
                         Return Item
                       </button>
                       <button
+                        className="ordersAddToCartBtn"
                         value={item.id}
                         onClick={(e) => handleAddToCart(e, item)}
                       >

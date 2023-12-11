@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../store/otherUsers";
 
@@ -17,7 +18,9 @@ export default function UserReviews({ user }) {
         let revArr = [];
         Object.values(products).map((product) => {
           Object.values(product.reviews).map((prodRev) => {
-            revArr.push(prodRev);
+            if (product.seller_id == user.id) {
+              revArr.push(prodRev);
+            }
           });
         });
         setReviews(revArr);
@@ -35,14 +38,20 @@ export default function UserReviews({ user }) {
               {reviews.map((review) => (
                 <div key={review.id} className="indvUserReviews">
                   <div>
-                    <h4>{products[review.product_id].name}</h4>
+                    <NavLink to={`/products/${review.product_id}`}>
+                      <h4>{products[review.product_id].name}</h4>
+                    </NavLink>
                     <p>{review.rating} Stars</p>
                     <p className="userProductReview">{review.review}</p>
-                    <p>Author: {users[review.user_id].username}</p>
+                    <NavLink to={`/profile/${review.user_id}`}>
+                      <p>Author: {users[review.user_id].username}</p>
+                    </NavLink>
                     {!review.seller_commented &&
                       currUser &&
                       currUser.id == user.id && (
-                        <button disabled>Respond</button>
+                        <button style={{ width: "100%" }} disabled>
+                          Respond
+                        </button>
                       )}
                   </div>
                 </div>
@@ -51,18 +60,6 @@ export default function UserReviews({ user }) {
           ) : (
             <h3>You have no reviews yet</h3>
           )}
-          {/* {Object.values(reviews).length > 0 ? (
-            <div className="userReviewsContainer">
-              {Object.values(reviews).map((review) => (
-
-              ))}
-            </div>
-          ) : (
-            // {Object.values{products}.map(product => (
-            //   {Object.values{products.reviews}}
-            // ))}
-            <h3>You have no reviews</h3>
-          )} */}
         </>
       )}
     </div>

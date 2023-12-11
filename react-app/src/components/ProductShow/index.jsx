@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
 import { addItemToCart, updateQuantity } from "../../store/cart";
-import { deleteProductThunk } from "../../store/product";
+import { deleteProductThunk } from "../../store/asdfsadfasdfasdfas";
 import OpenModalButton from "../OpenModalButton";
 import DeleteProduct from "../DeleteModal/deleteModalProduct";
 import "./index.css";
@@ -66,24 +66,10 @@ const ProductShow = () => {
 
   const handleClick = async (e, prod) => {
     e.preventDefault();
-    const prodId = prod.id;
-    if (cart[prodId]) {
-      let result = await dispatch(updateQuantity(prodId, "inc", 1));
-      if (result.errors) {
-        window.alert(result.errors)
-      } else {
-        window.alert("Added to Cart")
-      }
-      setRenderSwitch(renderSwitch ? false : true)
-    } else {
-      let result = await dispatch(addItemToCart(prodId));
-      if (result.errors) {
-        window.alert(result.errors)
-      } else {
-        window.alert("Added to Cart")
-      }
-      setRenderSwitch(renderSwitch ? false : true)
-    }
+    const prodId = prod.id
+    const message = "Item added to your shopping cart! 😊"
+    alert(message);
+    dispatch(addItemToCart(prodId));
   };
 
   return Object.keys(product).length > 0 &&
@@ -96,7 +82,7 @@ const ProductShow = () => {
         {+product.units_available > 0
           ? `${product.units_available} available`
           : "SOLD OUT"}
-      </h3>f
+      </h3>
       <div id="product-images-container">
         <img
           id="preview-image"
@@ -128,7 +114,9 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {user && user.id != product.seller_id && (
-        <button onClick={(e) => handleClick(e, product)}>Add to cart</button>
+        <button className="add-button" onClick={(e) => handleClick(e, product)}>
+          Add to cart
+        </button>
       )}
       {user && user.id == product.seller_id && (
         <button onClick={edit}>Edit Product</button>
@@ -137,7 +125,7 @@ const ProductShow = () => {
       <Reviews product={product} />
     </div>
   ) : product && !product.seller_id ? (
-    <h1>Not Available</h1>
+    <h1>Loading...</h1>
   ) : null;
 };
 

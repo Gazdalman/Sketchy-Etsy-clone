@@ -4,6 +4,7 @@ import { getWish } from "../../store/wishlist";
 import { addItemToCart, getCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function UserWishlist({ user }) {
   const dispatch = useDispatch();
@@ -12,9 +13,11 @@ export default function UserWishlist({ user }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getWish())
-      .then(() => dispatch(getCart()))
-      .then(() => setIsLoaded(true));
+    if (user) {
+      dispatch(getWish())
+        .then(() => dispatch(getCart()))
+        .then(() => setIsLoaded(true));
+    }
   }, [dispatch]);
 
   // useEffect(() => {
@@ -29,6 +32,7 @@ export default function UserWishlist({ user }) {
     } else {
       dispatch(addItemToCart(productId));
     }
+    alert("Item added to your shopping cart! 😊");
   };
 
   return (
@@ -39,8 +43,11 @@ export default function UserWishlist({ user }) {
             <div key={product.id} className="indvUserWishItems">
               <div className="userProductImage">
                 <>
-                  {product.product_image ? (
-                    <img src={product.product_image} />
+                  {product.preview ? (
+                    <img
+                      src={product.preview}
+                      className="userIdvProductImage"
+                    />
                   ) : (
                     <>
                       <p>Product Image</p>
@@ -50,7 +57,9 @@ export default function UserWishlist({ user }) {
                 </>
               </div>
               <div>
-                <h4>{product.name}</h4>
+                <NavLink to={`/products/${product.id}`}>
+                  <h4>{product.name}</h4>
+                </NavLink>
                 <div className="userProductPrice">{product.price}</div>
                 <div className="userWishlistButtons">
                   <OpenModalButton
@@ -59,6 +68,7 @@ export default function UserWishlist({ user }) {
                     modalComponent={<DeleteWish product={product} />}
                   />
                   <button
+                    className="addItemToCartBtn"
                     value={product.id}
                     onClick={(e) => handleClick(e, product)}
                   >

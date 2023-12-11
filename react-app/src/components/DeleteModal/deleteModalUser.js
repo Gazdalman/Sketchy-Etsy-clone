@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUser } from "../../store/session";
 
 import "./deleteModal.css";
@@ -9,12 +9,18 @@ function DeleteAccount() {
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
 
-  const deleteAccount = async (e) => {
+  const deleteAccount = (e) => {
     e.preventDefault();
-
-    history.push("/");
-    await dispatch(deleteUser()).then(closeModal);
+    if (["nina", "ann", "toney", "rod", "demoUser5"].includes(user.username)) {
+      const message = "No deleteing demo users...you heathen...";
+      alert(message);
+    } else {
+      dispatch(deleteUser())
+        .then(closeModal)
+        .then(() => history.push("/home"));
+    }
   };
 
   return (

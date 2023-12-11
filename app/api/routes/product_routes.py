@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Product, Review, db, User, ProductImage
 from app.forms import ProductForm, ProductImageForm, ProductEditForm
 from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
+
 product_routes = Blueprint("products", __name__, url_prefix="/products")
 
 def validation_errors_to_error_messages(validation_errors):
@@ -20,7 +21,7 @@ def get_all():
   """
   Returns a list of all products on the site
   """
-  products = Product.query.filter(Product.seller_id > 0).all()
+  products = Product.query.filter(Product.seller_id > 0).order_by(Product.created_at.desc()).all()
   p_list = [product.to_dict() for product in products]
   return p_list
   # return render_template("test_products.html", p_list=p_list)
@@ -115,6 +116,7 @@ def edit_product(id):
       product.price=data['price']
       product.description=data['description']
       product.units_available=data['units_available']
+      product.category=data['category']
     elif current_user.get_id() != product.seller_id:
       return {"errors": ["unauthorized : You do not own this product."]}, 401
     else:

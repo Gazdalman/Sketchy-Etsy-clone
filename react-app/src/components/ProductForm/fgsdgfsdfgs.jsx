@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, editProduct } from "../../store/product";
+import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
 import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
-import "./ProductForm.css";
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
@@ -11,7 +10,7 @@ const ProductFormPage = ({ type, product }) => {
   const history = useHistory();
   const [name, setName] = useState(type == "edit" ? product.name : "");
   const [category, setCategory] = useState(
-    type == "edit" ? product.category : ""
+    type == "edit" ? product.categories : ""
   );
   const [price, setPrice] = useState(type == "edit" ? product.price : "");
   const [description, setDescription] = useState(
@@ -279,10 +278,10 @@ const ProductFormPage = ({ type, product }) => {
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button className="submit-create" type="submit" disabled={disabled}>
+        <button type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
-        <button className="cancel-create" onClick={(e) => goBack(e)}>Cancel</button>
+        <button onClick={(e) => goBack(e)}>Cancel</button>
       </form>
     </div>
   ) : (
@@ -290,4 +289,4 @@ const ProductFormPage = ({ type, product }) => {
   );
 };
 
-export default ProductFormPage;
+export default ProductFormPage
