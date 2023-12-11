@@ -155,7 +155,6 @@ def add_images(id):
       url=upload['url'],
       product_id=int(id)
     )
-    product.images.append(image)
     db.session.add(image)
     db.session.commit()
     return image.to_dict()
