@@ -12,7 +12,7 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  //const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,23 +33,53 @@ export default function Cart() {
     setIsLoaded(true);
   }, []);
 
-  const decQuant = async (item) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "dec";
-    // const itemId = item.id;
-    // if (Number(item.quantity) === 1) {
-    //   await dispatch(removeItem(itemId));
-    // } else {
-    //   await dispatch(updateQuantity(itemId, change));
-    // }
+  const changeQuant = (e, type, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+
+    let updatedCart = {};
+    if (type === "inc") {
+      currCart[itemId].quantity++;
+      updatedCart = { ...currCart };
+    }
+    if (type === "dec") {
+      currCart[itemId].quantity--;
+      if (!currCart[itemId].quantity) {
+        delete currCart[itemId];
+        updatedCart = { ...currCart };
+      } else {
+        updatedCart = { ...currCart };
+      }
+    }
+    if (type === "remove") {
+      delete currCart[itemId];
+      updatedCart = { ...currCart };
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
   };
-  const incQuant = async (itemId) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "inc";
-    // await dispatch(updateQuantity(itemId, change));
-  };
+  // const decQuant = async (item) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "dec";
+  //   const itemId = item.id;
+  //   if (Number(item.quantity) === 1) {
+  //     await dispatch(removeItem(itemId));
+  //   } else {
+  //     await dispatch(updateQuantity(itemId, change));
+  //   }
+  // };
+  // const incQuant = async (itemId) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "inc";
+  //   await dispatch(updateQuantity(itemId, change));
+  // };
 
   const onOptionChange = (e) => {
     setPayment(e.target.value);
