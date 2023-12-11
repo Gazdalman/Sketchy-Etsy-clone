@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createProduct, editProduct } from "../../store/product";
 import { useHistory } from "react-router-dom";
 import "./index.css";
+import "./ProductForm.css"
 
 import "./ProductForm.css"
 
