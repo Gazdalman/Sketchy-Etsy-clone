@@ -11,7 +11,7 @@ const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart);
+  //const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
@@ -53,12 +53,28 @@ const ProductPage = () => {
 
   const handleClick = (e, prod) => {
     e.preventDefault();
-    if (cart[prod.id]) {
-      dispatch(updateQuantity(prod.id, "inc", 1));
-    } else if (prod.unit_available > 0) {
-      dispatch(addItemToCart(prod.id));
-      window.alert("Added to Cart")
+    let currCart = null;
+
+    currCart = localStorage.getItem(`${user.id}Cart`);
+
+    let updateCart = {};
+    if (currCart) {
+      const cart = JSON.parse(currCart);
+
+      if (cart[product.id]) {
+        cart[product.id].quantity++;
+        updateCart = { ...cart };
+      } else {
+        product.quantity = 1;
+        updateCart = { ...cart };
+        updateCart[product.id] = product;
+      }
+    } else {
+      product.quantity = 1;
+      updateCart[product.id] = product;
     }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return isLoaded ? (
