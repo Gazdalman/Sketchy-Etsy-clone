@@ -94,7 +94,7 @@ export default function Cart() {
     setPayment(e.target.value);
   };
 
-  return Object.values(cart) ? (
+  return cart.length ? (
     <div className="shopping-cart-page">
       {isLoaded &&
         cart.map((item) => (
