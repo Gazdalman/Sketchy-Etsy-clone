@@ -17,11 +17,18 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      return history.push("/login");
-    }
-    const localCart = localStorage.getItem(`${user.id}Cart`);
+  useEffect(
+    () => {
+      if (!user) {
+        return history.push("/login");
+      }
+
+      // dispatch(getCart()).then(() => {
+      //   setIsLoaded(true);
+      // });
+      // let localCart = null;
+
+      const localCart = localStorage.getItem(`${user.id}Cart`);
       console.log(localCart);
       const parsedCart = JSON.parse(localCart);
       console.log(parsedCart);
@@ -29,25 +36,59 @@ export default function Cart() {
         setCart([...Object.values(parsedCart)]);
       }
       setIsLoaded(true);
-  }, []);
+    },
+    [
+      /* dispatch */
+    ]
+  );
 
-  const decQuant = async (item) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "dec";
-    // const itemId = item.id;
-    // if (Number(item.quantity) === 1) {
-    //   await dispatch(removeItem(itemId));
-    // } else {
-    //   await dispatch(updateQuantity(itemId, change));
-    // }
+  const changeQuant = (e, type, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+
+    let updatedCart = {};
+    if (type === "inc") {
+      currCart[itemId].quantity++;
+      updatedCart = { ...currCart };
+    }
+    if (type === "dec") {
+      currCart[itemId].quantity--;
+      if (!currCart[itemId].quantity) {
+        delete currCart[itemId];
+        updatedCart = { ...currCart };
+      } else {
+        updatedCart = { ...currCart };
+      }
+    }
+    if (type === "remove") {
+      delete currCart[itemId];
+      updatedCart = { ...currCart };
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
   };
-  const incQuant = async (itemId) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "inc";
-    // await dispatch(updateQuantity(itemId, change));
-  };
+  // const decQuant = async (item) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "dec";
+  //   const itemId = item.id;
+  //   if (Number(item.quantity) === 1) {
+  //     await dispatch(removeItem(itemId));
+  //   } else {
+  //     await dispatch(updateQuantity(itemId, change));
+  //   }
+  // };
+  // const incQuant = async (itemId) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "inc";
+  //   await dispatch(updateQuantity(itemId, change));
+  // };
 
   const onOptionChange = (e) => {
     setPayment(e.target.value);
@@ -58,7 +99,7 @@ export default function Cart() {
       {isLoaded &&
         cart.map((item) => (
           <div key={item.id} className="cart-card">
-            {console.log(item)}
+            {console.log(cart)}
             <img
               src={item.preview}
               alt="item preview"
@@ -69,8 +110,14 @@ export default function Cart() {
             <p>{item.description}</p>
             <p>
               {item.quantity}
-              <button onClick={() => decQuant(item)}> - </button>
-              <button onClick={() => incQuant(item.id)}> + </button>
+              <button onClick={(e) => changeQuant(e, "dec", item.id)}>
+                {" "}
+                -{" "}
+              </button>
+              <button onClick={(e) => changeQuant(e, "inc", item.id)}>
+                {" "}
+                +{" "}
+              </button>
             </p>
             <>
               <OpenModalButton
