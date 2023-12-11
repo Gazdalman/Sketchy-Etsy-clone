@@ -22,9 +22,12 @@ class CartProduct(db.Model):
 
   id = db.Column(db.INTEGER, primary_key=True)
   cart_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("carts.id")))
+
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
 
   quantity = db.Column(db.INTEGER, nullable=False, default=1)
+
+
 
   def to_dict(self):
     return {
