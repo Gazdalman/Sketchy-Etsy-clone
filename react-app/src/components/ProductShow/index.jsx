@@ -66,25 +66,10 @@ const ProductShow = () => {
 
   const handleClick = async (e, prod) => {
     e.preventDefault();
-    const prodId = prod.id;
-    if (cart[prodId]) {
-      let result = await dispatch(updateQuantity(prodId, "inc", 1));
-      if (result.errors) {
-        window.alert(result.errors)
-      } else {
-        window.alert("Added to Cart")
-      }
-      setRenderSwitch(renderSwitch ? false : true)
-    } else {
-      let result = await dispatch(addItemToCart(prodId));
-      if (result.errors) {
-        window.alert(result.errors)
-      } else {
-        window.alert("Added to Cart")
-      }
-      setRenderSwitch(renderSwitch ? false : true)
-    }
-    alert("Item added to your shopping cart! 😊");
+    const prodId = prod.id
+    const message = "Item added to your shopping cart! 😊"
+    alert(message);
+    dispatch(addItemToCart(prodId));
   };
 
   return Object.keys(product).length > 0 &&
@@ -97,7 +82,7 @@ const ProductShow = () => {
         {+product.units_available > 0
           ? `${product.units_available} available`
           : "SOLD OUT"}
-      </h3>f
+      </h3>
       <div id="product-images-container">
         <img
           id="preview-image"
