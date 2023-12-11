@@ -14,7 +14,7 @@ const ProductShow = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
   const history = useHistory();
-  // const cart = useSelector((state) => state.cart);
+  //const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session.user);
   const product = useSelector((state) => state.requestedProduct);
 
