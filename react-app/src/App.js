@@ -1,10 +1,11 @@
 /* BoilerPlate */
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { authenticate } from "./store/session";
 
 /* Import Routes */
+/* Landing Page*/
 /* Landing Page*/
 import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
@@ -25,6 +26,7 @@ import EditProduct from "./components/EditComponent";
 
 /* Import thunks */
 import { getAllProducts } from "./store/product";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   const dispatch = useDispatch();
