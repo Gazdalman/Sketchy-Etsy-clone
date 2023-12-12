@@ -12,12 +12,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  row-gap: 15px;
 }
+
+
 .delete-buttons {
-  width: 50%;
+  width: 40%;
+  padding: 5px;
+  margin: 2px 0px 0px;
+  background-color: #322e3f;
+  border-radius: 12px;
+  border: 5px solid #322e3f;
+  color: white;
+  font-size: 18px;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 5px;
+
+  &:hover {
+    background-color: #ab434a;
+    border: 5px solid #ab434a;
+  }
+
 }
 .cart-button {
-  width: 50%;
+  width: 26%;
+  text-align: center;
   padding: 5px;
   margin: 2px 0px 0px;
   background-color: hwb(173 29% 47%);
@@ -28,15 +48,14 @@
   padding: 5px;
   margin: 0;
   margin-bottom: 5px;
+
+  &:hover {
+    background-color: #322e3f;
+    border: 5px solid #322e3f;
+  }
 }
-.cart-button:hover {
-  background-color: #ab434a;
-  border: 5px solid black;
-}
-button:hover {
-  background-color: #ab434a;
-  border: 5px solid black;
-}
+
+
 .wishlist-container {
   display: flex;
   flex-direction: row;
