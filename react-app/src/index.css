@@ -1,7 +1,11 @@
 /* TODO Add site wide styles */
-body {
+body, html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
   margin: 0;
-  background: rgb(174, 169, 190) 50%;
+  /* background: #aea9be 50%; */
+  background-color: #FAE27F;
   font-family: "Muli", sans-serif;
 }
 

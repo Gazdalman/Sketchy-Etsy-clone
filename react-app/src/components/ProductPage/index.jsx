@@ -4,7 +4,9 @@ import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
-import "./index.css";
+import skull from "../../assets/skull.png";
+import introImg from "../../assets/intro.png"
+
 import "./ProductPage.css";
 
 const ProductPage = () => {
@@ -97,11 +99,19 @@ const ProductPage = () => {
 
   return isLoaded ? (
     <div className="products-page">
-      <div className="home-intro">
-         <span>Hello</span>
+      <div className="home-about">
+          <img src={skull} alt="graphic-img" />
+        <div className="home-about-details">
+
+          <h1>Welcome to Sketchy</h1>
+          <h2>where creativity meets questionable!</h2>
+        </div>
       </div>
-      <h1>Peruse Our Products</h1>
-      <div className="products-main-contianer">
+      <div className="home-intro">
+         <img src={introImg} alt="sale" />
+      </div>
+      <h2 style={{color:"#503980" }}>Peruse Our Products</h2>
+      <div className="products-main-container">
         {prodArr.map((product) => (
           <div key={product.id} className="products-card">
             <a key={product.id} href={`/products/${product.id}`}>
@@ -133,9 +143,9 @@ const ProductPage = () => {
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     )}
                   </div>
 

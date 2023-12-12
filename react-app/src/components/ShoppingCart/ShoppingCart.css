@@ -13,11 +13,7 @@
 
     margin-left: 5%;
 }
-.shopping-cart-container {
-    width: 50%;
 
-    margin-left: 5%;
-}
 
 .cart-card {
     background-color:#fff;
@@ -36,38 +32,33 @@
 }
 
 .payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     width: 50%;
     margin-left: 5%;
 
 }
 
-
-
 .radio-input-payment {
-    font-size: 50px;
+    font-size: 40px;
+
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 10px;
-
-    position: sticky;
 }
 
 
-.radio-inner {
-    display: flex;
-    align-items: center;
-    gap: 1em;
+.radio-inner i {
+    margin-left: 15px;
     color: #322e3f;
 }
-
 
 .radio-btn {
   width: 2em;
   height: 2em;
 }
-
 
 
 .delete-button-container {
@@ -86,7 +77,7 @@
 
 .delete-button-container:hover {
     background-color: #49867f;
-    border: 5px solid #322e3f;
+    border: 5px solid #49867f;
 }
 
 .quantity-btn {
@@ -119,5 +110,9 @@
 }
 .payment-btn:hover {
     background-color: #49867f;
-    border: 5px solid #322e3f;
+    border: 2px solid #49867f;
+}
+.cart-btns-container {
+    display: flex;
+    gap: 15px;
 }

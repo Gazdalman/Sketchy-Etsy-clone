@@ -14,7 +14,7 @@
   background-size: cover;
   background-repeat: no-repeat; */
 
-  /* background-color: #FDD67A; */
+  background-color: #FAE27F;
 }
 
 .nav-sub-container-logo {
@@ -29,6 +29,8 @@
   justify-content: space-around;
   align-items: center;
   margin-right: 4%;
+
+
 }
 
 .nav-sub-container > * {
