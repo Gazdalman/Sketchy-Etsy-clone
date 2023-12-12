@@ -12,72 +12,127 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
-
+  const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      return history.push("/login");
-    }
-    if (user.id) {
-      dispatch(getCart()).then(() => {
-        setIsLoaded(true);
-      });
-    }
-  }, [dispatch]);
+  useEffect(
+    () => {
+      if (!user) {
+        return history.push("/login");
+      }
 
-  const decQuant = async (item) => {
-    const message = "Functionality comming soon...";
-    alert(message);
-    // const change = "dec";
-    // const itemId = item.id;
-    // if (Number(item.quantity) === 1) {
-    //   await dispatch(removeItem(itemId));
-    // } else {
-    //   await dispatch(updateQuantity(itemId, change));
-    // }
+      // dispatch(getCart()).then(() => {
+      //   setIsLoaded(true);
+      // });
+      // let localCart = null;
+
+      const localCart = localStorage.getItem(`${user.id}Cart`);
+      console.log(localCart);
+      const parsedCart = JSON.parse(localCart);
+      console.log(parsedCart);
+      if (localCart) {
+        setCart([...Object.values(parsedCart)]);
+      }
+      setIsLoaded(true);
+    },
+    [
+      /* dispatch */
+    ]
+  );
+
+  const changeQuant = (e, type, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+
+    let updatedCart = {};
+    if (type === "inc") {
+      currCart[itemId].quantity++;
+      updatedCart = { ...currCart };
+    }
+    if (type === "dec") {
+      currCart[itemId].quantity--;
+      if (!currCart[itemId].quantity) {
+        delete currCart[itemId];
+        updatedCart = { ...currCart };
+      } else {
+        updatedCart = { ...currCart };
+      }
+    }
+    if (type === "remove") {
+      delete currCart[itemId];
+      updatedCart = { ...currCart };
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
   };
-  const incQuant = async (itemId) => {
-    // const change = "inc";
-    // await dispatch(updateQuantity(itemId, change));
-    const message = "Functionality comming soon...";
-    alert(message);
-  };
+  // const decQuant = async (item) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "dec";
+  //   const itemId = item.id;
+  //   if (Number(item.quantity) === 1) {
+  //     await dispatch(removeItem(itemId));
+  //   } else {
+  //     await dispatch(updateQuantity(itemId, change));
+  //   }
+  // };
+  // const incQuant = async (itemId) => {
+  //   // const message = "Functionality comming soon...";
+  //   // alert(message);
+  //   const change = "inc";
+  //   await dispatch(updateQuantity(itemId, change));
+  // };
 
   const onOptionChange = (e) => {
     setPayment(e.target.value);
   };
 
-  return Object.values(cart) ? (
+  return cart.length ? (
     <div className="shopping-cart-page">
-      <div className="shopping-cart-container">
-        {isLoaded &&
-          Object.values(cart).map((item) => (
-            <div key={item.id} className="cart-card">
-              <h3 style={{ fontSize: 33 }}>{item.name}</h3>
-              <p>$ {item.price}</p>
-              <p>{item.description}</p>
-              <p style={{ fontSize: 30 }}>
-                <button className="quantity-btn" onClick={() => decQuant(item)}> - </button>
-                {item["quantity"]}
-                <button className="quantity-btn" onClick={() => incQuant(item.id)}> + </button>
-              </p>
-              <>
-                <OpenModalButton
-                  modalClasses={["delete-button-container"]}
-                  buttonText="Remove from Cart"
-                  modalComponent={<DeleteItem product={item} />}
-                />
-              </>
-            </div>
-          ))}
-      </div>
-      <div className="payment">
-        <h2 style={{ fontSize: 33, color: "#322e3f" }}>How will you pay?</h2>
-        <div className="radio-input-payment">
-          <div className="radio-inner">
+      {isLoaded &&
+        cart.map((item) => (
+          <div key={item.id} className="cart-card">
+            {console.log(cart)}
+            <img
+              src={item.preview}
+              style={{"width": "20px"}}
+              alt="item preview"
+              className="productImageCart"
+            />
+            <h3>{item.name}</h3>
+            <p>{item.price}</p>
+            <p>{item.description}</p>
+            <p>
+              {item.quantity}
+              <button onClick={(e) => changeQuant(e, "dec", item.id)}>
+                {" "}
+                -{" "}
+              </button>
+              <button onClick={(e) => changeQuant(e, "inc", item.id)}>
+                {" "}
+                +{" "}
+              </button>
+            </p>
+            <>
+              <OpenModalButton
+                modalClasses={["delete-button-container"]}
+                buttonText="Remove from Cart"
+                modalComponent={<DeleteItem product={item} />}
+              />
+            </>
+          </div>
+        ))}
+      {cart.length ? (
+        <div className="payment">
+          <h2>How will you pay?</h2>
+          <div className="radio-input-payment">
             <input
               className="radio-btn"
               type="radio"
@@ -113,16 +168,17 @@ export default function Cart() {
               <i class="fa-solid fa-ice-cream"></i>
             </label>
           </div>
+          <NavLink to="/home">
+            <button className="payment-btn">Continue Shopping</button>
+          </NavLink>
+          <NavLink to="/checkout">
+            <button className="payment-btn">Checkout</button>
+          </NavLink>
         </div>
-        <NavLink to="/home">
-          <button className="payment-btn">Continue Shopping</button>
-        </NavLink>
-        <NavLink to="/checkout">
-          <button className="payment-btn">Checkout</button>
-        </NavLink>
-      </div>
-    </div>
-  ) : (
-    <h2>Your cart is empty</h2>
-  )
+
+      ) : (
+        <h2>Your cart is empty</h2>
+      )
+      }
+    </div>) : null
 }

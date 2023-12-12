@@ -5,14 +5,13 @@ import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import "./index.css";
-
 import "./ProductPage.css";
 
 const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart);
+  //const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const userWish = useSelector((state) => state.wishlist);
   const prodArr = Object.values(products);
@@ -46,29 +45,54 @@ const ProductPage = () => {
 
       if (userWish.products[productId]) {
 
-          dispatch(removeWish(productId));
-          if (e.target.className == "fa-solid fa-heart") {
-            e.target.className = "fa-regular fa-heart";
-          };
+        dispatch(removeWish(productId));
+        if (e.target.className == "fa-solid fa-heart") {
+          e.target.className = "fa-regular fa-heart";
+        };
 
-      }else {
-          dispatch(addWish(productId));
+      } else {
+        dispatch(addWish(productId));
 
-          if (e.target.className == "fa-regular fa-heart") {
-            e.target.className = "fa-solid fa-heart";
-          };
-    };
+        if (e.target.className == "fa-regular fa-heart") {
+          e.target.className = "fa-solid fa-heart";
+        };
+      };
 
     }
 
   };
 
-  const handleClick = (e, prod) => {
+  const handleClick = (e, product) => {
     e.preventDefault();
-    const message = "Item added to your shopping cart! 😊"
+    const message = "Item added to your shopping cart! 😊";
     alert(message);
-    dispatch(addItemToCart(prod.id))
+    // if (cart[prodId]) {
+    //   dispatch(updateQuantity(prodId, "inc"));
+    // } else {
+    // dispatch(addItemToCart(prodId));
+    // }
+    let currCart = null;
 
+    currCart = localStorage.getItem(`${user.id}Cart`);
+
+    let updateCart = {};
+    if (currCart) {
+      const cart = JSON.parse(currCart);
+
+      if (cart[product.id]) {
+        cart[product.id].quantity++;
+        updateCart = { ...cart };
+      } else {
+        product.quantity = 1;
+        updateCart = { ...cart };
+        updateCart[product.id] = product;
+      }
+    } else {
+      product.quantity = 1;
+      updateCart[product.id] = product;
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return isLoaded ? (
@@ -109,9 +133,9 @@ const ProductPage = () => {
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{fontSize:50, color:"#ab434a", marginLeft:5, cursor:"pointer"}}></i>
+                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
                     )}
                   </div>
 
