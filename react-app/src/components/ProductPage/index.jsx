@@ -10,7 +10,7 @@ import ConfirmAdd from "../ConfirmAddTo";
 
 import "./ProductPage.css";
 import skull from "../../assets/skull.png";
-import introImg from "../../assets/intro.png";
+import introImg from "../../assets/intro.png"
 
 const ProductPage = ({ prods, word }) => {
   const history = useHistory();
@@ -126,16 +126,17 @@ const ProductPage = ({ prods, word }) => {
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
-        <img src={skull} alt="graphic-img" />
+          <img src={skull} alt="graphic-img" />
         <div className="home-about-details">
+
           <h1>Welcome to Sketchy</h1>
           <h2>where creativity meets questionable!</h2>
         </div>
       </div>
       <div className="home-intro">
-        <img src={introImg} alt="sale" />
+         <img src={introImg} alt="sale" />
       </div>
-      <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
+      <h2 style={{color:"#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
           <div key={product.id} className="products-card" >
@@ -158,9 +159,9 @@ const ProductPage = ({ prods, word }) => {
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     ) : (
-                      <i className="fa-regular fa-heart" style={{ fontSize: 50, color: "#ab434a", marginLeft: 5, cursor: "pointer" }}></i>
+                      <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     )}
                   </div>
 
