@@ -82,7 +82,10 @@ const ProductPage = () => {
   };
 
   return isLoaded ? (
-    <div>
+    <div className="products-page">
+      <div className="home-intro">
+         <span>Hello</span>
+      </div>
       <h1>Peruse Our Products</h1>
       <div className="products-main-contianer" >
         {prodArr.map((product) => (
