@@ -102,6 +102,7 @@ export default function Cart() {
             {console.log(cart)}
             <img
               src={item.preview}
+              style={{"width": "20px"}}
               alt="item preview"
               className="productImageCart"
             />
@@ -167,16 +168,17 @@ export default function Cart() {
               <i class="fa-solid fa-ice-cream"></i>
             </label>
           </div>
+          <NavLink to="/home">
+            <button className="payment-btn">Continue Shopping</button>
+          </NavLink>
+          <NavLink to="/checkout">
+            <button className="payment-btn">Checkout</button>
+          </NavLink>
         </div>
-        <NavLink to="/home">
-          <button className="payment-btn">Continue Shopping</button>
-        </NavLink>
-        <NavLink to="/checkout">
-          <button className="payment-btn">Checkout</button>
-        </NavLink>
-      </div>
-    </div>
-  ) : (
-    <h2>Your cart is empty</h2>
-  )
+
+      ) : (
+        <h2>Your cart is empty</h2>
+      )
+      }
+    </div>) : null
 }
