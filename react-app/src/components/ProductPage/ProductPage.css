@@ -98,16 +98,16 @@ a {
 }
 body {
     margin: 0;
-    background:  rgb(174, 169, 190) 50%;
+    background:  #aea9be 50%;
+    /* background: #ecd6a2; ; */
     font-family: 'Muli', sans-serif;
 
 }
 
-/* #product-page {
-    background: linear-gradient(10deg, #f2eede 50.1%,  rgb(174, 169, 190) 50%);
+.products-page {
+    border: 2px solid red;
 
-} */
-
+}
 
 
 .products-main-contianer {
