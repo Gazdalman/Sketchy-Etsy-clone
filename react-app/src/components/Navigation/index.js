@@ -91,10 +91,11 @@ function Navigation({ isLoaded }) {
 =======
       <div className="nav-sub-container1">
 
-          <NavLink className="nav-link"  to="/home">
+      <div className="nav-sub-container-logo">
+          <NavLink className="nav-link" to="/home">
             <div
-            style={{fontSize:50, cursor: "pointer"}}
-            className="nav-btn">
+              style={{ fontSize: 50, cursor: "pointer" }}
+              className="nav-btn">
               <i className="fa-solid fa-skull "></i>
             </div>
           </NavLink>
@@ -113,19 +114,20 @@ function Navigation({ isLoaded }) {
         </div>
 
       </div>
-        <div className="search-bar">
-          <div onClick={(e) => handleClick(e)}>Search <i class="fa-solid fa-magnifying-glass"></i></div>
-        </div>
 
-        <div className="nav-sub-container">
+      <div className="search-bar">
+        <div onClick={(e) => handleClick(e)}>Search <i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
 
-              <NavLink className="nav-link" to="/wishlist">
-                <div
-                  style={{fontSize: 33}}
-                  className="nav-btn">
-                  <i className="fa-solid fa-heart"></i>
-                </div>
-              </NavLink>
+      <div className="nav-sub-container">
+
+        <NavLink className="nav-link" to="/wishlist">
+          <div
+            style={{ fontSize: 33 }}
+            className="nav-btn">
+            <i className="fa-solid fa-heart"></i>
+          </div>
+        </NavLink>
 
 
               <NavLink className="nav-link" to="/cart">
