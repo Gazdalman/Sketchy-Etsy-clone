@@ -68,11 +68,14 @@ const ProductPage = () => {
     const message = "Item added to your shopping cart! 😊"
     alert(message);
     dispatch(addItemToCart(prod.id))
-    
+
   };
 
   return isLoaded ? (
-    <div>
+    <div className="products-page">
+      <div className="home-intro">
+         <span>Hello</span>
+      </div>
       <h1>Peruse Our Products</h1>
       <div className="products-main-contianer">
         {prodArr.map((product) => (
