@@ -144,13 +144,12 @@ const ProductPage = ({ prods, word }) => {
 
                   {/* )} */}
 
-                  <button
-                    value={product.id}
-                    onClick={(e) => handleClick(e, product)}
-                    className="add-to-cart-btn"
-                  >
-                    Add to cart
-                  </button>
+                  <OpenModalButton
+                    buttonText="Add to Cart"
+                    modalComponent={
+                      <ConfirmAdd product={product} user={user} />
+                    }
+                  />
                 </div>
               )}
             </div>
