@@ -179,7 +179,7 @@ function Reviews({ product }) {
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
-                      color: "hwb(49 76% 11%)",
+                      color: "#322e3f",
                     }}
                   >
                     {`${user.firstName}, ${user.username}`}

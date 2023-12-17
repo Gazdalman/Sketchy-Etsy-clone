@@ -30,7 +30,7 @@
   background-color: #ab434a;
   border: 5px solid #322e3f;
 }
-.edit-button-container {
+.add-edit-button-container {
   font-size: 18px;
   width: 70%;
   color: #ffffff;
@@ -42,7 +42,7 @@
   padding: 15px;
   margin-left: 13%;
 }
-.edit-button-container:hover {
+.add-edit-button-container:hover {
   background-color: #ab434a;
   border: 5px solid #322e3f;
 }
