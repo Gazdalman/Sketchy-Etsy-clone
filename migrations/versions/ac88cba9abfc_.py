@@ -71,20 +71,21 @@ def upgrade():
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
 
-    op.create_table('carts',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
+    # op.create_table('carts',
+    # sa.Column('id', sa.Integer(), nullable=False),
+    # sa.Column('user_id', sa.Integer(), nullable=False),
+    # sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    # sa.PrimaryKeyConstraint('id')
+    # )
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
+    # if environment == "production":
+    #     op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
 
 
     op.create_table('orders',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('user_id', sa.INTEGER(), nullable=False),
+    sa.Column('total', sa.String()),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -125,18 +126,18 @@ def upgrade():
 
 
 
-    op.create_table('cart_products',
-    sa.Column('id', sa.INTEGER(), nullable=False),
-    sa.Column('cart_id', sa.INTEGER(), nullable=True),
-    sa.Column('product_id', sa.INTEGER(), nullable=True),
-    sa.Column('quantity', sa.INTEGER(), nullable=False),
-    sa.ForeignKeyConstraint(['cart_id'], ['carts.id'], ),
-    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
+    # op.create_table('cart_products',
+    # sa.Column('id', sa.INTEGER(), nullable=False),
+    # sa.Column('orderId', sa.INTEGER(), nullable=True),
+    # sa.Column('product_id', sa.INTEGER(), nullable=True),
+    # sa.Column('quantity', sa.INTEGER(), nullable=False),
+    # sa.ForeignKeyConstraint(['orderId'], ['orders.id'], ),
+    # sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    # sa.PrimaryKeyConstraint('id')
+    # )
 
-    if environment == "production":
-        op.execute(f"ALTER TABLE cart_products SET SCHEMA {SCHEMA};")
+    # if environment == "production":
+    #     op.execute(f"ALTER TABLE cart_products SET SCHEMA {SCHEMA};")
 
 
 
@@ -208,10 +209,10 @@ def downgrade():
     op.drop_table('reviews')
     op.drop_table('product_images')
     op.drop_table('order_products')
-    op.drop_table('cart_products')
+    # op.drop_table('cart_products')
     op.drop_table('wishlists')
     op.drop_table('products')
     op.drop_table('orders')
-    op.drop_table('carts')
+    # op.drop_table('carts')
     op.drop_table('users')
     # ### end Alembic commands ###

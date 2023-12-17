@@ -179,7 +179,7 @@ function Reviews({ product }) {
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
-                      color: "hwb(49 76% 11%)",
+                      color: "#322e3f",
                     }}
                   >
                     {`${user.firstName}, ${user.username}`}
@@ -237,24 +237,26 @@ function Reviews({ product }) {
                   </label>
                 </div>
               </div>
-              {user?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["delete-button-container"]}
-                  buttonText="Delete Review"
-                  modalComponent={
-                    <DeleteReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
-              {user?.id == user_id ? (
-                <OpenModalButton
-                  modalClasses={["edit-button-container"]}
-                  buttonText="Edit Review"
-                  modalComponent={
-                    <EditReview reviewId={id} productId={productId} />
-                  }
-                />
-              ) : null}
+              <div className="review-buttons">
+                {user?.id == user_id ? (
+                  <OpenModalButton
+                    modalClasses={["delete-button-container"]}
+                    buttonText="Delete Review"
+                    modalComponent={
+                      <DeleteReview reviewId={id} productId={productId} />
+                    }
+                  />
+                ) : null}
+                {user?.id == user_id ? (
+                  <OpenModalButton
+                    modalClasses={["add-edit-button-container"]}
+                    buttonText="Edit Review"
+                    modalComponent={
+                      <EditReview reviewId={id} productId={productId} />
+                    }
+                  />
+                ) : null}
+              </div>
             </div>
           ))
         ) : (

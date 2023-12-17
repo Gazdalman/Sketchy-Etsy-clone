@@ -273,6 +273,30 @@
   border-radius: 12px;
   width: 100%;
 }
+#delete-btn {
+  color: #ffffff;
+  /* border: 5px solid #ab434a; */
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  font-weight: bold;
+  font-size: 15px;
+}
+#delete-btn:hover {
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
+}
+#keep-btn {
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  border: 5px solid #322e3f;
+  background-color: tan;
+}
+#keep-btn:hover {
+  color: #ffffff;
+  background-color: #322e3f;
+  border: 5px solid tan;
+}
 
 #delete-review-btn {
   background-color: #49867f;
@@ -293,51 +317,177 @@
   border: 5px solid #322e3f;
   color: #322e3f;
 }
-/*Ann delete from cart*/
 
-/* .delete-cart-modal {
-    padding: 50px;
-
+#deleteReviewModel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 15px;
 }
 
+#deleteReviewModel:hover {
+  background-color: #ab434a;
+  border: 5px solid #ab434a;
+}
+
+#delReviewModalTitle {
+  text-align: center;
+}
+
+#delReviewModalText {
+  text-align: center;
+  max-width: 300px;
+  font-size: 20px;
+  /* text-wrap: wrap; */
+}
+
+#delReviewModalButtons {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+#delete-review-btn,
+#keep-review-btn {
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
+}
 #delete-btn {
-    font-size: 18px;
-    width: 50%;
-    color: #ffffff;
-    border: 5px solid #ab434a;
-    border-radius: 12px;
-    background-color: #ab434a;
-    cursor: pointer;
-
-    position: relative;
-    padding: 15px;
-
-
+  color: #ffffff;
+  /* border: 5px solid #ab434a; */
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  font-weight: bold;
+  font-size: 15px;
 }
 #delete-btn:hover {
-    background-color: #49867f;
-    border: 5px solid #322e3f;
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
 }
-
-
 #keep-btn {
-    font-size: 18px;
-    width: 50%;
-    color: #ffffff;
-    border: 5px solid #322e3f;
-    background-color: #322e3f;
-    border-radius: 12px;
-    cursor: pointer;
-
-    position: relative;
-    padding: 15px;
-
-    margin-top: 5%;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  border: 5px solid #322e3f;
+  background-color: tan;
 }
 #keep-btn:hover {
-    background-color: #49867f;
-    border: 5px solid #322e3f;
-} */
+  color: #ffffff;
+  background-color: #322e3f;
+  border: 5px solid tan;
+}
 
+#delete-review-btn {
+  background-color: #49867f;
+  border: 5px solid #49867f;
+}
+#delete-review-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+}
 
-/*Ann delete from cart*/
+#keep-review-btn {
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+}
+#keep-review-btn:hover {
+  background-color: #e2dcc2;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+}
+
+#deleteReviewModel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 15px;
+}
+
+#deleteReviewModel:hover {
+  background-color: #ab434a;
+  border: 5px solid #ab434a;
+}
+
+#delReviewModalTitle {
+  text-align: center;
+}
+
+#delReviewModalText {
+  text-align: center;
+  max-width: 300px;
+  font-size: 20px;
+  /* text-wrap: wrap; */
+}
+
+#delReviewModalButtons {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+#delete-review-btn,
+#keep-review-btn {
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
+}
+#delete-btn {
+  color: #ffffff;
+  /* border: 5px solid #ab434a; */
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  font-weight: bold;
+  font-size: 15px;
+}
+#delete-btn:hover {
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
+}
+#keep-btn {
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  border: 5px solid #322e3f;
+  background-color: tan;
+}
+#keep-btn:hover {
+  color: #ffffff;
+  background-color: #322e3f;
+  border: 5px solid tan;
+}
+
+#delete-review-btn {
+  background-color: #49867f;
+  border: 5px solid #49867f;
+}
+#delete-review-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+}
+
+#keep-review-btn {
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+}
+#keep-review-btn:hover {
+  background-color: #e2dcc2;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+}

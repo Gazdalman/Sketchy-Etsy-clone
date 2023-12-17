@@ -1,5 +1,5 @@
 #product-images-container {
-/*   display: grid;
+  /*   display: grid;
   grid-template-areas:
     "image2 main main"
     "image3 main main"
@@ -118,8 +118,9 @@ img {
   margin-right: auto;
 }
 
-.add-button:hover {
+.add-button > button:hover {
   background-color: #e2dcc2;
+  color: #322e3f;
   border: 5px solid #322e3f;
 }
 #product-images-container {
