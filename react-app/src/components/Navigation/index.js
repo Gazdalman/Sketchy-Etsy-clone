@@ -116,19 +116,17 @@ function Navigation({ isLoaded }) {
       </div>
 
       <div className="search-bar">
-        <div onClick={(e) => handleClick(e)}>Search <i class="fa-solid fa-magnifying-glass"></i></div>
+        <div onClick={(e) => handleClick(e)}>
+          Search <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
 
       <div className="nav-sub-container">
-
         <NavLink className="nav-link" to="/wishlist">
-          <div
-            style={{ fontSize: 33 }}
-            className="nav-btn">
+          <div style={{ fontSize: 33 }} className="nav-btn">
             <i className="fa-solid fa-heart"></i>
           </div>
         </NavLink>
-
 
               <NavLink className="nav-link" to="/cart">
                 <div

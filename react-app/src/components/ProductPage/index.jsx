@@ -10,7 +10,7 @@ import ConfirmAdd from "../ConfirmAddTo";
 
 import "./ProductPage.css";
 import skull from "../../assets/skull.png";
-import introImg from "../../assets/intro.png"
+import introImg from "../../assets/intro.png";
 
 const ProductPage = ({ prods, word }) => {
   const history = useHistory();
@@ -47,14 +47,11 @@ const ProductPage = ({ prods, word }) => {
     const productId = product.id;
 
     if (userWish && userWish.products) {
-
       if (userWish.products[productId]) {
-
         dispatch(removeWish(productId));
         if (e.target.className == "fa-solid fa-heart") {
           e.target.className = "fa-regular fa-heart";
-        };
-
+        }
       } else {
         dispatch(addWish(productId));
 
@@ -126,20 +123,19 @@ const ProductPage = ({ prods, word }) => {
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
-          <img src={skull} alt="graphic-img" />
+        <img src={skull} alt="graphic-img" />
         <div className="home-about-details">
-
           <h1>Welcome to Sketchy</h1>
           <h2>where creativity meets questionable!</h2>
         </div>
       </div>
       <div className="home-intro">
-         <img src={introImg} alt="sale" />
+        <img src={introImg} alt="sale" />
       </div>
-      <h2 style={{color:"#503980" }}>Peruse Our Products</h2>
+      <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card" >
+          <div key={product.id} className="products-card">
             <a key={product.id} href={`/products/${product.id}`}>
 
                 <img className="products-img" src="https://images.unsplash.com/photo-1627798133922-270bb80af5ed?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="product"/>
@@ -158,7 +154,9 @@ const ProductPage = ({ prods, word }) => {
                     className="add-wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
-                    {user && userWish.products && userWish.products[product.id] ? (
+                    {user &&
+                    userWish.products &&
+                    userWish.products[product.id] ? (
                       <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     ) : (
                       <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>

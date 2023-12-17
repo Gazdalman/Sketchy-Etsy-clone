@@ -8,7 +8,6 @@ import ReviewFormModal from "../CreateReviewModal";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
-import { getAllUsers } from "../../store/otherUsers";
 
 function Reviews({ product }) {
   const dispatch = useDispatch();
@@ -22,12 +21,8 @@ function Reviews({ product }) {
   const review = orderReviews(Object.values(unorderedReviews));
   const reviews = addUsers(review, users);
   const [isLoaded, setIsLoaded] = useState(false);
-  const review = orderReviews(Object.values(unorderedReviews));
-  const reviews = addUsers(review, users);
-  const [isLoaded, setIsLoaded] = useState(false);
   const reviewsLength = reviews?.length;
   function orderReviews(list) {
-    let newbie = [];
     let newbie = [];
     for (let i = list.length - 1; i >= 0; i--) {
       newbie.push(list[i]);
@@ -56,8 +51,8 @@ function Reviews({ product }) {
   }
 
   let commented = false;
-  const exists = (element) => element?.user_id == curruser.id;
-  if (curruser && reviewsLength >= 1) {
+  const exists = (element) => element?.user_id == user.id;
+  if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
 
@@ -65,9 +60,6 @@ function Reviews({ product }) {
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
-    dispatch(allTheReviews(productId))
-      .then(() => dispatch(getAllUsers()))
-      .then(() => setIsLoaded(true));
     dispatch(allTheReviews(productId))
       .then(() => dispatch(getAllUsers()))
       .then(() => setIsLoaded(true));
@@ -146,7 +138,7 @@ function Reviews({ product }) {
         </div>
       </div>
       <div>
-        {!commented && curruser && curruser.id != product.seller_id ? (
+        {!commented && user && user.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
@@ -159,6 +151,7 @@ function Reviews({ product }) {
           reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
             <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
               <div
+                className="review-info"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -166,7 +159,13 @@ function Reviews({ product }) {
                   width: "90%",
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
                   <p
                     style={{
                       fontSize: "20px",
@@ -176,7 +175,7 @@ function Reviews({ product }) {
                   >
                     {review}
                   </p>
-                  <p
+                  <span
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
@@ -262,7 +261,7 @@ function Reviews({ product }) {
           ))
         ) : (
           <h1>REVIEWS DON'T EXIST</h1>
-        )))}
+        )}
       </div>
     </>
   );

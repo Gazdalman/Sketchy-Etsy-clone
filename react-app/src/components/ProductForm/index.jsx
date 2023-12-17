@@ -4,7 +4,6 @@ import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
 import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
 import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
-import "./ProductForm.css"
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
@@ -101,9 +100,6 @@ const ProductFormPage = ({ type, product }) => {
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product, images));
-    return history.push(`/products/${id}`);
-  };
     const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
