@@ -28,7 +28,7 @@
   padding: 5px;
 }
 
-.delete-button-container {
+.model-delete-button-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -96,6 +96,30 @@
   border-radius: 12px;
   width: 100%;
 }
+#delete-btn {
+  color: #ffffff;
+  /* border: 5px solid #ab434a; */
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  font-weight: bold;
+  font-size: 15px;
+}
+#delete-btn:hover {
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
+}
+#keep-btn {
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  border: 5px solid #322e3f;
+  background-color: tan;
+}
+#keep-btn:hover {
+  color: #ffffff;
+  background-color: #322e3f;
+  border: 5px solid tan;
+}
 
 #delete-review-btn {
   background-color: #49867f;
@@ -116,51 +140,3 @@
   border: 5px solid #322e3f;
   color: #322e3f;
 }
-/*Ann delete from cart*/
-
-/* .delete-cart-modal {
-    padding: 50px;
-
-}
-
-#delete-btn {
-    font-size: 18px;
-    width: 50%;
-    color: #ffffff;
-    border: 5px solid #ab434a;
-    border-radius: 12px;
-    background-color: #ab434a;
-    cursor: pointer;
-
-    position: relative;
-    padding: 15px;
-
-
-}
-#delete-btn:hover {
-    background-color: #49867f;
-    border: 5px solid #322e3f;
-}
-
-
-#keep-btn {
-    font-size: 18px;
-    width: 50%;
-    color: #ffffff;
-    border: 5px solid #322e3f;
-    background-color: #322e3f;
-    border-radius: 12px;
-    cursor: pointer;
-
-    position: relative;
-    padding: 15px;
-
-    margin-top: 5%;
-}
-#keep-btn:hover {
-    background-color: #49867f;
-    border: 5px solid #322e3f;
-} */
-
-
-/*Ann delete from cart*/

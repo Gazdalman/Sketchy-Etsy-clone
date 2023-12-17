@@ -191,7 +191,7 @@ function Reviews({ product }) {
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
-                      color: "hwb(49 76% 11%)",
+                      color: "#322e3f",
                     }}
                   >
                     {`${User.firstName}, ${User.username} commented at ${created_at}`}
@@ -256,7 +256,7 @@ function Reviews({ product }) {
                 ) : null}
                 {curruser?.id == user_id ? (
                   <OpenModalButton
-                    modalClasses={["edit-button-container"]}
+                    modalClasses={["add-edit-button-container"]}
                     buttonText="Edit Review"
                     modalComponent={
                       <EditReview reviewId={id} productId={productId} />

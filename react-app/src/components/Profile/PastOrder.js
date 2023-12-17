@@ -41,7 +41,11 @@ export default function () {
       <div className="pastOrdersBody">
         <h1>History Order</h1>
         {Object.values(allOrders).map((order) => (
-          <div key={order.id} className="indvOrdersInAll">
+          <div
+            key={order.id}
+            className="indvOrdersInAll"
+            id={order.products.length > 2 ? "scroll" : ""}
+          >
             <h3>
               Order#:{" "}
               {Object.keys(allOrders).find((key) => allOrders[key] === order)}
@@ -71,12 +75,14 @@ export default function () {
                         Return Item
                       </button>
 
-                      <OpenModalButton
-                        buttonText="Buy Again"
-                        modalComponent={
-                          <ConfirmAdd product={item} user={user} />
-                        }
-                      />
+                      <div className="ordersAddToCartBtn">
+                        <OpenModalButton
+                          buttonText="Buy Again"
+                          modalComponent={
+                            <ConfirmAdd product={item} user={user} />
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -22,20 +22,46 @@
 }
 
 .cart-card {
-    background-color:#fff;
-    padding: 15px;
-    border: 5px solid #322e3f;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    margin: 20px auto;
-    transition: all 0.2s ease-in-out;
-    font-size: 20px;
-
+  background-color: #fff;
+  padding: 15px;
+  border: 5px solid #322e3f;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 20px auto;
+  transition: all 0.2s ease-in-out;
+  font-size: 20px;
+  text-align: center;
 }
 .cart-card:hover {
   transform: translateY(-10px);
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
+
+.cartProd_nameNpricediv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cartProd_nameNpricediv > * {
+  margin: 15px;
+}
+
+.cartProd_description {
+  display: flex;
+}
+
+.cartProd_quantityChangeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.cartProd_quantityChangeContainer {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* cartProd_quantityButtonsContainer */
 
 .payment {
   display: flex;
@@ -75,11 +101,16 @@
 
 
 
-.delete-button-container {
+.delete-button-container#removeFromCart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 18px;
-  width: 70%;
+  /* width: 70%; */
   color: #ffffff;
-  border: 5px solid #ab434a;
+  /* border: 5px solid #ab434a; */
   border-radius: 12px;
   background-color: #ab434a;
   cursor: pointer;
