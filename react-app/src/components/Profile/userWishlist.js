@@ -55,12 +55,14 @@ export default function UserWishlist({ user }) {
                     modalComponent={<DeleteWish product={product} />}
                   />
 
-                  <OpenModalButton
-                    buttonText="Add to Cart"
-                    modalComponent={
-                      <ConfirmAdd product={product} user={user} />
-                    }
-                  />
+                  <div className="addItemToCartBtn">
+                    <OpenModalButton
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>

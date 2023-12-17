@@ -1,5 +1,5 @@
-/* #product-images-container {
-  display: grid;
+#product-images-container {
+/*   display: grid;
   grid-template-areas:
     "image2 main main"
     "image3 main main"

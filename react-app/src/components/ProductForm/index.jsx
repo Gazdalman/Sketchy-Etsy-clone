@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createProduct, editProduct } from "../../store/product";
 import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
-import "./ProductForm.css"
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
@@ -11,7 +10,7 @@ const ProductFormPage = ({ type, product }) => {
   const history = useHistory();
   const [name, setName] = useState(type == "edit" ? product.name : "");
   const [category, setCategory] = useState(
-    type == "edit" ? product.category : ""
+    type == "edit" ? product.categories : ""
   );
   const [price, setPrice] = useState(type == "edit" ? product.price : "");
   const [description, setDescription] = useState(
@@ -46,7 +45,7 @@ const ProductFormPage = ({ type, product }) => {
       setPrice(1);
       return 1;
     } else if (price > 9999999) {
-      setPrice(9999999)
+      setPrice(9999999);
     }
     return price;
   };
@@ -55,7 +54,7 @@ const ProductFormPage = ({ type, product }) => {
       setUnitsAvailable(1);
       return 1;
     } else if (units > 9999999) {
-      setUnitsAvailable(9999999)
+      setUnitsAvailable(9999999);
     }
     return units;
   };
@@ -69,12 +68,12 @@ const ProductFormPage = ({ type, product }) => {
 
   useEffect(() => {
     if (!name || name.length < 3 || name.length > 50) setDisabled(true);
-    if (!description || description.length < 10) setDisabled(true);
-    if (!prevImg && type != "edit") setDisabled(true);
+    else if (!description || description.length < 10) setDisabled(true);
+    else if (!prevImg && type != "edit") setDisabled(true);
+    else setDisabled(false);
   }, [name, description, prevImg]);
 
   if (!user) {
-    return history.replace("/");
     return history.replace("/");
   }
 
@@ -88,31 +87,18 @@ const ProductFormPage = ({ type, product }) => {
     product.append("price", price);
     product.append("units_available", unitsAvailable);
     product.append("preview", prevImg);
-    e.preventDefault();
-    const product = new FormData();
-    const images = [];
-    product.append("name", name);
-    product.append("description", description);
-    product.append("category", category);
-    product.append("price", price);
-    product.append("units_available", unitsAvailable);
-    product.append("preview", prevImg);
 
-    let num = 1;
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const image = new FormData();
-        image.append(`image`, img);
-        images.push(image);
+        const imageData = new FormData();
+        imageData.append("image", img);
+        images.push(imageData);
       }
       num += 1;
     }
 
     setImageLoading(true);
-    const id = await dispatch(createProduct(product, images));
-    return history.push(`/products/${id}`);
-  };
     const id = await dispatch(createProduct(product, images));
     return history.push(`/products/${id}`);
   };
@@ -125,42 +111,24 @@ const ProductFormPage = ({ type, product }) => {
     productData.append("category", category);
     productData.append("price", price);
     productData.append("units_available", unitsAvailable);
-    e.preventDefault();
-    const productData = new FormData();
-    productData.append("name", name);
-    productData.append("description", description);
-    productData.append("category", category);
-    productData.append("price", price);
-    productData.append("units_available", unitsAvailable);
 
     const updated = await dispatch(editProduct(productData, product.id));
-    const updated = await dispatch(editProduct(productData, product.id));
     if (updated.errors) {
-      const errs = {};
       const errs = {};
       for (const err in updated.errors) {
         const parts = err.split(" : ");
         errs[parts[0]] = parts[1];
-        const parts = err.split(" : ");
-        errs[parts[0]] = parts[1];
       }
       setErrors(errs);
-      setErrors(errs);
       if (errors.not_found || errors.unauthorized) {
-        return history.replace("/");
         return history.replace("/");
       }
     } else {
       return history.push(`/products/${updated.id}`);
-      return history.push(`/products/${updated.id}`);
     }
-  };
   };
 
   const goBack = (e) => {
-    e.preventDefault();
-    return history.goBack();
-  };
     e.preventDefault();
     return history.goBack();
   };
@@ -310,10 +278,10 @@ const ProductFormPage = ({ type, product }) => {
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button className="submit-create" type="submit" disabled={disabled}>
+        <button type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
-        <button className="cancel-create" onClick={(e) => goBack(e)}>Cancel</button>
+        <button onClick={(e) => goBack(e)}>Cancel</button>
       </form>
     </div>
   ) : (

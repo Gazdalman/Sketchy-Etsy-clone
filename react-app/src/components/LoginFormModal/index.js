@@ -7,7 +7,6 @@ import "./LoginForm.css";
 import OpenModalButton from "../OpenModalButton";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();

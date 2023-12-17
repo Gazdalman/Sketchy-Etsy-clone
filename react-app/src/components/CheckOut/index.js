@@ -31,8 +31,6 @@ export default function CheckOut() {
     dispatch(placeOrder()).then(() => history.push("/home"));
   };
 
-  // * Will need to override input & label styling later
-
   return (
     <>
     <h2>Check Out</h2>
