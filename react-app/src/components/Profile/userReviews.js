@@ -46,13 +46,13 @@ export default function UserReviews({ user }) {
                     <NavLink to={`/profile/${review.user_id}`}>
                       <p>Author: {users[review.user_id].username}</p>
                     </NavLink>
-                    {!review.seller_commented &&
+                    {/* {!review.seller_commented &&
                       currUser &&
                       currUser.id == user.id && (
                         <button style={{ width: "100%" }} disabled>
                           Respond
                         </button>
-                      )}
+                      )} */}
                   </div>
                 </div>
               ))}
