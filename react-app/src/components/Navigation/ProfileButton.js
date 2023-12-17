@@ -64,7 +64,9 @@ function ProfileButton({ user, disabled }) {
               </NavLink>
             </li>
             <li>
-              <button onClick={handleLogout} className="dropdown-btn" >Log Out</button>
+              <button onClick={handleLogout} className="dropdown-btn">
+                Log Out
+              </button>
             </li>
           </>
         ) : (

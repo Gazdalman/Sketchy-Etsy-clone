@@ -1,11 +1,11 @@
 /* TODO Add site wide styles */
-body, html {
+body,
+html {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
-  /* background: #aea9be 50%; */
-  background-color: #FAE27F;
+  background-color: #fae27f;
   font-family: "Muli", sans-serif;
 }
 

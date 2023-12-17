@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 
 import "./deleteModal.css";
-import { deleteProductThunk } from "../../store/asdfsadfasdfasdfas";
+import { deleteProductThunk } from "../../store/product";
 
 //PLEASE CHANGE names/variables
 
