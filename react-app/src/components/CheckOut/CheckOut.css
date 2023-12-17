@@ -109,3 +109,22 @@
 .red {
   color: #ef5350;
 }
+
+.checkout_buttons_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 25px;
+}
+.checkout_buttons_container > form,
+.checkout_buttons_container > a {
+  width: 50%;
+}
+
+.checkout_buttons_container > form > button,
+.cancel-btn {
+  width: 80%;
+}
+.cancel-btn {
+  margin-top: 0px;
+}

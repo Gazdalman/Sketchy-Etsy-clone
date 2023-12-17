@@ -64,9 +64,25 @@ export default function Cart() {
     setCart([...Object.values(updatedCart)]);
   };
 
-  const onOptionChange = e => {
-    setPayment(e.target.value)
-  }
+  const removeFromCart = (e, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+    let updatedCart = {};
+
+    delete currCart[itemId];
+    updatedCart = { ...currCart };
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
+  };
+
+  const onOptionChange = (e) => {
+    setPayment(e.target.value);
+  };
 
   return cart.length ? (
     <div className="shopping-cart-page">
@@ -80,32 +96,44 @@ export default function Cart() {
                 alt="item preview"
                 className="productImageCart"
               />
-              <h3>{item.name}</h3>
-              <p>{item.price}</p>
-              <p>{item.description}</p>
-              <p>
-                {item.quantity}
-                <button
-                  className="quantity-btn"
-                  onClick={(e) => changeQuant(e, "dec", item.id)}
-                >
-                  {" "}
-                  -{" "}
-                </button>
-                <button
-                  className="quantity-btn"
-                  onClick={(e) => changeQuant(e, "inc", item.id)}
-                >
-                  {" "}
-                  +{" "}
-                </button>
-              </p>
+              <div className="cartProd_nameNpricediv">
+                <h3>{item.name}</h3>
+                <p>${item.price}</p>
+              </div>
+
+              <div className="cartProd_description">{item.description}</div>
+              <div className="cartProd_quantityChangeContainer">
+                <p>{item.quantity}</p>
+                <div className="cartProd_quantityButtonsContainer">
+                  <button
+                    className="quantity-btn"
+                    onClick={(e) => changeQuant(e, "dec", item.id)}
+                  >
+                    {" "}
+                    -{" "}
+                  </button>
+                  <button
+                    className="quantity-btn"
+                    onClick={(e) => changeQuant(e, "inc", item.id)}
+                  >
+                    {" "}
+                    +{" "}
+                  </button>
+                </div>
+              </div>
               <>
-                <OpenModalButton
+                {/* <OpenModalButton
                   modalClasses={["delete-button-container"]}
                   buttonText="Remove from Cart"
                   modalComponent={<DeleteItem product={item} />}
-                />
+                /> */}
+                <button
+                  className="delete-button-container"
+                  id="removeFromCart"
+                  onClick={(e) => removeFromCart(e, item.id)}
+                >
+                  Remove from Cart
+                </button>
               </>
             </div>
           ))}

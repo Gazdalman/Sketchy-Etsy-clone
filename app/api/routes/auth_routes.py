@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Cart, Wishlist, db
+from app.models import User, Wishlist, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user
@@ -74,11 +74,11 @@ def sign_up():
         db.session.add(new_user)
         db.session.commit()
 
-        user_cart = Cart(
-            user_id = new_user.id
-        )
-        db.session.add(user_cart)
-        db.session.commit()
+        # user_cart = Cart(
+        #     user_id = new_user.id
+        # )
+        # db.session.add(user_cart)
+        # db.session.commit()
 
         user_wishlist = Wishlist(
             user_id = new_user.id

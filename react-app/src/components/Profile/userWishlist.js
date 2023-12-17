@@ -50,7 +50,7 @@ export default function UserWishlist({ user }) {
                 <div className="userProductPrice">{product.price}</div>
                 <div className="userWishlistButtons">
                   <OpenModalButton
-                    modalClasses={["delete-button-container"]}
+                    modalClasses={["modal-delete-button-container"]}
                     buttonText="Delete Product"
                     modalComponent={<DeleteWish product={product} />}
                   />

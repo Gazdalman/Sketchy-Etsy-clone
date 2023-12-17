@@ -33,11 +33,11 @@ class User(db.Model, UserMixin):
         back_populates="seller"
     )
 
-    cart = db.relationship(
-        "Cart",
-        back_populates="cart_user",
-        cascade='all, delete-orphan'
-    )
+    # cart = db.relationship(
+    #     "Cart",
+    #     back_populates="cart_user",
+    #     cascade='all, delete-orphan'
+    # )
 
     wishlist = db.relationship(
         "Wishlist",

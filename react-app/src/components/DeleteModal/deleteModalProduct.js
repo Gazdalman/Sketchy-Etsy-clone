@@ -23,7 +23,7 @@ function DeleteProduct({ product, refresh }) {
   };
 
   return (
-    <div className="delete-button-container" id="deleteModel">
+    <div className="modal-delete-button-container" id="deleteModel">
       <h2 id="delModalTitle">Confirm Delete</h2>
       <p id="delModalText">
         Are you sure you want to remove this product from your product list?

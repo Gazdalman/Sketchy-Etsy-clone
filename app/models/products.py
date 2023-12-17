@@ -34,11 +34,11 @@ class Product(db.Model):
     back_populates="products"
   )
 
-  cart = db.relationship(
-    "Cart",
-    secondary=add_prefix_for_prod("cart_products"),
-    back_populates="cart_product_list"
-  )
+  # cart = db.relationship(
+  #   "Cart",
+  #   secondary=add_prefix_for_prod("cart_products"),
+  #   back_populates="cart_product_list"
+  # )
 
   wishlist = db.relationship(
     "Wishlist",

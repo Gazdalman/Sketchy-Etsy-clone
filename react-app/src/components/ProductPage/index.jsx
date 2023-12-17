@@ -116,12 +116,14 @@ const ProductPage = () => {
                     )}
                   </div>
 
-                  <OpenModalButton
-                    buttonText="Add to Cart"
-                    modalComponent={
-                      <ConfirmAdd product={product} user={user} />
-                    }
-                  />
+                  <div className="add-to-cart-btn">
+                    <OpenModalButton
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
+                  </div>
                 </div>
               )}
             </div>

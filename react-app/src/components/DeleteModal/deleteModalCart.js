@@ -18,22 +18,20 @@ function DeleteItem({ product }) {
     await dispatch(removeItem(product.id)).then(closeModal);
 
     history.push("/cart");
+
+    closeModal();
   };
 
   return (
-    <div className="delete-button-container" id="deleteModel">
-      <h2 id="delModalTitle">Confirm Delete</h2>
-      <p id="delModalText">
-        Are you sure you want to remove this product from your cart?
-      </p>
-      <div id="delModalButtons">
-        <button id="delete-btn" onClick={deleteItem}>
-          Yes (Delete product)
-        </button>
-        <button id="keep-btn" onClick={closeModal}>
-          No (Keep product)
-        </button>
-      </div>
+    <div className="delete-button-container">
+      <h2>Confirm Delete</h2>
+      <p>Are you sure you want to remove this product from your cart?</p>
+      <button id="delete-btn" onClick={deleteItem}>
+        Yes (Delete product)
+      </button>
+      <button id="keep-btn" onClick={closeModal}>
+        No (Keep product)
+      </button>
     </div>
   );
 }
