@@ -83,10 +83,11 @@ const ProductShow = () => {
         <p id="product-description">{product?.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
-      {user?.id != product?.seller_id && (
-        <button value={product.id} onClick={(e) => handleClick(e, product)}>
-          Add to cart
-        </button>
+      {user && user.id != product.seller_id && (
+        <OpenModalButton
+          buttonText="Add to Cart"
+          modalComponent={<ConfirmAdd product={product} user={user} />}
+        />
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />
