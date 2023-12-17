@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
 
 import "./deleteModal.css";
-import { deleteProductThunk } from "../../store/asdfsadfasdfasdfas";
+import { deleteProductThunk } from "../../store/product";
 
 //PLEASE CHANGE names/variables
 
@@ -15,7 +15,9 @@ function DeleteProduct({ product, refresh }) {
   const deleteButton = async (e) => {
     e.preventDefault();
 
-    await dispatch(deleteProductThunk(product.id)).then(() => refresh ? history.go(0) : history.goBack()).then(closeModal);
+    await dispatch(deleteProductThunk(product.id))
+      .then(() => (refresh ? history.go(0) : history.goBack()))
+      .then(closeModal);
 
     history.push("/");
   };

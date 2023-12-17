@@ -1,56 +1,30 @@
 """empty message
 
-<<<<<<< HEAD
-<<<<<<<< HEAD:migrations/versions/1a8224881521_.py
-Revision ID: 1a8224881521
-Revises:
-Create Date: 2023-11-27 17:28:43.564369
-========
-Revision ID: 1bd787ee40cf
-Revises: 
-Create Date: 2023-11-27 19:11:03.475168
->>>>>>>> 761b1e0 (readme push):migrations/versions/1bd787ee40cf_.py
-=======
 <<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 <<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
 Revision ID: 6506cb7e81a2
-Revises: 
+Revises:
 Create Date: 2023-11-27 11:35:31.747436
 ========
 Revision ID: 2cfb087e8c2d
-Revises: 
+Revises:
 Create Date: 2023-11-22 08:25:31.237377
 >>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
 =======
 Revision ID: 1a8224881521
 Revises:
 Create Date: 2023-11-27 17:28:43.564369
->>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
->>>>>>> 067e912 (This is dumb)
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD
-<<<<<<<< HEAD:migrations/versions/1a8224881521_.py
 revision = '1a8224881521'
-========
-revision = '1bd787ee40cf'
->>>>>>>> 761b1e0 (readme push):migrations/versions/1bd787ee40cf_.py
-=======
-<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-<<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-revision = '6506cb7e81a2'
-========
-revision = '2cfb087e8c2d'
->>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
-=======
-revision = '1a8224881521'
->>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
->>>>>>> 067e912 (This is dumb)
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -71,18 +45,34 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
+
     op.create_table('carts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
+
+
     op.create_table('orders',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('user_id', sa.INTEGER(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('products',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
@@ -96,12 +86,24 @@ def upgrade():
     sa.ForeignKeyConstraint(['seller_id'], ['users.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('wishlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE wishlists SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('cart_products',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('cart_id', sa.INTEGER(), nullable=True),
@@ -111,6 +113,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE cart_products SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('order_products',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('order_id', sa.INTEGER(), nullable=True),
@@ -120,6 +128,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE order_products SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('product_images',
     sa.Column('id', sa.INTEGER(), nullable=False),
     sa.Column('product_id', sa.INTEGER(), nullable=True),
@@ -127,6 +141,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE product_images SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
@@ -140,23 +160,11 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<< HEAD
-<<<<<<<< HEAD:migrations/versions/1a8224881521_.py
-=======
-<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-=======
->>>>>>> 067e912 (This is dumb)
 
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
 
 
-<<<<<<< HEAD
-========
->>>>>>>> 761b1e0 (readme push):migrations/versions/1bd787ee40cf_.py
-=======
->>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
->>>>>>> 067e912 (This is dumb)
     op.create_table('wishlist_details',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('wishlist_id', sa.Integer(), nullable=True),
@@ -165,21 +173,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['wishlist_id'], ['wishlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-<<<<<<< HEAD
-<<<<<<<< HEAD:migrations/versions/1a8224881521_.py
 
     if environment == "production":
         op.execute(f"ALTER TABLE wishlist_details SET SCHEMA {SCHEMA};")
-========
->>>>>>>> 761b1e0 (readme push):migrations/versions/1bd787ee40cf_.py
-=======
-<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-=======
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE wishlist_details SET SCHEMA {SCHEMA};")
->>>>>>> ec7cf82 (This is dumb):migrations/versions/1a8224881521_.py
->>>>>>> 067e912 (This is dumb)
     # ### end Alembic commands ###
 
 

@@ -56,6 +56,7 @@
   border: 5px solid rgb(58, 102, 115);
 }
 
+/* Tab Containers */
 .userOrdersContainer {
   display: flex;
   flex-direction: column;
@@ -71,6 +72,7 @@
   gap: 15px;
   /* overflow-y: scroll hidden; */
 }
+
 .indvUserProducts,
 .indvUserReviews,
 .indvUserOrderItems,
@@ -157,12 +159,13 @@
   gap: 15px;
   color: hwb(173 29% 47%);
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
 .ordersAddToCartBtn {
   background-color: hwb(173 29% 47%);
   border: 5px solid hwb(173 29% 47%);
 }
+
 .ordersReturnItemBtn {
   background-color: rgb(58, 102, 115);
   border: 5px solid rgb(58, 102, 115);
@@ -172,7 +175,7 @@
   border: 5px solid #e2dcc2;
   color: black;
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
 .ordersWriteReview,
 .ordersReturnItemBtn,
@@ -184,13 +187,13 @@
   margin-bottom: 5px;
   width: 100%;
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
 .ordersReturnItemBtn,
 .ordersAddToCartBtn {
   color: white;
 }
-.addItemToCartBtn:hover,
+.addItemToCartBtn > button:hover,
 .editUserProductBtn:hover,
 .ordersWriteReview:hover,
 .ordersReturnItemBtn:hover,

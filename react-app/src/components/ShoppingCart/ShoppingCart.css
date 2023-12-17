@@ -14,9 +14,11 @@
     margin-left: 5%;
 }
 .shopping-cart-container {
-    width: 50%;
-
-    margin-left: 5%;
+  width: 65%;
+  height: 650px;
+  padding: 10px;
+  margin-left: 5%;
+  overflow-y: scroll;
 }
 
 .cart-card {
@@ -36,9 +38,12 @@
 }
 
 .payment {
-    width: 50%;
-    margin-left: 5%;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 35%;
+  margin-left: 5%;
 }
 
 
@@ -71,13 +76,13 @@
 
 
 .delete-button-container {
-    font-size: 18px;
-    width: 70%;
-    color: #ffffff;
-    border: 5px solid #ab434a;
-    border-radius: 12px;
-    background-color: #ab434a;
-    cursor: pointer;
+  font-size: 18px;
+  width: 70%;
+  color: #ffffff;
+  border: 5px solid #ab434a;
+  border-radius: 12px;
+  background-color: #ab434a;
+  cursor: pointer;
 
     position: relative;
     padding: 15px;
@@ -205,7 +210,7 @@
 
 .delete-button-container:hover {
     background-color: #49867f;
-    border: 5px solid #49867f;
+    border: 5px solid #322e3f;
 }
 
 .quantity-btn {
@@ -238,9 +243,17 @@
 }
 .payment-btn:hover {
     background-color: #49867f;
-    border: 2px solid #49867f;
+    border: 5px solid #322e3f;
 }
-.cart-btns-container {
-    display: flex;
-    gap: 15px;
+
+.productImageCart {
+  height: 300px;
+  width: 300px;
+  border-radius: 15px;
+}
+.shopping-cart-page {
+  background: rgb(174, 169, 190) 50;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
 }

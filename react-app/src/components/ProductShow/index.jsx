@@ -18,34 +18,22 @@ const ProductShow = () => {
   const user = useSelector((state) => state.session.user);
   const product = useSelector((state) => state.requestedProduct);
 
-  const images = product ? product.images : null
-  const imgLen = images ? images.length : 0
+  const images = product ? product.images : null;
+  const imgLen = images ? images.length : 0;
   const [revAvg, setRevAvg] = useState(0);
-  const [imgNum, setImgNum] = useState(-1)
+  const [imgNum, setImgNum] = useState(-1);
   const [numReviews, setNumReviews] = useState(0);
-  const [renderSwitch, setRenderSwitch] = useState(true)
+  const [renderSwitch, setRenderSwitch] = useState(true);
 
-  console.log('images', imgLen);
+  console.log("images", imgLen);
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
       history.replace("/not-found");
     }
-    setImgNum(-1)
+    setImgNum(-1);
     console.log("object");
   }, [dispatch, renderSwitch]);
-
-
-  // useEffect(() => {
-  //   if (product && product.ProductImages && product.ProductImages.length > 0) {
-  //     setPreviewImage({ ...(product.ProductImages.find((image) => image.preview === true)) });
-  //   }
-
-  // }, [product]);
-
-  // if (!isLoaded && rerendered && !product) {
-  //   history.replace("/not-found")
-  // }
 
   const edit = (e) => {
     e.preventDefault();

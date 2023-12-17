@@ -12,53 +12,61 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [cart, setCart] = useState([]);
 
-  useEffect(
-    () => {
-      if (!user) {
-        return history.push("/login");
+  useEffect(() => {
+    if (!user) {
+      return history.push("/login");
+    }
+
+    const localCart = localStorage.getItem(`${user.id}Cart`);
+    // console.log(localCart);
+    const parsedCart = JSON.parse(localCart);
+    // console.log(parsedCart);
+    if (localCart) {
+      setCart([...Object.values(parsedCart)]);
+    }
+    setIsLoaded(true);
+  }, []);
+
+  const changeQuant = (e, type, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+
+    let updatedCart = {};
+    if (type === "inc") {
+      currCart[itemId].quantity++;
+      updatedCart = { ...currCart };
+    }
+    if (type === "dec") {
+      currCart[itemId].quantity--;
+      if (!currCart[itemId].quantity) {
+        delete currCart[itemId];
+        updatedCart = { ...currCart };
+      } else {
+        updatedCart = { ...currCart };
       }
+    }
+    if (type === "remove") {
+      delete currCart[itemId];
+      updatedCart = { ...currCart };
+    }
 
-      // dispatch(getCart()).then(() => {
-      //   setIsLoaded(true);
-      // });
-      // let localCart = null;
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
 
-      const localCart = localStorage.getItem(`${user.id}Cart`);
-      console.log(localCart);
-      const parsedCart = JSON.parse(localCart);
-      console.log(parsedCart);
-      if (localCart) {
-        setCart([...Object.values(parsedCart)]);
-      }
-      setIsLoaded(true);
-    },
-    [
-      /* dispatch */
-    ]
-  );
-
-  const decQuant = async (item) => {
-    // const change = "dec";
-    // const itemId = item.id;
-    // if (Number(item.quantity) === 1) {
-    //   await dispatch(removeItem(itemId));
-    // } else {
-    //   await dispatch(updateQuantity(itemId, change));
-    // }
-    const message = "Functionality comming soon...";
-    alert(message);
+    setCart([...Object.values(updatedCart)]);
   };
-  const incQuant = async (itemId) => {
-    // const change = "inc";
-    // await dispatch(updateQuantity(itemId, change));
-    const message = "Functionality comming soon...";
-    alert(message);
-  };
+
+  const onOptionChange = e => {
+    setPayment(e.target.value)
+  }
 
   return cart.length ? (
     <div className="shopping-cart-page">
@@ -69,7 +77,6 @@ export default function Cart() {
               {/* {console.log(cart)} */}
               <img
                 src={item.preview}
-                style={{"width": "20px"}}
                 alt="item preview"
                 className="productImageCart"
               />
@@ -78,11 +85,17 @@ export default function Cart() {
               <p>{item.description}</p>
               <p>
                 {item.quantity}
-                <button className="quantity-btn" onClick={(e) => changeQuant(e, "dec", item.id)}>
+                <button
+                  className="quantity-btn"
+                  onClick={(e) => changeQuant(e, "dec", item.id)}
+                >
                   {" "}
                   -{" "}
                 </button>
-                <button className="quantity-btn" onClick={(e) => changeQuant(e, "inc", item.id)}>
+                <button
+                  className="quantity-btn"
+                  onClick={(e) => changeQuant(e, "inc", item.id)}
+                >
                   {" "}
                   +{" "}
                 </button>
@@ -97,7 +110,7 @@ export default function Cart() {
             </div>
           ))}
       </div>
-      {cart.length ? (
+      {cart.length && (
         <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-inner">
@@ -110,7 +123,9 @@ export default function Cart() {
                 checked={payment === "option1"}
                 onChange={onOptionChange}
               />
-              <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
+              <label for="op1">
+                <i class="fa-regular fa-credit-card"></i>
+              </label>
             </div>
             <div className="radio-input-payment">
               <input
@@ -121,7 +136,9 @@ export default function Cart() {
                 checked={payment === "option2"}
                 onChange={onOptionChange}
               />
-              <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
+              <label for="op2">
+                <i class="fa-solid fa-pizza-slice"></i>
+              </label>
             </div>
 
             <div className="radio-input-payment">
@@ -138,15 +155,28 @@ export default function Cart() {
               </label>
             </div>
           </div>
-            <div className="cart-btns-container">
-              <NavLink to="/home">
-                <button className="payment-btn">Continue Shopping</button>
-              </NavLink>
-              <NavLink to="/checkout">
-                <button className="payment-btn">Checkout</button>
-              </NavLink>
-            </div>
+          <div className="cart-btns-container">
+            <NavLink to="/home">
+              <button className="payment-btn">Continue Shopping</button>
+            </NavLink>
+            <NavLink to="/checkout">
+              <button className="payment-btn">Checkout</button>
+            </NavLink>
+          </div>
         </div>
-
+      )}
+    </div>
+  ) : (
+    <div>
+      <h1> Nothing in your cart </h1>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          history.push("/home");
+        }}
+      >
+        Shop Now!
+      </button>
+    </div>
   );
 }
