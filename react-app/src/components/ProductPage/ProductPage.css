@@ -84,17 +84,18 @@
 .home-about {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+
   background: url("../../assets/about.png");
   background-size: cover;
   width: 100vw;
-  height: 900px;
-  padding: 0 20px;
+  height: 950px;
+  padding: 40px 0;
 }
 
 .home-about img {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   animation: skull 1s infinite;
 }
 
@@ -117,8 +118,9 @@
 .home-about-details {
   font-size: 50px;
   background-color: #ffffff;
-  padding: 10px;
+  padding: 50px;
 }
+
 
 .products-main-container {
   display: flex;
