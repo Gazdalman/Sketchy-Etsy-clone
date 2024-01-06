@@ -26,12 +26,9 @@ function Navigation({ isLoaded }) {
     filteredData
   );
   const [search, setSearch] = useState("");
+  console.log("🚀 ~ file: index.js:29 ~ Navigation ~ search:", search);
   // const [isLoaded, setIsLoaded] = useState(false);
   const [render, setRender] = useState(false);
-  const changePage = () => {
-    <ProductShowing prods={filteredData} />;
-    history.push("/search");
-  };
   const filterFunc = (e) => {
     const searchWord = e.target.value;
     setSearch(searchWord);
@@ -57,6 +54,7 @@ function Navigation({ isLoaded }) {
       //   "🚀 ~ file: index.js:47 ~ filterFunc ~ filteredData:",
       //   filteredData
       // );
+      history.push("/home");
       setRender(!render);
     } else {
       setFilteredData(newFilter);
@@ -69,8 +67,15 @@ function Navigation({ isLoaded }) {
       //   "🚀 ~ file: index.js:53 ~ filterFunc ~ filteredData:",
       //   filteredData
       // );
+      changePage();
       setRender(!render);
+      // return <ProductShowing prods={filteredData} />;
     }
+    <ProductShowing prods={filteredData} />;
+  };
+  const changePage = () => {
+    <ProductShowing prods={filteredData} />;
+    history.push("/search");
   };
   useEffect(() => {
     dispatch(getAllProducts());
@@ -126,7 +131,7 @@ function Navigation({ isLoaded }) {
           className="form-input"
           value={search}
           onChange={filterFunc}
-          onClick={changePage}
+          // onClick={changePage}
         />
       </div>
 
