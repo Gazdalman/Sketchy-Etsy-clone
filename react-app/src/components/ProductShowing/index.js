@@ -11,7 +11,7 @@ import ConfirmAdd from "../ConfirmAddTo";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
-const ProductShowing = ({ prods, word }) => {
+const ProductShowing = ({ prods }) => {
   console.log("🚀 ~ file: index.js:15 ~ prods:", prods);
 
   const history = useHistory();
