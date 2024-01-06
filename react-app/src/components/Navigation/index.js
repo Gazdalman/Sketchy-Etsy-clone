@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
 
 
   const [search, setSearch] = useState("");
-  
+
   const [render, setRender] = useState(false);
   const filterFunc = (e) => {
     const searchWord = e.target.value;
@@ -116,7 +116,7 @@ function Navigation({ isLoaded }) {
       {/* <div onClick={(e) => handleClick(e)}>
         </div> */}
       {/* </div> */}
-      <div
+      {/* <div
         style={{
           width: "100%",
           display: "flex",
@@ -146,7 +146,7 @@ function Navigation({ isLoaded }) {
           onChange={filterFunc}
           onClick={changePage}
         />
-      </div>
+      </div> */}
 
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
