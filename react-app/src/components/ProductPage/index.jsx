@@ -1,24 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
+import { useHistory } from "react-router-dom";
+import { getAllProducts } from "../../store/product";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
 // import { addItemToCart, updateQuantity } from "../../store/cart";
 
 import OpenModalButton from "../OpenModalButton";
 import ConfirmAdd from "../ConfirmAddTo";
-import { addItemToCart, updateQuantity } from "../../store/cart";
-import skull from "../../assets/skull.png";
-import introImg from "../../assets/intro.png"
 
 import "./ProductPage.css";
-
+import skull from "../../assets/skull.png";
+import introImg from "../../assets/intro.png";
 
 const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  //const cart = useSelector((state) => state.cart);
   //const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const userWish = useSelector((state) => state.wishlist);
@@ -40,12 +37,6 @@ const ProductPage = () => {
         }
       })
       .then(() => {
-        // * Only gather wishlist if there is a user signed in otherwise unauthorized triggers in console
-        if (user) {
-          dispatch(getWish());
-        }
-      })
-      .then(() => {
         setIsLoaded(true);
       });
   }, [dispatch]);
@@ -56,73 +47,34 @@ const ProductPage = () => {
     const productId = product.id;
 
     if (userWish && userWish.products) {
-
       if (userWish.products[productId]) {
-
         dispatch(removeWish(productId));
         if (e.target.className == "fa-solid fa-heart") {
           e.target.className = "fa-regular fa-heart";
-        };
-
+        }
       } else {
         dispatch(addWish(productId));
 
         if (e.target.className == "fa-regular fa-heart") {
           e.target.className = "fa-solid fa-heart";
-        };
-      };
-
-    }
-
-  };
-
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
-    let currCart = null;
-
-    currCart = localStorage.getItem(`${user.id}Cart`);
-
-    let updateCart = {};
-    if (currCart) {
-      const cart = JSON.parse(currCart);
-
-      if (cart[product.id]) {
-        cart[product.id].quantity++;
-        updateCart = { ...cart };
-      } else {
-        product.quantity = 1;
-        updateCart = { ...cart };
-        updateCart[product.id] = product;
+        }
       }
-    } else {
-      product.quantity = 1;
-      updateCart[product.id] = product;
     }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
-          <img src={skull} alt="graphic-img" />
+        <img src={skull} alt="graphic-img" />
         <div className="home-about-details">
-
           <h1>Welcome to Sketchy</h1>
           <h2>where creativity meets questionable!</h2>
         </div>
       </div>
       <div className="home-intro">
-         <img src={introImg} alt="sale" />
+        <img src={introImg} alt="sale" />
       </div>
-      <h2 style={{color:"#503980" }}>Peruse Our Products</h2>
+      <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
           <div key={product.id} className="products-card">
@@ -150,17 +102,6 @@ const ProductPage = () => {
               {user && user.id != product.seller_id && (
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
-
-                  <div
-                    className="wish-btn"
-                    onClick={(e) => addToWish(e, product)}
-                  >
-                    {user && userWish.products && userWish.products[product.id] ? (
-                      <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
-                    ) : (
-                      <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
-                    )}
-                  </div>
 
                   <div
                     className="wish-btn"

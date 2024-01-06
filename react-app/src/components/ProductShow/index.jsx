@@ -3,8 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../../store/singleProduct";
 import Reviews from "../ProductReviews";
-import { addItemToCart, updateQuantity } from "../../store/cart";
-import { deleteProductThunk } from "../../store/asdfsadfasdfasdfas";
+
+// import { deleteProductThunk } from "../../store/product";
 import OpenModalButton from "../OpenModalButton";
 // import DeleteProduct from "../DeleteModal/deleteModalProduct";
 import ConfirmAdd from "../ConfirmAddTo";

@@ -25,8 +25,8 @@
     height: fit-content;
     margin-right: 15px;
 
-    border: 5px solid #322e3f;
-  }
+  border: 5px solid #322e3f;
+}
 
   /*checkout form*/
   #form-container {
@@ -35,13 +35,13 @@
     display: flex;
     flex-direction: column;
 
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    margin: 20px auto;
-    padding: 15px;
-  }
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 20px auto;
+  padding: 15px;
+}
 
 #checkout-form > * {
   display: flex;
@@ -127,6 +127,25 @@ input[type=month] {
 }
 .red {
     color: #ef5350;
+}
+
+.checkout_buttons_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 25px;
+}
+.checkout_buttons_container > form,
+.checkout_buttons_container > a {
+  width: 50%;
+}
+
+.checkout_buttons_container > form > button,
+.cancel-btn {
+  width: 80%;
+}
+.cancel-btn {
+  margin-top: 0px;
 }
 
 .checkout_buttons_container {

@@ -13,11 +13,10 @@ export default function Cart() {
 
   const user = useSelector((state) => state.session.user);
   // const cart = useSelector((state) => state.cart);
-  // const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
 
   useEffect(() => {
     if (!user) {

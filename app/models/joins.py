@@ -20,26 +20,17 @@ class OrderProduct(db.Model):
 #   if environment == "production":
 #     __table_args__ = {'schema': SCHEMA}
 
-<<<<<<< HEAD
   id = db.Column(db.INTEGER, primary_key=True)
   cart_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("carts.id")))
 
   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
-=======
-#   id = db.Column(db.INTEGER, primary_key=True)
-
-#   orderId = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("carts.id")))
-
-#   product_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("products.id")))
-
-#   quantity = db.Column(db.INTEGER, nullable=False, default=1)
->>>>>>> 77bb327b3a34b0d3beba541edeb30df513e17a38
 
 
 
 
   def to_dict(self):
     return {
+      "orderId": self.cart_id,
       "orderId": self.cart_id,
       "productId": self.product_id,
       "quatity": self.quantity

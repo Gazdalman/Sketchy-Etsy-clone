@@ -21,9 +21,6 @@ export default function UserReviews({ user }) {
             if (product.seller_id == user.id) {
               revArr.push(prodRev);
             }
-            if (product.seller_id == user.id) {
-              revArr.push(prodRev);
-            }
           });
         });
         setReviews(revArr);
@@ -44,21 +41,18 @@ export default function UserReviews({ user }) {
                     <NavLink to={`/products/${review.product_id}`}>
                       <h4>{products[review.product_id].name}</h4>
                     </NavLink>
-                    <NavLink to={`/products/${review.product_id}`}>
-                      <h4>{products[review.product_id].name}</h4>
-                    </NavLink>
                     <p>{review.rating} Stars</p>
                     <p className="userProductReview">{review.review}</p>
                     <NavLink to={`/profile/${review.user_id}`}>
                       <p>Author: {users[review.user_id].username}</p>
                     </NavLink>
-                    {!review.seller_commented &&
+                    {/* {!review.seller_commented &&
                       currUser &&
                       currUser.id == user.id && (
                         <button style={{ width: "100%" }} disabled>
                           Respond
                         </button>
-                      )}
+                      )} */}
                   </div>
                 </div>
               ))}
