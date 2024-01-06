@@ -13,8 +13,6 @@ import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
 const ProductPage = ({ prods, word }) => {
-  console.log("🚀 ~ file: index.jsx:16 ~ wprd:", word);
-  console.log("🚀 ~ file: index.jsx:16 ~ prods:", prods);
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
