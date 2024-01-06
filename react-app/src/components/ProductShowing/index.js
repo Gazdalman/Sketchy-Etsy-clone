@@ -8,11 +8,10 @@ import { getWish, addWish, removeWish } from "../../store/wishlist";
 import OpenModalButton from "../OpenModalButton";
 import ConfirmAdd from "../ConfirmAddTo";
 
-import "./ProductPage.css";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
-const ProductPage = ({ prods, word }) => {
+const ProductShowing = ({ prods, word }) => {
   console.log("🚀 ~ file: index.jsx:16 ~ wprd:", word);
   console.log("🚀 ~ file: index.jsx:16 ~ prods:", prods);
   const history = useHistory();
@@ -66,16 +65,6 @@ const ProductPage = ({ prods, word }) => {
 
   return isLoaded ? (
     <div className="products-page">
-      <div className="home-about">
-        <img src={skull} alt="graphic-img" />
-        <div className="home-about-details">
-          <h1>Welcome to Sketchy</h1>
-          <h2>where creativity meets questionable!</h2>
-        </div>
-      </div>
-      <div className="home-intro">
-        <img src={introImg} alt="sale" />
-      </div>
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
@@ -138,4 +127,4 @@ const ProductPage = ({ prods, word }) => {
   );
 };
 
-export default ProductPage;
+export default ProductShowing;

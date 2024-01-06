@@ -25,6 +25,7 @@ import EditProduct from "./components/EditComponent";
 
 /* Import thunks */
 import { getAllProducts } from "./store/product";
+import ProductShowing from "./components/ProductShowing";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <ProductPage />
+          </Route>
+          <Route exact path="/search">
+            <ProductShowing />
           </Route>
           <Route exact path="/login">
             <LoginFormPage />
