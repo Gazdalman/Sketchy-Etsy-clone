@@ -15,7 +15,7 @@ const handleClick = (e) => {
 
 function Navigation({ isLoaded }) {
   const productArr = Object.values(useSelector((state) => state.products));
-  console.log("🚀 ~ file: index.js:14 ~ Navigation ~ productArr:", productArr);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -25,12 +25,15 @@ function Navigation({ isLoaded }) {
     "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:",
     filteredData
   );
+
   const [search, setSearch] = useState("");
-  console.log("🚀 ~ file: index.js:29 ~ Navigation ~ search:", search);
+  console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
+
   // const [isLoaded, setIsLoaded] = useState(false);
   const [render, setRender] = useState(false);
   const filterFunc = (e) => {
     const searchWord = e.target.value;
+
     setSearch(searchWord);
     const newFilter = productArr.filter((value) => {
       if (
@@ -45,33 +48,19 @@ function Navigation({ isLoaded }) {
     });
     if (searchWord === "") {
       setFilteredData(productArr);
-      // <ProductShowing prods={filteredData} word={searchWord} />;
-      // console.log(
-      //   "🚀 ~ file: index.js:47 ~ filterFunc ~ searchWord:",
-      //   searchWord
-      // );
-      // console.log(
-      //   "🚀 ~ file: index.js:47 ~ filterFunc ~ filteredData:",
-      //   filteredData
-      // );
+
       history.push("/home");
       setRender(!render);
     } else {
       setFilteredData(newFilter);
-      // <ProductShowing prods={filteredData} word={searchWord} />;
-      // console.log(
-      //   "🚀 ~ file: index.js:53 ~ filterFunc ~ searchWord:",
-      //   searchWord
-      // );
-      // console.log(
-      //   "🚀 ~ file: index.js:53 ~ filterFunc ~ filteredData:",
-      //   filteredData
-      // );
+
       changePage();
+      // return <ProductShowing prods={filteredData} words={search} />;
+
       setRender(!render);
       // return <ProductShowing prods={filteredData} />;
     }
-    <ProductShowing prods={filteredData} />;
+    return <ProductShowing prods={filteredData} words={search} />;
   };
   const changePage = () => {
     <ProductShowing prods={filteredData} />;
@@ -103,7 +92,7 @@ function Navigation({ isLoaded }) {
       {/* <div onClick={(e) => handleClick(e)}>
         </div> */}
       {/* </div> */}
-      <div
+      {/* <div
         style={{
           width: "100%",
           display: "flex",
@@ -130,10 +119,12 @@ function Navigation({ isLoaded }) {
           placeholder={"Search Our Products..."}
           className="form-input"
           value={search}
-          onChange={filterFunc}
+          onChange={(e) => {
+            filterFunc(e);
+          }}
           // onClick={changePage}
         />
-      </div>
+      </div> */}
 
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
@@ -156,6 +147,7 @@ function Navigation({ isLoaded }) {
             </li>
           )}
       </div>
+      {/* {search && <ProductShowing prods={filteredData} words={search} />} */}
     </div>
   );
 }
