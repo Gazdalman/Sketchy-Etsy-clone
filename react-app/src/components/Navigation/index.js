@@ -6,6 +6,7 @@ import "./Navigation.css";
 import ProductPage from "../ProductPage";
 import { getAllProducts } from "../../store/product";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import ProductShowing from "../ProductShowing";
 
 const handleClick = (e) => {
   e.preventDefault();
@@ -42,11 +43,27 @@ function Navigation({ isLoaded }) {
     });
     if (searchWord === "") {
       setFilteredData(productArr);
-      <ProductPage prods={filteredData} word={searchWord} />;
+      <ProductShowing prods={filteredData} word={searchWord} />;
+      console.log(
+        "🚀 ~ file: index.js:47 ~ filterFunc ~ searchWord:",
+        searchWord
+      );
+      console.log(
+        "🚀 ~ file: index.js:47 ~ filterFunc ~ filteredData:",
+        filteredData
+      );
       setRender(!render);
     } else {
       setFilteredData(newFilter);
-      <ProductPage prods={filteredData} word={searchWord} />;
+      <ProductShowing prods={filteredData} word={searchWord} />;
+      console.log(
+        "🚀 ~ file: index.js:53 ~ filterFunc ~ searchWord:",
+        searchWord
+      );
+      console.log(
+        "🚀 ~ file: index.js:53 ~ filterFunc ~ filteredData:",
+        filteredData
+      );
       setRender(!render);
     }
   };

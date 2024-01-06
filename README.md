@@ -59,8 +59,31 @@
 
       * Set your prices to whatever your heart desires, manage your orders, and connect with your fans.
 
-  Feedback and Support
+## Getting started
 
-  We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
+1. Clone this repository (only this branch)
 
-  Thank you for being a part of the Sketchy community. Let's celebrate creativity together! 🎨
+2. Install dependencies
+
+   ```bash
+   pipenv install -r requirements.txt
+
+   ```
+
+3. Enter the shell --
+
+`pipenv shell`
+
+4. Start the backend Environment
+
+`flask run`
+
+5. Start the frontend environment
+
+`npm start`
+
+Feedback and Support
+
+We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
+
+Thank you for being a part of the Sketchy community. Let's celebrate creativity together! 🎨
