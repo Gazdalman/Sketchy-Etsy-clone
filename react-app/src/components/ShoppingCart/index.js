@@ -13,34 +13,26 @@ export default function Cart() {
 
   const user = useSelector((state) => state.session.user);
   // const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [payment, setPayment] = useState("option1");
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  
 
-  useEffect(
-    () => {
-      if (!user) {
-        return history.push("/login");
-      }
+  useEffect(() => {
+    if (!user) {
+      return history.push("/login");
+    }
 
-      // dispatch(getCart()).then(() => {
-      //   setIsLoaded(true);
-      // });
-      // let localCart = null;
-
-      const localCart = localStorage.getItem(`${user.id}Cart`);
-      console.log(localCart);
-      const parsedCart = JSON.parse(localCart);
-      console.log(parsedCart);
-      if (localCart) {
-        setCart([...Object.values(parsedCart)]);
-      }
-      setIsLoaded(true);
-    },
-    [
-      /* dispatch */
-    ]
-  );
+    const localCart = localStorage.getItem(`${user.id}Cart`);
+    // console.log(localCart);
+    const parsedCart = JSON.parse(localCart);
+    // console.log(parsedCart);
+    if (localCart) {
+      setCart([...Object.values(parsedCart)]);
+    }
+    setIsLoaded(true);
+  }, []);
 
   const changeQuant = (e, type, itemId) => {
     e.preventDefault();
@@ -72,23 +64,22 @@ export default function Cart() {
 
     setCart([...Object.values(updatedCart)]);
   };
-  // const decQuant = async (item) => {
-  //   // const message = "Functionality comming soon...";
-  //   // alert(message);
-  //   const change = "dec";
-  //   const itemId = item.id;
-  //   if (Number(item.quantity) === 1) {
-  //     await dispatch(removeItem(itemId));
-  //   } else {
-  //     await dispatch(updateQuantity(itemId, change));
-  //   }
-  // };
-  // const incQuant = async (itemId) => {
-  //   // const message = "Functionality comming soon...";
-  //   // alert(message);
-  //   const change = "inc";
-  //   await dispatch(updateQuantity(itemId, change));
-  // };
+
+  const removeFromCart = (e, itemId) => {
+    e.preventDefault();
+
+    const storedCart = localStorage.getItem(`${user.id}Cart`);
+
+    const currCart = JSON.parse(storedCart);
+    let updatedCart = {};
+
+    delete currCart[itemId];
+    updatedCart = { ...currCart };
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
+
+    setCart([...Object.values(updatedCart)]);
+  };
 
   const onOptionChange = (e) => {
     setPayment(e.target.value);
@@ -100,38 +91,55 @@ export default function Cart() {
         {isLoaded &&
           cart.map((item) => (
             <div key={item.id} className="cart-card">
-              {console.log(cart)}
+              {/* {console.log(cart)} */}
               <img
                 src={item.preview}
-                style={{"width": "20px"}}
                 alt="item preview"
                 className="productImageCart"
               />
-              <h3>{item.name}</h3>
-              <p>{item.price}</p>
-              <p>{item.description}</p>
-              <p>
-                {item.quantity}
-                <button className="quantity-btn" onClick={(e) => changeQuant(e, "dec", item.id)}>
-                  {" "}
-                  -{" "}
-                </button>
-                <button className="quantity-btn" onClick={(e) => changeQuant(e, "inc", item.id)}>
-                  {" "}
-                  +{" "}
-                </button>
-              </p>
+              <div className="cartProd_nameNpricediv">
+                <h3>{item.name}</h3>
+                <p>${item.price}</p>
+              </div>
+
+              <div className="cartProd_description">{item.description}</div>
+              <div className="cartProd_quantityChangeContainer">
+                <p>{item.quantity}</p>
+                <div className="cartProd_quantityButtonsContainer">
+                  <button
+                    className="quantity-btn"
+                    onClick={(e) => changeQuant(e, "dec", item.id)}
+                  >
+                    {" "}
+                    -{" "}
+                  </button>
+                  <button
+                    className="quantity-btn"
+                    onClick={(e) => changeQuant(e, "inc", item.id)}
+                  >
+                    {" "}
+                    +{" "}
+                  </button>
+                </div>
+              </div>
               <>
-                <OpenModalButton
+                {/* <OpenModalButton
                   modalClasses={["delete-button-container"]}
                   buttonText="Remove from Cart"
                   modalComponent={<DeleteItem product={item} />}
-                />
+                /> */}
+                <button
+                  className="delete-button-container"
+                  id="removeFromCart"
+                  onClick={(e) => removeFromCart(e, item.id)}
+                >
+                  Remove from Cart
+                </button>
               </>
             </div>
           ))}
       </div>
-      {cart.length ? (
+      {cart.length && (
         <div className="payment">
           <h2>How will you pay?</h2>
           <div className="radio-inner">
@@ -144,7 +152,9 @@ export default function Cart() {
                 checked={payment === "option1"}
                 onChange={onOptionChange}
               />
-              <label for="op1"><i class="fa-regular fa-credit-card"></i></label>
+              <label for="op1">
+                <i class="fa-regular fa-credit-card"></i>
+              </label>
             </div>
             <div className="radio-input-payment">
               <input
@@ -155,7 +165,9 @@ export default function Cart() {
                 checked={payment === "option2"}
                 onChange={onOptionChange}
               />
-              <label for="op2"><i class="fa-solid fa-pizza-slice"></i></label>
+              <label for="op2">
+                <i class="fa-solid fa-pizza-slice"></i>
+              </label>
             </div>
 
             <div className="radio-input-payment">
@@ -172,19 +184,28 @@ export default function Cart() {
               </label>
             </div>
           </div>
-            <div className="cart-btns-container">
-              <NavLink to="/home">
-                <button className="payment-btn">Continue Shopping</button>
-              </NavLink>
-              <NavLink to="/checkout">
-                <button className="payment-btn">Checkout</button>
-              </NavLink>
-            </div>
+          <div className="cart-btns-container">
+            <NavLink to="/home">
+              <button className="payment-btn">Continue Shopping</button>
+            </NavLink>
+            <NavLink to="/checkout">
+              <button className="payment-btn">Checkout</button>
+            </NavLink>
+          </div>
         </div>
-
-      ) : (
-        <h2>Your cart is empty</h2>
-      )
-      }
-    </div>) : null
+      )}
+    </div>
+  ) : (
+    <div>
+      <h1> Nothing in your cart </h1>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          history.push("/home");
+        }}
+      >
+        Shop Now!
+      </button>
+    </div>
+  );
 }

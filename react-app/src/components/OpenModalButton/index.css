@@ -1,4 +1,4 @@
-.delete-button-container {
+.modal-delete-button-container {
   font-size: 18px;
   width: 70%;
   color: #ffffff;
@@ -10,11 +10,11 @@
   padding: 15px;
   margin-left: 13%;
 }
-.delete-button-container:hover {
+.modal-delete-button-container:hover {
   background-color: #49867f;
   border: 5px solid #322e3f;
 }
-.edit-button-container {
+.add-edit-button-container {
   font-size: 18px;
   width: 70%;
   color: #ffffff;
@@ -26,11 +26,25 @@
   padding: 15px;
   margin-left: 13%;
 }
-.edit-button-container:hover {
+.add-edit-button-container:hover {
   background-color: #ab434a;
   border: 5px solid #322e3f;
 }
 .add-edit-button-container {
+  font-size: 18px;
+  width: 70%;
+  color: #ffffff;
+  border: 5px solid #49867f;
+  border-radius: 12px;
+  background-color: #49867f;
+  cursor: pointer;
+  position: relative;
+  padding: 15px;
+  margin-left: 13%;
+}
+.add-edit-button-container:hover {
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
   font-size: 18px;
   width: 70%;
   color: #ffffff;

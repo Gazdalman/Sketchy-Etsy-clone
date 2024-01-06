@@ -26,6 +26,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
   max-width: 400px;
 }
@@ -46,6 +48,9 @@
   max-width: 150px;
   width: 100px;
   height: 50px;
+  background-color: #b26c71;
+  color: #fff;
+  font-weight: bold;
 }
 .deleteProductButton {
   background-color: #ab434a;
@@ -53,9 +58,11 @@
 }
 .delAcountButton:hover,
 .deleteProductButton:hover {
-  border: 5px solid rgb(58, 102, 115);
+  border: 5px solid #ab434a;
+  background-color: #b26c71;
 }
 
+/* Tab Containers */
 .userOrdersContainer {
   display: flex;
   flex-direction: column;
@@ -67,10 +74,11 @@
 .userWishlistContainer {
   display: flex;
   justify-items: flex-start;
+  justify-items: flex-start;
   flex-wrap: wrap;
   gap: 15px;
-  /* overflow-y: scroll hidden; */
 }
+
 .indvUserProducts,
 .indvUserReviews,
 .indvUserOrderItems,
@@ -82,7 +90,11 @@
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin: 20px;
+  margin: 20px;
   transition: all 0.2s ease-in-out;
+}
+.indvUserOrderItems {
+  padding: 50px;
 }
 .indvUserOrderItems {
   padding: 50px;
@@ -151,18 +163,22 @@
 .indvOrdersInAll {
   border-bottom: 1px solid rgb(58, 102, 115);
 }
+#scroll {
+  overflow-x: scroll;
+}
 .allOrdersItemsContainer {
   display: inline-flex;
   justify-content: flex-start;
   gap: 15px;
   color: hwb(173 29% 47%);
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
-.ordersAddToCartBtn {
+.ordersAddToCartBtn > button {
   background-color: hwb(173 29% 47%);
   border: 5px solid hwb(173 29% 47%);
 }
+
 .ordersReturnItemBtn {
   background-color: rgb(58, 102, 115);
   border: 5px solid rgb(58, 102, 115);
@@ -172,11 +188,11 @@
   border: 5px solid #e2dcc2;
   color: black;
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
 .ordersWriteReview,
 .ordersReturnItemBtn,
-.ordersAddToCartBtn {
+.ordersAddToCartBtn > button {
   border-radius: 12px;
   font-size: 18px;
   padding: 5px;
@@ -184,17 +200,17 @@
   margin-bottom: 5px;
   width: 100%;
 }
-.addItemToCartBtn,
+.addItemToCartBtn > button,
 .editUserProductBtn,
 .ordersReturnItemBtn,
-.ordersAddToCartBtn {
+.ordersAddToCartBtn > button {
   color: white;
 }
-.addItemToCartBtn:hover,
+.addItemToCartBtn > button:hover,
 .editUserProductBtn:hover,
 .ordersWriteReview:hover,
 .ordersReturnItemBtn:hover,
-.ordersAddToCartBtn:hover {
+.ordersAddToCartBtn > button:hover {
   background-color: #322e3f;
 }
 .ordersWriteReview:hover {

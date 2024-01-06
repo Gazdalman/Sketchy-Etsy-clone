@@ -5,6 +5,7 @@ import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import ConfirmAdd from "../ConfirmAddTo";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function UserOrders({ user }) {
@@ -30,16 +31,16 @@ export default function UserOrders({ user }) {
     e.target.style.color = "red";
   };
 
-  const handleAddToCart = (e, product) => {
-    e.preventDefault();
-    const productId = product.id;
-    if (cart[productId]) {
-      dispatch(updateQuantity(productId, "inc"));
-    } else {
-      dispatch(addItemToCart(productId));
-    }
-    alert("Item added to your shopping cart! 😊");
-  };
+  // const handleAddToCart = (e, product) => {
+  //   e.preventDefault();
+  //   const productId = product.id;
+  //   if (cart[productId]) {
+  //     dispatch(updateQuantity(productId, "inc"));
+  //   } else {
+  //     dispatch(addItemToCart(productId));
+  //   }
+  //   alert("Item added to your shopping cart! 😊");
+  // };
 
   return isLoaded ? (
     <div className="userOrdersContainer">
@@ -54,7 +55,12 @@ export default function UserOrders({ user }) {
             <p>Order Total: {order.total}</p>
             <div className="userOrderItemsContainer">
               {order.products.map((item) => (
-                <div key={item.id} className="indvUserOrderItems">
+                <div
+                  key={item.id}
+                  className="indvUserOrderItems"
+                  id={order.products.length > 2 ? "scroll" : ""}
+                >
+                  {console.log(order.products.length)}
                   <div>
                     <NavLink to={`/products/${item.id}`}>
                       <h4>{item.name}</h4>
@@ -77,13 +83,21 @@ export default function UserOrders({ user }) {
                       >
                         Return Item
                       </button>
-                      <button
+                      {/* <button
                         className="ordersAddToCartBtn"
                         value={item.id}
                         onClick={(e) => handleAddToCart(e, item)}
                       >
                         Buy Again
-                      </button>
+                      </button> */}
+                      <div className="ordersAddToCartBtn">
+                        <OpenModalButton
+                          buttonText="Buy Again"
+                          modalComponent={
+                            <ConfirmAdd product={item} user={user} />
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

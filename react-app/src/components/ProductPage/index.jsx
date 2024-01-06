@@ -3,16 +3,22 @@ import { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllProducts } from "../../store/asdfsadfasdfasdfas";
 import { getWish, addWish, removeWish } from "../../store/wishlist";
+// import { addItemToCart, updateQuantity } from "../../store/cart";
+
+import OpenModalButton from "../OpenModalButton";
+import ConfirmAdd from "../ConfirmAddTo";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png"
 
 import "./ProductPage.css";
 
+
 const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  //const cart = useSelector((state) => state.cart);
   //const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.products);
   const userWish = useSelector((state) => state.wishlist);
@@ -27,6 +33,12 @@ const ProductPage = () => {
 
   useEffect(() => {
     dispatch(getAllProducts())
+      .then(() => {
+        // * Only gather wishlist if there is a user signed in otherwise unauthorized triggers in console
+        if (user) {
+          dispatch(getWish());
+        }
+      })
       .then(() => {
         // * Only gather wishlist if there is a user signed in otherwise unauthorized triggers in console
         if (user) {
@@ -129,8 +141,9 @@ const ProductPage = () => {
                     {"  "}
                   </span>
                 </div>
-                <span>By {product.seller}</span>
+                {/* <span>By {product.seller}</span> */}
               </div>
+              <span>By {product.seller}</span>
             </a>
 
             <div style={{ margin: 20 }} className="prod-btns-container">
@@ -149,14 +162,27 @@ const ProductPage = () => {
                     )}
                   </div>
 
-                  <button
-                    value={product.id}
-                    disabled={!product.units_available}
-                    onClick={(e) => handleClick(e, product)}
-                    className="add-to-cart-btn"
+                  <div
+                    className="wish-btn"
+                    onClick={(e) => addToWish(e, product)}
                   >
-                    Add to cart
-                  </button>
+                    {user &&
+                    userWish.products &&
+                    userWish.products[product.id] ? (
+                      <i className="fa-solid fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
+                    ) : (
+                      <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
+                    )}
+                  </div>
+
+                  <div className="add-to-cart-btn">
+                    <OpenModalButton
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
+                  </div>
                 </div>
               )}
             </div>

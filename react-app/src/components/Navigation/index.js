@@ -11,9 +11,10 @@ const handleClick = (e) => {
 };
 
 
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-  const location = useLocation()
+  const location = useLocation();
   return (
     <div className="nav-main-container">
 

@@ -15,7 +15,7 @@ function Reviews({ product }) {
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const target = Object.values(products).find((ele) => ele.id == productId);
-  const curruser = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
   const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
@@ -32,7 +32,7 @@ function Reviews({ product }) {
   function addUsers(list, users) {
     let newbie = [];
     for (let i = 0; i < list.length; i++) {
-      list[i].user = users?.find((ele) => ele.id == list[i].user_id);
+      list[i].User = users?.find((ele) => ele.id == list[i].user_id);
       list[i].commented = false;
       newbie.push(list[i]);
     }
@@ -51,12 +51,12 @@ function Reviews({ product }) {
   }
 
   let commented = false;
-  const exists = (element) => element?.user_id == curruser.id;
-  if (curruser && reviewsLength >= 1) {
+  const exists = (element) => element?.user_id == user.id;
+  if (user && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
 
-  const owns = (ele) => ele.seller_id == curruser.id;
+  const owns = (ele) => ele.seller_id == user.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
@@ -142,7 +142,7 @@ function Reviews({ product }) {
         </div>
       </div>
       <div>
-        {!commented && curruser && curruser.id != product.seller_id ? (
+        {!commented && user && user.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
@@ -152,7 +152,7 @@ function Reviews({ product }) {
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
             <div
               style={{
                 display: "flex",
@@ -191,10 +191,10 @@ function Reviews({ product }) {
                     style={{
                       fontWeight: "bold",
                       fontSize: "12px",
-                      color: "hwb(49 76% 11%)",
+                      color: "#322e3f",
                     }}
                   >
-                    {`${user.firstName}, ${user.username} commented at ${created_at}`}
+                    {`${User.firstName}, ${User.username} commented at ${created_at}`}
                   </span>
                 </div>
                 <div
@@ -245,7 +245,7 @@ function Reviews({ product }) {
                 </div>
               </div>
               <div className="review-buttons">
-                {curruser?.id == user_id ? (
+                {user?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["delete-button-container"]}
                     buttonText="Delete Review"
@@ -254,9 +254,9 @@ function Reviews({ product }) {
                     }
                   />
                 ) : null}
-                {curruser?.id == user_id ? (
+                {user?.id == user_id ? (
                   <OpenModalButton
-                    modalClasses={["edit-button-container"]}
+                    modalClasses={["add-edit-button-container"]}
                     buttonText="Edit Review"
                     modalComponent={
                       <EditReview reviewId={id} productId={productId} />

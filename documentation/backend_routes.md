@@ -1,4 +1,4 @@
-Backend Routes
+# Backend Routes
 
 # SKETCHY ETSY
 
@@ -13,6 +13,18 @@ Route that verifies users existence
 Route to log in a user
 
 ### `POST /api/auth/login`
+
+# Sign Up
+
+Route to sign up a user
+
+### `POST /api/auth/signup`
+
+# Log out
+
+Route to log out a user
+
+### `GET /api/auth/logout`
 
 # Sign Up
 

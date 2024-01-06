@@ -5,6 +5,7 @@ import { getAllOrders } from "../../store/order";
 import { addItemToCart, updateQuantity } from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../CreateReviewModal";
+import ConfirmAdd from "../ConfirmAddTo";
 
 export default function () {
   const dispatch = useDispatch();
@@ -35,22 +36,16 @@ export default function () {
     e.target.style.color = "red";
   };
 
-  const handleAddToCart = (e, product) => {
-    e.preventDefault();
-    const productId = product.id;
-    if (cart[productId]) {
-      dispatch(updateQuantity(productId, "inc"));
-    } else {
-      dispatch(addItemToCart(productId));
-    }
-  };
-
   return (
     isLoaded && (
       <div className="pastOrdersBody">
         <h1>History Order</h1>
         {Object.values(allOrders).map((order) => (
-          <div key={order.id} className="indvOrdersInAll">
+          <div
+            key={order.id}
+            className="indvOrdersInAll"
+            id={order.products.length > 2 ? "scroll" : ""}
+          >
             <h3>
               Order#:{" "}
               {Object.keys(allOrders).find((key) => allOrders[key] === order)}
@@ -79,13 +74,15 @@ export default function () {
                       >
                         Return Item
                       </button>
-                      <button
-                        className="ordersAddToCartBtn"
-                        value={item.id}
-                        onClick={(e) => handleAddToCart(e, item)}
-                      >
-                        Buy Again
-                      </button>
+
+                      <div className="ordersAddToCartBtn">
+                        <OpenModalButton
+                          buttonText="Buy Again"
+                          modalComponent={
+                            <ConfirmAdd product={item} user={user} />
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

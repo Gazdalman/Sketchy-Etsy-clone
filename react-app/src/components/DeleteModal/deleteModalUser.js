@@ -24,7 +24,7 @@ function DeleteAccount() {
   };
 
   return (
-    <div className="delete-button-container" id="deleteModel">
+    <div className="modal-delete-button-container" id="deleteModel">
       <h2 id="delModalTitle">Confirm Delete</h2>
       <p id="delModalText">Are you sure you want to delete your account?</p>
       <div id="delModalButtons">

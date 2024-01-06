@@ -21,6 +21,9 @@ export default function UserReviews({ user }) {
             if (product.seller_id == user.id) {
               revArr.push(prodRev);
             }
+            if (product.seller_id == user.id) {
+              revArr.push(prodRev);
+            }
           });
         });
         setReviews(revArr);
@@ -38,6 +41,9 @@ export default function UserReviews({ user }) {
               {reviews.map((review) => (
                 <div key={review.id} className="indvUserReviews">
                   <div>
+                    <NavLink to={`/products/${review.product_id}`}>
+                      <h4>{products[review.product_id].name}</h4>
+                    </NavLink>
                     <NavLink to={`/products/${review.product_id}`}>
                       <h4>{products[review.product_id].name}</h4>
                     </NavLink>

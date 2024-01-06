@@ -28,7 +28,7 @@
   padding: 5px;
 }
 
-.delete-button-container {
+.model-delete-button-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -38,6 +38,7 @@
 
 #delete-btn {
   width: 75%;
+  width: 75%;
   padding: 10px;
   background-color: green;
   color: white;
@@ -46,6 +47,7 @@
 }
 
 #keep-btn {
+  width: 75%;
   width: 75%;
   padding: 10px;
   background-color: black;
@@ -62,6 +64,11 @@
   text-align: center;
   gap: 10px;
   padding: 15px;
+}
+
+#deleteReviewModel:hover {
+  background-color: #ab434a;
+  border: 5px solid #ab434a;
 }
 
 #deleteReviewModel:hover {
@@ -86,6 +93,7 @@
   align-content: center;
   gap: 15px;
   width: 100%;
+  width: 100%;
 }
 
 #delete-review-btn,
@@ -95,6 +103,55 @@
   color: white;
   border-radius: 12px;
   width: 100%;
+}
+
+#delete-review-btn {
+  background-color: #49867f;
+  border: 5px solid #49867f;
+}
+#delete-review-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+}
+
+#keep-review-btn {
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+}
+#keep-review-btn:hover {
+  background-color: #e2dcc2;
+  border: 5px solid #322e3f;
+  color: #322e3f;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
+}
+#delete-btn {
+  color: #ffffff;
+  /* border: 5px solid #ab434a; */
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+  font-weight: bold;
+  font-size: 15px;
+}
+#delete-btn:hover {
+  background-color: #ab434a;
+  border: 5px solid #322e3f;
+}
+#keep-btn {
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  border: 5px solid #322e3f;
+  background-color: tan;
+}
+#keep-btn:hover {
+  color: #ffffff;
+  background-color: #322e3f;
+  border: 5px solid tan;
 }
 
 #delete-review-btn {

@@ -6,9 +6,13 @@ const DELETE_WISH = "wishlist/DELETE_WISH";
 const allWish = (wishlist) => ({
   type: ALL_WISH,
   payload: wishlist,
+  type: ALL_WISH,
+  payload: wishlist,
 });
 
 const deleteWish = (productId) => ({
+  type: DELETE_WISH,
+  payload: productId,
   type: DELETE_WISH,
   payload: productId,
 });
@@ -20,6 +24,7 @@ const deleteWish = (productId) => ({
 // });
 
 //get all wish
+
 export const getWish = () => async (dispatch) => {
   const response = await fetch("/api/wishlist/", {
     headers: {
@@ -31,6 +36,7 @@ export const getWish = () => async (dispatch) => {
     const data = await response.json();
     dispatch(allWish(data));
   }
+
 };
 
 //delete wish
@@ -39,6 +45,7 @@ export const removeWish = (productId) => async (dispatch) => {
     method: "DELETE",
   });
 
+
   if (response.ok) {
     const message = await response.json();
     if (message.error) {
@@ -46,11 +53,12 @@ export const removeWish = (productId) => async (dispatch) => {
       return;
     }
 
-        dispatch(getWish());
-        // dispatch(deleteWish(productId));
 
-        return message;
-    };
+    // dispatch(deleteWish(productId));
+    dispatch(getWish());
+    return message;
+  }
+
 };
 
 //add to wishlist

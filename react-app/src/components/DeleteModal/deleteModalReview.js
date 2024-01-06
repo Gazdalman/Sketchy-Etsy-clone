@@ -35,7 +35,7 @@ function DeleteReview({ reviewId, productId }) {
   }, [reviewsLength]);
 
   return (
-    <div className="delete-button-container" id="deleteReviewModel">
+    <div className="modal-delete-button-container" id="deleteReviewModel">
       <h2 id="delReviewModalTitle">Confirm Delete</h2>
       <p id="delReviewModalText">
         Are you sure you want to permanently DELETE this Review?

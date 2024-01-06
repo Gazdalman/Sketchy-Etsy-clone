@@ -1,6 +1,6 @@
 #product-images-container {
-  /* display: grid; */
-  /* grid-template-areas:
+  /*   display: grid;
+  grid-template-areas:
     "image2 main main"
     "image3 main main"
     "image4 main main"
@@ -25,15 +25,15 @@
 
 #change-photo-down,
 #change-photo-up {
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(255, 255, 255, 0);
   width: fit-content;
-  color: rgba(255,255,255,0);;
+  color: rgba(255, 255, 255, 0);
   font-size: 50px;
 }
 
 #change-photo-down:hover,
 #change-photo-up:hover {
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(255, 255, 255, 0);
   color: grey;
   width: fit-content;
   font-size: 50px;
@@ -74,7 +74,7 @@ img {
   width: 1000px;
   height: auto;
 }
-.add-button {
+.add-button > button {
   font-size: 18px;
   width: 25%;
   color: #ffffff;
@@ -89,8 +89,9 @@ img {
   margin-right: auto;
 }
 
-.add-button:hover {
+.add-button > button:hover {
   background-color: #e2dcc2;
+  color: #322e3f;
   border: 5px solid #322e3f;
 }
 #product-images-container {

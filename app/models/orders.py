@@ -14,6 +14,8 @@ class Order(db.Model):
 
   user_id = db.Column(db.INTEGER, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
+  total = db.Column(db.String)
+
 
   products = db.relationship(
     "Product",

@@ -46,7 +46,7 @@ const ProductFormPage = ({ type, product }) => {
       setPrice(1);
       return 1;
     } else if (price > 9999999) {
-      setPrice(9999999)
+      setPrice(9999999);
     }
     return price;
   };
@@ -55,7 +55,7 @@ const ProductFormPage = ({ type, product }) => {
       setUnitsAvailable(1);
       return 1;
     } else if (units > 9999999) {
-      setUnitsAvailable(9999999)
+      setUnitsAvailable(9999999);
     }
     return units;
   };
@@ -68,10 +68,10 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
-    else if (!description || description.length < 10) setDisabled(true)
-    else if (!prevImg && type != "edit") setDisabled(true)
-    else setDisabled(false)
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
+    else if (!description || description.length < 10) setDisabled(true);
+    else if (!prevImg && type != "edit") setDisabled(true);
+    else setDisabled(false);
   }, [name, description, prevImg]);
 
   if (!user) {
@@ -92,8 +92,8 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const imageData = new FormData()
-        imageData.append('image', img)
+        const imageData = new FormData();
+        imageData.append("image", img);
         images.push(imageData);
       }
       num += 1;
