@@ -21,10 +21,15 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
+  console.log(
+    "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:",
+    filteredData
+  );
   const [search, setSearch] = useState("");
   // const [isLoaded, setIsLoaded] = useState(false);
   const [render, setRender] = useState(false);
   const changePage = () => {
+    <ProductShowing prods={filteredData} />;
     history.push("/search");
   };
   const filterFunc = (e) => {
@@ -43,27 +48,27 @@ function Navigation({ isLoaded }) {
     });
     if (searchWord === "") {
       setFilteredData(productArr);
-      <ProductShowing prods={filteredData} word={searchWord} />;
-      console.log(
-        "🚀 ~ file: index.js:47 ~ filterFunc ~ searchWord:",
-        searchWord
-      );
-      console.log(
-        "🚀 ~ file: index.js:47 ~ filterFunc ~ filteredData:",
-        filteredData
-      );
+      // <ProductShowing prods={filteredData} word={searchWord} />;
+      // console.log(
+      //   "🚀 ~ file: index.js:47 ~ filterFunc ~ searchWord:",
+      //   searchWord
+      // );
+      // console.log(
+      //   "🚀 ~ file: index.js:47 ~ filterFunc ~ filteredData:",
+      //   filteredData
+      // );
       setRender(!render);
     } else {
       setFilteredData(newFilter);
-      <ProductShowing prods={filteredData} word={searchWord} />;
-      console.log(
-        "🚀 ~ file: index.js:53 ~ filterFunc ~ searchWord:",
-        searchWord
-      );
-      console.log(
-        "🚀 ~ file: index.js:53 ~ filterFunc ~ filteredData:",
-        filteredData
-      );
+      // <ProductShowing prods={filteredData} word={searchWord} />;
+      // console.log(
+      //   "🚀 ~ file: index.js:53 ~ filterFunc ~ searchWord:",
+      //   searchWord
+      // );
+      // console.log(
+      //   "🚀 ~ file: index.js:53 ~ filterFunc ~ filteredData:",
+      //   filteredData
+      // );
       setRender(!render);
     }
   };
