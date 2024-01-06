@@ -67,8 +67,8 @@ const ProductPage = () => {
       <div className="home-about">
         <img src={skull} alt="graphic-img" />
         <div className="home-about-details">
-          <h1>Welcome to Sketchy</h1>
-          <h2>where creativity meets questionable!</h2>
+            <h1>Welcome to Sketchy</h1>
+            <h2>where creativity meets questionable!</h2>
         </div>
       </div>
       <div className="home-intro">
@@ -103,6 +103,14 @@ const ProductPage = () => {
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
 
+                  <div className="add-to-cart-btn">
+                    <OpenModalButton
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
+                  </div>
                   <div
                     className="wish-btn"
                     onClick={(e) => addToWish(e, product)}
@@ -116,14 +124,6 @@ const ProductPage = () => {
                     )}
                   </div>
 
-                  <div className="add-to-cart-btn">
-                    <OpenModalButton
-                      buttonText="Add to Cart"
-                      modalComponent={
-                        <ConfirmAdd product={product} user={user} />
-                      }
-                    />
-                  </div>
                 </div>
               )}
             </div>
