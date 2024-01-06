@@ -11,9 +11,8 @@ import ConfirmAdd from "../ConfirmAddTo";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
-const ProductShowing = ({ prods, words }) => {
-  console.log("🚀asasdad ~ file: index.js:15 ~ prods:", prods);
-  console.log("🚀 ~ file: index.js:15 ~ words:", words);
+const ProductShowing = ({ prods, word }) => {
+  console.log("🚀 ~ file: index.js:15 ~ prods:", prods);
 
   const history = useHistory();
   const dispatch = useDispatch();
