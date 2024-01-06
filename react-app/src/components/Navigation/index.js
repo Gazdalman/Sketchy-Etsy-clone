@@ -21,15 +21,10 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
-  console.log(
-    "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:",
-    filteredData
-  );
+
 
   const [search, setSearch] = useState("");
-  console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
-
-  // const [isLoaded, setIsLoaded] = useState(false);
+  
   const [render, setRender] = useState(false);
   const filterFunc = (e) => {
     const searchWord = e.target.value;
@@ -115,10 +110,42 @@ function Navigation({ isLoaded }) {
 
       </div>
 
-      <div className="search-bar">
-        <div onClick={(e) => handleClick(e)}>
-          Search <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
+      {/* <div className="search-bar">
+        Search <i class="fa-solid fa-magnifying-glass"></i>
+        <input value={search} onChange={filterFunc} /> */}
+      {/* <div onClick={(e) => handleClick(e)}>
+        </div> */}
+      {/* </div> */}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          height: "30px",
+          top: "175px",
+        }}
+      >
+        <i
+          className="fa fa-search"
+          style={{
+            position: "relative",
+            top: " 5px",
+            left: "25px",
+            fontSize: "20px",
+          }}
+        ></i>
+        <input
+          style={{
+            padding: "0 30px",
+            borderRadius: "15px",
+          }}
+          type="text"
+          placeholder={"Search Our Products..."}
+          className="form-input"
+          value={search}
+          onChange={filterFunc}
+          onClick={changePage}
+        />
       </div>
 
       <div className="nav-sub-container">
