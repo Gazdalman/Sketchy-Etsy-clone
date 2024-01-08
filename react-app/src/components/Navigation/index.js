@@ -92,39 +92,39 @@ function Navigation({ isLoaded }) {
       {/* <div onClick={(e) => handleClick(e)}>
         </div> */}
       {/* </div> */}
-      // {/* <div
-      //   style={{
-      //     width: "100%",
-      //     display: "flex",
-      //     justifyContent: "center",
-      //     height: "30px",
-      //     top: "175px",
-      //   }}
-      // >
-      //   <i
-      //     className="fa fa-search"
-      //     style={{
-      //       position: "relative",
-      //       top: " 5px",
-      //       left: "25px",
-      //       fontSize: "20px",
-      //     }}
-      //   ></i>
-      //   <input
-      //     style={{
-      //       padding: "0 30px",
-      //       borderRadius: "15px",
-      //     }}
-      //     type="text"
-      //     placeholder={"Search Our Products..."}
-      //     className="form-input"
-      //     value={search}
-      //     onChange={(e) => {
-      //       filterFunc(e);
-      //     }}
-      //     // onClick={changePage}
-      //   />
-      // </div> */}
+      {/* // <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          height: "30px",
+          top: "175px",
+        }}
+      >
+        <i
+          className="fa fa-search"
+          style={{
+            position: "relative",
+            top: " 5px",
+            left: "25px",
+            fontSize: "20px",
+          }}
+        ></i>
+        <input
+          style={{
+            padding: "0 30px",
+            borderRadius: "15px",
+          }}
+          type="text"
+          placeholder={"Search Our Products..."}
+          className="form-input"
+          value={search}
+          onChange={(e) => {
+            filterFunc(e);
+          }}
+          // onClick={changePage}
+        />
+      </div> */}
 
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
