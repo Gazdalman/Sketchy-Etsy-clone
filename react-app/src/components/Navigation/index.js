@@ -89,7 +89,7 @@ function Navigation({ isLoaded }) {
           <div onClick={(e) => handleClick(e)}></div>
         </div>
         //{" "} */}
-      <div
+      {/* <div
         style={{
           width: "100%",
           display: "flex",
@@ -120,7 +120,7 @@ function Navigation({ isLoaded }) {
             filterFunc(e);
           }}
         />
-      </div>
+      </div> */}
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
           <div style={{ fontSize: 33 }} className="nav-btn">
