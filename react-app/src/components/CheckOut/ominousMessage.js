@@ -8,7 +8,7 @@ export default function CheckOutMessage() {
     <>
     {/* <img src={logo} alt="logo" style={{width:300, height:300}}/> */}
     <div className="checkout-message">
-      <p style={{fontSize:30}} className="blue"> Hello, Don't worry! 😈 </p>
+      <p style={{fontSize:30}} className="blue"> Just Kidding! 😈 </p>
       <p className="purple">We already know where you live...</p>
       <p className="red">...and we've already got your card info</p>
       <p className="green">...No we will not be explaining how...</p>
