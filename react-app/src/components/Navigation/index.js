@@ -93,7 +93,6 @@ function Navigation({ isLoaded }) {
             </li>
           )}
       </div>
-      {/* {search && <ProductShowing prods={filteredData} words={search} />} */}
     </div>
   );
 }
