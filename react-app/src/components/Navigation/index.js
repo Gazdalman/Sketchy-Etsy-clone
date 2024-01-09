@@ -95,21 +95,12 @@ function Navigation({ isLoaded }) {
             </div>
           </NavLink>
 
-        <div className="category">
-          <div onClick={(e) => handleClick(e)}>Categories <i class="fa-solid fa-caret-down"></i></div>
-        </div>
-
+        {/* <div className="category">
+            <div onClick={(e) => handleClick(e)}>
+              Categories <i class="fa-solid fa-caret-down"></i>
+            </div>
+          </div> */}
       </div>
-        <div className="search-bar">
-          <div onClick={(e) => handleClick(e)}>Search <i class="fa-solid fa-magnifying-glass"></i></div>
-        </div>
-
-        <div className="category">
-          <div onClick={(e) => handleClick(e)}>Categories <i class="fa-solid fa-caret-down"></i></div>
-        </div>
-
-      </div>
-
       {/* <div className="search-bar">
         Search <i class="fa-solid fa-magnifying-glass"></i>
         <input value={search} onChange={filterFunc} /> */}
@@ -146,8 +137,7 @@ function Navigation({ isLoaded }) {
           onChange={filterFunc}
           onClick={changePage}
         />
-      </div> */}
-
+      </div>
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
           <div style={{ fontSize: 33 }} className="nav-btn">
