@@ -50,20 +50,18 @@ function Navigation({ isLoaded }) {
       setFilteredData(productArr);
 
       history.push("/home");
-      setRender(!render);
+      // setRender(!render);
     } else {
       setFilteredData(newFilter);
 
       changePage();
-      // return <ProductShowing prods={filteredData} words={search} />;
 
-      setRender(!render);
-      // return <ProductShowing prods={filteredData} />;
+      // setRender(!render);
     }
     return <ProductShowing prods={filteredData} words={search} />;
   };
   const changePage = () => {
-    <ProductShowing prods={filteredData} />;
+    // <ProductShowing prods={filteredData} />;
     history.push("/search");
   };
   useEffect(() => {
@@ -80,19 +78,18 @@ function Navigation({ isLoaded }) {
         </NavLink>
 
         {/* <div className="category">
-          <div onClick={(e) => handleClick(e)}>
-            Categories <i class="fa-solid fa-caret-down"></i>
-          </div>
-        </div> */}
+            <div onClick={(e) => handleClick(e)}>
+              Categories <i class="fa-solid fa-caret-down"></i>
+            </div>
+          </div> */}
       </div>
-
       {/* <div className="search-bar">
-        Search <i class="fa-solid fa-magnifying-glass"></i>
-        <input value={search} onChange={filterFunc} /> */}
-      {/* <div onClick={(e) => handleClick(e)}>
-        </div> */}
-      {/* </div> */}
-      {/* // <div
+          Search <i class="fa-solid fa-magnifying-glass"></i>
+          <input value={search} onChange={filterFunc} />
+          <div onClick={(e) => handleClick(e)}></div>
+        </div>
+        //{" "} */}
+      <div
         style={{
           width: "100%",
           display: "flex",
@@ -122,10 +119,8 @@ function Navigation({ isLoaded }) {
           onChange={(e) => {
             filterFunc(e);
           }}
-          // onClick={changePage}
         />
-      </div> */}
-
+      </div>
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
           <div style={{ fontSize: 33 }} className="nav-btn">
@@ -147,7 +142,6 @@ function Navigation({ isLoaded }) {
             </li>
           )}
       </div>
-      {/* {search && <ProductShowing prods={filteredData} words={search} />} */}
     </div>
   );
 }
