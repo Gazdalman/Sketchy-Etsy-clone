@@ -1,32 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/2cfb087e8c2d_.py
-<<<<<<<< HEAD:migrations/versions/2cfb087e8c2d_.py
-<<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-Revision ID: 6506cb7e81a2
-Revises: 
-Create Date: 2023-11-27 11:35:31.747436
-========
-Revision ID: 2cfb087e8c2d
-Revises: 
-Create Date: 2023-11-22 08:25:31.237377
->>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
-========
-Revision ID: 786fd16e16f4
-Revises: 
-Create Date: 2023-11-26 22:43:07.126195
->>>>>>>> 349ca87 (touch up):migrations/versions/786fd16e16f4_.py
-========
-<<<<<<< HEAD:migrations/versions/ae8202cf3b14_.py
-Revision ID: ae8202cf3b14
+Revision ID: 1a8224881521
 Revises:
-Create Date: 2023-11-26 20:46:11.869049
-=======
-Revision ID: 6fc74bd6ff21
-Revises:
-Create Date: 2023-11-26 18:12:00.052254
->>>>>>> 949648e6553dfde6025fa17dea581961ae270167:migrations/versions/6fc74bd6ff21_.py
->>>>>>>> 0f90925 (actual edits):migrations/versions/ac88cba9abfc_.py
+Create Date: 2023-11-27 17:28:43.564369
 
 """
 from alembic import op
@@ -37,15 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/2cfb087e8c2d_.py
-<<<<<<<< HEAD:migrations/versions/6506cb7e81a2_.py
-revision = '6506cb7e81a2'
-========
-revision = '2cfb087e8c2d'
->>>>>>>> a6fb8e4 (change table name):migrations/versions/2cfb087e8c2d_.py
-========
-revision = '786fd16e16f4'
->>>>>>>> 349ca87 (touch up):migrations/versions/786fd16e16f4_.py
+revision = '1a8224881521'
 down_revision = None
 branch_labels = None
 depends_on = None

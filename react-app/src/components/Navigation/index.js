@@ -22,7 +22,6 @@ function Navigation({ isLoaded }) {
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
 
-
   const [search, setSearch] = useState("");
 
   const [render, setRender] = useState(false);
@@ -65,79 +64,14 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className="nav-main-container">
-<<<<<<< HEAD
       <div className="nav-sub-container-logo">
         <NavLink className="nav-link" to="/home">
           <div style={{ fontSize: 50, cursor: "pointer" }} className="nav-btn">
             <i className="fa-solid fa-skull "></i>
           </div>
         </NavLink>
-
-        {/* <div className="category">
-            <div onClick={(e) => handleClick(e)}>
-              Categories <i class="fa-solid fa-caret-down"></i>
-            </div>
-          </div> */}
       </div>
-      {/* <div className="search-bar">
-          Search <i class="fa-solid fa-magnifying-glass"></i>
-          <input value={search} onChange={filterFunc} />
-          <div onClick={(e) => handleClick(e)}></div>
-=======
-      <div className="nav-sub-container1">
 
-      <div className="nav-sub-container-logo">
-          <NavLink className="nav-link" to="/home">
-            <div
-              style={{ fontSize: 50, cursor: "pointer" }}
-              className="nav-btn">
-              <i className="fa-solid fa-skull "></i>
-            </div>
-          </NavLink>
-
-        {/* <div className="category">
-            <div onClick={(e) => handleClick(e)}>
-              Categories <i class="fa-solid fa-caret-down"></i>
-            </div>
-          </div> */}
-      </div>
-      {/* <div className="search-bar">
-        Search <i class="fa-solid fa-magnifying-glass"></i>
-        <input value={search} onChange={filterFunc} /> */}
-      {/* <div onClick={(e) => handleClick(e)}>
-        </div> */}
-      {/* </div> */}
-      {/* <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          height: "30px",
-          top: "175px",
-        }}
-      >
-        <i
-          className="fa fa-search"
-          style={{
-            position: "relative",
-            top: " 5px",
-            left: "25px",
-            fontSize: "20px",
-          }}
-        ></i>
-        <input
-          style={{
-            padding: "0 30px",
-            borderRadius: "15px",
-          }}
-          type="text"
-          placeholder={"Search Our Products..."}
-          className="form-input"
-          value={search}
-          onChange={filterFunc}
-          onClick={changePage}
-        />
-      </div>
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
           <div style={{ fontSize: 33 }} className="nav-btn">
@@ -145,63 +79,6 @@ function Navigation({ isLoaded }) {
           </div>
         </NavLink>
 
-              <NavLink className="nav-link" to="/cart">
-                <div
-                  style={{fontSize: 33, cursor: "pointer"}}
-                  className="nav-btn">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-              </NavLink>
-
-            {(isLoaded) && (
-
-              <ProfileButton user={sessionUser}
-              disabled={location.pathname == '/login' || location.pathname == '/signup'}/>
-
-            )}
->>>>>>> 349ca87 (touch up)
-        </div>
-        //{" "} */}
-      {/* <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          height: "30px",
-          top: "175px",
-        }}
-      >
-        <i
-          className="fa fa-search"
-          style={{
-            position: "relative",
-            top: " 5px",
-            left: "25px",
-            fontSize: "20px",
-          }}
-        ></i>
-        <input
-          style={{
-            padding: "0 30px",
-            borderRadius: "15px",
-          }}
-          type="text"
-          placeholder={"Search Our Products..."}
-          className="form-input"
-          value={search}
-          onChange={(e) => {
-            filterFunc(e);
-          }}
-        />
-      </div> */}
-      <div className="nav-sub-container">
-        <NavLink className="nav-link" to="/wishlist">
-          <div style={{ fontSize: 33 }} className="nav-btn">
-            <i className="fa-solid fa-heart"></i>
-          </div>
-        </NavLink>
-
-<<<<<<< HEAD
         <NavLink className="nav-link" to="/cart">
           <div style={{ fontSize: 33, cursor: "pointer" }} className="nav-btn">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -216,8 +93,6 @@ function Navigation({ isLoaded }) {
             </li>
           )}
       </div>
-=======
->>>>>>> 349ca87 (touch up)
     </div>
   );
 }

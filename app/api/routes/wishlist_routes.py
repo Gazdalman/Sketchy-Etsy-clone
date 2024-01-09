@@ -12,6 +12,7 @@ def all_wishlist():
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
 
+
     return wishlist.to_dict()
 
 
@@ -21,7 +22,7 @@ def all_wishlist():
 def new_wishlist(id):
 
     #get product from the request
-  
+
     product = Product.query.get(id)
 
     wishlist = Wishlist.query.filter(Wishlist.user_id == current_user.get_id()).first()
