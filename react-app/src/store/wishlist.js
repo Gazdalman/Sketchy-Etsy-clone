@@ -21,11 +21,7 @@ const deleteWish = (productId) => ({
 
 //get all wish
 export const getWish = () => async (dispatch) => {
-  const response = await fetch("/api/wishlist/", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch("/api/wishlist/");
 
   if (response.ok) {
     const data = await response.json();
@@ -61,18 +57,18 @@ export const addWish = (productId) => async (dispatch) => {
     },
   });
 
-    if (response.ok) {
-        const message = response.json();
+  if (response.ok) {
+    const message = response.json();
 
-        dispatch(getWish());
-        return message
-    };
-
+    dispatch(getWish());
+    return message;
+  }
 };
 
 export default function wishlist(state = initialState, action) {
   switch (action.type) {
     case ALL_WISH:
+      console.log(action.payload);
       return action.payload;
 
     case DELETE_WISH:

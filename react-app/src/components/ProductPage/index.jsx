@@ -45,7 +45,7 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-
+    console.log(userWish);
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -57,67 +57,9 @@ const ProductPage = ({ prods, word }) => {
 
         if (e.target.className == "fa-regular fa-heart") {
           e.target.className = "fa-solid fa-heart";
-        };
-      };
-
-    }
-
-
-  };
-
-
-
-  const handleClick = (e, prodId) => {
-    e.preventDefault();
-    if (cart[prodId]) {
-      dispatch(updateQuantity(prodId, "inc"));
-    } else {
-      dispatch(addWish(productId));
-
-        if (e.target.className == "fa-regular fa-heart") {
-          e.target.className = "fa-solid fa-heart";
-        };
-      };
-
-    }
-
-  };
-
-
-
-
-
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
-    let currCart = null;
-
-    currCart = localStorage.getItem(`${user.id}Cart`);
-
-    let updateCart = {};
-    if (currCart) {
-      const cart = JSON.parse(currCart);
-
-      if (cart[product.id]) {
-        cart[product.id].quantity++;
-        updateCart = { ...cart };
-      } else {
-        product.quantity = 1;
-        updateCart = { ...cart };
-        updateCart[product.id] = product;
+        }
       }
-    } else {
-      product.quantity = 1;
-      updateCart[product.id] = product;
     }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return isLoaded ? (
@@ -137,21 +79,32 @@ const ProductPage = ({ prods, word }) => {
         {prodArr.map((product) => (
           <div key={product.id} className="products-card">
             <a key={product.id} href={`/products/${product.id}`}>
+              <div>
+                <img
+                  className="products-img"
+                  src={product.preview}
+                  alt={`Product #${product.id} - ${product.name}`}
+                />
 
-                <img className="products-img" src="https://images.unsplash.com/photo-1627798133922-270bb80af5ed?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="product"/>
-
-              <div className="products-detail">
-                <div>{product.name}</div>
-                <span id="price">{"  "}${product.price}{"  "}</span>
+                <div className="products-detail">
+                  <div>{product.name}</div>
+                  <span id="price">
+                    {"  "}${product.price}
+                    {"  "}
+                  </span>
+                </div>
+                {/* <span>By {product.seller}</span> */}
               </div>
               <span>By {product.seller}</span>
             </a>
 
             <div style={{ margin: 20 }} className="prod-btns-container">
               {user && user.id != product.seller_id && (
-                <div id="prod-page-btn-container">
+                <div className="prod-page-btn-container">
+                  {/* {  userWish.products[product.id] == undefined  &&  ( */}
+
                   <div
-                    className="add-wish-btn"
+                    className="wish-btn"
                     onClick={(e) => addToWish(e, product)}
                   >
                     {user &&
@@ -162,8 +115,6 @@ const ProductPage = ({ prods, word }) => {
                       <i className="fa-regular fa-heart"></i> //style={{ fontSize: 40, color: "#ab434a", marginRight: 5, cursor: "pointer" }}></i>
                     )}
                   </div>
-
-                  {/* )} */}
 
                   <div className="add-to-cart-btn">
                     <OpenModalButton

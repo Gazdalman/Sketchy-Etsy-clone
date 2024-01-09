@@ -32,7 +32,7 @@ const ProductShow = () => {
       history.replace("/not-found");
     }
     setImgNum(-1);
-    console.log("object");
+    // console.log("object");
   }, [dispatch, renderSwitch]);
 
   const edit = (e) => {
