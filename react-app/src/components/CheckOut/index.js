@@ -103,7 +103,12 @@ export default function CheckOut() {
           {/* <button className="checkout-btn" onClick={(e) => handleClick(e)}>Confirm</button> */}
           <div className="checkout_buttons_container">
             <form onSubmit={place_Order}>
-              <button className="checkout-btn" type="submit">
+              <button
+                className="checkout-btn"
+                type="submit"
+                title={clicked ? " 🤣 " : "Payment info required"}
+                disabled={!clicked}
+              >
                 Confirm
               </button>
             </form>

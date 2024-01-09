@@ -194,7 +194,8 @@ function Reviews({ product }) {
                       color: "#322e3f",
                     }}
                   >
-                    {`${User.firstName}, ${User.username} commented at ${created_at}`}
+                    {User &&
+                      `${User.firstName}, ${User.username} commented at ${created_at}`}
                   </span>
                 </div>
                 <div
