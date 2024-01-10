@@ -59,6 +59,7 @@
 
       * Set your prices to whatever your heart desires, manage your orders, and connect with your fans.
 
+
 ### Please keep in mind that the site is for fun and meant to look rather questionable.
 
 # Sketchy - Your Artistic Marketplace
@@ -85,5 +86,34 @@
 Feedback and Support
 
 We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
+
+
+## Getting started
+
+1. Clone this repository (only this branch)
+
+2. Install dependencies
+
+   ```bash
+   pipenv install -r requirements.txt
+
+   ```
+
+3. Enter the shell --
+
+`pipenv shell`
+
+4. Start the backend Environment
+
+`flask run`
+
+5. Start the frontend environment
+
+`npm start`
+
+Feedback and Support
+
+We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
+
 
 Thank you for being a part of the Sketchy community. Let's celebrate creativity together! 🎨

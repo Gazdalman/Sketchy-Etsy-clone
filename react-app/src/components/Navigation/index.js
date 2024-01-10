@@ -22,7 +22,14 @@ function Navigation({ isLoaded }) {
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
 
-  const [search, setSearch] = useState("");
+
+ //  const [search, setSearch] = useState("");
+
+
+ // console.log( "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:", filteredData );
+ // console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
+
+ // const [isLoaded, setIsLoaded] = useState(false);
 
   const [render, setRender] = useState(false);
   const filterFunc = (e) => {
@@ -70,7 +77,55 @@ function Navigation({ isLoaded }) {
             <i className="fa-solid fa-skull "></i>
           </div>
         </NavLink>
+
       </div>
+
+
+
+        {/* <div className="category">
+            <div onClick={(e) => handleClick(e)}>
+              Categories <i class="fa-solid fa-caret-down"></i>
+            </div>
+          </div> */}
+      </div>
+      {/* <div className="search-bar">
+          Search <i class="fa-solid fa-magnifying-glass"></i>
+          <input value={search} onChange={filterFunc} />
+          <div onClick={(e) => handleClick(e)}></div>
+        </div>
+        //{" "} */}
+      {/* <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          height: "30px",
+          top: "175px",
+        }}
+      >
+        <i
+          className="fa fa-search"
+          style={{
+            position: "relative",
+            top: " 5px",
+            left: "25px",
+            fontSize: "20px",
+          }}
+        ></i>
+        <input
+          style={{
+            padding: "0 30px",
+            borderRadius: "15px",
+          }}
+          type="text"
+          placeholder={"Search Our Products..."}
+          className="form-input"
+          value={search}
+          onChange={(e) => {
+            filterFunc(e);
+          }}
+        />
+      </div> */}
 
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
