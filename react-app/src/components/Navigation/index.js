@@ -21,15 +21,16 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
-  console.log(
-    "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:",
-    filteredData
-  );
 
-  const [search, setSearch] = useState("");
-  console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
 
-  // const [isLoaded, setIsLoaded] = useState(false);
+ //  const [search, setSearch] = useState("");
+
+
+ // console.log( "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:", filteredData );
+ // console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
+
+ // const [isLoaded, setIsLoaded] = useState(false);
+
   const [render, setRender] = useState(false);
   const filterFunc = (e) => {
     const searchWord = e.target.value;
@@ -77,6 +78,10 @@ function Navigation({ isLoaded }) {
           </div>
         </NavLink>
 
+      </div>
+
+
+
         {/* <div className="category">
             <div onClick={(e) => handleClick(e)}>
               Categories <i class="fa-solid fa-caret-down"></i>
@@ -121,6 +126,7 @@ function Navigation({ isLoaded }) {
           }}
         />
       </div> */}
+
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
           <div style={{ fontSize: 33 }} className="nav-btn">

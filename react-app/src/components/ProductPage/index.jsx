@@ -45,7 +45,7 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-
+    console.log(userWish);
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
