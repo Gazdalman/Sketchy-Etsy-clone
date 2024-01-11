@@ -15,28 +15,25 @@
   row-gap: 15px;
 }
 
-
-.delete-buttons {
+.delete-button,
+.cart-button {
   width: 40%;
+}
+.delete-button > button {
   padding: 5px;
-  margin: 2px 0px 0px;
   background-color: #322e3f;
   border-radius: 12px;
   border: 5px solid #322e3f;
   color: white;
   font-size: 18px;
-  padding: 5px;
-  margin: 0;
-  margin-bottom: 5px;
 
   &:hover {
     background-color: #ab434a;
     border: 5px solid #ab434a;
   }
-
 }
+
 .cart-button {
-  width: 26%;
   text-align: center;
   padding: 5px;
   margin: 2px 0px 0px;
@@ -54,7 +51,6 @@
     border: 5px solid #322e3f;
   }
 }
-
 
 .wishlist-container {
   display: flex;

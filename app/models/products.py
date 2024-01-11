@@ -42,11 +42,7 @@ class Product(db.Model):
 
   wishlist = db.relationship(
     "Wishlist",
-<<<<<<< HEAD
     secondary=add_prefix_for_prod("wishlist_details"),
-=======
-    secondary="wishlist_details",
->>>>>>> a6fb8e4 (change table name)
     back_populates="products"
   )
 
