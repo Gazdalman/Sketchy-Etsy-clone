@@ -46,7 +46,7 @@ export default function Profile() {
             <button className="editProfileBtn">Edit Profile</button>
           </NavLink>
           <OpenModalButton
-            modalClasses={["delete-button-container", "delAcountButton"]}
+            modalClasses={["delAcountButton"]}
             buttonText="Delete your Account"
             modalComponent={<DeleteAccount />}
           />

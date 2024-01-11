@@ -15,7 +15,7 @@ function Reviews({ product }) {
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const target = Object.values(products).find((ele) => ele.id == productId);
-  const user = useSelector((state) => state.session.user);
+  const curruser = useSelector((state) => state.session.user);
   const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
@@ -56,7 +56,7 @@ function Reviews({ product }) {
     commented = reviews?.some(exists);
   }
 
-  const owns = (ele) => ele.seller_id == user.id;
+  const owns = (ele) => ele.seller_id == curruser.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {

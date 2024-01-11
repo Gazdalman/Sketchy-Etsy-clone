@@ -25,39 +25,40 @@ function Navigation({ isLoaded }) {
   const [search, setSearch] = useState("");
 
   const [render, setRender] = useState(false);
-  const filterFunc = (e) => {
-    const searchWord = e.target.value;
+  // const filterFunc = (e) => {
+  //   const searchWord = e.target.value;
 
-    setSearch(searchWord);
-    const newFilter = productArr.filter((value) => {
-      if (
-        value.name.toLowerCase().includes(searchWord.toLowerCase())
-        // ||
-        // value.category.find(
-        //   (ele) => ele.name.toLowerCase() == searchWord.toLowerCase()
-        // )
-      ) {
-        return value;
-      }
-    });
-    if (searchWord === "") {
-      setFilteredData(productArr);
+  //   setSearch(searchWord);
+  //   const newFilter = productArr.filter((value) => {
+  //     if (
+  //       value.name.toLowerCase().includes(searchWord.toLowerCase())
+  //       // ||
+  //       // value.category.find(
+  //       //   (ele) => ele.name.toLowerCase() == searchWord.toLowerCase()
+  //       // )
+  //     ) {
+  //       return value;
+  //     }
+  //   });
+  //   if (searchWord === "") {
+  //     setFilteredData(productArr);
 
-      history.push("/home");
-      // setRender(!render);
-    } else {
-      setFilteredData(newFilter);
+  //     history.push("/home");
+  //     // setRender(!render);
+  //   } else {
+  //     setFilteredData(newFilter);
 
-      changePage();
+  //     changePage();
 
-      // setRender(!render);
-    }
-    return <ProductShowing prods={filteredData} words={search} />;
-  };
-  const changePage = () => {
-    // <ProductShowing prods={filteredData} />;
-    history.push("/search");
-  };
+  //     // setRender(!render);
+  //   }
+  //   return <ProductShowing prods={filteredData} words={search} />;
+  // };
+  // const changePage = () => {
+  //   // <ProductShowing prods={filteredData} />;
+  //   history.push("/search");
+  // };
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch, isLoaded, render]);
