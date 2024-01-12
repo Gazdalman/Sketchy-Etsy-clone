@@ -64,41 +64,6 @@ const ProductPage = ({ prods, word }) => {
 
   };
 
-
-
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
-    let currCart = null;
-
-    currCart = localStorage.getItem(`${user.id}Cart`);
-
-    let updateCart = {};
-    if (currCart) {
-      const cart = JSON.parse(currCart);
-
-      if (cart[product.id]) {
-        cart[product.id].quantity++;
-        updateCart = { ...cart };
-      } else {
-        product.quantity = 1;
-        updateCart = { ...cart };
-        updateCart[product.id] = product;
-      }
-    } else {
-      product.quantity = 1;
-      updateCart[product.id] = product;
-    }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
-  };
-
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">

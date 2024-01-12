@@ -120,6 +120,7 @@ img {
 
 .add-button:hover {
   background-color: #e2dcc2;
+  color: #322e3f;
   border: 5px solid #322e3f;
 }
 #product-images-container {

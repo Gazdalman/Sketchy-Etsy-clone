@@ -148,9 +148,8 @@ function Reviews({ product }) {
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
             <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
-              {console.log(reviews)}
               <div
                 className="review-info"
                 style={{
@@ -183,7 +182,7 @@ function Reviews({ product }) {
                       color: "#322e3f",
                     }}
                   >
-                    {`${user.firstName}, ${user.username}`}
+                    {`${User.firstName}, ${User.username}`}
                     <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
                       {" "}
                       commented at{" "}
