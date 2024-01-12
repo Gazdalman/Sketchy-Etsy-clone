@@ -16,6 +16,7 @@ export default function Cart() {
   const [payment, setPayment] = useState("option1");
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(
     () => {

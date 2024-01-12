@@ -65,6 +65,7 @@ const ProductShow = () => {
         </span>
       </div>
       <h4 id="product-owner">Sold by {product?.seller}</h4>
+      <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
         <p id="product-description">{product?.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}

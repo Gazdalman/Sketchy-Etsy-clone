@@ -76,6 +76,7 @@ export const addWish = (productId) => async (dispatch) => {
 export default function wishlist(state = initialState, action) {
   switch (action.type) {
     case ALL_WISH:
+
       return action.payload;
 
     case DELETE_WISH:

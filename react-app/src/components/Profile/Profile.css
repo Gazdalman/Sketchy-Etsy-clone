@@ -57,6 +57,7 @@
   border: 5px solid rgb(58, 102, 115);
 }
 
+/* Tab Containers */
 .userOrdersContainer {
   display: flex;
   flex-direction: column;
@@ -74,6 +75,7 @@
 .userWishlistContainer {
   width: 98%;
 }
+
 .indvUserProducts,
 .indvUserReviews,
 .indvUserOrderItems,
@@ -153,6 +155,9 @@
 }
 .indvOrdersInAll {
   border-bottom: 1px solid rgb(58, 102, 115);
+}
+#scroll {
+  overflow-x: scroll;
 }
 .allOrdersItemsContainer {
   display: inline-flex;

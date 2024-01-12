@@ -86,6 +86,7 @@ function Navigation({ isLoaded }) {
           </div>
         </NavLink>
 
+
         {isLoaded &&
           location.pathname != "/login" &&
           location.pathname != "/signup" && (
