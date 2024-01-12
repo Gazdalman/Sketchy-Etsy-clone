@@ -45,10 +45,7 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-<<<<<<< HEAD
-=======
     // console.log(userWish);
->>>>>>> 61a92ddc4fdb97aecec50cb24d08d4b7566886c1
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -60,14 +57,10 @@ const ProductPage = ({ prods, word }) => {
 
         if (e.target.className == "fa-regular fa-heart") {
           e.target.className = "fa-solid fa-heart";
-        };
-      };
-
+        }
+      }
     }
-
   };
-
-
 
   const handleClick = (e, product) => {
     e.preventDefault();
@@ -117,7 +110,7 @@ const ProductPage = ({ prods, word }) => {
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card" >
+          <div key={product.id} className="products-card">
             <a key={product.id} href={`/products/${product.id}`}>
               <div>
                 <img
