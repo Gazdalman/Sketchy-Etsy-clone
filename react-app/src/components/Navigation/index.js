@@ -22,11 +22,31 @@ function Navigation({ isLoaded }) {
   const location = useLocation();
   const [filteredData, setFilteredData] = useState(productArr);
 
-  const [search, setSearch] = useState("");
+  //  const [search, setSearch] = useState("");
+
+  // console.log( "🚀 ~ file: index.js:24 ~ Navigation ~ filteredData:", filteredData );
+  // console.log("🚀 ~ file: index.js:30 ~ Navigation ~ search:", search);
+
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   const [render, setRender] = useState(false);
-  // const filterFunc = (e) => {
-  //   const searchWord = e.target.value;
+  // // const filterFunc = (e) => {
+  // //   const searchWord = e.target.value;
+
+  //   setSearch(searchWord);
+  //   const newFilter = productArr.filter((value) => {
+  //     if (
+  //       value.name.toLowerCase().includes(searchWord.toLowerCase())
+  //       // ||
+  //       // value.category.find(
+  //       //   (ele) => ele.name.toLowerCase() == searchWord.toLowerCase()
+  //       // )
+  //     ) {
+  //       return value;
+  //     }
+  //   });
+  //   if (searchWord === "") {
+  //     setFilteredData(productArr);
 
   //   setSearch(searchWord);
   //   const newFilter = productArr.filter((value) => {
@@ -85,7 +105,6 @@ function Navigation({ isLoaded }) {
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
         </NavLink>
-
 
         {isLoaded &&
           location.pathname != "/login" &&

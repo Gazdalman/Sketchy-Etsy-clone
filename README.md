@@ -59,6 +59,32 @@
 
       * Set your prices to whatever your heart desires, manage your orders, and connect with your fans.
 
+<<<<<<< HEAD
+=======
+### Please keep in mind that the site is for fun and meant to look rather questionable.
+
+# Sketchy - Your Artistic Marketplace
+
+### Welcome to Sketchy, where creativity meets questionable! This particular variation is a lively worldwide marketplace designed for artists and other show people to display their "unique" items as well as sell their "unique" goods. If you are a supporter of small independent artists and showing love to their "various" items, Sketchy is the place of legend for you.
+
+```bash
+pipenv install -r requirements.txt
+
+```
+
+3. Enter the shell --
+
+`pipenv shell`
+
+4. Start the backend Environment
+
+`flask run`
+
+5. Start the frontend environment
+
+`npm start`
+
+>>>>>>> 61a92ddc4fdb97aecec50cb24d08d4b7566886c1
 Feedback and Support
 
 We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
@@ -89,6 +115,5 @@ We value your feedback! We just don't care enough to actually read it. If you ha
 Feedback and Support
 
 We value your feedback! We just don't care enough to actually read it. If you have any questions, concerns, or suggestions, please reach out to our support team at support@sketchy.com.
-
 
 Thank you for being a part of the Sketchy community. Let's celebrate creativity together! 🎨
