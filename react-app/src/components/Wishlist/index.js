@@ -61,20 +61,20 @@ export default function Wishlist() {
                   </div>
                   <div>{product.price}</div>
                   <div className="wishlist-buttons">
-                    <div className="delete-buttons-container">
+                    <div className="delete-button">
                       <OpenModalButton
-                        modalClasses={["delete-buttons"]}
+                        // modalClasses={["delete-button"]}
                         buttonText="Delete Product"
                         modalComponent={<DeleteWish product={product} />}
                       />
                     </div>
-                    <div
+                    <button
                       className="cart-button"
                       value={product.id}
                       onClick={(e) => handleClick(e, product)}
                     >
                       Add to cart
-                    </div>
+                    </button>
                   </div>
                 </div>
               ))}

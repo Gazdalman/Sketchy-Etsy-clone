@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
-import { getCart, removeItem, updateQuantity } from "../../store/cart";
-import OpenModalButton from "../OpenModalButton";
-import DeleteItem from "../DeleteModal/deleteModalCart";
+// import { getCart, removeItem, updateQuantity } from "../../store/cart";
+// import OpenModalButton from "../OpenModalButton";
+// import DeleteItem from "../DeleteModal/deleteModalCart";
 
 import "./ShoppingCart.css";
 
@@ -17,21 +17,30 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  useEffect(
+    () => {
+      if (!user) {
+        return history.push("/login");
+      }
 
-  useEffect(() => {
-    if (!user) {
-      return history.push("/login");
-    }
+      // dispatch(getCart()).then(() => {
+      //   setIsLoaded(true);
+      // });
+      // let localCart = null;
 
-    const localCart = localStorage.getItem(`${user.id}Cart`);
-    // console.log(localCart);
-    const parsedCart = JSON.parse(localCart);
-    // console.log(parsedCart);
-    if (localCart) {
-      setCart([...Object.values(parsedCart)]);
-    }
-    setIsLoaded(true);
-  }, []);
+      const localCart = localStorage.getItem(`${user.id}Cart`);
+      console.log(localCart);
+      const parsedCart = JSON.parse(localCart);
+      console.log(parsedCart);
+      if (localCart) {
+        setCart([...Object.values(parsedCart)]);
+      }
+      setIsLoaded(true);
+    },
+    [
+      /* dispatch */
+    ]
+  );
 
   const changeQuant = (e, type, itemId) => {
     e.preventDefault();
@@ -58,22 +67,6 @@ export default function Cart() {
       delete currCart[itemId];
       updatedCart = { ...currCart };
     }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
-
-    setCart([...Object.values(updatedCart)]);
-  };
-
-  const removeFromCart = (e, itemId) => {
-    e.preventDefault();
-
-    const storedCart = localStorage.getItem(`${user.id}Cart`);
-
-    const currCart = JSON.parse(storedCart);
-    let updatedCart = {};
-
-    delete currCart[itemId];
-    updatedCart = { ...currCart };
 
     localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
 
@@ -128,9 +121,8 @@ export default function Cart() {
                   modalComponent={<DeleteItem product={item} />}
                 /> */}
                 <button
-                  className="delete-button-container"
                   id="removeFromCart"
-                  onClick={(e) => removeFromCart(e, item.id)}
+                  onClick={(e) => changeQuant(e, "remove", item.id)}
                 >
                   Remove from Cart
                 </button>
@@ -195,13 +187,14 @@ export default function Cart() {
       )}
     </div>
   ) : (
-    <div>
+    <div className="emptyCart">
       <h1> Nothing in your cart </h1>
       <button
         onClick={(e) => {
           e.preventDefault();
           history.push("/home");
         }}
+        className="empty-cart-btn"
       >
         Shop Now!
       </button>

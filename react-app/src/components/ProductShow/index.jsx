@@ -25,19 +25,52 @@ const ProductShow = () => {
   const [numReviews, setNumReviews] = useState(0);
   const [renderSwitch, setRenderSwitch] = useState(true);
 
-  console.log("images", imgLen);
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
       history.replace("/not-found");
     }
     setImgNum(-1);
-    console.log("object");
+    // console.log("object");
   }, [dispatch, renderSwitch]);
 
   const edit = (e) => {
     e.preventDefault();
     return history.push(`/products/${productId}/edit`);
+  };
+
+  const handleClick = (e, product) => {
+    e.preventDefault();
+    const message = "Item added to your shopping cart! 😊";
+    alert(message);
+    // const prodId = prod.id;
+    // if (cart[prodId]) {
+    //   dispatch(updateQuantity(prodId, "inc"));
+    // } else {
+    // dispatch(addItemToCart(prodId));
+    // }
+    let currCart = null;
+
+    currCart = localStorage.getItem(`${user.id}Cart`);
+
+    let updateCart = {};
+    if (currCart) {
+      const cart = JSON.parse(currCart);
+
+      if (cart[product.id]) {
+        cart[product.id].quantity++;
+        updateCart = { ...cart };
+      } else {
+        product.quantity = 1;
+        updateCart = { ...cart };
+        updateCart[product.id] = product;
+      }
+    } else {
+      product.quantity = 1;
+      updateCart[product.id] = product;
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return Object.keys(product).length > 0 &&
@@ -66,18 +99,16 @@ const ProductShow = () => {
         </span>
       </div>
       <h4 id="product-owner">Sold by {product?.seller}</h4>
-      <h4 id="product-owner">Sold by {product?.seller}</h4>
       <div id="product-details-lower">
         <p id="product-description">{product?.description}</p>
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {user && user.id != product.seller_id && (
-        <div className="add-button">
-          <OpenModalButton
-            buttonText="Add to Cart"
-            modalComponent={<ConfirmAdd product={product} user={user} />}
-          />
-        </div>
+        <OpenModalButton
+          modalClasses={["add-button"]}
+          buttonText="Add to Cart"
+          modalComponent={<ConfirmAdd product={product} user={user} />}
+        />
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />

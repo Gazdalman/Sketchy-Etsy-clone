@@ -26,7 +26,6 @@ export default function UserReviews({ user }) {
         setReviews(revArr);
       })
       .then(() => setIsLoaded(true));
-    console.log(products);
   }, [dispatch]);
 
   return (

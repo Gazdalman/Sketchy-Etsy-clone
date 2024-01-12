@@ -25,6 +25,7 @@ import EditProduct from "./components/EditComponent";
 
 /* Import thunks */
 import { getAllProducts } from "./store/product";
+import ProductShowing from "./components/ProductShowing";
 
 function App() {
   const dispatch = useDispatch();

@@ -38,6 +38,18 @@ Route to log out a user
 
 ### `GET /api/auth/logout`
 
+# Sign Up
+
+Route to sign up a user
+
+### `POST /api/auth/signup`
+
+# Log out
+
+Route to log out a user
+
+### `GET /api/auth/logout`
+
 # Home Page
 
 Route to get to Sketchy Etsy Home Page

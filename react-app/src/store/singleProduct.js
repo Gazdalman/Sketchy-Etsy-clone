@@ -1,14 +1,13 @@
-
-const GET_ONE = 'product/getOneProduct';
+const GET_ONE = "product/getOneProduct";
 
 const getOne = (product) => {
   return {
     type: GET_ONE,
-    product
-  }
-}
+    product,
+  };
+};
 
-export const getOneProduct = (productId) => async dispatch => {
+export const getOneProduct = (productId) => async (dispatch) => {
   const res = await fetch(`/api/products/${productId}`);
 
   if (res.ok) {
@@ -18,17 +17,17 @@ export const getOneProduct = (productId) => async dispatch => {
     return product;
   }
 
-  return { broken: 'nope' }
+  return { broken: "nope" };
 };
 
 const singleProductReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_ONE:
-      return { ...action.product }
+      return { ...action.product };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default singleProductReducer;

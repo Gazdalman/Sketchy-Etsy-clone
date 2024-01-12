@@ -46,21 +46,17 @@
   max-width: 150px;
   width: 100px;
   height: 50px;
-  background-color: #b26c71;
-  color: #fff;
   font-weight: bold;
 }
+.delAcountButton:hover,
 .deleteProductButton {
   background-color: #ab434a;
   color: #fff;
 }
-.delAcountButton:hover,
 .deleteProductButton:hover {
-  border: 5px solid #ab434a;
-  background-color: #b26c71;
+  border: 5px solid rgb(58, 102, 115);
 }
 
-/* Tab Containers */
 .userOrdersContainer {
   display: flex;
   flex-direction: column;
@@ -75,7 +71,9 @@
   flex-wrap: wrap;
   gap: 15px;
 }
-
+.userWishlistContainer {
+  width: 98%;
+}
 .indvUserProducts,
 .indvUserReviews,
 .indvUserOrderItems,
@@ -156,9 +154,6 @@
 .indvOrdersInAll {
   border-bottom: 1px solid rgb(58, 102, 115);
 }
-#scroll {
-  overflow-x: scroll;
-}
 .allOrdersItemsContainer {
   display: inline-flex;
   justify-content: flex-start;
@@ -171,7 +166,6 @@
   background-color: hwb(173 29% 47%);
   border: 5px solid hwb(173 29% 47%);
 }
-
 .ordersReturnItemBtn {
   background-color: rgb(58, 102, 115);
   border: 5px solid rgb(58, 102, 115);
