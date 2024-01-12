@@ -56,25 +56,25 @@ export default function Wishlist() {
                     <img
                       src={pic}
                       alt="stock pic"
-                      style={{ width: "90%", height: "auto" }}
+                      style={{ width: "80%", height: "auto" }}
                     />
                   </div>
                   <div>{product.price}</div>
                   <div className="wishlist-buttons">
-                    <div className="delete-buttons-container">
+                    <div className="delete-button">
                       <OpenModalButton
-                        modalClasses={["delete-buttons"]}
+                        // modalClasses={["delete-button"]}
                         buttonText="Delete Product"
                         modalComponent={<DeleteWish product={product} />}
                       />
                     </div>
-                    <div
+                    <button
                       className="cart-button"
                       value={product.id}
                       onClick={(e) => handleClick(e, product)}
                     >
                       Add to cart
-                    </div>
+                    </button>
                   </div>
                 </div>
               ))}

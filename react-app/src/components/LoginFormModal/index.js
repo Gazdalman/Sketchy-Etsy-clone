@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const [creds, setCreds] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -25,7 +25,7 @@ function LoginFormModal() {
       setErrors(data);
     } else {
       closeModal();
-      history.push("/home")
+      history.push("/home");
     }
   };
 

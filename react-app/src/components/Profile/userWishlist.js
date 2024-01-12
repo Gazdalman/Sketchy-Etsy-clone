@@ -27,11 +27,11 @@ export default function UserWishlist({ user }) {
   return (
     <>
       {isLoaded ? (
-        <div className="userWishlistContainer">
+        <>
           {wishlist &&
           wishlist != "undefined" &&
           Object.keys(wishlist).length > 0 ? (
-            <div>
+            <div className="userWishlistContainer">
               {console.log(wishlist)}
               {Object.values(wishlist.products).map((product) => (
                 <div key={product.id} className="indvUserWishItems">
@@ -91,7 +91,7 @@ export default function UserWishlist({ user }) {
               </NavLink>
             </div>
           )}
-        </div>
+        </>
       ) : (
         <h3>Loading Your Wishlist...</h3>
       )}

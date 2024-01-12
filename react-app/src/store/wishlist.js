@@ -42,10 +42,11 @@ export const removeWish = (productId) => async (dispatch) => {
       return;
     }
 
-    // dispatch(deleteWish(productId));
-    dispatch(getWish());
-    return message;
-  }
+        dispatch(getWish());
+        // dispatch(deleteWish(productId));
+
+        return message;
+    };
 };
 
 //add to wishlist
@@ -56,6 +57,13 @@ export const addWish = (productId) => async (dispatch) => {
       "Content-Type": "application/json",
     },
   });
+
+    if (response.ok) {
+        const message = response.json();
+
+        dispatch(getWish());
+        return message
+    };
 
   if (response.ok) {
     const message = response.json();
@@ -68,7 +76,7 @@ export const addWish = (productId) => async (dispatch) => {
 export default function wishlist(state = initialState, action) {
   switch (action.type) {
     case ALL_WISH:
-      console.log(action.payload);
+
       return action.payload;
 
     case DELETE_WISH:

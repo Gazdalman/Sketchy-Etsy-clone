@@ -41,7 +41,7 @@ function DeleteReview({ reviewId, productId }) {
         Are you sure you want to permanently DELETE this Review?
       </p>
       <div id="delReviewModalButtons">
-        <button id="deletea-review-btn" onClick={deleteReview}>
+        <button id="delete-review-btn" onClick={deleteReview}>
           Yes (Delete Review)
         </button>
         <button id="keep-review-btn" onClick={closeModal}>

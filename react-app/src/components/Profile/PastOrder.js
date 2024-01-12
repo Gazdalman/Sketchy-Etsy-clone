@@ -12,7 +12,7 @@ export default function () {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const allOrders = useSelector((state) => state.orders);
-  const cart = useSelector((state) => state.cart);
+  // const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // console.log("order state", allOrders);
@@ -39,7 +39,7 @@ export default function () {
   return (
     isLoaded && (
       <div className="pastOrdersBody">
-        <h1>History Order</h1>
+        <h1>Orders History</h1>
         {Object.values(allOrders).map((order) => (
           <div
             key={order.id}

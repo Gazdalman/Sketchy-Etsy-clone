@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, editProduct } from "../../store/product";
-import { useHistory } from "react-router-dom";
+import { createProduct, editProduct } from "../../store/asdfsadfasdfasdfas";
+import { useHistory, useParams } from "react-router-dom";
 import "./index.css";
-import "./ProductForm.css";
 
 const ProductFormPage = ({ type, product }) => {
   const user = useSelector((state) => state.session.user);
@@ -11,7 +10,7 @@ const ProductFormPage = ({ type, product }) => {
   const history = useHistory();
   const [name, setName] = useState(type == "edit" ? product.name : "");
   const [category, setCategory] = useState(
-    type == "edit" ? product.category : ""
+    type == "edit" ? product.categories : ""
   );
   const [price, setPrice] = useState(type == "edit" ? product.price : "");
   const [description, setDescription] = useState(
@@ -46,7 +45,7 @@ const ProductFormPage = ({ type, product }) => {
       setPrice(1);
       return 1;
     } else if (price > 9999999) {
-      setPrice(9999999);
+      setPrice(9999999)
     }
     return price;
   };
@@ -55,7 +54,7 @@ const ProductFormPage = ({ type, product }) => {
       setUnitsAvailable(1);
       return 1;
     } else if (units > 9999999) {
-      setUnitsAvailable(9999999);
+      setUnitsAvailable(9999999)
     }
     return units;
   };
@@ -68,10 +67,10 @@ const ProductFormPage = ({ type, product }) => {
   }, []);
 
   useEffect(() => {
-    if (!name || name.length < 3 || name.length > 50) setDisabled(true);
-    else if (!description || description.length < 10) setDisabled(true);
-    else if (!prevImg && type != "edit") setDisabled(true);
-    else setDisabled(false);
+    if (!name || name.length < 3 || name.length > 50) setDisabled(true)
+    else if (!description || description.length < 10) setDisabled(true)
+    else if (!prevImg && type != "edit") setDisabled(true)
+    else setDisabled(false)
   }, [name, description, prevImg]);
 
   if (!user) {
@@ -92,9 +91,9 @@ const ProductFormPage = ({ type, product }) => {
     let num = 1;
     for (const img of [img1, img2, img3, img4, img5]) {
       if (img) {
-        const image = new FormData();
-        image.append(`image`, img);
-        images.push(image);
+        const imageData = new FormData()
+        imageData.append('image', img)
+        images.push(imageData);
       }
       num += 1;
     }
@@ -279,10 +278,10 @@ const ProductFormPage = ({ type, product }) => {
             onChange={(e) => setUnitsAvailable(e.target.value)}
           />
         </span>
-        <button className="submit-create" type="submit" disabled={disabled}>
+        <button type="submit" disabled={disabled}>
           {type == "edit" ? "Edit Product" : "Create Product"}
         </button>
-        <button className="cancel-create" onClick={(e) => goBack(e)}>Cancel</button>
+        <button onClick={(e) => goBack(e)}>Cancel</button>
       </form>
     </div>
   ) : (
@@ -290,4 +289,4 @@ const ProductFormPage = ({ type, product }) => {
   );
 };
 
-export default ProductFormPage;
+export default ProductFormPage

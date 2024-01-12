@@ -15,7 +15,7 @@ function Reviews({ product }) {
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const target = Object.values(products).find((ele) => ele.id == productId);
-  const user = useSelector((state) => state.session.user);
+  const curruser = useSelector((state) => state.session.user);
   const users = Object.values(useSelector((state) => state.allUsers));
   const unorderedReviews = useSelector((state) => state.review);
   const review = orderReviews(Object.values(unorderedReviews));
@@ -51,12 +51,12 @@ function Reviews({ product }) {
   }
 
   let commented = false;
-  const exists = (element) => element?.user_id == user.id;
-  if (user && reviewsLength >= 1) {
+  const exists = (element) => element?.user_id == curruser.id;
+  if (curruser && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
 
-  const owns = (ele) => ele.seller_id == user.id;
+  const owns = (ele) => ele.seller_id == curruser.id;
 
   const closeMenu = () => setShowMenu(false);
   useEffect(() => {
@@ -138,7 +138,7 @@ function Reviews({ product }) {
         </div>
       </div>
       <div>
-        {!commented && user && user.id != product.seller_id ? (
+        {!commented && curruser && curruser.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
             modalClasses={["add-edit-button-container"]}
@@ -238,7 +238,7 @@ function Reviews({ product }) {
                 </div>
               </div>
               <div className="review-buttons">
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["delete-button-container"]}
                     buttonText="Delete Review"
@@ -247,7 +247,7 @@ function Reviews({ product }) {
                     }
                   />
                 ) : null}
-                {user?.id == user_id ? (
+                {curruser?.id == user_id ? (
                   <OpenModalButton
                     modalClasses={["add-edit-button-container"]}
                     buttonText="Edit Review"

@@ -25,7 +25,6 @@ const ProductShow = () => {
   const [numReviews, setNumReviews] = useState(0);
   const [renderSwitch, setRenderSwitch] = useState(true);
 
-  console.log("images", imgLen);
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
     if (res.broken) {
@@ -72,12 +71,11 @@ const ProductShow = () => {
         {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
       </div>
       {user && user.id != product.seller_id && (
-        <div className="add-button">
-          <OpenModalButton
-            buttonText="Add to Cart"
-            modalComponent={<ConfirmAdd product={product} user={user} />}
-          />
-        </div>
+        <OpenModalButton
+          modalClasses={["add-button"]}
+          buttonText="Add to Cart"
+          modalComponent={<ConfirmAdd product={product} user={user} />}
+        />
       )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
       <Reviews product={product} />

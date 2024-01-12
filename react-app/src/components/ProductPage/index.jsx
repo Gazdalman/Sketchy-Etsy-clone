@@ -45,7 +45,6 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-    console.log(userWish);
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -57,8 +56,9 @@ const ProductPage = ({ prods, word }) => {
 
         if (e.target.className == "fa-regular fa-heart") {
           e.target.className = "fa-solid fa-heart";
-        }
-      }
+        };
+      };
+
     }
   };
 
@@ -77,7 +77,7 @@ const ProductPage = ({ prods, word }) => {
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
-          <div key={product.id} className="products-card">
+          <div key={product.id} className="products-card" >
             <a key={product.id} href={`/products/${product.id}`}>
               <div>
                 <img
