@@ -45,6 +45,10 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
+<<<<<<< HEAD
+=======
+    // console.log(userWish);
+>>>>>>> 61a92ddc4fdb97aecec50cb24d08d4b7566886c1
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -60,6 +64,42 @@ const ProductPage = ({ prods, word }) => {
       };
 
     }
+
+  };
+
+
+
+  const handleClick = (e, product) => {
+    e.preventDefault();
+    const message = "Item added to your shopping cart! 😊";
+    alert(message);
+    // if (cart[prodId]) {
+    //   dispatch(updateQuantity(prodId, "inc"));
+    // } else {
+    // dispatch(addItemToCart(prodId));
+    // }
+    let currCart = null;
+
+    currCart = localStorage.getItem(`${user.id}Cart`);
+
+    let updateCart = {};
+    if (currCart) {
+      const cart = JSON.parse(currCart);
+
+      if (cart[product.id]) {
+        cart[product.id].quantity++;
+        updateCart = { ...cart };
+      } else {
+        product.quantity = 1;
+        updateCart = { ...cart };
+        updateCart[product.id] = product;
+      }
+    } else {
+      product.quantity = 1;
+      updateCart[product.id] = product;
+    }
+
+    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
   return isLoaded ? (

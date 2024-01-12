@@ -1,55 +1,56 @@
-const POPULATE_PRODUCTS = "product/populateProducts";
-const ADD_IMAGES = "product/images";
-const CHANGE_PRODUCTS = "product/changeProducts";
-const DELETE_PRODUCT = "product/deleteProduct";
+
+const POPULATE_PRODUCTS = 'product/populateProducts';
+const ADD_IMAGES = 'product/images'
+const CHANGE_PRODUCTS = 'product/changeProducts';
+const DELETE_PRODUCT = 'product/deleteProduct';
 
 const populateProducts = (products) => {
   return {
     type: POPULATE_PRODUCTS,
-    products,
-  };
-};
+    products
+  }
+}
 
 const changeProducts = (product) => {
   return {
     type: CHANGE_PRODUCTS,
-    product,
-  };
-};
+    product
+  }
+}
 
 const deleteProduct = (productId) => {
   return {
     type: DELETE_PRODUCT,
-    productId,
-  };
-};
+    productId
+  }
+}
 
-export const getAllProducts = () => async (dispatch) => {
-  const res = await fetch("/api/products/");
+export const getAllProducts = () => async dispatch => {
+  const res = await fetch('/api/products/');
 
   if (res.ok) {
     const products = await res.json();
-    dispatch(populateProducts(products));
-    return products;
+    dispatch(populateProducts(products))
+    return products
   }
-};
+}
 
-export const editProduct = (product, productId) => async (dispatch) => {
+export const editProduct = (product, productId) => async dispatch => {
   const res = await fetch(`/api/products/${productId}/edit`, {
-    method: "PUT",
-    body: product,
-  });
+    method: 'PUT',
+    body: product
+  })
   if (res.ok) {
-    const prod = await res.json();
-    return prod;
+    const prod = await res.json()
+    return prod
   }
-  return res.json();
-};
+  return res.json()
+}
 
-export const createProduct = (product, images) => async (dispatch) => {
-  const res = await fetch("/api/products/form", {
-    method: "POST",
-    body: product,
+export const createProduct = (product, images) => async dispatch => {
+  const res = await fetch('/api/products/form', {
+    method: 'POST',
+    body: product
   });
 
   if (res.ok) {
@@ -57,65 +58,65 @@ export const createProduct = (product, images) => async (dispatch) => {
     if (images.length) {
       for (const image of images) {
         await fetch(`/api/products/${product.id}/images`, {
-          method: "POST",
-          body: image,
-        });
+          method: 'POST',
+          body: image
+        })
       }
-      dispatch(changeProducts(product));
+      dispatch(changeProducts(product))
     }
-    return product.id;
+    return product.id
   }
 
-  return res.json();
-};
+  return res.json()
+}
 
-export const addImages = (productId, images) => async (dispatch) => {
-  await images.forEach((image) => {
+export const addImages = (productId, images) => async dispatch => {
+  await images.forEach(image => {
     fetch(`/api/products/${productId}/images`, {
-      method: "POST",
+      method: 'POST',
       body: {
-        ...image,
-      },
-    });
-  });
-  return null;
-};
+        ...image
+      }
+    })
+  })
+  return null
+}
 
-export const deleteProductThunk = (productId) => async (dispatch) => {
+export const deleteProductThunk = (productId) => async dispatch => {
   const res = await fetch(`/api/products/${productId}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
-  dispatch(getAllProducts());
-  return res;
-};
+  dispatch(getAllProducts())
+  return res
+}
 
-let newState;
+let newState
 // let allProducts
 const productsReducer = (state = {}, action) => {
   switch (action.type) {
     case POPULATE_PRODUCTS:
       newState = {};
-      action.products.forEach((product) => {
+      action.products.forEach(product => {
         newState[product.id] = product;
       });
       // allProducts = {...newState}
       return newState;
 
     case CHANGE_PRODUCTS:
-      newState = { ...state, [action.product.id]: action.product };
-      return newState;
+      newState = { ...state, [action.product.id]: action.product }
+      return newState
 
     case ADD_IMAGES:
-      return { ...state };
+      return { ...state }
 
     case DELETE_PRODUCT:
-      newState = { ...state };
-      delete newState[action.productId];
-      return newState;
+      newState = { ...state }
+      delete newState[action.productId]
+      return newState
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export default productsReducer;
