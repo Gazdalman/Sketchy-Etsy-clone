@@ -6,7 +6,7 @@
   list-style-type: none;
 
   width: 100%;
-  height: 350px;
+  height: 100px;
 
   /* background: url(../../assets/wave.svg); */
   background-size: cover;
@@ -14,6 +14,8 @@
 
   background-color: #fae27f;
 }
+
+
 
 .nav-sub-container1 {
   display: flex;

@@ -12,7 +12,7 @@ import "./ProductPage.css";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
-const ProductPage = ({ prods, word }) => {
+const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -45,7 +45,7 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-    // console.log(userWish);
+
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -62,46 +62,13 @@ const ProductPage = ({ prods, word }) => {
     }
   };
 
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
-    let currCart = null;
-
-    currCart = localStorage.getItem(`${user.id}Cart`);
-
-    let updateCart = {};
-    if (currCart) {
-      const cart = JSON.parse(currCart);
-
-      if (cart[product.id]) {
-        cart[product.id].quantity++;
-        updateCart = { ...cart };
-      } else {
-        product.quantity = 1;
-        updateCart = { ...cart };
-        updateCart[product.id] = product;
-      }
-    } else {
-      product.quantity = 1;
-      updateCart[product.id] = product;
-    }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
-  };
-
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
         <img src={skull} alt="graphic-img" />
         <div className="home-about-details">
-          <h1>Welcome to Sketchy</h1>
-          <h2>where creativity meets questionable!</h2>
+            <h1>Welcome to Sketchy</h1>
+            <h2>where creativity meets questionable!</h2>
         </div>
       </div>
       <div className="home-intro">
@@ -136,6 +103,14 @@ const ProductPage = ({ prods, word }) => {
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
 
+                  <div className="add-to-cart-btn">
+                    <OpenModalButton
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
+                  </div>
                   <div
                     className="wish-btn"
                     onClick={(e) => addToWish(e, product)}
@@ -149,14 +124,6 @@ const ProductPage = ({ prods, word }) => {
                     )}
                   </div>
 
-                  <div className="add-to-cart-btn">
-                    <OpenModalButton
-                      buttonText="Add to Cart"
-                      modalComponent={
-                        <ConfirmAdd product={product} user={user} />
-                      }
-                    />
-                  </div>
                 </div>
               )}
             </div>

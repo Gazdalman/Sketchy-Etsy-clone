@@ -443,3 +443,29 @@
   flex-wrap: nowrap;
   justify-content: space-evenly;
 }
+
+/**empty cart**/
+.emptyCart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+}
+
+.empty-cart-btn {
+  font-size: 20px;
+  width: 150px;
+  color: #ffffff;
+  border: 5px solid #322e3f;
+  background-color: #322e3f;
+  border-radius: 12px;
+  cursor: pointer;
+
+  position: relative;
+  padding: 13px;
+  margin-top: 5%;
+  &&:hover {
+    background-color: #49867f;
+    border: 5px solid #49867f;
+  }
+}

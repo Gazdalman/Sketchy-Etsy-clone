@@ -78,10 +78,12 @@ export default function wishlist(state = initialState, action) {
     case ALL_WISH:
       return action.payload;
 
+
     case DELETE_WISH:
       const newState = { ...state };
       delete newState[action.payload];
       return newState;
+
 
     default:
       return state;

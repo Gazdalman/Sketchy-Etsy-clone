@@ -72,23 +72,6 @@ export default function Cart() {
 
     setCart([...Object.values(updatedCart)]);
   };
-  // const decQuant = async (item) => {
-  //   // const message = "Functionality comming soon...";
-  //   // alert(message);
-  //   const change = "dec";
-  //   const itemId = item.id;
-  //   if (Number(item.quantity) === 1) {
-  //     await dispatch(removeItem(itemId));
-  //   } else {
-  //     await dispatch(updateQuantity(itemId, change));
-  //   }
-  // };
-  // const incQuant = async (itemId) => {
-  //   // const message = "Functionality comming soon...";
-  //   // alert(message);
-  //   const change = "inc";
-  //   await dispatch(updateQuantity(itemId, change));
-  // };
 
   const onOptionChange = (e) => {
     setPayment(e.target.value);
@@ -211,6 +194,7 @@ export default function Cart() {
           e.preventDefault();
           history.push("/home");
         }}
+        className="empty-cart-btn"
       >
         Shop Now!
       </button>
