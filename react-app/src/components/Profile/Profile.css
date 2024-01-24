@@ -1,0 +1,212 @@
+.profileContainer {
+  margin: 25px;
+}
+
+.profileTab {
+  cursor: pointer;
+  text-align: center;
+  background-color: rgba(74, 135, 128, 0.25);
+  border-radius: 15px;
+  padding: 10px 15px;
+}
+.profileTab:hover {
+  background-color: rgba(58, 102, 115, 0.5);
+}
+.profileTab#selected {
+  background-color: rgba(58, 102, 115, 0.75);
+}
+
+.profileTabDisplay {
+  display: flex;
+  padding-top: 15px;
+  overflow-wrap: wrap;
+}
+
+.profileButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+}
+.proNewProdBtn,
+.editProfileBtn {
+  max-width: 150px;
+  width: 100px;
+  height: 50px;
+  /* padding: 10px; */
+  margin: 10px;
+  font-weight: bold;
+}
+.editProfileBtn {
+  height: 50px;
+}
+.delAcountButton {
+  margin: 10px;
+  max-width: 150px;
+  width: 100px;
+  height: 50px;
+  font-weight: bold;
+}
+.delAcountButton:hover,
+.deleteProductButton {
+  background-color: #ab434a;
+  color: #fff;
+}
+.deleteProductButton:hover {
+  border: 5px solid rgb(58, 102, 115);
+}
+
+.userOrdersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.userReviewsContainer,
+.userProductsContainer,
+.userOrderItemsContainer,
+.userWishlistContainer {
+  display: flex;
+  justify-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.userWishlistContainer {
+  width: 98%;
+}
+.indvUserProducts,
+.indvUserReviews,
+.indvUserOrderItems,
+.indvUserWishItems {
+  padding: 25px;
+  gap: 15px;
+  border: 1px solid #322e3f;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 20px;
+  transition: all 0.2s ease-in-out;
+}
+.indvUserOrderItems {
+  padding: 50px;
+}
+.indvUserProducts {
+  width: fit-content;
+  min-width: 350px;
+}
+.indvUserReviews,
+.indvUserOrderItems,
+.indvUserWishItems {
+  min-width: 200px;
+  max-height: 250px;
+  padding-top: 15px;
+}
+.indvUserReviews {
+  overflow-y: scroll;
+}
+.indvUserProducts:hover,
+.indvUserReviews:hover,
+.indvUserOrderItems:hover,
+.indvUserWishItems:hover {
+  transform: translateY(-10px);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.userProductImages {
+  max-width: 150px;
+  padding: 5px;
+}
+.userIdvProductImage {
+  height: 300px;
+  width: 300px;
+  border-radius: 15px;
+}
+.userProductDescription,
+.userProductReview {
+  display: flex;
+  overflow-wrap: anywhere;
+  flex-wrap: wrap;
+  min-width: 150px;
+  max-width: 150px;
+}
+.orderItemPriceQuantDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.userProductPrice,
+.orderedItemPrice {
+  display: flex;
+  justify-content: flex-end;
+}
+.userProductButtons,
+.userOrderButtons,
+.userWishlistButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#editroductButton {
+  width: 100%;
+}
+
+.pastOrdersBody {
+  margin: 25px;
+}
+.indvOrdersInAll {
+  border-bottom: 1px solid rgb(58, 102, 115);
+}
+.allOrdersItemsContainer {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 15px;
+  color: hwb(173 29% 47%);
+}
+.addItemToCartBtn > button,
+.editUserProductBtn,
+.ordersAddToCartBtn > button {
+  background-color: hwb(173 29% 47%);
+  border: 5px solid hwb(173 29% 47%);
+}
+.ordersReturnItemBtn {
+  background-color: rgb(58, 102, 115);
+  border: 5px solid rgb(58, 102, 115);
+}
+.ordersWriteReview {
+  background-color: #e2dcc2;
+  border: 5px solid #e2dcc2;
+  color: black;
+}
+.addItemToCartBtn > button,
+.editUserProductBtn,
+.ordersWriteReview,
+.ordersReturnItemBtn,
+.ordersAddToCartBtn > button {
+  border-radius: 12px;
+  font-size: 18px;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.addItemToCartBtn > button,
+.editUserProductBtn,
+.ordersReturnItemBtn,
+.ordersAddToCartBtn > button {
+  color: white;
+}
+.addItemToCartBtn > button:hover,
+.editUserProductBtn:hover,
+.ordersWriteReview:hover,
+.ordersReturnItemBtn:hover,
+.ordersAddToCartBtn > button:hover {
+  background-color: #322e3f;
+}
+.ordersWriteReview:hover {
+  color: white;
+}
+
+.userProductsTabBtn {
+  height: 42px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+}

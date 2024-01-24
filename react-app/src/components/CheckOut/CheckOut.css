@@ -1,0 +1,155 @@
+.checkout-page {
+  width: 100%;
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  gap: 3%;
+  align-items: center;
+}
+
+/*form-message-container*/
+.form-message-container {
+  width: 50%;
+  margin: 10px;
+  width: 50%;
+  margin: 10px;
+}
+
+/* payment detail */
+.checkout-card {
+  font-size: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 50%;
+  height: fit-content;
+  margin-right: 15px;
+
+  border: 5px solid #322e3f;
+}
+
+/*checkout form*/
+#form-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 20px auto;
+  padding: 15px;
+}
+
+#checkout-form > * {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkout-btn-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout-btn {
+  font-size: 18px;
+  width: 40%;
+  color: #ffffff;
+  border: 5px solid #322e3f;
+  background-color: #322e3f;
+  border-radius: 12px;
+  cursor: pointer;
+
+  position: relative;
+  padding: 15px;
+
+  margin: 6%;
+}
+.checkout-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+}
+
+.cancel-btn {
+  font-size: 18px;
+  width: 40%;
+  color: #ffffff;
+  border: 5px solid #ab434a;
+  border-radius: 12px;
+  background-color: #ab434a;
+  cursor: pointer;
+
+  position: relative;
+  padding: 15px;
+}
+.cancel-btn:hover {
+  background-color: #49867f;
+  border: 5px solid #322e3f;
+}
+
+/*checkout message*/
+.checkout-message {
+  background-color: #0a0a0a;
+  font-family: monospace;
+  font-size: 15px;
+  text-align: center;
+
+  height: 200px;
+  padding: 15px;
+}
+
+.blue {
+  color: #29b6f6;
+}
+.green {
+  color: #9ccc65;
+}
+.purple {
+  color: #ba68c8;
+}
+.red {
+  color: #ef5350;
+}
+
+.checkout_buttons_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 25px;
+}
+.checkout_buttons_container > form,
+.checkout_buttons_container > a {
+  width: 50%;
+}
+
+.checkout_buttons_container > form > button,
+.cancel-btn {
+  width: 80%;
+}
+.cancel-btn {
+  margin-top: 0px;
+}
+
+.checkout_buttons_container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 25px;
+}
+.checkout_buttons_container > form,
+.checkout_buttons_container > a {
+  width: 50%;
+}
+
+.checkout_buttons_container > form > button,
+.cancel-btn {
+  width: 80%;
+}
+.cancel-btn {
+  margin-top: 0px;
+}

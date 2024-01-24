@@ -1,0 +1,13 @@
+.confirmAddToMessageContainer {
+  background-color: tan;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  border-radius: 15px;
+}
+.confirmAddToMessageContainer > button {
+  width: 80%;
+  padding: 20px;
+  font-size: 25px;
+}
