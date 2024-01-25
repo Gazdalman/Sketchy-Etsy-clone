@@ -9,6 +9,11 @@ html {
   font-family: "Muli", sans-serif;
 }
 
+#root {
+  overflow-y: scroll;
+  overflow-x: clip;
+}
+
 h1 {
   width: fit-content;
   margin-top: 0;

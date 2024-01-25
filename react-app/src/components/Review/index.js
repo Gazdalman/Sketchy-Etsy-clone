@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReview from "../DeleteModal/deleteModalReview";
 
+// import "./Review.css"
+
 function Reviews() {
   const dispatch = useDispatch();
   const { userId } = useParams();

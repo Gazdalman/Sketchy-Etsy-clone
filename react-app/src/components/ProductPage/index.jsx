@@ -65,15 +65,17 @@ const ProductPage = () => {
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
-        <img src={skull} alt="graphic-img" />
-        <div className="home-about-details">
+        <div>
+          <img src={skull} alt="graphic-img" />
+        </div>
+          <div className="home-about-details">
             <h1>Welcome to Sketchy</h1>
             <h2>where creativity meets questionable!</h2>
         </div>
       </div>
-      <div className="home-intro">
-        <img src={introImg} alt="sale" />
-      </div>
+        <div className="home-intro">
+          <img src={introImg} alt="sale" />
+        </div>
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
@@ -102,15 +104,14 @@ const ProductPage = () => {
               {user && user.id != product.seller_id && (
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
-
-                  <div className="add-to-cart-btn">
                     <OpenModalButton
+                      modalClasses={["add-to-cart-btn"]}
                       buttonText="Add to Cart"
                       modalComponent={
                         <ConfirmAdd product={product} user={user} />
                       }
                     />
-                  </div>
+
                   <div
                     className="wish-btn"
                     onClick={(e) => addToWish(e, product)}

@@ -2,7 +2,7 @@ import "./index.css";
 
 function Footer() {
   return (
-    <>
+    <div className="footer-main">
       <h4 className="footer-header">
         Take a Looker at our illustrious Creation Team
       </h4>
@@ -53,7 +53,7 @@ function Footer() {
           </a>
         </h6>
       </div>
-    </>
+    </div>
   );
 }
 
