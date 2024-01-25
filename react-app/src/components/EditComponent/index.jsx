@@ -12,8 +12,7 @@ const EditProduct = () => {
   const user = useSelector(state => state.session.user);
   const product = useSelector(state => state.requestedProduct);
 
-  console.log("product", product);
-  console.log("user", user);
+
 
   useEffect(() => {
     if (!user) {

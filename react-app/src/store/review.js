@@ -40,7 +40,7 @@ export const allYourReviews = (userId) => async (dispatch) => {
   // console.log("🚀 ~ file: review.js:36 ~ allYourReviews ~ userId:", userId);
   const response = await fetch(`/api/reviews/${userId}/reviews`);
   const reviews = await response.json();
-  console.log(reviews);
+  // console.log(reviews);
   dispatch(allReviews(reviews));
   // return reviews;
 };

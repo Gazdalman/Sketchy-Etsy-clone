@@ -13,13 +13,13 @@ function Reviews() {
   const user = useSelector((state) => state.session.user);
   const unorderedReviews = useSelector((state) => state.review);
   const reviews = orderReviews(Object.values(unorderedReviews));
-  console.log("🚀 ~ file: index.js:14 ~ Reviews ~ reviews:", reviews);
+  // console.log("🚀 ~ file: index.js:14 ~ Reviews ~ reviews:", reviews);
   const [activeRating, setActiveRating] = useState(0);
   const reviewsLength = reviews?.length;
-  console.log(
-    "🚀 ~ file: index.js:17 ~ Reviews ~ reviewsLength:",
-    reviewsLength
-  );
+  // console.log(
+  //   "🚀 ~ file: index.js:17 ~ Reviews ~ reviewsLength:",
+  //   reviewsLength
+  // );
   function orderReviews(list) {
     let newwie = [];
     for (let i = list.length - 1; i >= 0; i--) {

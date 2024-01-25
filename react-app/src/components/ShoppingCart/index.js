@@ -29,9 +29,9 @@ export default function Cart() {
       // let localCart = null;
 
       const localCart = localStorage.getItem(`${user.id}Cart`);
-      console.log(localCart);
+      // console.log(localCart);
       const parsedCart = JSON.parse(localCart);
-      console.log(parsedCart);
+      // console.log(parsedCart);
       if (localCart) {
         setCart([...Object.values(parsedCart)]);
       }

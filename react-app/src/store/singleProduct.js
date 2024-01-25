@@ -12,7 +12,7 @@ export const getOneProduct = (productId) => async (dispatch) => {
 
   if (res.ok) {
     const product = await res.json();
-    console.log(product);
+    // console.log(product);
     await dispatch(getOne(product));
     return product;
   }

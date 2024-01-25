@@ -22,11 +22,6 @@ const ProductPage = () => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // console.log("user", user);
-  // console.log("products state", products);
-  // console.log("favorite", favorite)
-  // console.log("local storage fav", storedFavorite)
-  // console.log("user wish", userWish);
 
   useEffect(() => {
     dispatch(getAllProducts())
