@@ -32,6 +32,7 @@ class OrderProduct(db.Model):
   def to_dict(self):
     return {
       "orderId": self.cart_id,
+      "orderId": self.cart_id,
       "productId": self.product_id,
       "quatity": self.quantity
     }

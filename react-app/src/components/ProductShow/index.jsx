@@ -24,6 +24,9 @@ const ProductShow = () => {
   const [imgNum, setImgNum] = useState(-1);
   const [numReviews, setNumReviews] = useState(0);
   const [renderSwitch, setRenderSwitch] = useState(true);
+  const [openReview, setOpenReview] = useState(false);
+
+
 
   useEffect(() => {
     const res = dispatch(getOneProduct(productId));
@@ -73,45 +76,76 @@ const ProductShow = () => {
     localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
   };
 
+  const handleOpenReview = () => {
+    setOpenReview(!openReview)
+  }
+
   return Object.keys(product).length > 0 &&
     +product.id === +productId &&
     +product.seller_id ? (
-    <div id="product-show">
-      <h1 id="product-name">{product.name}</h1>
-      <h3>
-        ${product.price} | Product #:{product.id} |{" "}
-        {+product.units_available > 0
-          ? `${product.units_available} available`
-          : "SOLD OUT"}
-      </h3>
-      <div id="product-images-container">
-        <img
-          id="preview-image"
-          src={product.preview}
-          alt={`Product ${product.id}`}
-        />
-        <span id="none-prev">
+    <div className="product-show">
+      {/* <div className="product-show-heading">
+        <h1 id="product-name">{product.name}</h1>
+        <h3>
+          ${product.price} | Product #:{product.id} |{" "}
+          {+product.units_available > 0
+            ? `${product.units_available} available`
+            : "SOLD OUT"}
+        </h3>
+      </div> */}
+      <div className="product-images-container">
+        <div className="preview-image-container">
+          <img
+            id="preview-image"
+            src={product.preview}
+            alt={`Product ${product.id}`}
+          />
+        </div>
+        {/* <span id="none-prev"> */}
           {/* {product.ProductImages.length > 0 && product.ProductImages.map(image => (
             image.id !== previewImage.id ? (
               <img className="product-img" id={`img-${imgNum++}`} key={image.id} src={image.url} alt={`Product ${image.id}`} />
             ) : null
           ))} */}
-        </span>
+        {/* </span> */}
+        <div className="product-show-heading">
+            <div >
+            <h1 id="product-name">{product.name}</h1>
+            <h3>
+              ${product.price} | Product #:{product.id} |{" "}
+              {+product.units_available > 0
+                ? `${product.units_available} available`
+                : "SOLD OUT"}
+            </h3>
+          </div>
+
+          <h4 id="product-owner">Sold by {product?.seller}</h4>
+          <div id="product-details-lower">
+            <p id="product-description">{product?.description}</p>
+            {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
+          </div>
+          {user && user.id != product.seller_id && (
+            <OpenModalButton
+              modalClasses={["add-button-product-show"]}
+              buttonText="Add to Cart"
+              modalComponent={<ConfirmAdd product={product} user={user} />}
+            />
+          )}
+        </div>
       </div>
-      <h4 id="product-owner">Sold by {product?.seller}</h4>
-      <div id="product-details-lower">
-        <p id="product-description">{product?.description}</p>
-        {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
-      </div>
-      {user && user.id != product.seller_id && (
-        <OpenModalButton
-          modalClasses={["add-button"]}
-          buttonText="Add to Cart"
-          modalComponent={<ConfirmAdd product={product} user={user} />}
-        />
-      )}
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}
-      <Reviews product={product} />
+
+      <div className="review-container">
+        <span className="review-menu">
+          {openReview ?
+          (<>Product's Reviews<i onClick={handleOpenReview} className="fa-solid fa-caret-down" style={{marginLeft: 20}}></i></>):
+           <>Product's Reviews<i onClick={handleOpenReview} className="fa-solid fa-caret-up" style={{marginLeft: 20}}></i></>
+          }
+        </span>
+
+          {openReview && <Reviews product={product} />}
+
+      </div>
     </div>
   ) : product && !product.seller_id ? (
     <h1>Loading...</h1>

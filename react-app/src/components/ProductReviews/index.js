@@ -9,6 +9,9 @@ import DeleteReview from "../DeleteModal/deleteModalReview";
 import EditReview from "../EditReviewModal/editModalReview";
 import { getAllUsers } from "../../store/otherUsers";
 
+import "./ProductReviews.css"
+
+
 function Reviews({ product }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -51,7 +54,7 @@ function Reviews({ product }) {
   }
 
   let commented = false;
-  const exists = (element) => element?.user_id == curruser.id;
+  const exists = (element) => element?.curruser_id == curruser.id;
   if (curruser && reviewsLength >= 1) {
     commented = reviews?.some(exists);
   }
@@ -66,25 +69,17 @@ function Reviews({ product }) {
   }, [dispatch, reviewsLength]);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "nowrap",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          width: "20%",
-        }}
+    <div className="review-main">
+      <div className="review-heading"
       >
         {reviewsLength < 1 ? (
-          <span>
+          <span >
             <h1>
               {reviewsLength} Reviews {avg?.toFixed(2)} Stars
             </h1>
           </span>
         ) : (
-          <span>
+          <span >
             <h1>{reviewsLength} Reviews</h1>
           </span>
         )}
@@ -95,7 +90,7 @@ function Reviews({ product }) {
           <h1 style={{ padding: "0 5px 0 5px" }}>{avg?.toFixed(2)}</h1>
           <label>
             <div
-              class="rating"
+              className="rating"
               style={{ display: "flex", flexDirection: "row" }}
             >
               <i
@@ -137,34 +132,34 @@ function Reviews({ product }) {
           </label>
         </div>
       </div>
-      <div>
+      <div className="review-lower">
         {!commented && curruser && curruser.id != product.seller_id ? (
           <OpenModalButton
             buttonText="Add Review"
-            modalClasses={["add-edit-button-container"]}
+            modalClasses={["add-review-btn"]}
             onButtonClick={closeMenu}
             modalComponent={<ReviewFormModal productId={productId} />}
           />
         ) : null}
 
         {isLoaded && reviewsLength >= 1 ? (
-          reviews?.map(({ id, user_id, review, rating, created_at, user }) => (
-            <div style={{ borderBottom: "1px solid grey", padding: "5px" }}>
-              {console.log(reviews)}
+          reviews?.map(({ id, user_id, review, rating, created_at, User }) => (
+            <div style={{ borderBottom: "1px solid grey", padding: "5px",   width: "100%", }}>
+              {/* {console.log(reviews)} */}
               <div
                 className="review-info"
                 style={{
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "baseline",
                   justifyContent: "space-between",
-                  width: "90%",
+
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "flex-start",
+
                   }}
                 >
                   <p
@@ -181,9 +176,13 @@ function Reviews({ product }) {
                       fontWeight: "bold",
                       fontSize: "12px",
                       color: "#322e3f",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      marginLeft: 10
                     }}
                   >
-                    {`${user.firstName}, ${user.username}`}
+                    {`${User.firstName}, ${User.username}`}
                     <span style={{ fontWeight: "bolder", fontSize: "12px" }}>
                       {" "}
                       commented at{" "}
@@ -241,7 +240,7 @@ function Reviews({ product }) {
               <div className="review-buttons">
                 {curruser?.id == user_id ? (
                   <OpenModalButton
-                    modalClasses={["delete-button-container"]}
+                    modalClasses={["delete-review-btn"]}
                     buttonText="Delete Review"
                     modalComponent={
                       <DeleteReview reviewId={id} productId={productId} />
@@ -250,7 +249,7 @@ function Reviews({ product }) {
                 ) : null}
                 {curruser?.id == user_id ? (
                   <OpenModalButton
-                    modalClasses={["add-edit-button-container"]}
+                    modalClasses={["edit-review-btn"]}
                     buttonText="Edit Review"
                     modalComponent={
                       <EditReview reviewId={id} productId={productId} />
@@ -264,7 +263,7 @@ function Reviews({ product }) {
           <h1>REVIEWS DON'T EXIST</h1>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

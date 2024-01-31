@@ -10,8 +10,6 @@ function DeleteWish({ product }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log("product to delete ====>", product);
-
   const deleteWish = async (e) => {
     e.preventDefault();
 

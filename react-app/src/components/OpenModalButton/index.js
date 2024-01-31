@@ -25,7 +25,7 @@ function OpenModalButton({
 
   return (
     <button
-      style={{ padding: "5px", width: "100%", margin: "0", marginTop: "2px" }}
+      // style={{ padding: "5px", width: "100%", margin: "0", marginTop: "2px" }}
       className={classes}
       onClick={onClick}
     >

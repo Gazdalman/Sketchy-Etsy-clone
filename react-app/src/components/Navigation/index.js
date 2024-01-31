@@ -87,7 +87,7 @@ function Navigation({ isLoaded }) {
     <div className="nav-main-container">
       <div className="nav-sub-container-logo">
         <NavLink className="nav-link" to="/home">
-          <div style={{ fontSize: 50, cursor: "pointer" }} className="nav-btn">
+          <div style={{ fontSize: 60, cursor: "pointer", marginLeft: 55}} className="nav-btn">
             <i className="fa-solid fa-skull "></i>
           </div>
         </NavLink>
@@ -95,13 +95,13 @@ function Navigation({ isLoaded }) {
 
       <div className="nav-sub-container">
         <NavLink className="nav-link" to="/wishlist">
-          <div style={{ fontSize: 33 }} className="nav-btn">
+          <div style={{ fontSize: 40 }} className="nav-btn">
             <i className="fa-solid fa-heart"></i>
           </div>
         </NavLink>
 
         <NavLink className="nav-link" to="/cart">
-          <div style={{ fontSize: 33, cursor: "pointer" }} className="nav-btn">
+          <div style={{ fontSize: 40, cursor: "pointer" }} className="nav-btn">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
         </NavLink>

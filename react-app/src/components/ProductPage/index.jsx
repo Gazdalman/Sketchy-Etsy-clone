@@ -12,7 +12,7 @@ import "./ProductPage.css";
 import skull from "../../assets/skull.png";
 import introImg from "../../assets/intro.png";
 
-const ProductPage = ({ prods, word }) => {
+const ProductPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
@@ -22,11 +22,6 @@ const ProductPage = ({ prods, word }) => {
   const prodArr = Object.values(products);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // console.log("user", user);
-  // console.log("products state", products);
-  // console.log("favorite", favorite)
-  // console.log("local storage fav", storedFavorite)
-  // console.log("user wish", userWish);
 
   useEffect(() => {
     dispatch(getAllProducts())
@@ -45,7 +40,7 @@ const ProductPage = ({ prods, word }) => {
     e.preventDefault();
 
     const productId = product.id;
-    // console.log(userWish);
+
     if (userWish && userWish.products) {
       if (userWish.products[productId]) {
         dispatch(removeWish(productId));
@@ -62,51 +57,20 @@ const ProductPage = ({ prods, word }) => {
     }
   };
 
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const message = "Item added to your shopping cart! 😊";
-    alert(message);
-    // if (cart[prodId]) {
-    //   dispatch(updateQuantity(prodId, "inc"));
-    // } else {
-    // dispatch(addItemToCart(prodId));
-    // }
-    let currCart = null;
-
-    currCart = localStorage.getItem(`${user.id}Cart`);
-
-    let updateCart = {};
-    if (currCart) {
-      const cart = JSON.parse(currCart);
-
-      if (cart[product.id]) {
-        cart[product.id].quantity++;
-        updateCart = { ...cart };
-      } else {
-        product.quantity = 1;
-        updateCart = { ...cart };
-        updateCart[product.id] = product;
-      }
-    } else {
-      product.quantity = 1;
-      updateCart[product.id] = product;
-    }
-
-    localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
-  };
-
   return isLoaded ? (
     <div className="products-page">
       <div className="home-about">
-        <img src={skull} alt="graphic-img" />
-        <div className="home-about-details">
-          <h1>Welcome to Sketchy</h1>
-          <h2>where creativity meets questionable!</h2>
+        <div>
+          <img src={skull} alt="graphic-img" />
+        </div>
+          <div className="home-about-details">
+            <h1>Welcome to Sketchy</h1>
+            <h2>where creativity meets questionable!</h2>
         </div>
       </div>
-      <div className="home-intro">
-        <img src={introImg} alt="sale" />
-      </div>
+        <div className="home-intro">
+          <img src={introImg} alt="sale" />
+        </div>
       <h2 style={{ color: "#503980" }}>Peruse Our Products</h2>
       <div className="products-main-container">
         {prodArr.map((product) => (
@@ -135,6 +99,13 @@ const ProductPage = ({ prods, word }) => {
               {user && user.id != product.seller_id && (
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
+                    <OpenModalButton
+                      modalClasses={["add-to-cart-btn"]}
+                      buttonText="Add to Cart"
+                      modalComponent={
+                        <ConfirmAdd product={product} user={user} />
+                      }
+                    />
 
                   <div
                     className="wish-btn"
@@ -149,14 +120,6 @@ const ProductPage = ({ prods, word }) => {
                     )}
                   </div>
 
-                  <div className="add-to-cart-btn">
-                    <OpenModalButton
-                      buttonText="Add to Cart"
-                      modalComponent={
-                        <ConfirmAdd product={product} user={user} />
-                      }
-                    />
-                  </div>
                 </div>
               )}
             </div>
