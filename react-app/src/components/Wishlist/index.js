@@ -5,7 +5,7 @@ import { getWish } from "../../store/wishlist";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
-import pic from "../../assets/picture.jpg";
+import ConfirmAdd from "../ConfirmAddTo";
 import "./Wishlist.css";
 
 export default function Wishlist() {
@@ -23,8 +23,8 @@ export default function Wishlist() {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log("wishlist products", allProducts);
-  console.log("all products", products);
+  // console.log("wishlist products", allProducts);
+  // console.log("all products", products);
 
 
   useEffect(() => {
@@ -37,15 +37,15 @@ export default function Wishlist() {
     history.push("/login");
   }
 
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const productId = product.id;
-    if (cart[productId]) {
-      dispatch(updateQuantity(productId, "inc"));
-    } else {
-      dispatch(addItemToCart(productId));
-    }
-  };
+  // const handleClick = (e, product) => {
+  //   e.preventDefault();
+  //   const productId = product.id;
+  //   if (cart[productId]) {
+  //     dispatch(updateQuantity(productId, "inc"));
+  //   } else {
+  //     dispatch(addItemToCart(productId));
+  //   }
+  // };
 
   return (
     isLoaded && (
@@ -74,13 +74,15 @@ export default function Wishlist() {
                         modalComponent={<DeleteWish product={product} />}
                       />
                     </div>
-                    <button
-                      className="wishlist-cart-button"
-                      value={product.id}
-                      onClick={(e) => handleClick(e, product)}
-                    >
-                      Add to cart
-                    </button>
+
+                    <div className="wishlist-cart-button">
+                        <OpenModalButton
+                          buttonText="Add to cart"
+                          modalComponent={
+                            <ConfirmAdd product={products[product.id]} user={user} />
+                          }
+                        />
+                      </div>
                   </div>
                 </div>
               ))}
