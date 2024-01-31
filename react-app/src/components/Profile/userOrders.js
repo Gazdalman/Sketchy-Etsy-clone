@@ -16,7 +16,7 @@ export default function UserOrders({ user }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // console.log("orders Arr", Object.values(orders));
-  console.log('products', products)
+  // console.log('products', products)
 
   useEffect(() => {
     dispatch(getAllOrders()).then(() => setIsLoaded(true));

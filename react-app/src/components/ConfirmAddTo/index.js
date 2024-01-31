@@ -9,7 +9,7 @@ export default function ConfirmAdd({ product, user }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
-  console.log('product buygain', product)
+  // console.log('product buygain', product)
 
   useEffect(() => {
     let currCart = null;
