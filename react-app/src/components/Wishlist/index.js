@@ -5,7 +5,7 @@ import { getWish } from "../../store/wishlist";
 import OpenModalButton from "../OpenModalButton";
 import DeleteWish from "../DeleteModal/deleteModalWishlist";
 import { addItemToCart, updateQuantity } from "../../store/cart";
-import pic from "../../assets/picture.jpg";
+import ConfirmAdd from "../ConfirmAddTo";
 import "./Wishlist.css";
 
 export default function Wishlist() {
@@ -17,10 +17,15 @@ export default function Wishlist() {
   const allProducts = wishlist.products
     ? Object.values(wishlist.products)
     : null;
+
+  const products = useSelector((state) => state.products)
+
+
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // console.log("product id", wishlist.products);
-  // console.log("all product", allProducts);
+  // console.log("wishlist products", allProducts);
+  // console.log("all products", products);
+
 
   useEffect(() => {
     if (user) {
@@ -32,15 +37,15 @@ export default function Wishlist() {
     history.push("/login");
   }
 
-  const handleClick = (e, product) => {
-    e.preventDefault();
-    const productId = product.id;
-    if (cart[productId]) {
-      dispatch(updateQuantity(productId, "inc"));
-    } else {
-      dispatch(addItemToCart(productId));
-    }
-  };
+  // const handleClick = (e, product) => {
+  //   e.preventDefault();
+  //   const productId = product.id;
+  //   if (cart[productId]) {
+  //     dispatch(updateQuantity(productId, "inc"));
+  //   } else {
+  //     dispatch(addItemToCart(productId));
+  //   }
+  // };
 
   return (
     isLoaded && (
@@ -50,31 +55,34 @@ export default function Wishlist() {
           {allProducts && allProducts.length > 0 && (
             <>
               {allProducts.map((product) => (
-                <div className="all-products" key={product.id}>
+                <div className="wish-product-cards" key={product.id}>
                   <div>{product.name}</div>
-                  <div className="img-div">
-                    <img
-                      src={pic}
-                      alt="stock pic"
-                      style={{ width: "80%", height: "auto" }}
-                    />
-                  </div>
+                  <a key={product.id} href={`/products/${product.id}`}>
+                    <div className="wish-product-img">
+                      <img
+                        src={product.img}
+                        alt="stock pic"
+                        style={{ width: "80%", height: "auto" }}
+                      />
+                    </div>
+                  </a>
                   <div>{product.price}</div>
                   <div className="wishlist-buttons">
-                    <div className="delete-button">
+                    <div className="wishlist-delete-button">
                       <OpenModalButton
-                        // modalClasses={["delete-button"]}
                         buttonText="Delete Product"
                         modalComponent={<DeleteWish product={product} />}
                       />
                     </div>
-                    <button
-                      className="cart-button"
-                      value={product.id}
-                      onClick={(e) => handleClick(e, product)}
-                    >
-                      Add to cart
-                    </button>
+
+                    <div className="wishlist-cart-button">
+                        <OpenModalButton
+                          buttonText="Add to cart"
+                          modalComponent={
+                            <ConfirmAdd product={products[product.id]} user={user} />
+                          }
+                        />
+                      </div>
                   </div>
                 </div>
               ))}
