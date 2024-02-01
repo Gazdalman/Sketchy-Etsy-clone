@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from "react-router-dom";
+import { getOneProduct } from "../../store/singleProduct";
+import { decreaseQuantity, getAllProducts, increaseQuantity } from "../../store/product";
 // import { getCart, removeItem, updateQuantity } from "../../store/cart";
 // import OpenModalButton from "../OpenModalButton";
 // import DeleteItem from "../DeleteModal/deleteModalCart";
@@ -16,6 +18,7 @@ export default function Cart() {
   const [payment, setPayment] = useState("option1");
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
 
   useEffect(
     () => {
@@ -42,7 +45,19 @@ export default function Cart() {
     ]
   );
 
-  const changeQuant = (e, type, itemId) => {
+  const checkQuantity = async (itemId) => {
+    const product = await dispatch(getOneProduct(itemId))
+
+    console.log(product);
+
+    if (product.units_available > 0) {
+      return false
+    }
+
+    return true
+  }
+
+  const changeQuant = async (e, type, itemId) => {
     e.preventDefault();
 
     const storedCart = localStorage.getItem(`${user.id}Cart`);
@@ -51,8 +66,14 @@ export default function Cart() {
 
     let updatedCart = {};
     if (type === "inc") {
+      if (await checkQuantity(itemId)) {
+        window.alert("No more units available")
+        return
+      }
       currCart[itemId].quantity++;
       updatedCart = { ...currCart };
+      await dispatch(decreaseQuantity(itemId, 1));
+      await dispatch(getAllProducts())
     }
     if (type === "dec") {
       currCart[itemId].quantity--;
@@ -62,10 +83,15 @@ export default function Cart() {
       } else {
         updatedCart = { ...currCart };
       }
+      await dispatch(increaseQuantity(itemId, 1))
+      await dispatch(getAllProducts())
     }
     if (type === "remove") {
+      const quant = currCart[itemId].quantity
       delete currCart[itemId];
       updatedCart = { ...currCart };
+      await dispatch(increaseQuantity(itemId, quant))
+      await dispatch(getAllProducts())
     }
 
     localStorage.setItem(`${user.id}Cart`, JSON.stringify(updatedCart));
@@ -105,8 +131,9 @@ export default function Cart() {
                     {" "}
                     -{" "}
                   </button>
+                  {console.log(checkQuantity(item.id))}
                   <button
-                    className="quantity-btn"
+                    className={`quantity-btn`}
                     onClick={(e) => changeQuant(e, "inc", item.id)}
                   >
                     {" "}
@@ -143,7 +170,7 @@ export default function Cart() {
                 checked={payment === "option1"}
                 onChange={onOptionChange}
               />
-              <label for="op1">
+              <label htmlFor="op1">
                 <i class="fa-regular fa-credit-card"></i>
               </label>
             </div>
@@ -156,7 +183,7 @@ export default function Cart() {
                 checked={payment === "option2"}
                 onChange={onOptionChange}
               />
-              <label for="op2">
+              <label htmlFor="op2">
                 <i class="fa-solid fa-pizza-slice"></i>
               </label>
             </div>
@@ -170,7 +197,7 @@ export default function Cart() {
                 checked={payment === "option3"}
                 onChange={onOptionChange}
               />
-              <label for="op3">
+              <label htmlFor="op3">
                 <i class="fa-solid fa-ice-cream"></i>
               </label>
             </div>

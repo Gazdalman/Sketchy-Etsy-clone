@@ -38,5 +38,5 @@ class Wishlist (db.Model):
        return {
           "id": self.id,
           "user_id": self.user_id,
-          "products": dict( [(product.id, { "id": product.id, "name": product.name, "price": product.price}) for product in self.products ])
+          "products": dict( [(product.id, { "id": product.id, "name": product.name, "price": product.price, "img": product.preview_image}) for product in self.products ])
        }

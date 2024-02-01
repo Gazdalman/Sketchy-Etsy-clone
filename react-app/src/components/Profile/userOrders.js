@@ -12,9 +12,11 @@ export default function UserOrders({ user }) {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
   const cart = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.products)
   const [isLoaded, setIsLoaded] = useState(false);
 
   // console.log("orders Arr", Object.values(orders));
+  // console.log('products', products)
 
   useEffect(() => {
     dispatch(getAllOrders()).then(() => setIsLoaded(true));
@@ -60,7 +62,7 @@ export default function UserOrders({ user }) {
                   className="indvUserOrderItems"
                   id={order.products.length > 2 ? "scroll" : ""}
                 >
-                  {console.log(order.products.length)}
+                  {/* {console.log(order.products.length)} */}
                   <div>
                     <NavLink to={`/products/${item.id}`}>
                       <h4>{item.name}</h4>
@@ -94,7 +96,7 @@ export default function UserOrders({ user }) {
                         <OpenModalButton
                           buttonText="Buy Again"
                           modalComponent={
-                            <ConfirmAdd product={item} user={user} />
+                            <ConfirmAdd product={products[item.id]} user={user} />
                           }
                         />
                       </div>

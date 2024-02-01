@@ -42,7 +42,7 @@ function SignupFormModal() {
       <h1 className="signUpTitle">Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          First Name
+          First Name*
           <input
             className="signUpInput"
             type="text"

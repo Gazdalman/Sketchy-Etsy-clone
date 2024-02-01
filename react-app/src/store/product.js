@@ -90,6 +90,38 @@ export const deleteProductThunk = (productId) => async dispatch => {
   return res
 }
 
+export const decreaseQuantity = (productId, quantity) => async dispatch => {
+  const res = await fetch(`/api/products/${productId}/decrease`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({"quantity": quantity})
+  });
+
+  const product = await res.json();
+  if (res.ok) {
+    dispatch(changeProducts(product))
+    return product
+  }
+
+  return res.json()
+}
+
+export const increaseQuantity = (productId, quantity) => async dispatch => {
+  const res = await fetch(`/api/products/${productId}/increase`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({"quantity": quantity})
+  })
+
+  const product = await res.json()
+  if (res.ok) {
+    dispatch(getAllProducts())
+    return product
+  }
+
+  console.log(product);
+}
+
 let newState
 // let allProducts
 const productsReducer = (state = {}, action) => {
