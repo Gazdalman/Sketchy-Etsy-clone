@@ -9,6 +9,7 @@ import OpenModalButton from "../OpenModalButton";
 // import DeleteProduct from "../DeleteModal/deleteModalProduct";
 import ConfirmAdd from "../ConfirmAddTo";
 import "./index.css";
+import { decreaseQuantity } from "../../store/product";
 
 const ProductShow = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const ProductShow = () => {
     return history.push(`/products/${productId}/edit`);
   };
 
-  const handleClick = (e, product) => {
+  const handleClick = async (e, product) => {
     e.preventDefault();
     const message = "Item added to your shopping cart! 😊";
     alert(message);
@@ -74,6 +75,10 @@ const ProductShow = () => {
     }
 
     localStorage.setItem(`${user.id}Cart`, JSON.stringify(updateCart));
+    const res = await dispatch(decreaseQuantity(product.id, 1));
+    if (res.ok) {
+      await dispatch(getOneProduct(product.id));
+    }
   };
 
   const handleOpenReview = () => {
@@ -124,13 +129,19 @@ const ProductShow = () => {
             <p id="product-description">{product?.description}</p>
             {/* <CallOutBox numReviews={numReviews} avgRating={revAvg.toFixed(1)} product={product} /> */}
           </div>
-          {user && user.id != product.seller_id && (
+          {user && (user.id != product.seller_id ? (
             <OpenModalButton
               modalClasses={["add-button-product-show"]}
-              buttonText="Add to Cart"
-              modalComponent={<ConfirmAdd product={product} user={user} />}
+              buttonText={product.units_available >= 1 ? "Add to Cart" : "SOLD OUT"}
+              modalComponent={<ConfirmAdd page={"ps"} product={product} user={user} />}
+              buttonDisabled={product.units_available >= 1 ? false : true}
             />
-          )}
+          ) : <button
+          className="add-button-product-show"
+          onClick={() => history.push(`/products/${product.id}/edit`)}
+          >
+            Edit Product
+          </button>)}
         </div>
       </div>
       {/* <ReviewArea setRevAvg={setRevAvg} numRevs={setNumReviews} revAvg={revAvg} product={product} /> */}

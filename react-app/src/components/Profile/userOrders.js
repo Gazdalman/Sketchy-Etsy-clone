@@ -60,7 +60,7 @@ export default function UserOrders({ user }) {
                   className="indvUserOrderItems"
                   id={order.products.length > 2 ? "scroll" : ""}
                 >
-                  {console.log(order.products.length)}
+                  {/* {console.log(order.products.length)} */}
                   <div>
                     <NavLink to={`/products/${item.id}`}>
                       <h4>{item.name}</h4>

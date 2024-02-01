@@ -60,7 +60,7 @@ function EditReview({ reviewId, productId }) {
         .then(() => history.push(`/products/${productId + 1}`))
         .then(() => history.push(`/products/${productId}`));
     } else {
-      console.log("ERRORS PRESENT");
+      return;
     }
   };
 

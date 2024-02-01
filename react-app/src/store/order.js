@@ -31,7 +31,7 @@ export const addUserOrderItems =
   ({ formData }) =>
   async (dispatch) => {
     // ! add orders
-    console.log("formData hitting addUserOrderItems thunk => ", formData);
+    // console.log("formData hitting addUserOrderItems thunk => ", formData);
     const res = await fetch(`/api/orders/place`, {
       method: "PUT",
       headers: {

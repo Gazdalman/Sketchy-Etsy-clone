@@ -128,20 +128,6 @@
   border: 5px solid #322e3f;
 } */
 
-
-.quantity-btn {
-  font-size: 30px;
-  color: #322e3f;
-  border: 3px solid #322e3f;
-  width: 50px;
-  height: 50px;
-  background: #ffe581;
-  border-radius: 50%;
-
-  cursor: pointer;
-  margin: 5px;
-}
-
 .payment-btn {
   font-size: 18px;
   width: 200px;
@@ -203,6 +189,10 @@
   margin: 5px;
 }
 
+button.quantity-btn.disabled {
+  background: lightgrey;
+  border-color: lightgrey;
+}
 
 /**empty cart**/
 .emptyCart{

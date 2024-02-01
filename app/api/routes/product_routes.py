@@ -4,7 +4,7 @@ from app.models import Product, Review, db, User, ProductImage
 from app.forms import ProductForm, ProductImageForm, ProductEditForm
 from .aws_helper import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 
-product_routes = Blueprint("products", __name__, url_prefix="/products")
+product_routes = Blueprint("products", __name__, url_prefix="/api/products")
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -158,7 +158,35 @@ def add_images(id):
     )
     db.session.add(image)
     db.session.commit()
-    return image.to_dict()
+    return image.to_dict(), 200
 
   print(form.errors)
   return {"errors": ["not_found : No product with that id found"]}, 401
+
+@product_routes.route("/<int:id>/decrease", methods=["PUT"])
+@login_required
+def decrease_units(id):
+  """
+  Decreases the units available for a product
+  """
+  product = Product.query.get(id)
+  quantity = request.json['quantity']
+  if product:
+    product.units_available -= quantity
+    db.session.commit()
+    return product.to_dict(), 200
+  return {"errors": "No product found"}, 404
+
+@product_routes.route("/<int:id>/increase", methods=["PUT"])
+@login_required
+def increase_units(id):
+  """
+  Increases units available
+  """
+  product = Product.query.get(id)
+  quantity = request.json['quantity']
+  if product:
+    product.units_available += quantity
+    db.session.commit()
+    return product.to_dict(), 200
+  return {"errors": "No product found"}, 404
