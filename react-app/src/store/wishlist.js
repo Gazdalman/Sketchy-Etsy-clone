@@ -38,7 +38,7 @@ export const removeWish = (productId) => async (dispatch) => {
   if (response.ok) {
     const message = await response.json();
     if (message.error) {
-      console.log(message.error);
+      // console.log(message.error);
       return;
     }
 

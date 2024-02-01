@@ -10,7 +10,7 @@ export const getUser = (userId) => async (dispatch) => {
   if (res.ok) {
     const userData = await res.json();
     if (userData.errors) {
-      console.log(userData.errors);
+      // console.log(userData.errors);
       return;
     }
     // console.log(userData);

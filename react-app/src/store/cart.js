@@ -16,7 +16,7 @@ export const getCart = () => async (dispatch) => {
   if (res.ok) {
     const cartData = await res.json();
     if (cartData.errors) {
-      console.log(cartData.errors);
+      // console.log(cartData.errors);
       return;
     }
     dispatch(getAllCartItems(cartData));
@@ -30,7 +30,7 @@ export const removeItem = (itemId) => async (dispatch) => {
   if (res.ok) {
     const cartData = await res.json();
     if (cartData.error) {
-      console.log(cartData.error);
+      // console.log(cartData.error);
       return;
     }
     dispatch(getCart());

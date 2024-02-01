@@ -96,12 +96,13 @@ const ProductPage = () => {
             </a>
 
             <div style={{ margin: 20 }} className="prod-btns-container">
-              {user && user.id != product.seller_id && (
+              {user && user.id != product.seller_id  && (
                 <div className="prod-page-btn-container">
                   {/* {  userWish.products[product.id] == undefined  &&  ( */}
                     <OpenModalButton
                       modalClasses={["add-to-cart-btn"]}
-                      buttonText="Add to Cart"
+                      buttonText={product.units_available >= 1 ? "Add to Cart" : "SOLD OUT"}
+                      buttonDisabled={product.units_available < 1}
                       modalComponent={
                         <ConfirmAdd product={product} user={user} />
                       }

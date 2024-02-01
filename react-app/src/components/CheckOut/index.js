@@ -63,7 +63,7 @@ export default function CheckOut() {
         dispatch(addUserOrderItems({ formData }))
           .then((data) => {
             if (data && data.errors) {
-              console.log(data);
+              // console.log(data);
             }
             // console.log(data);
           })

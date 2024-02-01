@@ -56,7 +56,7 @@ function ReviewFormModal({ productId }) {
       history.push(`/products/${productId}`);
       return Redirect(`/products/${productId}`);
     } else {
-      console.log("ERRORS PRESENT");
+      return;
     }
   };
 
