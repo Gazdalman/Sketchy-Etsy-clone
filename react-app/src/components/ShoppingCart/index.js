@@ -19,6 +19,7 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+
   useEffect(
     () => {
       if (!user) {
@@ -169,7 +170,7 @@ export default function Cart() {
                 checked={payment === "option1"}
                 onChange={onOptionChange}
               />
-              <label for="op1">
+              <label htmlFor="op1">
                 <i class="fa-regular fa-credit-card"></i>
               </label>
             </div>
@@ -182,7 +183,7 @@ export default function Cart() {
                 checked={payment === "option2"}
                 onChange={onOptionChange}
               />
-              <label for="op2">
+              <label htmlFor="op2">
                 <i class="fa-solid fa-pizza-slice"></i>
               </label>
             </div>
@@ -196,7 +197,7 @@ export default function Cart() {
                 checked={payment === "option3"}
                 onChange={onOptionChange}
               />
-              <label for="op3">
+              <label htmlFor="op3">
                 <i class="fa-solid fa-ice-cream"></i>
               </label>
             </div>

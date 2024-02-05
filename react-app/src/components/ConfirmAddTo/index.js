@@ -9,6 +9,7 @@ export default function ConfirmAdd({ page, product, user }) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
+
   const addToCart = async() => {
     if (page) {
       await dispatch(getOneProduct(product.id))
@@ -18,6 +19,7 @@ export default function ConfirmAdd({ page, product, user }) {
       closeModal()
     }
   }
+
 
   useEffect(() => {
     const decrease = async () => {
