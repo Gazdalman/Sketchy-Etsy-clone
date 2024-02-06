@@ -78,6 +78,8 @@ function SignupFormPage() {
           <input
             className="signUpInput"
             type="text"
+            placeholder="5 or more characters"
+            minLength={5}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -91,6 +93,8 @@ function SignupFormPage() {
           <input
             className="signUpInput"
             type="password"
+            minLength={8}
+            placeholder="8 or more characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
