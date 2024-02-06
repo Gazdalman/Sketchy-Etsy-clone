@@ -70,7 +70,7 @@ function SignupFormModal() {
           Email
           <input
             className="signUpInput"
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -81,7 +81,9 @@ function SignupFormModal() {
           Username
           <input
             className="signUpInput"
+            placeholder="5 or more characters"
             type="text"
+            minLength={5}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -95,6 +97,8 @@ function SignupFormModal() {
           <input
             className="signUpInput"
             type="password"
+            placeholder="8 or more characters"
+            minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

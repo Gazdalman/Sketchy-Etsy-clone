@@ -48,7 +48,7 @@ export default function Cart() {
   const checkQuantity = async (itemId) => {
     const product = await dispatch(getOneProduct(itemId))
 
-    console.log(product);
+    // console.log(product);
 
     if (product.units_available > 0) {
       return false
@@ -131,7 +131,7 @@ export default function Cart() {
                     {" "}
                     -{" "}
                   </button>
-                  {console.log(checkQuantity(item.id))}
+                  {/* {console.log(checkQuantity(item.id))} */}
                   <button
                     className={`quantity-btn`}
                     onClick={(e) => changeQuant(e, "inc", item.id)}

@@ -119,7 +119,7 @@ export const increaseQuantity = (productId, quantity) => async dispatch => {
     return product
   }
 
-  console.log(product);
+  // console.log(product);
 }
 
 let newState
