@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+ailimport React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -66,7 +66,7 @@ function SignupFormPage() {
           Email
           <input
             className="signUpInput"
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
