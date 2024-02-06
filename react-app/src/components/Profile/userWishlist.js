@@ -32,14 +32,15 @@ export default function UserWishlist({ user }) {
           wishlist != "undefined" &&
           Object.keys(wishlist).length > 0 ? (
             <div className="userWishlistContainer">
-              {/* {console.log(wishlist)} */}
+              {/* {console.log('wishlist=====>', wishlist)} */}
               {Object.values(wishlist.products).map((product) => (
                 <div key={product.id} className="indvUserWishItems">
+                   <NavLink to={`/products/${product.id}`}>
                   <div className="userProductImage">
                     <>
-                      {product.preview ? (
+                      {product.img ? (
                         <img
-                          src={product.preview}
+                          src={product.img}
                           className="userIdvProductImage"
                         />
                       ) : (
@@ -49,29 +50,29 @@ export default function UserWishlist({ user }) {
                         </>
                       )}
                     </>
-                  </div>
-                  <div>
-                    <NavLink to={`/products/${product.id}`}>
                       <h4>{product.name}</h4>
-                    </NavLink>
-                    <div className="userProductPrice">{product.price}</div>
-                    <div className="userWishlistButtons">
-                      <OpenModalButton
-                        modalClasses={["modal-delete-button-container"]}
-                        buttonText="Delete Product"
-                        modalComponent={<DeleteWish product={product} />}
-                      />
-
-                      <div className="addItemToCartBtn">
+                    <div>
+                      <div className="userProductPrice">{product.price}</div>
+                      <div className="userWishlistButtons wishlist-delete-button">
                         <OpenModalButton
-                          buttonText="Add to Cart"
-                          modalComponent={
-                            <ConfirmAdd product={product} user={user} />
-                          }
+                          modalClasses={["wishlist-delete-button"]}
+                          buttonText="Delete Product"
+                          modalComponent={<DeleteWish product={product} />}
                         />
+
+                        <div className="addItemToCartBtn">
+                          <OpenModalButton
+                            buttonText="Add to Cart"
+                            modalComponent={
+                              <ConfirmAdd product={product} user={user} />
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                    </NavLink>
                 </div>
               ))}
             </div>

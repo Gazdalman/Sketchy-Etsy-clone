@@ -52,6 +52,8 @@
 .deleteProductButton {
   background-color: #ab434a;
   color: #fff;
+  border: none;
+  width: 150px;
 }
 .deleteProductButton:hover {
   border: 5px solid rgb(58, 102, 115);
@@ -78,25 +80,24 @@
 .indvUserReviews,
 .indvUserOrderItems,
 .indvUserWishItems {
+
   padding: 25px;
   gap: 15px;
-  border: 1px solid #322e3f;
+  border: .5px solid #322e3f;
   background-color: #fff;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 20px;
   transition: all 0.2s ease-in-out;
 }
-.indvUserOrderItems {
-  padding: 50px;
-}
+
 .indvUserProducts {
+  text-align: center;
   width: fit-content;
   min-width: 350px;
 }
-.indvUserReviews,
-.indvUserOrderItems,
-.indvUserWishItems {
+.indvUserReviews{
+  text-align: center;
   min-width: 200px;
   max-height: 250px;
   padding-top: 15px;
@@ -111,14 +112,21 @@
   transform: translateY(-10px);
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-.userProductImages {
-  max-width: 150px;
-  padding: 5px;
-}
-.userIdvProductImage {
-  height: 300px;
+
+.indvUserWishItems, .indvUserOrderItems {
+  text-align: center;
   width: 300px;
-  border-radius: 15px;
+  height: max-content;
+}
+.userProductImages {
+  height: 250px;
+  width: 100%;
+}
+
+.userIdvProductImage {
+  height: 250px;
+  width: 250px;
+  border-radius: 12px;
 }
 .userProductDescription,
 .userProductReview {
@@ -130,6 +138,8 @@
 }
 .orderItemPriceQuantDiv {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: space-between;
 }
 .userProductPrice,
@@ -142,7 +152,9 @@
 .userWishlistButtons {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
+
 }
 #editroductButton {
   width: 100%;
@@ -167,10 +179,12 @@
   border: 5px solid hwb(173 29% 47%);
 }
 .ordersReturnItemBtn {
+
   background-color: rgb(58, 102, 115);
   border: 5px solid rgb(58, 102, 115);
 }
 .ordersWriteReview {
+
   background-color: #e2dcc2;
   border: 5px solid #e2dcc2;
   color: black;
@@ -185,7 +199,7 @@
   padding: 5px;
   margin: 0;
   margin-bottom: 5px;
-  width: 100%;
+  width: 150px;
 }
 .addItemToCartBtn > button,
 .editUserProductBtn,
@@ -193,6 +207,7 @@
 .ordersAddToCartBtn > button {
   color: white;
 }
+
 .addItemToCartBtn > button:hover,
 .editUserProductBtn:hover,
 .ordersWriteReview:hover,

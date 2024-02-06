@@ -62,13 +62,19 @@ export default function UserOrders({ user }) {
                   className="indvUserOrderItems"
                   id={order.products.length > 2 ? "scroll" : ""}
                 >
-                  {/* {console.log(order.products.length)} */}
-                  <div>
+                  {/* {console.log('order', products)} */}
+                  <>
                     <NavLink to={`/products/${item.id}`}>
                       <h4>{item.name}</h4>
                     </NavLink>
                     <div className="orderItemPriceQuantDiv">
                       {/* <p># Purchased: {item.quantity}</p> */}
+                      <div className="userProductImages">
+                        {products[item.id].preview ? (
+                          <img src={products[item.id]?.preview} className="userIdvProductImage" alt="product-img"/>
+                        ) : <p>product image coming soon....</p> }
+                      </div>
+
                       <p className="orderedItemPrice">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
@@ -101,7 +107,7 @@ export default function UserOrders({ user }) {
                         />
                       </div>
                     </div>
-                  </div>
+                  </>
                 </div>
               ))}
             </div>

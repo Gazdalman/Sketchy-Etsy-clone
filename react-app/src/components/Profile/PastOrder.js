@@ -12,10 +12,11 @@ export default function () {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const allOrders = useSelector((state) => state.orders);
+  const products = useSelector((state) => state.products)
   // const cart = useSelector((state) => state.cart);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // console.log("order state", allOrders);
+  console.log("product state", products);
   // console.log("cart", cart);
 
   useEffect(() => {
@@ -58,6 +59,11 @@ export default function () {
                     <h4>{item.name}</h4>
                     <div className="orderItemPriceQuantDiv">
                       {/* <p># Purchased: {item.quantity}</p> */}
+                      <div className="userProductImages">
+                        {products[item.id].preview ? (
+                          <img src={products[item.id]?.preview} className="userIdvProductImage" alt="product-img"/>
+                        ) : <p>product image coming soon....</p> }
+                      </div>
                       <p className="orderedItemPrice">
                         ${(item.price * item.quantity).toFixed(2)}
                       </p>
