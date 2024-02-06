@@ -125,7 +125,7 @@ export const editUser =
     });
     const userData = await res.json();
     if (userData.errors) {
-      console.log(userData.errors);
+      // console.log(userData.errors);
       return userData.errors;
     }
     // console.log(userData);

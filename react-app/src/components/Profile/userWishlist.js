@@ -32,7 +32,7 @@ export default function UserWishlist({ user }) {
           wishlist != "undefined" &&
           Object.keys(wishlist).length > 0 ? (
             <div className="userWishlistContainer">
-              {console.log(wishlist)}
+              {/* {console.log(wishlist)} */}
               {Object.values(wishlist.products).map((product) => (
                 <div key={product.id} className="indvUserWishItems">
                   <div className="userProductImage">
